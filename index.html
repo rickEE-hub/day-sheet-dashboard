@@ -1,0 +1,870 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Day Sheet</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --bg:#F2F2F1;
+    --surface:#FFFFFF;
+    --surface-2:#EAEAEA;
+    --ink:#242424;
+    --ink-dim:#6C6C6C;
+    --ink-faint:#9C9C9C;
+    --border:#E2E2E1;
+    --border-strong:#CACAC9;
+    --accent:#ED2226;
+    --accent-ink:#FFFFFF;
+    --accent-soft:#FBE1E1;
+    --cat-install:#1E6FD9;
+    --cat-install-soft:#DCE7FA;
+    --cat-packdown:#8E24AA;
+    --cat-packdown-soft:#F1DFF4;
+    --cat-delivery:#1E8E3E;
+    --cat-delivery-soft:#DCF0E1;
+    --cat-collection:#D84315;
+    --cat-collection-soft:#FBE1D6;
+    --cat-driver:#00838F;
+    --cat-driver-soft:#D8EEF0;
+    --cat-test:#D6336C;
+    --cat-test-soft:#FBDCE6;
+    --cat-other:#6B7680;
+    --cat-other-soft:#E6E8E9;
+    --status-confirmed:#2E7D53;
+    --status-confirmed-soft:#DCEBE2;
+    --status-pending:#B4791A;
+    --status-pending-soft:#F1E5D0;
+    --status-prepped:#5B5FA6;
+    --status-prepped-soft:#E2E2EF;
+    --status-onlocation:#ED2226;
+    --status-onlocation-soft:#FBE1E1;
+    --status-returned:#6B7680;
+    --status-returned-soft:#E6E8E9;
+    --warn:#B3401E;
+    --warn-soft:#F5DFD6;
+    --shadow: 0 1px 2px rgba(20,20,20,.06), 0 4px 14px rgba(20,20,20,.05);
+    --radius: 10px;
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#161616;
+      --surface:#212121;
+      --surface-2:#292929;
+      --ink:#EDEDED;
+      --ink-dim:#A8A8A8;
+      --ink-faint:#7A7A7A;
+      --border:#343434;
+      --border-strong:#464646;
+      --accent:#FF4B4F;
+      --accent-ink:#1A0000;
+      --accent-soft:#3A1618;
+      --cat-install:#6FA8F0;
+      --cat-install-soft:#1B2A42;
+      --cat-packdown:#D08CE0;
+      --cat-packdown-soft:#3A2440;
+      --cat-delivery:#6FD08A;
+      --cat-delivery-soft:#1C3A26;
+      --cat-collection:#F0965F;
+      --cat-collection-soft:#3D2415;
+      --cat-driver:#5BC8D6;
+      --cat-driver-soft:#123338;
+      --cat-test:#F08FB0;
+      --cat-test-soft:#3D1F2A;
+      --cat-other:#ABABAB;
+      --cat-other-soft:#2A2A2A;
+      --status-confirmed:#78C79B;
+      --status-confirmed-soft:#1E362A;
+      --status-pending:#E0B15C;
+      --status-pending-soft:#3B2F16;
+      --status-prepped:#A6A9E0;
+      --status-prepped-soft:#2C2D42;
+      --status-onlocation:#FF4B4F;
+      --status-onlocation-soft:#3A1618;
+      --status-returned:#ABABAB;
+      --status-returned-soft:#2A2A2A;
+      --warn:#E68B67;
+      --warn-soft:#3E2419;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 6px 18px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#161616;
+    --surface:#212121;
+    --surface-2:#292929;
+    --ink:#EDEDED;
+    --ink-dim:#A8A8A8;
+    --ink-faint:#7A7A7A;
+    --border:#343434;
+    --border-strong:#464646;
+    --accent:#FF4B4F;
+    --accent-ink:#1A0000;
+    --accent-soft:#3A1618;
+    --cat-install:#6FA8F0;
+    --cat-install-soft:#1B2A42;
+    --cat-packdown:#D08CE0;
+    --cat-packdown-soft:#3A2440;
+    --cat-delivery:#6FD08A;
+    --cat-delivery-soft:#1C3A26;
+    --cat-collection:#F0965F;
+    --cat-collection-soft:#3D2415;
+    --cat-driver:#5BC8D6;
+    --cat-driver-soft:#123338;
+    --cat-test:#F08FB0;
+    --cat-test-soft:#3D1F2A;
+    --cat-other:#ABABAB;
+    --cat-other-soft:#2A2A2A;
+    --status-confirmed:#78C79B;
+    --status-confirmed-soft:#1E362A;
+    --status-pending:#E0B15C;
+    --status-pending-soft:#3B2F16;
+    --status-prepped:#A6A9E0;
+    --status-prepped-soft:#2C2D42;
+    --status-onlocation:#FF4B4F;
+    --status-onlocation-soft:#3A1618;
+    --status-returned:#ABABAB;
+    --status-returned-soft:#2A2A2A;
+    --warn:#E68B67;
+    --warn-soft:#3E2419;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 6px 18px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+    font-size:15px;
+    line-height:1.45;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--accent-soft);}
+
+  a{color:inherit;}
+  button{font-family:inherit;}
+
+  .wrap{
+    max-width:960px;
+    margin:0 auto;
+    padding:20px 20px 80px;
+  }
+
+  /* ---- Header / masthead ---- */
+  .masthead{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:16px;
+    padding-bottom:16px;
+    border-bottom:3px solid var(--ink);
+    margin-bottom:14px;
+    flex-wrap:wrap;
+  }
+  .masthead-left{display:flex; flex-direction:column; gap:2px;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+  }
+  h1{
+    font-family:'Poppins', sans-serif;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.01em;
+    font-size:clamp(26px,5vw,38px);
+    margin:0;
+    text-wrap:balance;
+  }
+  .date-line{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--ink-dim);
+  }
+  .masthead-right{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    gap:8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--ink-dim);
+  }
+  .snapshot-badge{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    font-weight:600;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    padding:3px 8px;
+    border-radius:100px;
+    background:var(--surface-2);
+    color:var(--ink-faint);
+    border:1px solid var(--border);
+    white-space:nowrap;
+  }
+  .snapshot-row{display:flex; align-items:center; gap:8px; text-align:right;}
+  .reload-btn{
+    border:1px solid var(--border-strong);
+    background:var(--surface);
+    color:var(--ink);
+    padding:6px 12px;
+    border-radius:7px;
+    font-size:12px;
+    font-family:'IBM Plex Mono', monospace;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .reload-btn:hover{border-color:var(--accent); color:var(--accent);}
+  .reload-btn:active{transform:translateY(1px);}
+  .reload-btn:focus-visible, button:focus-visible{
+    outline:2px solid var(--accent); outline-offset:2px;
+  }
+
+  /* ---- Day tabs ---- */
+  .day-tabs{
+    display:flex;
+    gap:6px;
+    margin-bottom:16px;
+    flex-wrap:wrap;
+  }
+  .day-tab{
+    background:var(--surface);
+    border:1px solid var(--border);
+    color:var(--ink-dim);
+    border-radius:8px;
+    padding:8px 14px;
+    cursor:pointer;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:13px;
+    font-weight:500;
+    display:flex;
+    align-items:baseline;
+    gap:7px;
+  }
+  .day-tab .day-tab-date{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--ink-faint);
+  }
+  .day-tab:hover{border-color:var(--border-strong);}
+  .day-tab.active{
+    background:var(--ink);
+    border-color:var(--ink);
+    color:var(--surface);
+  }
+  .day-tab.active .day-tab-date{color:var(--surface); opacity:.7;}
+
+  /* ---- Legend ---- */
+  .legend{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px 14px;
+    padding:0 0 20px;
+    font-size:12px;
+    color:var(--ink-dim);
+  }
+  .legend-item{display:inline-flex; align-items:center; gap:6px;}
+  .legend-swatch{width:9px;height:9px;border-radius:2px;flex:none;}
+
+  /* ---- Top-level states ---- */
+  .empty-state{
+    text-align:center;
+    padding:60px 20px;
+    color:var(--ink-dim);
+  }
+  .empty-state .big{font-family:'Poppins',sans-serif; font-size:20px; color:var(--ink); text-transform:uppercase; letter-spacing:.02em; margin-bottom:6px;}
+
+  /* ---- Timeline (jobs + manual items, interleaved by time) ---- */
+  .groups{display:flex; flex-direction:column; gap:14px; margin-top:0;}
+
+  .job{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    overflow:hidden;
+  }
+  .job-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:13px 16px;
+    border-bottom:1px solid var(--border);
+    flex-wrap:wrap;
+  }
+  .job-title-block{min-width:0;}
+  .job-title{
+    font-family:'Poppins', sans-serif;
+    font-weight:600;
+    font-size:17px;
+    letter-spacing:.01em;
+    margin:0;
+    overflow-wrap:anywhere;
+  }
+  .job-sub{
+    font-size:12.5px;
+    color:var(--ink-dim);
+    margin-top:2px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:4px 10px;
+  }
+  .job-badges{display:flex; align-items:center; gap:6px; flex-wrap:wrap;}
+
+  .pill{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    font-weight:500;
+    letter-spacing:.03em;
+    text-transform:uppercase;
+    padding:3px 8px;
+    border-radius:100px;
+    white-space:nowrap;
+  }
+  .pill-confirmed{background:var(--status-confirmed-soft); color:var(--status-confirmed);}
+  .pill-pending{background:var(--status-pending-soft); color:var(--status-pending);}
+  .pill-prepped{background:var(--status-prepped-soft); color:var(--status-prepped);}
+  .pill-onlocation{background:var(--status-onlocation-soft); color:var(--status-onlocation);}
+  .pill-returned{background:var(--status-returned-soft); color:var(--status-returned);}
+  .pill-warn{background:var(--warn-soft); color:var(--warn);}
+
+  .rows{display:flex; flex-direction:column;}
+  .row{
+    display:grid;
+    grid-template-columns:88px 116px 1fr;
+    gap:12px;
+    padding:11px 16px;
+    border-top:1px solid var(--border);
+    align-items:start;
+  }
+  .row:first-child{border-top:none;}
+  .row-time{
+    font-family:'IBM Plex Mono', monospace;
+    font-variant-numeric:tabular-nums;
+    font-size:13px;
+    color:var(--ink);
+    padding-top:2px;
+    white-space:nowrap;
+  }
+  .row-time .end{color:var(--ink-faint); display:block; font-size:11.5px;}
+  .cat-chip{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    font-weight:600;
+    letter-spacing:.03em;
+    text-transform:uppercase;
+    padding:3px 7px;
+    border-radius:5px;
+    display:inline-block;
+    white-space:nowrap;
+    width:fit-content;
+  }
+  .cat-install{background:var(--cat-install-soft); color:var(--cat-install);}
+  .cat-packdown{background:var(--cat-packdown-soft); color:var(--cat-packdown);}
+  .cat-delivery{background:var(--cat-delivery-soft); color:var(--cat-delivery);}
+  .cat-collection{background:var(--cat-collection-soft); color:var(--cat-collection);}
+  .cat-driver{background:var(--cat-driver-soft); color:var(--cat-driver);}
+  .cat-test{background:var(--cat-test-soft); color:var(--cat-test);}
+  .cat-other{background:var(--cat-other-soft); color:var(--cat-other);}
+
+  .row-body{min-width:0;}
+  .fn-name{font-weight:500; font-size:14px;}
+  .crew-line{
+    margin-top:5px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:5px;
+    align-items:center;
+  }
+  .crew-chip{
+    font-size:12px;
+    background:var(--surface-2);
+    color:var(--ink);
+    padding:2px 8px;
+    border-radius:100px;
+    border:1px solid var(--border);
+  }
+  .crew-unassigned{
+    font-size:12px;
+    color:var(--warn);
+    font-weight:500;
+  }
+  .vehicle-line{
+    margin-top:5px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    align-items:center;
+  }
+  .vehicle-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+  }
+  .vehicle-chip{
+    font-size:12px;
+    background:var(--surface);
+    color:var(--ink);
+    padding:2px 8px;
+    border-radius:6px;
+    border:1px dashed var(--border-strong);
+  }
+  .vehicle-missing{
+    font-size:12px;
+    color:var(--warn);
+    font-weight:500;
+  }
+  .row-note{
+    margin-top:6px;
+    font-size:12.5px;
+    color:var(--ink-dim);
+    background:var(--surface-2);
+    border-left:2px solid var(--border-strong);
+    padding:5px 9px;
+    border-radius:0 5px 5px 0;
+  }
+  .no-tasks{
+    padding:13px 16px;
+    font-size:13px;
+    color:var(--ink-faint);
+    font-style:italic;
+  }
+
+  /* ---- Manual item card — dotted, sits inline in the timeline ---- */
+  .manual-item{
+    background:var(--surface);
+    border:1px dashed var(--border-strong);
+    border-radius:var(--radius);
+    padding:11px 14px;
+    display:grid;
+    grid-template-columns:88px 1fr;
+    gap:12px;
+    align-items:start;
+  }
+  .manual-item .row-time{padding-top:1px;}
+
+  footer{
+    margin-top:40px;
+    padding-top:14px;
+    border-top:1px solid var(--border);
+    font-size:11.5px;
+    color:var(--ink-faint);
+    font-family:'IBM Plex Mono', monospace;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+
+  [hidden]{display:none !important;}
+
+  @media (max-width:560px){
+    .row{grid-template-columns:70px 1fr; }
+    .row .cat-chip{grid-column:2; }
+    .row-time{grid-row:1/3;}
+    .manual-item{grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="masthead-left">
+      <div class="eyebrow">Event Equipment Group &middot; NSW Warehouse Ops &middot; Read-only snapshot</div>
+      <h1 id="page-title">Today</h1>
+      <div class="date-line" id="date-line">&nbsp;</div>
+    </div>
+    <div class="masthead-right">
+      <span class="snapshot-badge" id="snapshot-label">snapshot: &mdash;</span>
+      <div class="snapshot-row">
+        <button class="reload-btn" id="reload-btn" type="button">Reload page</button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="day-tabs" id="day-tabs" role="tablist" aria-label="Select day">
+    <button class="day-tab" type="button" data-offset="0" role="tab">Today<span class="day-tab-date"></span></button>
+    <button class="day-tab" type="button" data-offset="1" role="tab">Tomorrow<span class="day-tab-date"></span></button>
+    <button class="day-tab" type="button" data-offset="2" role="tab">After tomorrow<span class="day-tab-date"></span></button>
+  </nav>
+
+  <div class="legend" id="legend">
+    <span class="legend-item"><span class="legend-swatch" style="background:var(--cat-install)"></span>Install</span>
+    <span class="legend-item"><span class="legend-swatch" style="background:var(--cat-packdown)"></span>Pack down</span>
+    <span class="legend-item"><span class="legend-swatch" style="background:var(--cat-delivery)"></span>Delivery</span>
+    <span class="legend-item"><span class="legend-swatch" style="background:var(--cat-collection)"></span>Collection</span>
+    <span class="legend-item"><span class="legend-swatch" style="background:var(--cat-driver)"></span>Driver</span>
+    <span class="legend-item"><span class="legend-swatch" style="background:var(--cat-test)"></span>Test</span>
+    <span class="legend-item"><span class="legend-swatch" style="background:var(--cat-other)"></span>Other</span>
+  </div>
+
+  <main id="groups" class="groups" aria-live="polite"></main>
+
+  <footer>
+    <span>Read-only snapshot &middot; for the live editable version, contact the warehouse team.</span>
+    <span id="footer-count"></span>
+  </footer>
+</div>
+
+<script id="app-state" type="application/json">{"items":[],"notes":{},"schedule":{"updatedAt":"2026-09-01T01:14:17Z","days":{"2026-09-01":[{"id":1308,"title":"Security Expo 2026 - Motorola","status":"prepped","venue":"International Convention Centre Sydney (ICC)","rows":[{"id":4555,"name":"AV Setup","category":"install","start":"2026-09-01T08:00:00+10:00","end":"2026-09-01T08:00:00+10:00","needed":2,"crew":["Mick Rocco","PJ Hamilton-Shailer"],"vehicles":["NSW Transit Van · 1UE4DI"]}],"loadError":null},{"id":1503,"title":"Gamuda SPW | CCD AV  (CBD Event)","status":"onlocation","venue":"City of Sydney Creative Studios","rows":[{"id":5344,"name":"Exhibition Installation","category":"install","start":"2026-09-01T13:00:00+10:00","end":"2026-09-01T13:00:00+10:00","needed":2,"crew":["Mick Rocco","PJ Hamilton-Shailer"],"vehicles":["NSW Transit Van · 1UE4DI"]}],"loadError":null},{"id":1541,"title":"PETIS26 - Organiser Order","status":"prepped","venue":"Hordern Pavilion","rows":[{"id":5322,"name":"AV Setup","category":"install","start":"2026-09-01T16:00:00+10:00","end":"2026-09-01T16:00:00+10:00","needed":1,"crew":["Mick Rocco","Yvette Paci"],"vehicles":["NSW Transit Van · 1UE4DI"]}],"loadError":null},{"id":1516,"title":"SECEAMS26 - Keenfinity","status":"onlocation","venue":"International Convention Centre Sydney (ICC)","rows":[{"id":5227,"name":"AV Packdown","category":"packdown","start":"2026-09-01T17:30:00+10:00","end":"2026-09-01T18:30:00+10:00","needed":1,"crew":["Yvette Paci","Mick Rocco"],"vehicles":["NSW Transit Van · 1UE4DI"]}],"loadError":null}],"2026-09-02":[{"id":1571,"title":"Transfer NSW > QLD (ARC GOLD COAST)","status":"confirmed","venue":null,"rows":[{"id":5463,"name":"Interstate Truck Transfer","category":"other","start":"2026-09-02T07:00:00+10:00","end":"2026-09-02T17:00:00+10:00","needed":1,"crew":["Rick Sanchez"],"vehicles":["NSW NNR200 Truck · 2FD9AT"]}],"loadError":null}],"2026-09-03":[{"id":1541,"title":"PETIS26 - Organiser Order","status":"prepped","venue":"Hordern Pavilion","rows":[{"id":5323,"name":"AV Reset","category":"other","start":"2026-09-03T15:30:00+10:00","end":"2026-09-03T15:30:00+10:00","needed":2,"crew":["Mick Rocco","Yvette Paci"],"vehicles":["NSW Transit Van · 1UE4DI"]}],"loadError":null}]}}}</script>
+
+<script id="app-script">
+(function(){
+  "use strict";
+
+  var STATUS_LIST = [
+    {id:1, key:'pending',    label:'Pending'},
+    {id:3, key:'confirmed',  label:'Confirmed'},
+    {id:4, key:'prepped',    label:'Prepped'},
+    {id:5, key:'onlocation', label:'On location'},
+    {id:6, key:'returned',   label:'Returned'}
+  ];
+  var STATUS_META = {};
+  STATUS_LIST.forEach(function(s){ STATUS_META[s.key] = s; });
+
+  var DAY_OFFSETS = [0, 1, 2];
+
+  var els = {
+    dateLine: document.getElementById('date-line'),
+    groups: document.getElementById('groups'),
+    footerCount: document.getElementById('footer-count'),
+    pageTitle: document.getElementById('page-title'),
+    dayTabs: document.getElementById('day-tabs'),
+    snapshotLabel: document.getElementById('snapshot-label'),
+    reloadBtn: document.getElementById('reload-btn')
+  };
+
+  var selectedDayOffset = 0;
+  var dayCache = {0:[], 1:[], 2:[]};
+  var lastUpdated = null;
+
+  /* ------------------------- helpers: dates ------------------------- */
+
+  function sydneyParts(date){
+    var fmt = new Intl.DateTimeFormat('en-CA', {
+      timeZone:'Australia/Sydney', year:'numeric', month:'2-digit', day:'2-digit'
+    });
+    var s = fmt.format(date); // YYYY-MM-DD
+    var bits = s.split('-');
+    return {y:+bits[0], m:+bits[1], d:+bits[2]};
+  }
+
+  function sydneyOffsetMs(date){
+    var fmt = new Intl.DateTimeFormat('en-US', {
+      timeZone:'Australia/Sydney', timeZoneName:'shortOffset', hour:'2-digit'
+    });
+    var parts = fmt.formatToParts(date);
+    var tzPart = parts.find(function(p){ return p.type === 'timeZoneName'; });
+    var m = tzPart && tzPart.value.match(/GMT([+-]\d+)(?::?(\d+))?/);
+    if(!m) return 10 * 3600 * 1000;
+    var h = parseInt(m[1], 10);
+    var min = m[2] ? parseInt(m[2], 10) : 0;
+    return (h * 3600 + (h < 0 ? -min : min) * 60) * 1000;
+  }
+
+  // Returns [dayStart, dayEnd) as real Date instants for the Sydney
+  // calendar day `offsetDays` from today (0 = today, 1 = tomorrow, ...),
+  // computed without assuming the viewer's own timezone.
+  function sydneyDayRange(offsetDays){
+    var now = new Date();
+    var p = sydneyParts(now);
+    var guessUTC = Date.UTC(p.y, p.m - 1, p.d + offsetDays, 0, 0, 0);
+    var offsetMs = sydneyOffsetMs(new Date(guessUTC));
+    var start = new Date(guessUTC - offsetMs);
+    var end = new Date(start.getTime() + 24 * 3600 * 1000);
+    return {start:start, end:end};
+  }
+
+  function isoDateForOffset(offsetDays){
+    var range = sydneyDayRange(offsetDays);
+    var fmt = new Intl.DateTimeFormat('en-CA', {
+      timeZone:'Australia/Sydney', year:'numeric', month:'2-digit', day:'2-digit'
+    });
+    return fmt.format(range.start);
+  }
+
+  function fmtDateLineFor(date){
+    var fmt = new Intl.DateTimeFormat('en-AU', {
+      timeZone:'Australia/Sydney', weekday:'long', day:'numeric', month:'long', year:'numeric'
+    });
+    return fmt.format(date);
+  }
+
+  function fmtWeekdayTitleFor(date){
+    var fmt = new Intl.DateTimeFormat('en-AU', {
+      timeZone:'Australia/Sydney', weekday:'long'
+    });
+    return fmt.format(date).toUpperCase();
+  }
+
+  function fmtShortDateFor(date){
+    var fmt = new Intl.DateTimeFormat('en-AU', {
+      timeZone:'Australia/Sydney', day:'numeric', month:'short'
+    });
+    return fmt.format(date);
+  }
+
+  function fmtSnapshotDateTime(date){
+    var fmt = new Intl.DateTimeFormat('en-AU', {
+      timeZone:'Australia/Sydney', weekday:'short', day:'numeric', month:'short',
+      year:'numeric', hour:'2-digit', minute:'2-digit', hour12:false
+    });
+    return fmt.format(date) + ' AEST/AEDT';
+  }
+
+  function fmtTime(iso){
+    if(!iso) return null;
+    var d = new Date(iso);
+    if(isNaN(d)) return null;
+    var fmt = new Intl.DateTimeFormat('en-AU', {
+      timeZone:'Australia/Sydney', hour:'2-digit', minute:'2-digit', hour12:false
+    });
+    return fmt.format(d);
+  }
+
+  function timeToMinutes(hhmm){
+    if(!hhmm) return null;
+    var bits = hhmm.split(':');
+    if(bits.length !== 2) return null;
+    var n = (+bits[0]) * 60 + (+bits[1]);
+    return isNaN(n) ? null : n;
+  }
+
+  function escapeHtml(str){
+    return String(str == null ? '' : str).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+  /* ------------------------- classification (kept for parity with the
+   * live source — categories arrive pre-computed in the baked-in data,
+   * but this mirrors the exact logic that produced them). ------------------------- */
+
+  function classify(name){
+    var n = (name || '').toLowerCase();
+    var has = function(arr){ return arr.some(function(k){ return n.indexOf(k) !== -1; }); };
+    var testKw = ['test'];
+    var driverKw = ['driver'];
+    var deliveryKw = ['delivery','deliver'];
+    var collectionKw = ['collection','pickup','pick up','pick-up','return'];
+    var packdownKw = ['packdown','pack down','pack-down','bump out','bump-out','bumpout','strike','de-rig','derig','teardown','dismantle'];
+    var installKw = ['setup','set up','set-up','install','bump in','bump-in','bumpin','build up','build-up','rig'];
+    if(has(testKw)) return 'test';
+    if(has(driverKw)) return 'driver';
+    if(has(deliveryKw)) return 'delivery';
+    if(has(collectionKw)) return 'collection';
+    if(has(packdownKw)) return 'packdown';
+    if(has(installKw)) return 'install';
+    return 'other';
+  }
+
+  var CAT_LABEL = {
+    install:'Install', packdown:'Pack down', delivery:'Delivery',
+    collection:'Collection', driver:'Driver', test:'Test', other:'Other'
+  };
+
+  /* ------------------------- state (baked-in snapshot) ------------------------- */
+
+  function getState(){
+    try{
+      var raw = document.getElementById('app-state').textContent;
+      var parsed = JSON.parse(raw);
+      if(!parsed.items) parsed.items = [];
+      if(!parsed.notes) parsed.notes = {};
+      if(!parsed.schedule) parsed.schedule = {updatedAt:null, days:{}};
+      return parsed;
+    }catch(e){
+      return {items:[], notes:{}, schedule:{updatedAt:null, days:{}}};
+    }
+  }
+
+  // This is a static build: the schedule was fetched once at build time
+  // and baked into the #app-state script tag below. There is no network
+  // call here — every viewer just reads the same embedded snapshot.
+  function loadScheduleFromState(){
+    var state = getState();
+    var sched = state.schedule || {updatedAt:null, days:{}};
+    var nextCache = {};
+    DAY_OFFSETS.forEach(function(off){
+      var iso = isoDateForOffset(off);
+      nextCache[off] = (sched.days && sched.days[iso]) || [];
+    });
+    dayCache = nextCache;
+    lastUpdated = sched.updatedAt ? new Date(sched.updatedAt) : null;
+  }
+
+  function renderSnapshotLabel(){
+    els.snapshotLabel.textContent = lastUpdated
+      ? ('Snapshot generated ' + fmtSnapshotDateTime(lastUpdated))
+      : 'Snapshot not yet generated';
+  }
+
+  /* ------------------------- day tabs ------------------------- */
+
+  function updateDayTabs(){
+    els.dayTabs.querySelectorAll('.day-tab').forEach(function(btn){
+      var offset = parseInt(btn.getAttribute('data-offset'), 10);
+      var range = sydneyDayRange(offset);
+      var sub = btn.querySelector('.day-tab-date');
+      if(sub) sub.textContent = fmtShortDateFor(range.start);
+      var isActive = offset === selectedDayOffset;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+  }
+
+  /* ------------------------- rendering: unified timeline ------------------------- */
+
+  function renderCurrentDay(){
+    updateDayTabs();
+
+    var range = sydneyDayRange(selectedDayOffset);
+    els.pageTitle.textContent = fmtWeekdayTitleFor(range.start);
+    els.dateLine.textContent = fmtDateLineFor(range.start);
+
+    var jobs = dayCache[selectedDayOffset] || [];
+    var iso = isoDateForOffset(selectedDayOffset);
+    var state = getState();
+    var manualItems = state.items.filter(function(i){
+      return (i.date || isoDateForOffset(0)) === iso;
+    });
+
+    var entries = jobs.map(function(job){
+      var mins = job.rows.length ? timeToMinutes(fmtTime(job.rows[0].start)) : null;
+      return {type:'job', sortKey: mins == null ? Infinity : mins, html: jobCardHtml(job, state)};
+    }).concat(manualItems.map(function(item){
+      var mins = timeToMinutes(item.time);
+      return {type:'manual', sortKey: mins == null ? Infinity : mins, html: manualCardHtml(item)};
+    }));
+
+    entries.sort(function(a,b){ return a.sortKey - b.sortKey; });
+
+    els.footerCount.textContent = (jobs.length || manualItems.length)
+      ? (jobs.length + ' job' + (jobs.length === 1 ? '' : 's') + (manualItems.length ? ', ' + manualItems.length + ' manual' : ''))
+      : '';
+
+    if(!entries.length){
+      els.groups.innerHTML =
+        '<div class="empty-state">' +
+          '<div class="big">Nothing scheduled</div>' +
+          '<div>No jobs or manual items for ' + escapeHtml(fmtWeekdayTitleFor(range.start)) + ' in this snapshot.</div>' +
+        '</div>';
+      return;
+    }
+
+    els.groups.innerHTML = entries.map(function(e){ return e.html; }).join('');
+  }
+
+  function jobCardHtml(job, state){
+    var meta = STATUS_META[job.status] || {key:'other', label:job.status};
+    var pillClass = 'pill-' + meta.key;
+    var pillLabel = meta.label;
+
+    var rowsHtml;
+    if(job.loadError){
+      rowsHtml = '<div class="no-tasks">Couldn&rsquo;t load tasks for this job at build time &mdash; ' + escapeHtml(job.loadError) + '</div>';
+    } else {
+      rowsHtml = job.rows.map(function(row){ return renderRow(row, state); }).join('');
+    }
+
+    return (
+      '<div class="job">' +
+        '<div class="job-head">' +
+          '<div class="job-title-block">' +
+            '<h3 class="job-title">' + escapeHtml(job.title) + '</h3>' +
+            (job.venue ? '<div class="job-sub">' + escapeHtml(job.venue) + '</div>' : '') +
+          '</div>' +
+          '<div class="job-badges"><span class="pill ' + pillClass + '">' + escapeHtml(pillLabel) + '</span></div>' +
+        '</div>' +
+        '<div class="rows">' + rowsHtml + '</div>' +
+      '</div>'
+    );
+  }
+
+  function renderRow(row, state){
+    var start = fmtTime(row.start);
+    var end = fmtTime(row.end);
+    var crewHtml;
+    if(row.crew.length){
+      crewHtml = row.crew.map(function(name){
+        return '<span class="crew-chip">' + escapeHtml(name) + '</span>';
+      }).join('');
+      if(row.needed && row.needed > row.crew.length){
+        crewHtml += '<span class="crew-unassigned">' + (row.needed - row.crew.length) + ' more needed</span>';
+      }
+    } else {
+      crewHtml = '<span class="crew-unassigned">Unassigned' + (row.needed ? ' — ' + row.needed + ' needed' : '') + '</span>';
+    }
+
+    var vehicleHtml = '<div class="vehicle-line"><span class="vehicle-tag">Vehicle</span>' +
+      (row.vehicles.length
+        ? row.vehicles.map(function(v){ return '<span class="vehicle-chip">' + escapeHtml(v) + '</span>'; }).join('')
+        : '<span class="vehicle-missing">Not assigned</span>') +
+      '</div>';
+
+    var note = state.notes[row.id];
+    var noteHtml = note ? '<div class="row-note">' + escapeHtml(note) + '</div>' : '';
+
+    return (
+      '<div class="row">' +
+        '<div class="row-time">' + (start || '—') + (end && end !== start ? '<span class="end">' + end + '</span>' : '') + '</div>' +
+        '<div><span class="cat-chip cat-' + row.category + '">' + CAT_LABEL[row.category] + '</span></div>' +
+        '<div class="row-body">' +
+          '<div class="fn-name">' + escapeHtml(row.name) + '</div>' +
+          '<div class="crew-line">' + crewHtml + '</div>' +
+          vehicleHtml +
+          noteHtml +
+        '</div>' +
+      '</div>'
+    );
+  }
+
+  function manualCardHtml(item){
+    return (
+      '<div class="manual-item">' +
+        '<div class="row-time">' + escapeHtml(item.time || '—') + '</div>' +
+        '<div class="row-body">' +
+          '<div class="fn-name">' + escapeHtml(item.title || 'Untitled') +
+            (item.category ? ' <span class="cat-chip cat-' + item.category + '" style="margin-left:6px;">' + CAT_LABEL[item.category] + '</span>' : '') +
+          '</div>' +
+          (item.crew ? '<div class="crew-line"><span class="crew-chip">' + escapeHtml(item.crew) + '</span></div>' : '') +
+          (item.note ? '<div class="row-note">' + escapeHtml(item.note) + '</div>' : '') +
+        '</div>' +
+      '</div>'
+    );
+  }
+
+  /* ------------------------- wiring ------------------------- */
+
+  els.reloadBtn.addEventListener('click', function(){ location.reload(); });
+
+  els.dayTabs.querySelectorAll('.day-tab').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      selectedDayOffset = parseInt(btn.getAttribute('data-offset'), 10);
+      renderCurrentDay();
+    });
+  });
+
+  function init(){
+    updateDayTabs();
+    loadScheduleFromState();
+    renderCurrentDay();
+    renderSnapshotLabel();
+  }
+
+  init();
+})();
+</script>
+
+</body></html>
