@@ -1,0 +1,10 @@
+{
+  "name": "day-sheet-dashboard",
+  "private": true,
+  "dependencies": {
+    "@netlify/blobs": "^11.0.2"
+  },
+  "devDependencies": {
+    "@netlify/functions": "^6.0.0"
+  }
+}
