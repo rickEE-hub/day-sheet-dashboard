@@ -588,17 +588,15 @@
 
   <header class="masthead">
     <div class="masthead-left">
-      <div class="eyebrow">Event Equipment Group &middot; NSW Warehouse Ops &middot; Shared &amp; editable</div>
+      <div class="eyebrow">Event Equipment Group &middot; NSW Warehouse Ops &middot; Read-only</div>
       <h1 id="page-title">Today</h1>
       <div class="date-line" id="date-line">&nbsp;</div>
     </div>
     <div class="masthead-right">
       <span class="snapshot-badge" id="snapshot-label">snapshot: &mdash;</span>
       <div class="button-row">
-        <button class="add-btn" id="add-item-btn" type="button">+ Add item</button>
         <button class="reload-btn" id="reload-btn" type="button">Reload page</button>
       </div>
-      <span class="save-flag" id="save-flag"></span>
     </div>
   </header>
 
@@ -618,12 +616,10 @@
     <span class="legend-item"><span class="legend-swatch" style="background:var(--cat-other)"></span>Other</span>
   </div>
 
-  <div id="form-slot"></div>
-
   <main id="groups" class="groups" aria-live="polite"></main>
 
   <footer>
-    <span>Rentman-sourced jobs are read-only here &middot; manual items are shared and editable by anyone with this link.</span>
+    <span>Read-only link &middot; to add or change items, use the team link.</span>
     <span id="footer-count"></span>
   </footer>
 </div>
@@ -653,10 +649,7 @@
     pageTitle: document.getElementById('page-title'),
     dayTabs: document.getElementById('day-tabs'),
     snapshotLabel: document.getElementById('snapshot-label'),
-    reloadBtn: document.getElementById('reload-btn'),
-    addItemBtn: document.getElementById('add-item-btn'),
-    formSlot: document.getElementById('form-slot'),
-    saveFlag: document.getElementById('save-flag')
+    reloadBtn: document.getElementById('reload-btn')
   };
 
   var API_BASE = '/api/items';
@@ -664,7 +657,6 @@
   var dayCache = {0:[], 1:[], 2:[]};
   var lastUpdated = null;
   var manualItems = [];
-  var editingItemId = null;
   var pollTimer = null;
 
   /* ------------------------- helpers: dates ------------------------- */
@@ -886,21 +878,10 @@
           '<div class="big">Nothing scheduled</div>' +
           '<div>No jobs or manual items for ' + escapeHtml(fmtWeekdayTitleFor(range.start)) + '. Use “+ Add item” to add something.</div>' +
         '</div>';
-      wireManualActions();
       return;
     }
 
     els.groups.innerHTML = entries.map(function(e){ return e.html; }).join('');
-    wireManualActions();
-  }
-
-  function wireManualActions(){
-    els.groups.querySelectorAll('[data-edit]').forEach(function(btn){
-      btn.addEventListener('click', function(){ openForm(btn.getAttribute('data-edit')); });
-    });
-    els.groups.querySelectorAll('[data-del]').forEach(function(btn){
-      btn.addEventListener('click', function(){ deleteItem(btn.getAttribute('data-del')); });
-    });
   }
 
   function jobCardHtml(job, state){
@@ -978,24 +959,11 @@
           (item.crew ? '<div class="crew-line"><span class="crew-chip">' + escapeHtml(item.crew) + '</span></div>' : '') +
           (item.note ? '<div class="row-note">' + escapeHtml(item.note) + '</div>' : '') +
         '</div>' +
-        '<div class="manual-actions">' +
-          '<button class="icon-btn" type="button" data-edit="' + item.id + '" title="Edit" aria-label="Edit item">&#9998;</button>' +
-          '<button class="icon-btn" type="button" data-del="' + item.id + '" title="Delete" aria-label="Delete item">&times;</button>' +
-        '</div>' +
       '</div>'
     );
   }
 
-  /* ------------------------- manual items: shared via /api/items ------------------------- */
-
-  function flagSave(msg, isErr){
-    els.saveFlag.textContent = msg;
-    els.saveFlag.classList.toggle('err', !!isErr);
-    if(msg){
-      window.clearTimeout(flagSave._t);
-      flagSave._t = window.setTimeout(function(){ els.saveFlag.textContent = ''; }, 4000);
-    }
-  }
+  /* ------------------------- manual items: read-only view of /api/items ------------------------- */
 
   function fetchItems(){
     return fetch(API_BASE)
@@ -1008,103 +976,7 @@
         renderCurrentDay();
       })
       .catch(function(){
-        flagSave('Couldn’t load shared items — showing last known copy.', true);
-      });
-  }
-
-  function openForm(itemId){
-    editingItemId = itemId || null;
-    var item = editingItemId ? manualItems.find(function(i){ return i.id === editingItemId; }) : null;
-    var itemDate = (item && item.date) || isoDateForOffset(selectedDayOffset);
-    item = item || {time:'', title:'', category:'other', crew:'', note:''};
-
-    els.formSlot.innerHTML =
-      '<div class="form-card">' +
-        '<div class="form-for">For <strong>' + escapeHtml(fmtFullDateFromISO(itemDate)) + '</strong></div>' +
-        '<div class="form-grid">' +
-          '<div class="field"><label for="f-time">Time</label><input id="f-time" type="time" value="' + escapeHtml(item.time) + '"></div>' +
-          '<div class="field"><label for="f-cat">Category</label>' +
-            '<select id="f-cat">' +
-              Object.keys(CAT_LABEL).map(function(k){
-                return '<option value="' + k + '"' + (k === item.category ? ' selected' : '') + '>' + CAT_LABEL[k] + '</option>';
-              }).join('') +
-            '</select>' +
-          '</div>' +
-          '<div class="field full"><label for="f-title">What</label><input id="f-title" type="text" placeholder="e.g. Borrowed forklift return — Acme Hire" value="' + escapeHtml(item.title) + '"></div>' +
-          '<div class="field full"><label for="f-crew">Who</label><input id="f-crew" type="text" placeholder="e.g. Mick, Rick" value="' + escapeHtml(item.crew) + '"></div>' +
-          '<div class="field full"><label for="f-note">Note</label><textarea id="f-note" placeholder="Any detail worth flagging">' + escapeHtml(item.note) + '</textarea></div>' +
-        '</div>' +
-        '<div class="form-actions">' +
-          '<button class="btn-secondary" type="button" id="f-cancel">Cancel</button>' +
-          '<button class="btn-primary" type="button" id="f-save">' + (editingItemId ? 'Save changes' : 'Add item') + '</button>' +
-        '</div>' +
-      '</div>';
-
-    document.getElementById('f-cancel').addEventListener('click', closeForm);
-    document.getElementById('f-save').addEventListener('click', function(){ saveForm(itemDate); });
-    document.getElementById('f-time').focus();
-  }
-
-  function closeForm(){
-    editingItemId = null;
-    els.formSlot.innerHTML = '';
-  }
-
-  function saveForm(itemDate){
-    var time = document.getElementById('f-time').value;
-    var category = document.getElementById('f-cat').value;
-    var title = document.getElementById('f-title').value.trim();
-    var crew = document.getElementById('f-crew').value.trim();
-    var note = document.getElementById('f-note').value.trim();
-    if(!title){
-      document.getElementById('f-title').focus();
-      return;
-    }
-
-    var payload = {date: itemDate, time: time, category: category, title: title, crew: crew, note: note};
-    var isEdit = !!editingItemId;
-    if(isEdit) payload.id = editingItemId;
-
-    var saveBtn = document.getElementById('f-save');
-    if(saveBtn){ saveBtn.disabled = true; }
-
-    fetch(API_BASE, {
-      method: isEdit ? 'PUT' : 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(payload)
-    })
-      .then(function(res){
-        if(!res.ok) throw new Error('save failed');
-        return res.json();
-      })
-      .then(function(data){
-        manualItems = (data && data.items) || manualItems;
-        closeForm();
-        renderCurrentDay();
-        flagSave(isEdit ? 'Item updated.' : 'Item added.', false);
-      })
-      .catch(function(){
-        flagSave('Couldn’t save — check your connection and try again.', true);
-        if(saveBtn){ saveBtn.disabled = false; }
-      });
-  }
-
-  function deleteItem(id){
-    if(!id) return;
-    if(!window.confirm('Delete this item for everyone with this link?')) return;
-
-    fetch(API_BASE + '?id=' + encodeURIComponent(id), {method: 'DELETE'})
-      .then(function(res){
-        if(!res.ok) throw new Error('delete failed');
-        return res.json();
-      })
-      .then(function(data){
-        manualItems = (data && data.items) || manualItems.filter(function(i){ return i.id !== id; });
-        renderCurrentDay();
-        flagSave('Item deleted.', false);
-      })
-      .catch(function(){
-        flagSave('Couldn’t delete — check your connection and try again.', true);
+        /* silent — this is a passive display link; a stale/missing manual list isn't worth surfacing */
       });
   }
 
@@ -1112,12 +984,9 @@
 
   els.reloadBtn.addEventListener('click', function(){ location.reload(); });
 
-  els.addItemBtn.addEventListener('click', function(){ openForm(null); });
-
   els.dayTabs.querySelectorAll('.day-tab').forEach(function(btn){
     btn.addEventListener('click', function(){
       selectedDayOffset = parseInt(btn.getAttribute('data-offset'), 10);
-      closeForm();
       renderCurrentDay();
     });
   });
