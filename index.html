@@ -595,7 +595,8 @@
     <div class="masthead-right">
       <span class="snapshot-badge" id="snapshot-label">snapshot: &mdash;</span>
       <div class="button-row">
-        <button class="add-btn" id="add-item-btn" type="button">+ Add item</button>
+        <button class="add-btn" id="add-item-btn" type="button" hidden>+ Add item</button>
+        <button class="reload-btn" id="lock-btn" type="button">Unlock editing</button>
         <button class="reload-btn" id="reload-btn" type="button">Reload page</button>
       </div>
       <span class="save-flag" id="save-flag"></span>
@@ -655,11 +656,15 @@
     snapshotLabel: document.getElementById('snapshot-label'),
     reloadBtn: document.getElementById('reload-btn'),
     addItemBtn: document.getElementById('add-item-btn'),
+    lockBtn: document.getElementById('lock-btn'),
     formSlot: document.getElementById('form-slot'),
     saveFlag: document.getElementById('save-flag')
   };
 
   var API_BASE = '/api/items';
+  var PASSCODE = '2866';
+  var PASSCODE_STORAGE_KEY = 'ds-passcode';
+  var UNLOCKED = false;
   var selectedDayOffset = 0;
   var dayCache = {0:[], 1:[], 2:[]};
   var lastUpdated = null;
@@ -978,10 +983,12 @@
           (item.crew ? '<div class="crew-line"><span class="crew-chip">' + escapeHtml(item.crew) + '</span></div>' : '') +
           (item.note ? '<div class="row-note">' + escapeHtml(item.note) + '</div>' : '') +
         '</div>' +
-        '<div class="manual-actions">' +
-          '<button class="icon-btn" type="button" data-edit="' + item.id + '" title="Edit" aria-label="Edit item">&#9998;</button>' +
-          '<button class="icon-btn" type="button" data-del="' + item.id + '" title="Delete" aria-label="Delete item">&times;</button>' +
-        '</div>' +
+        (UNLOCKED
+          ? '<div class="manual-actions">' +
+              '<button class="icon-btn" type="button" data-edit="' + item.id + '" title="Edit" aria-label="Edit item">&#9998;</button>' +
+              '<button class="icon-btn" type="button" data-del="' + item.id + '" title="Delete" aria-label="Delete item">&times;</button>' +
+            '</div>'
+          : '') +
       '</div>'
     );
   }
@@ -1012,7 +1019,46 @@
       });
   }
 
+  /* ------------------------- passcode lock ------------------------- */
+
+  function loadUnlockState(){
+    try{
+      UNLOCKED = window.localStorage.getItem(PASSCODE_STORAGE_KEY) === PASSCODE;
+    }catch(e){
+      UNLOCKED = false;
+    }
+  }
+
+  function applyLockUI(){
+    els.addItemBtn.hidden = !UNLOCKED;
+    els.lockBtn.textContent = UNLOCKED ? 'Lock editing' : 'Unlock editing';
+  }
+
+  function promptUnlock(){
+    var entered = window.prompt('Enter the passcode to edit this day sheet:');
+    if(entered === null) return;
+    if(entered.trim() === PASSCODE){
+      try{ window.localStorage.setItem(PASSCODE_STORAGE_KEY, PASSCODE); }catch(e){}
+      UNLOCKED = true;
+      applyLockUI();
+      closeForm();
+      renderCurrentDay();
+      flagSave('Editing unlocked on this device.', false);
+    } else {
+      flagSave('Wrong passcode.', true);
+    }
+  }
+
+  function lockEditing(){
+    try{ window.localStorage.removeItem(PASSCODE_STORAGE_KEY); }catch(e){}
+    UNLOCKED = false;
+    closeForm();
+    applyLockUI();
+    renderCurrentDay();
+  }
+
   function openForm(itemId){
+    if(!UNLOCKED){ promptUnlock(); return; }
     editingItemId = itemId || null;
     var item = editingItemId ? manualItems.find(function(i){ return i.id === editingItemId; }) : null;
     var itemDate = (item && item.date) || isoDateForOffset(selectedDayOffset);
@@ -1070,10 +1116,15 @@
 
     fetch(API_BASE, {
       method: isEdit ? 'PUT' : 'POST',
-      headers: {'Content-Type': 'application/json'},
+      headers: {'Content-Type': 'application/json', 'x-day-sheet-passcode': PASSCODE},
       body: JSON.stringify(payload)
     })
       .then(function(res){
+        if(res.status === 401){
+          lockEditing();
+          flagSave('Editing was locked — click Unlock editing and try again.', true);
+          throw null;
+        }
         if(!res.ok) throw new Error('save failed');
         return res.json();
       })
@@ -1083,18 +1134,27 @@
         renderCurrentDay();
         flagSave(isEdit ? 'Item updated.' : 'Item added.', false);
       })
-      .catch(function(){
-        flagSave('Couldn’t save — check your connection and try again.', true);
+      .catch(function(err){
+        if(err) flagSave('Couldn’t save — check your connection and try again.', true);
         if(saveBtn){ saveBtn.disabled = false; }
       });
   }
 
   function deleteItem(id){
     if(!id) return;
+    if(!UNLOCKED){ promptUnlock(); return; }
     if(!window.confirm('Delete this item for everyone with this link?')) return;
 
-    fetch(API_BASE + '?id=' + encodeURIComponent(id), {method: 'DELETE'})
+    fetch(API_BASE + '?id=' + encodeURIComponent(id), {
+      method: 'DELETE',
+      headers: {'x-day-sheet-passcode': PASSCODE}
+    })
       .then(function(res){
+        if(res.status === 401){
+          lockEditing();
+          flagSave('Editing was locked — click Unlock editing and try again.', true);
+          throw null;
+        }
         if(!res.ok) throw new Error('delete failed');
         return res.json();
       })
@@ -1103,8 +1163,8 @@
         renderCurrentDay();
         flagSave('Item deleted.', false);
       })
-      .catch(function(){
-        flagSave('Couldn’t delete — check your connection and try again.', true);
+      .catch(function(err){
+        if(err) flagSave('Couldn’t delete — check your connection and try again.', true);
       });
   }
 
@@ -1113,6 +1173,10 @@
   els.reloadBtn.addEventListener('click', function(){ location.reload(); });
 
   els.addItemBtn.addEventListener('click', function(){ openForm(null); });
+
+  els.lockBtn.addEventListener('click', function(){
+    if(UNLOCKED) lockEditing(); else promptUnlock();
+  });
 
   els.dayTabs.querySelectorAll('.day-tab').forEach(function(btn){
     btn.addEventListener('click', function(){
@@ -1123,6 +1187,8 @@
   });
 
   function init(){
+    loadUnlockState();
+    applyLockUI();
     updateDayTabs();
     loadScheduleFromState();
     renderCurrentDay();

@@ -3,8 +3,17 @@ import { getStore } from "@netlify/blobs";
 
 const CATEGORIES = ["install", "packdown", "delivery", "collection", "driver", "test", "other"];
 
+// Simple shared passcode gating writes (add/edit/delete). Reads (GET) stay
+// open so the read-only contractor link keeps working with no passcode.
+// This is a light deterrent, not real auth — the page is public source.
+const PASSCODE = "2866";
+
 function store() {
   return getStore("day-sheet-items");
+}
+
+function checkPasscode(req: Request): boolean {
+  return req.headers.get("x-day-sheet-passcode") === PASSCODE;
 }
 
 function sanitizeItem(input: any) {
@@ -29,6 +38,7 @@ export default async (req: Request, context: Context) => {
   }
 
   if (req.method === "POST") {
+    if (!checkPasscode(req)) return new Response("Invalid passcode", { status: 401 });
     let body: any;
     try {
       body = await req.json();
@@ -45,6 +55,7 @@ export default async (req: Request, context: Context) => {
   }
 
   if (req.method === "PUT") {
+    if (!checkPasscode(req)) return new Response("Invalid passcode", { status: 401 });
     let body: any;
     try {
       body = await req.json();
@@ -63,6 +74,7 @@ export default async (req: Request, context: Context) => {
   }
 
   if (req.method === "DELETE") {
+    if (!checkPasscode(req)) return new Response("Invalid passcode", { status: 401 });
     let id: string | null = new URL(req.url).searchParams.get("id");
     if (!id) {
       try {
