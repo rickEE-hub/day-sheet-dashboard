@@ -539,7 +539,6 @@
   var API_BASE = '/api/items';
   var NOTES_API = '/api/notes';
   var REMINDER_API = '/api/reminder';
-  var SCHEDULE_API = '/api/schedule';
   var selectedDayOffset = 0;
   var dayCache = {0:[], 1:[], 2:[], 3:[], 4:[]};
   var lastUpdated = null;
@@ -685,12 +684,12 @@
     }
   }
 
-  // First paint uses the snapshot baked in at last deploy (instant, no
-  // network dependency). fetchSchedule() below then overwrites it with
-  // the live copy from /api/schedule — that's what a Rentman refresh now
-  // updates, so every viewer sees new data within ~20s without a redeploy.
-  function applySchedule(sched){
-    sched = sched || {updatedAt:null, days:{}};
+  // This is a static build: the schedule was fetched once at build time
+  // and baked into the #app-state script tag below. There is no network
+  // call here — every viewer just reads the same embedded snapshot.
+  function loadScheduleFromState(){
+    var state = getState();
+    var sched = state.schedule || {updatedAt:null, days:{}};
     var nextCache = {};
     DAY_OFFSETS.forEach(function(off){
       var iso = isoDateForOffset(off);
@@ -698,25 +697,6 @@
     });
     dayCache = nextCache;
     lastUpdated = sched.updatedAt ? new Date(sched.updatedAt) : null;
-  }
-
-  function loadScheduleFromState(){
-    var state = getState();
-    applySchedule(state.schedule);
-  }
-
-  function fetchSchedule(){
-    return fetch(SCHEDULE_API)
-      .then(function(res){
-        if(!res.ok) throw new Error('load failed');
-        return res.json();
-      })
-      .then(function(data){
-        applySchedule(data);
-        renderCurrentDay();
-        renderSnapshotLabel();
-      })
-      .catch(function(){ /* silent — keep last known snapshot */ });
   }
 
   function renderSnapshotLabel(){
@@ -936,13 +916,12 @@
     renderCurrentDay();
     renderSnapshotLabel();
     renderReminder();
-    fetchSchedule();
     fetchItems();
     fetchNotes();
     fetchReminder();
-    pollTimer = window.setInterval(function(){ fetchSchedule(); fetchItems(); fetchNotes(); fetchReminder(); }, 20000);
+    pollTimer = window.setInterval(function(){ fetchItems(); fetchNotes(); fetchReminder(); }, 20000);
     document.addEventListener('visibilitychange', function(){
-      if(document.visibilityState === 'visible'){ fetchSchedule(); fetchItems(); fetchNotes(); fetchReminder(); }
+      if(document.visibilityState === 'visible'){ fetchItems(); fetchNotes(); fetchReminder(); }
     });
   }
 

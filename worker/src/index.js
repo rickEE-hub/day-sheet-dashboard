@@ -177,36 +177,13 @@ async function handleReminder(req, env) {
   return new Response("Method not allowed", { status: 405 });
 }
 
-/* ------------------------- /api/schedule ------------------------- */
-//
-// This is what replaces "bake the Rentman snapshot into the HTML and
-// redeploy". A refresh is now just a PUT here — no build, no deploy,
-// so it doesn't touch any Cloudflare/Netlify deploy quota. Every open
-// tab picks it up within ~20s via polling.
-
-async function handleSchedule(req, env) {
-  const kv = env.DAY_SHEET_KV;
-
-  if (req.method === "GET") {
-    const schedule = await kvGetJson(kv, "schedule", { updatedAt: null, days: {} });
-    return json(schedule);
-  }
-
-  if (req.method === "PUT") {
-    if (!checkPasscode(req)) return new Response("Invalid passcode", { status: 401 });
-    const body = await readJson(req);
-    if (!body || typeof body !== "object" || !body.days) {
-      return new Response("Body must be {updatedAt, days}", { status: 400 });
-    }
-    const schedule = { updatedAt: body.updatedAt || new Date().toISOString(), days: body.days };
-    await kv.put("schedule", JSON.stringify(schedule));
-    return json(schedule);
-  }
-
-  return new Response("Method not allowed", { status: 405 });
-}
-
 /* ------------------------- routing ------------------------- */
+//
+// Note: schedule (Rentman) data is intentionally NOT served from here.
+// It stays baked into public/index.html and public/view.html at deploy
+// time, refreshed by editing those files and pushing to GitHub — the
+// same workflow as before, just landing on Cloudflare's free Workers
+// Builds instead of Netlify's metered ones. See CLAUDE.md.
 
 export default {
   async fetch(req, env) {
@@ -215,7 +192,6 @@ export default {
     if (url.pathname === "/api/items") return handleItems(req, env);
     if (url.pathname === "/api/notes") return handleNotes(req, env);
     if (url.pathname === "/api/reminder") return handleReminder(req, env);
-    if (url.pathname === "/api/schedule") return handleSchedule(req, env);
 
     // Everything else is a static asset. html_handling is set to "none"
     // in wrangler.toml so /index.html and /view.html are served at those
