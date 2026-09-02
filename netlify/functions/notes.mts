@@ -5,7 +5,7 @@ import { getStore } from "@netlify/blobs";
 // id, though manual items normally carry their note inline via /api/items.
 // Reads (GET) stay open so the read-only contractor link can display notes.
 // Writes require the shared passcode, same light-deterrent pattern as items.mts.
-const PASSCODE = "2866";
+const PASSCODE = "4242";
 
 function store() {
   return getStore("day-sheet-notes");

@@ -11,7 +11,7 @@
 // x-day-sheet-passcode header on writes. GETs stay open for the
 // read-only contractor link.
 
-const PASSCODE = "2866";
+const PASSCODE = "4242";
 const CATEGORIES = ["install", "packdown", "delivery", "collection", "driver", "test", "other"];
 
 const JSON_HEADERS = { "content-type": "application/json; charset=utf-8" };

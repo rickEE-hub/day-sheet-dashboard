@@ -6,7 +6,7 @@ const CATEGORIES = ["install", "packdown", "delivery", "collection", "driver", "
 // Simple shared passcode gating writes (add/edit/delete). Reads (GET) stay
 // open so the read-only contractor link keeps working with no passcode.
 // This is a light deterrent, not real auth — the page is public source.
-const PASSCODE = "2866";
+const PASSCODE = "4242";
 
 function store() {
   return getStore("day-sheet-items");

@@ -10,7 +10,7 @@ Public, no-login warehouse-ops dashboard for Event Equipment Group (Sydney/NSW).
 
 Everything under `worker/` is the current, deployed-going-forward version of the site:
 
-- `worker/public/index.html` — team/edit page (passcode-gated writes, passcode `2866`).
+- `worker/public/index.html` — team/edit page (passcode-gated writes, passcode `4242` as of 2026-09-02 — was `2866`).
 - `worker/public/view.html` — contractor/read-only page.
 - `worker/src/index.js` — the Worker: serves the two pages via the Assets binding and implements `/api/items`, `/api/notes`, `/api/reminder` against Workers KV (binding `DAY_SHEET_KV`, namespace id `f02d047a1e6b4cfeab61cd5e261effb0`, title `day-sheet-kv`). Request/response shapes are unchanged from the old Netlify functions.
 - `worker/wrangler.toml` — Worker name `day-sheet-dashboard` (must match the Worker name Cloudflare's dashboard created during Git import — it auto-derived this from the repo name; renamed from an earlier `ee-day-sheet` to match, 2026-09-02), assets directory `./public` with `html_handling = "none"` (serves exact `/index.html` and `/view.html` paths, no auto-redirect to extensionless URLs — the Worker adds one explicit rewrite of `/` → `/index.html` so the root URL still works). KV namespace id is already filled in.
