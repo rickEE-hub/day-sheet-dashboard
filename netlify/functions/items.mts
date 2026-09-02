@@ -21,11 +21,12 @@ function sanitizeItem(input: any) {
   const category = CATEGORIES.includes(input?.category) ? input.category : "other";
   return {
     date: clamp(input?.date, 10),
-    time: clamp(input?.time, 5),
+    start: clamp(input?.start, 5),
+    end: clamp(input?.end, 5),
     category,
     title: clamp(input?.title, 200),
     crew: clamp(input?.crew, 200),
-    note: clamp(input?.note, 1000)
+    note: clamp(input?.note, 4000)
   };
 }
 

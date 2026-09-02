@@ -4,132 +4,156 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Day Sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
-
   :root{
-    --bg:#F2F2F1;
+    --bg:#F5F7FA;
     --surface:#FFFFFF;
-    --surface-2:#EAEAEA;
-    --ink:#242424;
-    --ink-dim:#6C6C6C;
-    --ink-faint:#9C9C9C;
-    --border:#E2E2E1;
-    --border-strong:#CACAC9;
-    --accent:#ED2226;
+    --surface-2:#EEF1F5;
+    --ink:#171B21;
+    --ink-dim:#5B6472;
+    --ink-faint:#94A0AF;
+    --border:#E3E7ED;
+    --border-strong:#C9D0DA;
+    --accent:#2454E8;
     --accent-ink:#FFFFFF;
-    --accent-soft:#FBE1E1;
-    --cat-install:#1E6FD9;
-    --cat-install-soft:#DCE7FA;
-    --cat-packdown:#8E24AA;
-    --cat-packdown-soft:#F1DFF4;
-    --cat-delivery:#1E8E3E;
-    --cat-delivery-soft:#DCF0E1;
-    --cat-collection:#D84315;
-    --cat-collection-soft:#FBE1D6;
-    --cat-driver:#00838F;
-    --cat-driver-soft:#D8EEF0;
-    --cat-test:#D6336C;
-    --cat-test-soft:#FBDCE6;
-    --cat-other:#6B7680;
-    --cat-other-soft:#E6E8E9;
-    --status-confirmed:#2E7D53;
-    --status-confirmed-soft:#DCEBE2;
-    --status-pending:#B4791A;
-    --status-pending-soft:#F1E5D0;
-    --status-prepped:#5B5FA6;
-    --status-prepped-soft:#E2E2EF;
-    --status-onlocation:#ED2226;
-    --status-onlocation-soft:#FBE1E1;
-    --status-returned:#6B7680;
-    --status-returned-soft:#E6E8E9;
-    --warn:#B3401E;
-    --warn-soft:#F5DFD6;
-    --shadow: 0 1px 2px rgba(20,20,20,.06), 0 4px 14px rgba(20,20,20,.05);
-    --radius: 10px;
+    --accent-soft:#E4EBFD;
+    --cat-install:#2454E8;
+    --cat-install-soft:#E4EBFD;
+    --cat-packdown:#7B3FE4;
+    --cat-packdown-soft:#EEE5FD;
+    --cat-delivery:#0E9F6E;
+    --cat-delivery-soft:#DCF7EC;
+    --cat-collection:#DD6B20;
+    --cat-collection-soft:#FDE9D8;
+    --cat-driver:#0891B2;
+    --cat-driver-soft:#DBF4F9;
+    --cat-test:#DB2777;
+    --cat-test-soft:#FBE1EC;
+    --cat-other:#6B7280;
+    --cat-other-soft:#EBEDF0;
+    --vehicle:#1E3A5F;
+    --vehicle-soft:#E1E9F1;
+    --vehicle-ink:#1E3A5F;
+    --status-confirmed:#0E9F6E;
+    --status-confirmed-soft:#DCF7EC;
+    --status-pending:#B45309;
+    --status-pending-soft:#FDECD3;
+    --status-prepped:#7B3FE4;
+    --status-prepped-soft:#EEE5FD;
+    --status-onlocation:#2454E8;
+    --status-onlocation-soft:#E4EBFD;
+    --status-returned:#6B7280;
+    --status-returned-soft:#EBEDF0;
+    --warn:#C2410C;
+    --warn-soft:#FDE7DA;
+    --reminder-bg-a:#FFF7ED;
+    --reminder-bg-b:#FFEFD9;
+    --reminder-border:#F3C98B;
+    --reminder-ink:#7C4A12;
+    --reminder-label:#9A5B0F;
+    --shadow: 0 1px 2px rgba(20,25,35,.04), 0 8px 24px rgba(20,25,35,.06);
+    --radius: 14px;
   }
 
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
-      --bg:#161616;
-      --surface:#212121;
-      --surface-2:#292929;
-      --ink:#EDEDED;
-      --ink-dim:#A8A8A8;
-      --ink-faint:#7A7A7A;
-      --border:#343434;
-      --border-strong:#464646;
-      --accent:#FF4B4F;
-      --accent-ink:#1A0000;
-      --accent-soft:#3A1618;
-      --cat-install:#6FA8F0;
-      --cat-install-soft:#1B2A42;
-      --cat-packdown:#D08CE0;
-      --cat-packdown-soft:#3A2440;
-      --cat-delivery:#6FD08A;
-      --cat-delivery-soft:#1C3A26;
-      --cat-collection:#F0965F;
-      --cat-collection-soft:#3D2415;
-      --cat-driver:#5BC8D6;
-      --cat-driver-soft:#123338;
-      --cat-test:#F08FB0;
-      --cat-test-soft:#3D1F2A;
-      --cat-other:#ABABAB;
-      --cat-other-soft:#2A2A2A;
-      --status-confirmed:#78C79B;
-      --status-confirmed-soft:#1E362A;
-      --status-pending:#E0B15C;
-      --status-pending-soft:#3B2F16;
-      --status-prepped:#A6A9E0;
-      --status-prepped-soft:#2C2D42;
-      --status-onlocation:#FF4B4F;
-      --status-onlocation-soft:#3A1618;
-      --status-returned:#ABABAB;
-      --status-returned-soft:#2A2A2A;
-      --warn:#E68B67;
-      --warn-soft:#3E2419;
-      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 6px 18px rgba(0,0,0,.35);
+      --bg:#12161C;
+      --surface:#1B212B;
+      --surface-2:#232A35;
+      --ink:#EDEFF3;
+      --ink-dim:#9AA3B2;
+      --ink-faint:#6B7484;
+      --border:#2A313D;
+      --border-strong:#3A4250;
+      --accent:#6B93F7;
+      --accent-ink:#0B1220;
+      --accent-soft:#1E2A4A;
+      --cat-install:#6B93F7;
+      --cat-install-soft:#1E2A4A;
+      --cat-packdown:#B49CFB;
+      --cat-packdown-soft:#2C2350;
+      --cat-delivery:#3EDCA0;
+      --cat-delivery-soft:#123528;
+      --cat-collection:#FB923C;
+      --cat-collection-soft:#3A2411;
+      --cat-driver:#3FD0E8;
+      --cat-driver-soft:#0E323A;
+      --cat-test:#F472B6;
+      --cat-test-soft:#3A1C2C;
+      --cat-other:#9CA3AF;
+      --cat-other-soft:#262B33;
+      --vehicle:#9CC0F0;
+      --vehicle-soft:#1E2A3D;
+      --vehicle-ink:#BFD9F5;
+      --status-confirmed:#3EDCA0;
+      --status-confirmed-soft:#123528;
+      --status-pending:#FBBF6D;
+      --status-pending-soft:#3A2A11;
+      --status-prepped:#B49CFB;
+      --status-prepped-soft:#2C2350;
+      --status-onlocation:#6B93F7;
+      --status-onlocation-soft:#1E2A4A;
+      --status-returned:#9CA3AF;
+      --status-returned-soft:#262B33;
+      --warn:#FB923C;
+      --warn-soft:#3A2411;
+      --reminder-bg-a:#2A2013;
+      --reminder-bg-b:#332616;
+      --reminder-border:#5A431F;
+      --reminder-ink:#F0C989;
+      --reminder-label:#F3B85E;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.45);
     }
   }
   :root[data-theme="dark"]{
-    --bg:#161616;
-    --surface:#212121;
-    --surface-2:#292929;
-    --ink:#EDEDED;
-    --ink-dim:#A8A8A8;
-    --ink-faint:#7A7A7A;
-    --border:#343434;
-    --border-strong:#464646;
-    --accent:#FF4B4F;
-    --accent-ink:#1A0000;
-    --accent-soft:#3A1618;
-    --cat-install:#6FA8F0;
-    --cat-install-soft:#1B2A42;
-    --cat-packdown:#D08CE0;
-    --cat-packdown-soft:#3A2440;
-    --cat-delivery:#6FD08A;
-    --cat-delivery-soft:#1C3A26;
-    --cat-collection:#F0965F;
-    --cat-collection-soft:#3D2415;
-    --cat-driver:#5BC8D6;
-    --cat-driver-soft:#123338;
-    --cat-test:#F08FB0;
-    --cat-test-soft:#3D1F2A;
-    --cat-other:#ABABAB;
-    --cat-other-soft:#2A2A2A;
-    --status-confirmed:#78C79B;
-    --status-confirmed-soft:#1E362A;
-    --status-pending:#E0B15C;
-    --status-pending-soft:#3B2F16;
-    --status-prepped:#A6A9E0;
-    --status-prepped-soft:#2C2D42;
-    --status-onlocation:#FF4B4F;
-    --status-onlocation-soft:#3A1618;
-    --status-returned:#ABABAB;
-    --status-returned-soft:#2A2A2A;
-    --warn:#E68B67;
-    --warn-soft:#3E2419;
-    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 6px 18px rgba(0,0,0,.35);
+    --bg:#12161C;
+    --surface:#1B212B;
+    --surface-2:#232A35;
+    --ink:#EDEFF3;
+    --ink-dim:#9AA3B2;
+    --ink-faint:#6B7484;
+    --border:#2A313D;
+    --border-strong:#3A4250;
+    --accent:#6B93F7;
+    --accent-ink:#0B1220;
+    --accent-soft:#1E2A4A;
+    --cat-install:#6B93F7;
+    --cat-install-soft:#1E2A4A;
+    --cat-packdown:#B49CFB;
+    --cat-packdown-soft:#2C2350;
+    --cat-delivery:#3EDCA0;
+    --cat-delivery-soft:#123528;
+    --cat-collection:#FB923C;
+    --cat-collection-soft:#3A2411;
+    --cat-driver:#3FD0E8;
+    --cat-driver-soft:#0E323A;
+    --cat-test:#F472B6;
+    --cat-test-soft:#3A1C2C;
+    --cat-other:#9CA3AF;
+    --cat-other-soft:#262B33;
+    --vehicle:#9CC0F0;
+    --vehicle-soft:#1E2A3D;
+    --vehicle-ink:#BFD9F5;
+    --status-confirmed:#3EDCA0;
+    --status-confirmed-soft:#123528;
+    --status-pending:#FBBF6D;
+    --status-pending-soft:#3A2A11;
+    --status-prepped:#B49CFB;
+    --status-prepped-soft:#2C2350;
+    --status-onlocation:#6B93F7;
+    --status-onlocation-soft:#1E2A4A;
+    --status-returned:#9CA3AF;
+    --status-returned-soft:#262B33;
+    --warn:#FB923C;
+    --warn-soft:#3A2411;
+    --reminder-bg-a:#2A2013;
+    --reminder-bg-b:#332616;
+    --reminder-border:#5A431F;
+    --reminder-ink:#F0C989;
+    --reminder-label:#F3B85E;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.45);
   }
 
   *{box-sizing:border-box;}
@@ -137,9 +161,9 @@
   body{
     background:var(--bg);
     color:var(--ink);
-    font-family:'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+    font-family:'Inter', system-ui, -apple-system, sans-serif;
     font-size:15px;
-    line-height:1.45;
+    line-height:1.5;
     -webkit-font-smoothing:antialiased;
   }
   ::selection{background:var(--accent-soft);}
@@ -150,8 +174,24 @@
   .wrap{
     max-width:960px;
     margin:0 auto;
-    padding:20px 20px 80px;
+    padding:28px 20px 60px;
   }
+
+  /* ---- Reminder banner (read-only) ---- */
+  .reminder{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    background:linear-gradient(135deg,var(--reminder-bg-a),var(--reminder-bg-b));
+    border:1px solid var(--reminder-border);
+    border-radius:var(--radius);
+    padding:14px 16px;
+    margin-bottom:20px;
+    box-shadow:var(--shadow);
+  }
+  .reminder .reminder-ico{font-size:18px; line-height:1.3;}
+  .reminder .reminder-txt{font-size:13.5px; color:var(--reminder-ink); flex:1; min-width:0; overflow-wrap:anywhere; white-space:pre-wrap;}
+  .reminder .reminder-txt b{display:block; font-size:11px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:3px; color:var(--reminder-label); font-weight:700;}
 
   /* ---- Header / masthead ---- */
   .masthead{
@@ -159,197 +199,84 @@
     align-items:flex-start;
     justify-content:space-between;
     gap:16px;
-    padding-bottom:16px;
-    border-bottom:3px solid var(--ink);
-    margin-bottom:14px;
+    margin-bottom:22px;
     flex-wrap:wrap;
   }
-  .masthead-left{display:flex; flex-direction:column; gap:2px;}
+  .masthead-left{display:flex; flex-direction:column; gap:3px;}
   .eyebrow{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:11px;
-    letter-spacing:.12em;
+    font-size:11.5px;
+    letter-spacing:.1em;
     text-transform:uppercase;
     color:var(--ink-faint);
+    font-weight:600;
   }
   h1{
-    font-family:'Poppins', sans-serif;
-    font-weight:700;
-    text-transform:uppercase;
-    letter-spacing:.01em;
-    font-size:clamp(26px,5vw,38px);
+    font-weight:800;
+    letter-spacing:-.02em;
+    font-size:clamp(26px,5vw,34px);
     margin:0;
     text-wrap:balance;
   }
   .date-line{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:13px;
+    font-size:14px;
     color:var(--ink-dim);
+    font-weight:500;
   }
   .masthead-right{
     display:flex;
     flex-direction:column;
     align-items:flex-end;
     gap:8px;
-    font-family:'IBM Plex Mono', monospace;
-    font-size:12px;
-    color:var(--ink-dim);
   }
   .snapshot-badge{
-    font-family:'IBM Plex Mono', monospace;
+    font-family:'JetBrains Mono', monospace;
     font-size:10.5px;
     font-weight:600;
-    letter-spacing:.06em;
+    letter-spacing:.05em;
     text-transform:uppercase;
-    padding:3px 8px;
+    padding:5px 11px;
     border-radius:100px;
     background:var(--surface-2);
-    color:var(--ink-faint);
+    color:var(--ink-dim);
     border:1px solid var(--border);
     white-space:nowrap;
   }
-  .snapshot-row{display:flex; align-items:center; gap:8px; text-align:right;}
-  .reload-btn{
-    border:1px solid var(--border-strong);
-    background:var(--surface);
-    color:var(--ink);
-    padding:6px 12px;
-    border-radius:7px;
-    font-size:12px;
-    font-family:'IBM Plex Mono', monospace;
-    cursor:pointer;
-    white-space:nowrap;
-  }
-  .reload-btn:hover{border-color:var(--accent); color:var(--accent);}
-  .reload-btn:active{transform:translateY(1px);}
-  .reload-btn:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible{
-    outline:2px solid var(--accent); outline-offset:2px;
-  }
-  .button-row{display:flex; gap:8px;}
-  .add-btn{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:12px;
-    background:var(--accent);
-    color:var(--accent-ink);
-    border:none;
-    border-radius:7px;
-    padding:7px 13px;
-    cursor:pointer;
-    font-weight:500;
-    white-space:nowrap;
-  }
-  .add-btn:hover{filter:brightness(1.06);}
-  .add-btn:active{transform:translateY(1px);}
-
-  .save-flag{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:11.5px;
-    color:var(--ink-faint);
-    margin:8px 0 0;
-    min-height:14px;
-    text-align:right;
-  }
-  .save-flag.err{color:var(--warn);}
-
-  .form-card{
-    background:var(--surface);
-    border:1px solid var(--border-strong);
-    border-radius:var(--radius);
-    padding:16px;
-    margin-bottom:18px;
-    box-shadow:var(--shadow);
-  }
-  .form-for{
-    font-size:12px;
-    color:var(--ink-dim);
-    margin-bottom:12px;
-  }
-  .form-for strong{color:var(--ink);}
-  .form-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px 12px;
-  }
-  .form-grid .full{grid-column:1/-1;}
-  .field label{
-    display:block;
-    font-size:11px;
-    text-transform:uppercase;
-    letter-spacing:.04em;
-    color:var(--ink-faint);
-    margin-bottom:4px;
-    font-family:'IBM Plex Mono', monospace;
-  }
-  .field input, .field select, .field textarea{
-    width:100%;
+  .btn{
     font-family:inherit;
-    font-size:13.5px;
-    padding:8px 9px;
-    border-radius:6px;
+    font-size:13px;
+    font-weight:600;
+    border-radius:9px;
+    padding:8px 14px;
+    cursor:pointer;
     border:1px solid var(--border-strong);
     background:var(--surface);
     color:var(--ink);
+    white-space:nowrap;
   }
-  .field textarea{resize:vertical; min-height:44px;}
-  .form-actions{
-    display:flex;
-    justify-content:flex-end;
-    gap:8px;
-    margin-top:12px;
-  }
-  .btn-secondary{
-    background:none;
-    border:1px solid var(--border-strong);
-    color:var(--ink-dim);
-    border-radius:7px;
-    padding:8px 14px;
-    font-size:13px;
-    cursor:pointer;
-  }
-  .btn-primary{
-    background:var(--accent);
-    color:var(--accent-ink);
-    border:none;
-    border-radius:7px;
-    padding:8px 14px;
-    font-size:13px;
-    font-weight:500;
-    cursor:pointer;
-  }
+  .btn:hover{border-color:var(--accent); color:var(--accent);}
+  .btn:active{transform:translateY(1px);}
+  .btn:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
 
   /* ---- Day tabs ---- */
   .day-tabs{
-    display:flex;
-    gap:6px;
-    margin-bottom:16px;
-    flex-wrap:wrap;
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:8px;
+    margin-bottom:20px;
   }
   .day-tab{
     background:var(--surface);
     border:1px solid var(--border);
-    color:var(--ink-dim);
-    border-radius:8px;
-    padding:8px 14px;
+    border-radius:12px;
+    padding:10px 6px;
+    text-align:center;
     cursor:pointer;
-    font-family:'IBM Plex Sans', sans-serif;
-    font-size:13px;
-    font-weight:500;
-    display:flex;
-    align-items:baseline;
-    gap:7px;
   }
-  .day-tab .day-tab-date{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:11px;
-    color:var(--ink-faint);
-  }
+  .day-tab .wd{display:block; font-size:10.5px; font-weight:700; letter-spacing:.05em; color:var(--ink-dim);}
+  .day-tab .num{display:block; font-size:17px; font-weight:800; margin-top:2px; color:var(--ink);}
   .day-tab:hover{border-color:var(--border-strong);}
-  .day-tab.active{
-    background:var(--ink);
-    border-color:var(--ink);
-    color:var(--surface);
-  }
-  .day-tab.active .day-tab-date{color:var(--surface); opacity:.7;}
+  .day-tab.active{background:var(--accent); border-color:var(--accent);}
+  .day-tab.active .wd, .day-tab.active .num{color:var(--accent-ink);}
 
   /* ---- Legend ---- */
   .legend{
@@ -361,7 +288,7 @@
     color:var(--ink-dim);
   }
   .legend-item{display:inline-flex; align-items:center; gap:6px;}
-  .legend-swatch{width:9px;height:9px;border-radius:2px;flex:none;}
+  .legend-swatch{width:9px;height:9px;border-radius:3px;flex:none;}
 
   /* ---- Top-level states ---- */
   .empty-state{
@@ -369,31 +296,31 @@
     padding:60px 20px;
     color:var(--ink-dim);
   }
-  .empty-state .big{font-family:'Poppins',sans-serif; font-size:20px; color:var(--ink); text-transform:uppercase; letter-spacing:.02em; margin-bottom:6px;}
+  .empty-state .big{font-size:19px; font-weight:700; color:var(--ink); margin-bottom:6px;}
 
-  /* ---- Timeline (jobs + manual items, interleaved by time) ---- */
+  /* ---- Timeline ---- */
   .groups{display:flex; flex-direction:column; gap:14px; margin-top:0;}
 
-  .job{
+  .job, .manual-item{
     background:var(--surface);
     border:1px solid var(--border);
     border-radius:var(--radius);
     box-shadow:var(--shadow);
     overflow:hidden;
   }
+  .manual-item{border:1px dashed var(--border-strong);}
   .job-head{
     display:flex;
     align-items:center;
     justify-content:space-between;
     gap:10px;
-    padding:13px 16px;
+    padding:14px 18px;
     border-bottom:1px solid var(--border);
     flex-wrap:wrap;
   }
   .job-title-block{min-width:0;}
   .job-title{
-    font-family:'Poppins', sans-serif;
-    font-weight:600;
+    font-weight:700;
     font-size:17px;
     letter-spacing:.01em;
     margin:0;
@@ -410,12 +337,11 @@
   .job-badges{display:flex; align-items:center; gap:6px; flex-wrap:wrap;}
 
   .pill{
-    font-family:'IBM Plex Mono', monospace;
     font-size:11px;
-    font-weight:500;
+    font-weight:700;
     letter-spacing:.03em;
     text-transform:uppercase;
-    padding:3px 8px;
+    padding:4px 10px;
     border-radius:100px;
     white-space:nowrap;
   }
@@ -429,30 +355,31 @@
   .rows{display:flex; flex-direction:column;}
   .row{
     display:grid;
-    grid-template-columns:88px 116px 1fr;
+    grid-template-columns:80px 116px 1fr;
     gap:12px;
-    padding:11px 16px;
+    padding:13px 18px;
     border-top:1px solid var(--border);
     align-items:start;
   }
-  .row:first-child{border-top:none;}
+  .rows .row:first-child{border-top:none;}
+  .manual-item .row{padding:14px 18px;}
   .row-time{
-    font-family:'IBM Plex Mono', monospace;
+    font-family:'JetBrains Mono', monospace;
     font-variant-numeric:tabular-nums;
     font-size:13px;
+    font-weight:600;
     color:var(--ink);
     padding-top:2px;
     white-space:nowrap;
   }
-  .row-time .end{color:var(--ink-faint); display:block; font-size:11.5px;}
+  .row-time .end{color:var(--ink-faint); display:block; font-size:11px; font-weight:500; margin-top:1px;}
   .cat-chip{
-    font-family:'IBM Plex Mono', monospace;
     font-size:10.5px;
-    font-weight:600;
+    font-weight:700;
     letter-spacing:.03em;
     text-transform:uppercase;
-    padding:3px 7px;
-    border-radius:5px;
+    padding:4px 8px;
+    border-radius:7px;
     display:inline-block;
     white-space:nowrap;
     width:fit-content;
@@ -466,119 +393,79 @@
   .cat-other{background:var(--cat-other-soft); color:var(--cat-other);}
 
   .row-body{min-width:0;}
-  .fn-name{font-weight:500; font-size:14px;}
+  .fn-name{font-weight:600; font-size:14.5px;}
   .crew-line{
-    margin-top:5px;
+    margin-top:6px;
     display:flex;
     flex-wrap:wrap;
-    gap:5px;
+    gap:6px;
     align-items:center;
   }
   .crew-chip{
     font-size:12px;
     background:var(--surface-2);
     color:var(--ink);
-    padding:2px 8px;
+    padding:3px 9px;
     border-radius:100px;
-    border:1px solid var(--border);
+    font-weight:500;
   }
   .crew-unassigned{
     font-size:12px;
     color:var(--warn);
-    font-weight:500;
+    font-weight:600;
   }
   .vehicle-line{
-    margin-top:5px;
+    margin-top:6px;
     display:flex;
     flex-wrap:wrap;
-    gap:6px;
+    gap:7px;
     align-items:center;
   }
   .vehicle-tag{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:10px;
-    letter-spacing:.06em;
+    font-size:10.5px;
+    letter-spacing:.05em;
     text-transform:uppercase;
-    color:var(--ink-faint);
+    color:var(--vehicle);
+    font-weight:700;
   }
   .vehicle-chip{
     font-size:12px;
-    background:var(--surface);
-    color:var(--ink);
-    padding:2px 8px;
-    border-radius:6px;
-    border:1px dashed var(--border-strong);
+    background:var(--vehicle-soft);
+    color:var(--vehicle-ink);
+    padding:3px 10px;
+    border-radius:7px;
+    font-weight:600;
+    border:1px solid var(--vehicle-soft);
   }
   .vehicle-missing{
     font-size:12px;
     color:var(--warn);
-    font-weight:500;
+    font-weight:600;
   }
   .row-note{
-    margin-top:6px;
+    margin-top:7px;
     font-size:12.5px;
     color:var(--ink-dim);
     background:var(--surface-2);
-    border-left:2px solid var(--border-strong);
-    padding:5px 9px;
-    border-radius:0 5px 5px 0;
+    border-radius:8px;
+    padding:8px 10px;
+    white-space:pre-wrap;
+    overflow-wrap:anywhere;
   }
   .no-tasks{
-    padding:13px 16px;
+    padding:14px 18px;
     font-size:13px;
     color:var(--ink-faint);
     font-style:italic;
   }
 
-  /* ---- Manual item card — dotted, sits inline in the timeline ---- */
-  .manual-item{
-    background:var(--surface);
-    border:1px dashed var(--border-strong);
-    border-radius:var(--radius);
-    padding:11px 14px;
-    display:grid;
-    grid-template-columns:88px 1fr auto;
-    gap:12px;
-    align-items:start;
-  }
-  .manual-item .row-time{padding-top:1px;}
-  .manual-actions{display:flex; gap:6px;}
-  .icon-btn{
-    background:none;
-    border:1px solid var(--border);
-    color:var(--ink-dim);
-    border-radius:6px;
-    width:26px;height:26px;
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    cursor:pointer;
-    font-size:13px;
-  }
-  .icon-btn:hover{border-color:var(--accent); color:var(--accent);}
-
-  footer{
-    margin-top:40px;
-    padding-top:14px;
-    border-top:1px solid var(--border);
-    font-size:11.5px;
-    color:var(--ink-faint);
-    font-family:'IBM Plex Mono', monospace;
-    display:flex;
-    justify-content:space-between;
-    flex-wrap:wrap;
-    gap:8px;
-  }
-
   [hidden]{display:none !important;}
 
-  @media (max-width:560px){
-    .row{grid-template-columns:70px 1fr; }
+  @media (max-width:640px){
+    .day-tabs{grid-template-columns:repeat(3,1fr); }
+    .row{grid-template-columns:64px 1fr; }
     .row .cat-chip{grid-column:2; }
     .row-time{grid-row:1/3;}
-    .manual-item{grid-template-columns:1fr; }
-    .manual-actions{justify-self:flex-start;}
-    .form-grid{grid-template-columns:1fr;}
   }
 </style>
 </head>
@@ -586,24 +473,26 @@
 
 <div class="wrap">
 
+  <div id="reminder-slot"></div>
+
   <header class="masthead">
     <div class="masthead-left">
       <div class="eyebrow">Event Equipment Group &middot; NSW Warehouse Ops &middot; Read-only</div>
-      <h1 id="page-title">Today</h1>
+      <h1>Day Sheet</h1>
       <div class="date-line" id="date-line">&nbsp;</div>
     </div>
     <div class="masthead-right">
       <span class="snapshot-badge" id="snapshot-label">snapshot: &mdash;</span>
-      <div class="button-row">
-        <button class="reload-btn" id="reload-btn" type="button">Reload page</button>
-      </div>
+      <button class="btn" id="reload-btn" type="button">Reload</button>
     </div>
   </header>
 
   <nav class="day-tabs" id="day-tabs" role="tablist" aria-label="Select day">
-    <button class="day-tab" type="button" data-offset="0" role="tab">Today<span class="day-tab-date"></span></button>
-    <button class="day-tab" type="button" data-offset="1" role="tab">Tomorrow<span class="day-tab-date"></span></button>
-    <button class="day-tab" type="button" data-offset="2" role="tab">After tomorrow<span class="day-tab-date"></span></button>
+    <button class="day-tab" type="button" data-offset="0" role="tab"><span class="wd"></span><span class="num"></span></button>
+    <button class="day-tab" type="button" data-offset="1" role="tab"><span class="wd"></span><span class="num"></span></button>
+    <button class="day-tab" type="button" data-offset="2" role="tab"><span class="wd"></span><span class="num"></span></button>
+    <button class="day-tab" type="button" data-offset="3" role="tab"><span class="wd"></span><span class="num"></span></button>
+    <button class="day-tab" type="button" data-offset="4" role="tab"><span class="wd"></span><span class="num"></span></button>
   </nav>
 
   <div class="legend" id="legend">
@@ -618,13 +507,9 @@
 
   <main id="groups" class="groups" aria-live="polite"></main>
 
-  <footer>
-    <span>Read-only link &middot; to add or change items, use the team link.</span>
-    <span id="footer-count"></span>
-  </footer>
 </div>
 
-<script id="app-state" type="application/json">{"items":[],"notes":{},"schedule":{"updatedAt":"2026-09-01T09:21:53Z","days":{"2026-09-01":[{"id":1308,"title":"Security Expo 2026 - Motorola","status":"prepped","venue":"International Convention Centre Sydney (ICC)","rows":[{"id":4555,"name":"AV Setup","category":"install","start":"2026-09-01T08:00:00+10:00","end":"2026-09-01T08:00:00+10:00","needed":2,"crew":["Mick Rocco","PJ Hamilton-Shailer"],"vehicles":["NSW Transit Van \u00b7 1UE4DI"]}],"loadError":null},{"id":1541,"title":"PETIS26 - Organiser Order","status":"prepped","venue":"Hordern Pavilion","rows":[{"id":5344,"name":"Exhibition Installation","category":"install","start":"2026-09-01T13:00:00+10:00","end":"2026-09-01T13:00:00+10:00","needed":2,"crew":["Mick Rocco","PJ Hamilton-Shailer"],"vehicles":["NSW Transit Van \u00b7 1UE4DI"]}],"loadError":null},{"id":1532,"title":"The Tax Institute Event - ICC Sydney","status":"confirmed","venue":"International Convention Centre Sydney (ICC)","rows":[{"id":5322,"name":"AV Setup","category":"install","start":"2026-09-01T16:00:00+10:00","end":"2026-09-01T16:00:00+10:00","needed":1,"crew":["Mick Rocco","Yvette Paci"],"vehicles":["NSW Transit Van \u00b7 1UE4DI"]}],"loadError":null},{"id":1503,"title":"Gamuda SPW | CCD AV  (CBD Event)","status":"onlocation","venue":"City of Sydney Creative Studios","rows":[{"id":5227,"name":"AV Packdown","category":"packdown","start":"2026-09-01T17:30:00+10:00","end":"2026-09-01T18:30:00+10:00","needed":1,"crew":["Yvette Paci","Mick Rocco"],"vehicles":["NSW Transit Van \u00b7 1UE4DI"]}],"loadError":null}],"2026-09-02":[{"id":1571,"title":"Transfer NSW > QLD (ARC GOLD COAST)","status":"prepped","venue":null,"rows":[{"id":5463,"name":"Interstate Truck Transfer","category":"other","start":"2026-09-02T07:00:00+10:00","end":"2026-09-02T17:00:00+10:00","needed":1,"crew":["Rick Sanchez"],"vehicles":["NSW NNR200 Truck \u00b7 2FD9AT"]}],"loadError":null}],"2026-09-03":[{"id":1532,"title":"The Tax Institute Event - ICC Sydney","status":"confirmed","venue":"International Convention Centre Sydney (ICC)","rows":[{"id":5323,"name":"AV Reset","category":"other","start":"2026-09-03T15:30:00+10:00","end":"2026-09-03T15:30:00+10:00","needed":2,"crew":["Mick Rocco","Yvette Paci"],"vehicles":["NSW Transit Van \u00b7 1UE4DI"]}],"loadError":null},{"id":1541,"title":"PETIS26 - Organiser Order","status":"prepped","venue":"Hordern Pavilion","rows":[{"id":5345,"name":"Exhibition Packdown","category":"packdown","start":"2026-09-03T17:30:00+10:00","end":"2026-09-03T17:30:00+10:00","needed":2,"crew":["Mick Rocco","Yvette Paci"],"vehicles":["NSW Transit Van \u00b7 1UE4DI"]}],"loadError":null}]}}}</script>
+<script id="app-state" type="application/json">{"items":[],"notes":{},"schedule":{"updatedAt":"2026-09-02T09:48:33Z","days":{"2026-09-02":[{"id":1571,"title":"Transfer NSW > QLD (ARC GOLD COAST)","status":"prepped","venue":null,"rows":[{"id":5463,"name":"Interstate Truck Transfer","category":"other","start":"2026-09-02T07:00:00+10:00","end":"2026-09-02T17:00:00+10:00","needed":1,"crew":["Rick Sanchez"],"vehicles":["NSW Sprinter Van · DL55LR"]}],"loadError":null}],"2026-09-03":[{"id":1532,"title":"The Tax Institute Event - ICC Sydney","status":"onlocation","venue":"International Convention Centre Sydney (ICC)","rows":[{"id":5323,"name":"AV Reset","category":"other","start":"2026-09-03T15:30:00+10:00","end":"2026-09-03T15:30:00+10:00","needed":2,"crew":["Mick Rocco","Yvette Paci"],"vehicles":["NSW Transit Van · 1UE4DI"]}],"loadError":null},{"id":1541,"title":"PETIS26 - Organiser Order","status":"prepped","venue":"Hordern Pavilion","rows":[{"id":5345,"name":"Exhibition Packdown","category":"packdown","start":"2026-09-03T17:30:00+10:00","end":"2026-09-03T17:30:00+10:00","needed":2,"crew":["Mick Rocco","Yvette Paci"],"vehicles":["NSW Transit Van · 1UE4DI"]}],"loadError":null}],"2026-09-04":[{"id":1532,"title":"The Tax Institute Event - ICC Sydney","status":"onlocation","venue":"International Convention Centre Sydney (ICC)","rows":[{"id":5324,"name":"AV Packdown","category":"packdown","start":"2026-09-04T07:00:00+10:00","end":"2026-09-04T07:00:00+10:00","needed":2,"crew":["Mick Rocco"],"vehicles":["NSW Transit Van · 1UE4DI"]}],"loadError":null},{"id":1308,"title":"Security Expo 2026 - Motorola","status":"prepped","venue":"International Convention Centre Sydney (ICC)","rows":[{"id":4556,"name":"AV Packdown","category":"packdown","start":"2026-09-04T16:30:00+10:00","end":"2026-09-04T16:30:00+10:00","needed":2,"crew":["Mick Rocco","Yvette Paci"],"vehicles":["NSW Transit Van · 1UE4DI"]}],"loadError":null},{"id":1516,"title":"SECEAMS26 - Keenfinity","status":"onlocation","venue":"International Convention Centre Sydney (ICC)","rows":[{"id":5279,"name":"Exhibition Packdown","category":"packdown","start":"2026-09-04T18:00:00+10:00","end":"2026-09-04T18:00:00+10:00","needed":1,"crew":["Yvette Paci","Mick Rocco"],"vehicles":["NSW Sprinter Van · DL55LR"]}],"loadError":null}],"2026-09-05":[],"2026-09-06":[{"id":1474,"title":"Sustainability Fest 2026 - Panel Talks Tent","status":"confirmed","venue":"Inner West Sustainability Hub","rows":[{"id":5130,"name":"AV Setup","category":"install","start":"2026-09-06T06:30:00+10:00","end":"2026-09-06T09:30:00+10:00","needed":2,"crew":["PJ Hamilton-Shailer","Mick Rocco"],"vehicles":["NSW Transit Van · 1UE4DI"]},{"id":5129,"name":"AV Show Engineer","category":"other","start":"2026-09-06T09:30:00+10:00","end":"2026-09-06T15:00:00+10:00","needed":1,"crew":["Mick Rocco"],"vehicles":["NSW Transit Van · 1UE4DI"]},{"id":5131,"name":"AV Packdown","category":"packdown","start":"2026-09-06T15:30:00+10:00","end":"2026-09-06T17:30:00+10:00","needed":2,"crew":["Mick Rocco"],"vehicles":["NSW Transit Van · 1UE4DI"]}],"loadError":null},{"id":1510,"title":"6M x 3M LED Wall Ground Built","status":"confirmed","venue":"Allianz Stadium","rows":[{"id":5247,"name":"AV Setup","category":"install","start":"2026-09-06T11:00:00+10:00","end":"2026-09-06T14:00:00+10:00","needed":1,"crew":["PJ Hamilton-Shailer","Rick Sanchez"],"vehicles":["NSW NNR200 Truck · 2FD9AT"]},{"id":5249,"name":"Delivery & Collection","category":"delivery","start":"2026-09-06T11:00:00+10:00","end":"2026-09-06T14:00:00+10:00","needed":1,"crew":[],"vehicles":[]},{"id":5250,"name":"Sunday Load In","category":"other","start":"2026-09-06T11:00:00+10:00","end":"2026-09-06T14:00:00+10:00","needed":1,"crew":[],"vehicles":[]}],"loadError":null},{"id":1491,"title":"LED Poster Board Hire","status":"confirmed","venue":"Allianz Stadium","rows":[{"id":5187,"name":"AV Setup","category":"install","start":"2026-09-06T14:00:00+10:00","end":"2026-09-06T15:00:00+10:00","needed":1,"crew":["Rick Sanchez","PJ Hamilton-Shailer"],"vehicles":["NSW NNR200 Truck · 2FD9AT"]},{"id":5189,"name":"Delivery & Collection","category":"delivery","start":"2026-09-06T14:00:00+10:00","end":"2026-09-06T15:00:00+10:00","needed":1,"crew":[],"vehicles":[]},{"id":5190,"name":"Sunday Load In","category":"other","start":"2026-09-06T14:00:00+10:00","end":"2026-09-06T15:00:00+10:00","needed":1,"crew":[],"vehicles":[]}],"loadError":null}]}}}</script>
 
 <script id="app-script">
 (function(){
@@ -640,23 +525,26 @@
   var STATUS_META = {};
   STATUS_LIST.forEach(function(s){ STATUS_META[s.key] = s; });
 
-  var DAY_OFFSETS = [0, 1, 2];
+  var DAY_OFFSETS = [0, 1, 2, 3, 4];
 
   var els = {
     dateLine: document.getElementById('date-line'),
     groups: document.getElementById('groups'),
-    footerCount: document.getElementById('footer-count'),
-    pageTitle: document.getElementById('page-title'),
     dayTabs: document.getElementById('day-tabs'),
     snapshotLabel: document.getElementById('snapshot-label'),
-    reloadBtn: document.getElementById('reload-btn')
+    reloadBtn: document.getElementById('reload-btn'),
+    reminderSlot: document.getElementById('reminder-slot')
   };
 
   var API_BASE = '/api/items';
+  var NOTES_API = '/api/notes';
+  var REMINDER_API = '/api/reminder';
   var selectedDayOffset = 0;
-  var dayCache = {0:[], 1:[], 2:[]};
+  var dayCache = {0:[], 1:[], 2:[], 3:[], 4:[]};
   var lastUpdated = null;
   var manualItems = [];
+  var liveNotes = {};
+  var reminderText = '';
   var pollTimer = null;
 
   /* ------------------------- helpers: dates ------------------------- */
@@ -683,9 +571,6 @@
     return (h * 3600 + (h < 0 ? -min : min) * 60) * 1000;
   }
 
-  // Returns [dayStart, dayEnd) as real Date instants for the Sydney
-  // calendar day `offsetDays` from today (0 = today, 1 = tomorrow, ...),
-  // computed without assuming the viewer's own timezone.
   function sydneyDayRange(offsetDays){
     var now = new Date();
     var p = sydneyParts(now);
@@ -718,9 +603,9 @@
     return fmt.format(date).toUpperCase();
   }
 
-  function fmtShortDateFor(date){
+  function fmtDayNumberFor(date){
     var fmt = new Intl.DateTimeFormat('en-AU', {
-      timeZone:'Australia/Sydney', day:'numeric', month:'short'
+      timeZone:'Australia/Sydney', day:'numeric'
     });
     return fmt.format(date);
   }
@@ -731,14 +616,6 @@
       year:'numeric', hour:'2-digit', minute:'2-digit', hour12:false
     });
     return fmt.format(date) + ' AEST/AEDT';
-  }
-
-  function fmtFullDateFromISO(iso){
-    var bits = (iso || '').split('-');
-    if(bits.length !== 3) return '';
-    var d = new Date(Date.UTC(+bits[0], +bits[1]-1, +bits[2], 12, 0, 0));
-    var fmt = new Intl.DateTimeFormat('en-AU', {weekday:'long', day:'numeric', month:'long'});
-    return fmt.format(d);
   }
 
   function fmtTime(iso){
@@ -834,12 +711,41 @@
     els.dayTabs.querySelectorAll('.day-tab').forEach(function(btn){
       var offset = parseInt(btn.getAttribute('data-offset'), 10);
       var range = sydneyDayRange(offset);
-      var sub = btn.querySelector('.day-tab-date');
-      if(sub) sub.textContent = fmtShortDateFor(range.start);
+      var wd = btn.querySelector('.wd');
+      var num = btn.querySelector('.num');
+      if(wd) wd.textContent = fmtWeekdayTitleFor(range.start);
+      if(num) num.textContent = fmtDayNumberFor(range.start);
       var isActive = offset === selectedDayOffset;
       btn.classList.toggle('active', isActive);
       btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
     });
+  }
+
+  /* ------------------------- reminder banner (read-only) ------------------------- */
+
+  function renderReminder(){
+    if(!reminderText){
+      els.reminderSlot.innerHTML = '';
+      return;
+    }
+    els.reminderSlot.innerHTML =
+      '<div class="reminder">' +
+        '<span class="reminder-ico">&#128204;</span>' +
+        '<div class="reminder-txt"><b>Reminder</b>' + escapeHtml(reminderText) + '</div>' +
+      '</div>';
+  }
+
+  function fetchReminder(){
+    return fetch(REMINDER_API)
+      .then(function(res){
+        if(!res.ok) throw new Error('load failed');
+        return res.json();
+      })
+      .then(function(data){
+        reminderText = (data && data.text) || '';
+        renderReminder();
+      })
+      .catch(function(){ /* silent — passive display link */ });
   }
 
   /* ------------------------- rendering: unified timeline ------------------------- */
@@ -848,35 +754,29 @@
     updateDayTabs();
 
     var range = sydneyDayRange(selectedDayOffset);
-    els.pageTitle.textContent = fmtWeekdayTitleFor(range.start);
     els.dateLine.textContent = fmtDateLineFor(range.start);
 
     var jobs = dayCache[selectedDayOffset] || [];
     var iso = isoDateForOffset(selectedDayOffset);
-    var state = getState();
     var itemsForDay = manualItems.filter(function(i){
       return (i.date || isoDateForOffset(0)) === iso;
     });
 
     var entries = jobs.map(function(job){
       var mins = job.rows.length ? timeToMinutes(fmtTime(job.rows[0].start)) : null;
-      return {type:'job', sortKey: mins == null ? Infinity : mins, html: jobCardHtml(job, state)};
+      return {type:'job', sortKey: mins == null ? Infinity : mins, html: jobCardHtml(job)};
     }).concat(itemsForDay.map(function(item){
-      var mins = timeToMinutes(item.time);
+      var mins = timeToMinutes(item.start);
       return {type:'manual', sortKey: mins == null ? Infinity : mins, html: manualCardHtml(item)};
     }));
 
     entries.sort(function(a,b){ return a.sortKey - b.sortKey; });
 
-    els.footerCount.textContent = (jobs.length || itemsForDay.length)
-      ? (jobs.length + ' job' + (jobs.length === 1 ? '' : 's') + (itemsForDay.length ? ', ' + itemsForDay.length + ' manual' : ''))
-      : '';
-
     if(!entries.length){
       els.groups.innerHTML =
         '<div class="empty-state">' +
           '<div class="big">Nothing scheduled</div>' +
-          '<div>No jobs or manual items for ' + escapeHtml(fmtWeekdayTitleFor(range.start)) + '. Use “+ Add item” to add something.</div>' +
+          '<div>No jobs or manual items for ' + escapeHtml(fmtWeekdayTitleFor(range.start)) + '.</div>' +
         '</div>';
       return;
     }
@@ -884,7 +784,7 @@
     els.groups.innerHTML = entries.map(function(e){ return e.html; }).join('');
   }
 
-  function jobCardHtml(job, state){
+  function jobCardHtml(job){
     var meta = STATUS_META[job.status] || {key:'other', label:job.status};
     var pillClass = 'pill-' + meta.key;
     var pillLabel = meta.label;
@@ -893,7 +793,7 @@
     if(job.loadError){
       rowsHtml = '<div class="no-tasks">Couldn&rsquo;t load tasks for this job at build time &mdash; ' + escapeHtml(job.loadError) + '</div>';
     } else {
-      rowsHtml = job.rows.map(function(row){ return renderRow(row, state); }).join('');
+      rowsHtml = job.rows.map(function(row){ return renderRow(row); }).join('');
     }
 
     return (
@@ -910,7 +810,7 @@
     );
   }
 
-  function renderRow(row, state){
+  function renderRow(row){
     var start = fmtTime(row.start);
     var end = fmtTime(row.end);
     var crewHtml;
@@ -931,7 +831,7 @@
         : '<span class="vehicle-missing">Not assigned</span>') +
       '</div>';
 
-    var note = state.notes[row.id];
+    var note = liveNotes[String(row.id)] || '';
     var noteHtml = note ? '<div class="row-note">' + escapeHtml(note) + '</div>' : '';
 
     return (
@@ -949,21 +849,24 @@
   }
 
   function manualCardHtml(item){
+    var start = item.start || '';
+    var end = item.end || '';
     return (
       '<div class="manual-item">' +
-        '<div class="row-time">' + escapeHtml(item.time || '—') + '</div>' +
-        '<div class="row-body">' +
-          '<div class="fn-name">' + escapeHtml(item.title || 'Untitled') +
-            (item.category ? ' <span class="cat-chip cat-' + item.category + '" style="margin-left:6px;">' + CAT_LABEL[item.category] + '</span>' : '') +
+        '<div class="row">' +
+          '<div class="row-time">' + (start || '—') + (end && end !== start ? '<span class="end">' + escapeHtml(end) + '</span>' : '') + '</div>' +
+          '<div><span class="cat-chip cat-' + (item.category || 'other') + '">' + CAT_LABEL[item.category || 'other'] + '</span></div>' +
+          '<div class="row-body">' +
+            '<div class="fn-name">' + escapeHtml(item.title || 'Untitled') + '</div>' +
+            (item.crew ? '<div class="crew-line"><span class="crew-chip">' + escapeHtml(item.crew) + '</span></div>' : '') +
+            (item.note ? '<div class="row-note">' + escapeHtml(item.note) + '</div>' : '') +
           '</div>' +
-          (item.crew ? '<div class="crew-line"><span class="crew-chip">' + escapeHtml(item.crew) + '</span></div>' : '') +
-          (item.note ? '<div class="row-note">' + escapeHtml(item.note) + '</div>' : '') +
         '</div>' +
       '</div>'
     );
   }
 
-  /* ------------------------- manual items: read-only view of /api/items ------------------------- */
+  /* ------------------------- manual items + notes: read-only ------------------------- */
 
   function fetchItems(){
     return fetch(API_BASE)
@@ -978,6 +881,22 @@
       .catch(function(){
         /* silent — this is a passive display link; a stale/missing manual list isn't worth surfacing */
       });
+  }
+
+  function fetchNotes(){
+    return fetch(NOTES_API)
+      .then(function(res){
+        if(!res.ok) throw new Error('load failed');
+        return res.json();
+      })
+      .then(function(data){
+        var raw = (data && data.notes) || {};
+        var flat = {};
+        Object.keys(raw).forEach(function(k){ flat[k] = raw[k] && raw[k].text; });
+        liveNotes = flat;
+        renderCurrentDay();
+      })
+      .catch(function(){ /* silent */ });
   }
 
   /* ------------------------- wiring ------------------------- */
@@ -996,10 +915,13 @@
     loadScheduleFromState();
     renderCurrentDay();
     renderSnapshotLabel();
+    renderReminder();
     fetchItems();
-    pollTimer = window.setInterval(fetchItems, 20000);
+    fetchNotes();
+    fetchReminder();
+    pollTimer = window.setInterval(function(){ fetchItems(); fetchNotes(); fetchReminder(); }, 20000);
     document.addEventListener('visibilitychange', function(){
-      if(document.visibilityState === 'visible') fetchItems();
+      if(document.visibilityState === 'visible'){ fetchItems(); fetchNotes(); fetchReminder(); }
     });
   }
 
