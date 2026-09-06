@@ -29,7 +29,7 @@ One-time setup (a human with dashboard access must do this, not Claude):
 5. Save and deploy. Every subsequent push to `main` rebuilds and redeploys automatically (free, well within the 500 builds/month tier at this project's volume).
 6. The site is served at the assigned `*.workers.dev` subdomain (Rick chose the free subdomain over a custom domain on 2026-09-02) — record the final URL here once known.
 
-Status as of 2026-09-02: KV namespace created, `wrangler.toml` has the real namespace id, Worker code committed and pushed to `main`, verified end-to-end with local `wrangler dev` (all three API routes, static asset routing at exact `/index.html` and `/view.html` paths, Playwright screenshot pass). **Not yet actually deployed to Cloudflare** — waiting on the one-time dashboard import above.
+Status as of 2026-09-06: **live and working** at https://day-sheet-dashboard.rick-120.workers.dev/ (team/edit) and `/view.html` (contractor read-only). Git integration deploys automatically on every push to `main`, confirmed repeatedly via `workers_get_worker_code`. Passcode `4242`.
 
 ## Rentman fetch recipe (authoritative — follow exactly, every refresh)
 
@@ -39,6 +39,15 @@ Status as of 2026-09-02: KV namespace created, `wrangler.toml` has the real name
 4. Fetch crew via `projectcrew` — filter `{"function":"/projectfunctions/<id>"}`, expand `crewmember`, **`fields` param is required** (e.g. `"id,function,crewmember"`) or the call fails.
 5. Fetch vehicles via `projectvehicles` — same pattern, expand `vehicle`, fields `"id,function,vehicle"`. Vehicle label = `vehicle.displayname + ' · ' + vehicle.licenseplate`.
 6. `classify(name)` keyword categorization (keep in sync with the JS in both HTML files): priority order — test → driver → delivery/deliver → collection/pickup/pick up/pick-up/return → packdown/pack down/pack-down/bump out/bump-out/bumpout/strike/de-rig/derig/teardown/dismantle → setup/set up/set-up/install/bump in/bump-in/bumpin/build up/build-up/rig → other.
+
+## Active manual overrides (do not overwrite from Rentman until resolved)
+
+Rick has told us Rentman's own data for these specific jobs is wrong, and given exact replacement times to use instead — verbatim, "These are manual overrides and stay as written, even where Rentman shows something different." On every future refresh, resolve these subprojects' listed rows to the override times below, not whatever `projectfunctions` currently returns — but do still refresh their crew/vehicle assignments from Rentman normally, since only the times are disputed.
+
+- **Project 1449 / subproject 1491 (LED Poster Board Hire)** — AV Setup (function id 5187): fixed at **2026-09-06 (Sun) 11:00–11:30**, not Rentman's value (which has bounced between Sun 20:00, Mon 06:58, etc.). AV Packdown (function id 5188): fixed at **2026-09-09 (Wed) 10:30–11:30**, not Rentman's Tuesday value.
+- **Project 1468 / subproject 1510 (6M x 3M LED Wall Ground Built)** — AV Packdown (function id 5248): fixed at **2026-09-09 (Wed) 11:30–14:00**, not Rentman's Tuesday value. (Its AV Setup, function id 5247, is NOT overridden — keep pulling that one from Rentman normally.)
+
+These are one-off date/time corrections tied to this specific occurrence of each job, not a recurring weekday rule. Once 2026-09-09 rolls out of the visible 5-day window (i.e. once "today" passes 2026-09-09), these overrides are moot and this section can be deleted — check with Rick before removing it if in doubt.
 
 ## Resolving a Rentman "project number" the user gives you
 
