@@ -38,7 +38,7 @@ Status as of 2026-09-06: **live and working** at https://day-sheet-dashboard.ric
 3. Resolve each unique `subproject` via `subprojects` → `get`, `expand="location,status"`. Keep only NSW jobs: `asset_location_from === "/stocklocations/1"`, and `status.id` in `{1,3,4,5,6}` (1=pending, 3=confirmed, 4=prepped, 5=onlocation, 6=returned; excludes 2=canceled, 7=inquiry, 8=concept).
 4. Fetch crew via `projectcrew` — filter `{"function":"/projectfunctions/<id>"}`, expand `crewmember`, **`fields` param is required** (e.g. `"id,function,crewmember"`) or the call fails.
 5. Fetch vehicles via `projectvehicles` — same pattern, expand `vehicle`, fields `"id,function,vehicle"`. Vehicle label = `vehicle.displayname + ' · ' + vehicle.licenseplate`.
-6. `classify(name)` keyword categorization (keep in sync with the JS in both HTML files): priority order — test → driver → delivery/deliver → collection/pickup/pick up/pick-up/return → packdown/pack down/pack-down/bump out/bump-out/bumpout/strike/de-rig/derig/teardown/dismantle → setup/set up/set-up/install/bump in/bump-in/bumpin/build up/build-up/rig → other.
+6. `classify(name)` keyword categorization (keep in sync with the JS in both HTML files): priority order — test → driver → operator/forklift/scissor lift/boom lift/crane/ehs → delivery/deliver → collection/pickup/pick up/pick-up/return → packdown/pack down/pack-down/bump out/bump-out/bumpout/strike/de-rig/derig/teardown/dismantle → setup/set up/set-up/install/bump in/bump-in/bumpin/build up/build-up/rig → warehouse/restock/stocktake/stock take/prep/sorting → other. `warehouse` sits *after* install/packdown deliberately so "Warehouse Pack Down" still reads as a packdown; `operator` sits high so "Forklift Operator" isn't swallowed by another rule.
 
 ## Active manual overrides (do not overwrite from Rentman until resolved)
 
@@ -47,7 +47,7 @@ Rick has told us Rentman's own data for these specific jobs is wrong, and given 
 - **Project 1449 / subproject 1491 (LED Poster Board Hire)** — AV Setup (function id 5187): fixed at **2026-09-06 (Sun) 11:00–11:30**, not Rentman's value (which has bounced between Sun 20:00, Mon 06:58, etc.). AV Packdown (function id 5188): fixed at **2026-09-09 (Wed) 10:30–11:30**, not Rentman's Tuesday value.
 - **Project 1468 / subproject 1510 (6M x 3M LED Wall Ground Built)** — AV Packdown (function id 5248): fixed at **2026-09-09 (Wed) 11:30–14:00**, not Rentman's Tuesday value. (Its AV Setup, function id 5247, is NOT overridden — keep pulling that one from Rentman normally.)
 
-These are one-off date/time corrections tied to this specific occurrence of each job, not a recurring weekday rule. Once 2026-09-09 rolls out of the visible 5-day window (i.e. once "today" passes 2026-09-09), these overrides are moot and this section can be deleted — check with Rick before removing it if in doubt.
+These are one-off date/time corrections tied to this specific occurrence of each job, not a recurring weekday rule. Once 2026-09-09 rolls out of the visible 14-day window (i.e. once "today" passes 2026-09-09), these overrides are moot and this section can be deleted — check with Rick before removing it if in doubt.
 
 ## Resolving a Rentman "project number" the user gives you
 
@@ -69,6 +69,18 @@ Rick refers to jobs by Rentman's user-facing **project number**, which is the `n
   ```
   Follow with `git fetch origin main` to resync the local tracking ref (pushing via an explicit URL doesn't update it automatically — expected, harmless).
 - General outbound network from this sandbox is allowlist-only: GitHub (via the override above), npm/pypi/etc. registries, and Anthropic infra work; arbitrary sites (`netlify.app`, `cloudflare.com`, `api.cloudflare.com`, `*.workers.dev`, general web) do not — `curl`/`wrangler`/etc. to those will fail with a proxy CONNECT rejection. MCP connector tool calls (Netlify, Cloudflare, Rentman, etc.) are unaffected — they run through Anthropic's own MCP proxy, not this local egress path.
+
+## Day window — 14 days (changed 2026-09-07)
+
+The sheet started as a 3-day view, went to 5, and is now **14 days** at Rick's request. The window is driven entirely by `DAY_OFFSETS` / `dayCache` in the JS of both HTML files plus the 14 static `.day-tab` buttons in the markup — the tabs render 7 across on two rows (4 across on mobile). **Every Rentman refresh must now bake 14 days of `schedule.days` keys** (today + 13), not 5, or the back half of the sheet renders as empty days.
+
+## Categories
+
+Nine categories: `install`, `packdown`, `delivery`, `collection`, `driver`, `warehouse`, `operator`, `test`, `other`. `warehouse` (olive `#4D7C0F`) and `operator` (deep red `#B91C1C`) were added 2026-09-07. Adding a category means touching four places: the `--cat-*` / `--cat-*-soft` vars in all three colour blocks of each HTML file (light, `prefers-color-scheme` dark, explicit dark), the `.cat-*` chip class, the legend row, `CAT_LABEL` in the JS (which also drives the Add-item dropdown), `classify()`, and the `CATEGORIES` allowlist in `worker/src/index.js` (the Worker silently coerces unknown categories to `other`).
+
+## Branding
+
+The masthead h1 reads **"Daily Schedule"** (renamed from "Day Sheet" 2026-09-07; the project, repo and Worker keep the day-sheet name). A transparent-background logo renders top-right via `<img class="brand-logo" src="/logo.png">` in `.masthead-right` on both pages. It carries `onerror="this.remove()"` so the header degrades cleanly if the file is missing — **as of 2026-09-07 `worker/public/logo.png` has not been supplied yet**, so nothing renders there until Rick provides the asset.
 
 ## Theme
 

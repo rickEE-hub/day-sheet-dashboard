@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Day Sheet</title>
+<title>Daily Schedule</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -31,6 +31,10 @@
     --cat-driver-soft:#DBF4F9;
     --cat-test:#DB2777;
     --cat-test-soft:#FBE1EC;
+    --cat-warehouse:#4D7C0F;
+    --cat-warehouse-soft:#E7F2D5;
+    --cat-operator:#B91C1C;
+    --cat-operator-soft:#FBE2E2;
     --cat-other:#6B7280;
     --cat-other-soft:#EBEDF0;
     --vehicle:#1E3A5F;
@@ -82,6 +86,10 @@
       --cat-driver-soft:#0E323A;
       --cat-test:#F472B6;
       --cat-test-soft:#3A1C2C;
+      --cat-warehouse:#A3D45F;
+      --cat-warehouse-soft:#25320F;
+      --cat-operator:#F87171;
+      --cat-operator-soft:#3B1A1A;
       --cat-other:#9CA3AF;
       --cat-other-soft:#262B33;
       --vehicle:#9CC0F0;
@@ -131,6 +139,10 @@
     --cat-driver-soft:#0E323A;
     --cat-test:#F472B6;
     --cat-test-soft:#3A1C2C;
+    --cat-warehouse:#A3D45F;
+    --cat-warehouse-soft:#25320F;
+    --cat-operator:#F87171;
+    --cat-operator-soft:#3B1A1A;
     --cat-other:#9CA3AF;
     --cat-other-soft:#262B33;
     --vehicle:#9CC0F0;
@@ -228,6 +240,15 @@
     align-items:flex-end;
     gap:8px;
   }
+  .brand-logo{
+    height:46px;
+    width:auto;
+    max-width:220px;
+    object-fit:contain;
+    display:block;
+    margin-bottom:2px;
+  }
+  @media (max-width:640px){ .brand-logo{height:36px; max-width:160px;} }
   .snapshot-badge{
     font-family:'JetBrains Mono', monospace;
     font-size:10.5px;
@@ -260,7 +281,7 @@
   /* ---- Day tabs ---- */
   .day-tabs{
     display:grid;
-    grid-template-columns:repeat(5,1fr);
+    grid-template-columns:repeat(7,1fr);
     gap:8px;
     margin-bottom:20px;
   }
@@ -268,12 +289,13 @@
     background:var(--surface);
     border:1px solid var(--border);
     border-radius:12px;
-    padding:10px 6px;
+    padding:9px 4px;
     text-align:center;
     cursor:pointer;
+    min-width:0;
   }
-  .day-tab .wd{display:block; font-size:10.5px; font-weight:700; letter-spacing:.05em; color:var(--ink-dim);}
-  .day-tab .num{display:block; font-size:17px; font-weight:800; margin-top:2px; color:var(--ink);}
+  .day-tab .wd{display:block; font-size:10px; font-weight:700; letter-spacing:.05em; color:var(--ink-dim);}
+  .day-tab .num{display:block; font-size:16px; font-weight:800; margin-top:2px; color:var(--ink);}
   .day-tab:hover{border-color:var(--border-strong);}
   .day-tab.active{background:var(--accent); border-color:var(--accent);}
   .day-tab.active .wd, .day-tab.active .num{color:var(--accent-ink);}
@@ -390,6 +412,8 @@
   .cat-collection{background:var(--cat-collection-soft); color:var(--cat-collection);}
   .cat-driver{background:var(--cat-driver-soft); color:var(--cat-driver);}
   .cat-test{background:var(--cat-test-soft); color:var(--cat-test);}
+  .cat-warehouse{background:var(--cat-warehouse-soft); color:var(--cat-warehouse);}
+  .cat-operator{background:var(--cat-operator-soft); color:var(--cat-operator);}
   .cat-other{background:var(--cat-other-soft); color:var(--cat-other);}
 
   .row-body{min-width:0;}
@@ -462,7 +486,7 @@
   [hidden]{display:none !important;}
 
   @media (max-width:640px){
-    .day-tabs{grid-template-columns:repeat(3,1fr); }
+    .day-tabs{grid-template-columns:repeat(4,1fr); gap:6px;}
     .row{grid-template-columns:64px 1fr; }
     .row .cat-chip{grid-column:2; }
     .row-time{grid-row:1/3;}
@@ -477,11 +501,13 @@
 
   <header class="masthead">
     <div class="masthead-left">
-      <div class="eyebrow">Event Equipment Group &middot; NSW Warehouse Ops &middot; Read-only</div>
-      <h1>Day Sheet</h1>
+      <div class="eyebrow">Event Equipment Group &middot; NSW Warehouse Ops &middot; 14-day view &middot; Read-only</div>
+      <h1>Daily Schedule</h1>
       <div class="date-line" id="date-line">&nbsp;</div>
     </div>
     <div class="masthead-right">
+      <img class="brand-logo" src="/logo.png" alt="Event Equipment Group"
+           onerror="this.remove()">
       <span class="snapshot-badge" id="snapshot-label">snapshot: &mdash;</span>
       <button class="btn" id="reload-btn" type="button">Reload</button>
     </div>
@@ -493,6 +519,15 @@
     <button class="day-tab" type="button" data-offset="2" role="tab"><span class="wd"></span><span class="num"></span></button>
     <button class="day-tab" type="button" data-offset="3" role="tab"><span class="wd"></span><span class="num"></span></button>
     <button class="day-tab" type="button" data-offset="4" role="tab"><span class="wd"></span><span class="num"></span></button>
+    <button class="day-tab" type="button" data-offset="5" role="tab"><span class="wd"></span><span class="num"></span></button>
+    <button class="day-tab" type="button" data-offset="6" role="tab"><span class="wd"></span><span class="num"></span></button>
+    <button class="day-tab" type="button" data-offset="7" role="tab"><span class="wd"></span><span class="num"></span></button>
+    <button class="day-tab" type="button" data-offset="8" role="tab"><span class="wd"></span><span class="num"></span></button>
+    <button class="day-tab" type="button" data-offset="9" role="tab"><span class="wd"></span><span class="num"></span></button>
+    <button class="day-tab" type="button" data-offset="10" role="tab"><span class="wd"></span><span class="num"></span></button>
+    <button class="day-tab" type="button" data-offset="11" role="tab"><span class="wd"></span><span class="num"></span></button>
+    <button class="day-tab" type="button" data-offset="12" role="tab"><span class="wd"></span><span class="num"></span></button>
+    <button class="day-tab" type="button" data-offset="13" role="tab"><span class="wd"></span><span class="num"></span></button>
   </nav>
 
   <div class="legend" id="legend">
@@ -502,6 +537,8 @@
     <span class="legend-item"><span class="legend-swatch" style="background:var(--cat-collection)"></span>Collection</span>
     <span class="legend-item"><span class="legend-swatch" style="background:var(--cat-driver)"></span>Driver</span>
     <span class="legend-item"><span class="legend-swatch" style="background:var(--cat-test)"></span>Test</span>
+    <span class="legend-item"><span class="legend-swatch" style="background:var(--cat-warehouse)"></span>Warehouse</span>
+    <span class="legend-item"><span class="legend-swatch" style="background:var(--cat-operator)"></span>Operator</span>
     <span class="legend-item"><span class="legend-swatch" style="background:var(--cat-other)"></span>Other</span>
   </div>
 
@@ -525,7 +562,7 @@
   var STATUS_META = {};
   STATUS_LIST.forEach(function(s){ STATUS_META[s.key] = s; });
 
-  var DAY_OFFSETS = [0, 1, 2, 3, 4];
+  var DAY_OFFSETS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 
   var els = {
     dateLine: document.getElementById('date-line'),
@@ -540,7 +577,8 @@
   var NOTES_API = '/api/notes';
   var REMINDER_API = '/api/reminder';
   var selectedDayOffset = 0;
-  var dayCache = {0:[], 1:[], 2:[], 3:[], 4:[]};
+  var dayCache = {0:[], 1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[],
+                9:[], 10:[], 11:[], 12:[], 13:[]};
   var lastUpdated = null;
   var manualItems = [];
   var liveNotes = {};
@@ -651,22 +689,27 @@
     var has = function(arr){ return arr.some(function(k){ return n.indexOf(k) !== -1; }); };
     var testKw = ['test'];
     var driverKw = ['driver'];
+    var operatorKw = ['operator','forklift','scissor lift','boom lift','crane','ehs'];
+    var warehouseKw = ['warehouse','restock','stocktake','stock take','prep','sorting'];
     var deliveryKw = ['delivery','deliver'];
     var collectionKw = ['collection','pickup','pick up','pick-up','return'];
     var packdownKw = ['packdown','pack down','pack-down','bump out','bump-out','bumpout','strike','de-rig','derig','teardown','dismantle'];
     var installKw = ['setup','set up','set-up','install','bump in','bump-in','bumpin','build up','build-up','rig'];
     if(has(testKw)) return 'test';
     if(has(driverKw)) return 'driver';
+    if(has(operatorKw)) return 'operator';
     if(has(deliveryKw)) return 'delivery';
     if(has(collectionKw)) return 'collection';
     if(has(packdownKw)) return 'packdown';
     if(has(installKw)) return 'install';
+    if(has(warehouseKw)) return 'warehouse';
     return 'other';
   }
 
   var CAT_LABEL = {
     install:'Install', packdown:'Pack down', delivery:'Delivery',
-    collection:'Collection', driver:'Driver', test:'Test', other:'Other'
+    collection:'Collection', driver:'Driver', warehouse:'Warehouse',
+    operator:'Operator', test:'Test', other:'Other'
   };
 
   /* ------------------------- state (baked-in snapshot) ------------------------- */
@@ -776,7 +819,7 @@
       els.groups.innerHTML =
         '<div class="empty-state">' +
           '<div class="big">Nothing scheduled</div>' +
-          '<div>No jobs or manual items for ' + escapeHtml(fmtWeekdayTitleFor(range.start)) + '.</div>' +
+          '<div>No jobs or tasks for ' + escapeHtml(fmtWeekdayTitleFor(range.start)) + '.</div>' +
         '</div>';
       return;
     }

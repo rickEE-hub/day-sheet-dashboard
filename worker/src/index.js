@@ -12,7 +12,7 @@
 // read-only contractor link.
 
 const PASSCODE = "4242";
-const CATEGORIES = ["install", "packdown", "delivery", "collection", "driver", "test", "other"];
+const CATEGORIES = ["install", "packdown", "delivery", "collection", "driver", "warehouse", "operator", "test", "other"];
 
 const JSON_HEADERS = { "content-type": "application/json; charset=utf-8" };
 
