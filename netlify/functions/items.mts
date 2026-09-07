@@ -1,7 +1,7 @@
 import type { Context, Config } from "@netlify/functions";
 import { getStore } from "@netlify/blobs";
 
-const CATEGORIES = ["install", "packdown", "delivery", "collection", "driver", "test", "other"];
+const CATEGORIES = ["install", "packdown", "delivery", "collection", "driver", "warehouse", "operator", "test", "other"];
 
 // Simple shared passcode gating writes (add/edit/delete). Reads (GET) stay
 // open so the read-only contractor link keeps working with no passcode.
