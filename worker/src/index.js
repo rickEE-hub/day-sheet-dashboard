@@ -198,6 +198,14 @@ const NSW_LOCATION = "/stocklocations/1";
 const ALLOWED_STATUS_IDS = new Set([1, 3, 4, 5, 6]); // pending, confirmed, prepped, onlocation, returned
 const WINDOW_DAYS = 14;
 
+// Cron ticks hourly (see wrangler.toml) but only actually pulls from Rentman
+// at these Sydney-local hours — Rick doesn't want night-time refreshes.
+// Checked here rather than baked into the cron expression itself, since
+// Cloudflare Cron Triggers are UTC-only with no timezone support, and a
+// fixed UTC cron would silently drift an hour off "8am-5pm Sydney" across
+// the AEST/AEDT boundary. This stays correct year-round instead.
+const REFRESH_HOURS = new Set([8, 11, 14, 17]);
+
 // Manual overrides — see CLAUDE.md "Active manual overrides". Rick has
 // confirmed Rentman's own data for these specific function rows is wrong
 // and given exact replacement times; these are used verbatim instead of
@@ -229,6 +237,10 @@ function statusKey(name) {
 
 function sydneyTodayKey() {
   return new Intl.DateTimeFormat("en-CA", { timeZone: "Australia/Sydney", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
+}
+
+function sydneyCurrentHour() {
+  return Number(new Intl.DateTimeFormat("en-CA", { timeZone: "Australia/Sydney", hour: "2-digit", hourCycle: "h23" }).format(new Date()));
 }
 
 function addDaysToKey(dateKey, days) {
@@ -468,6 +480,7 @@ export default {
   },
 
   async scheduled(event, env, ctx) {
+    if (!REFRESH_HOURS.has(sydneyCurrentHour())) return;
     ctx.waitUntil(refreshSchedule(env));
   }
 };

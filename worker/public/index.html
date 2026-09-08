@@ -699,6 +699,7 @@
       <div class="button-row">
         <button class="btn primary" id="add-item-btn" type="button" hidden>+ Add item</button>
         <button class="btn" id="lock-btn" type="button">Unlock editing</button>
+        <button class="btn" id="refresh-schedule-btn" type="button" title="Pull the latest schedule from Rentman right now, instead of waiting for the next automatic refresh">Refresh now</button>
         <button class="btn" id="reload-btn" type="button">Reload</button>
       </div>
       <span class="save-flag" id="save-flag"></span>
@@ -769,6 +770,7 @@
     dayTabs: document.getElementById('day-tabs'),
     snapshotLabel: document.getElementById('snapshot-label'),
     reloadBtn: document.getElementById('reload-btn'),
+    refreshScheduleBtn: document.getElementById('refresh-schedule-btn'),
     addItemBtn: document.getElementById('add-item-btn'),
     lockBtn: document.getElementById('lock-btn'),
     formSlot: document.getElementById('form-slot'),
@@ -980,6 +982,36 @@
         renderCurrentDay();
       })
       .catch(function(){ /* keep last known (baked or previously fetched) */ });
+  }
+
+  // Forces the Worker to pull straight from Rentman right now, instead of
+  // waiting for the next scheduled() cron tick — same endpoint, just POST
+  // instead of GET. Passcode-gated like the other write endpoints.
+  function refreshScheduleNow(){
+    var btn = els.refreshScheduleBtn;
+    btn.disabled = true;
+    var originalText = btn.textContent;
+    btn.textContent = 'Refreshing…';
+    return fetch(SCHEDULE_API, { method: 'POST', headers: { 'x-day-sheet-passcode': PASSCODE } })
+      .then(function(res){ return res.json().then(function(data){ return {ok: res.ok, data: data}; }); })
+      .then(function(result){
+        applySchedule(result.data && result.data.schedule);
+        renderSnapshotLabel();
+        renderCurrentDay();
+        if(result.ok && !(result.data && result.data.lastError)){
+          flagSave('Schedule refreshed from Rentman.', false);
+        } else {
+          var msg = (result.data && result.data.lastError && result.data.lastError.message) || 'Refresh failed.';
+          flagSave('Couldn’t refresh from Rentman — ' + msg, true);
+        }
+      })
+      .catch(function(){
+        flagSave('Couldn’t reach the server to refresh — check your connection.', true);
+      })
+      .then(function(){
+        btn.disabled = false;
+        btn.textContent = originalText;
+      });
   }
 
   function renderSnapshotLabel(){
@@ -1518,6 +1550,8 @@
   /* ------------------------- wiring ------------------------- */
 
   els.reloadBtn.addEventListener('click', function(){ location.reload(); });
+
+  els.refreshScheduleBtn.addEventListener('click', function(){ refreshScheduleNow(); });
 
   els.addItemBtn.addEventListener('click', function(){ openForm(null); });
 
