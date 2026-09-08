@@ -3,7 +3,7 @@
 Public, no-login warehouse-ops dashboard for Event Equipment Group (Sydney/NSW).
 
 - Repo: `rickEE-hub/day-sheet-dashboard`.
-- Data source: Rentman (via the `Rentman` MCP server), pulled manually per refresh — there is no live sync.
+- Data source: Rentman (via the `Rentman` MCP server) — there is no live sync (see "Live schedule refresh — tried and reverted" below for why). As of 2026-09-08, refreshes happen automatically via two Routines (Claude Code scheduled triggers), not on-demand requests to Claude — see "Automated refresh schedule (Routines)" below.
 - **Hosting is migrating from Netlify to Cloudflare Workers** (started 2026-09-02) because Netlify meters production deploys against a monthly credit allowance that a 5x/day refresh cadence burns through fast; Cloudflare Workers Builds' free tier (500 builds/month) comfortably covers that volume at $0. See "Cloudflare deploy" below for current status — until cutover is confirmed working, the Netlify site stays up as a fallback (see "Legacy: Netlify" at the bottom).
 
 ## Live architecture (Cloudflare Worker, `worker/`)
@@ -40,6 +40,17 @@ A Cron-Trigger-driven design was fully built, deployed, and then reverted within
 **Why it was reverted:** every call to `https://api.rentman.net/projectfunctions` with a self-serve API token (Rentman → Settings → Configuration → Account → Integrations → API → Show token) came back `403`: `{"Message":"User is not authorized to access this resource with an explicit deny in an identity-based policy"}`. This is Rentman's own backend (AWS API-Gateway-style) rejecting the request — not a bad token format (`Authorization: Bearer <token>` was cross-checked against several independent real-world Rentman integrations on GitHub, all using the identical header). Reproduced twice: once with a token generated under Rick's own "Operations"-role account, once with a fresh token an admin generated specifically to rule out a role problem — **both got the identical error**, which means it isn't about which Rentman user made the token. Meanwhile the `Rentman` MCP server used interactively in Claude sessions (a separate, officially-integrated channel — not the self-serve token flow) reads `/projectfunctions` successfully every time. Most likely explanation: Rentman scopes self-serve "openapi"-type tokens to a subset of resources that excludes Crew Scheduling data, separate from account/role permissions — but this needs Rentman support to confirm, since the exact wording is their infrastructure's, not something guessable from outside.
 
 **Current status:** reverted. Rick is asking Rentman support directly whether self-serve tokens can be granted this access. If they confirm yes and say what's needed, the cron design can be resurrected from this section's git history (commits from 2026-09-08 on the `claude/new-session-gonbfm` branch, PRs #1 and #2) rather than rebuilt from scratch. Until then, schedule refreshes are back to the manual "pull via Rentman MCP, bake into 4 HTML files, push" workflow below.
+
+## Automated refresh schedule (Routines) — added 2026-09-08
+
+Rick wants refreshes to happen on their own, weekdays only, at 7am and 5pm Sydney time — no need to ask a Claude session each time. Two Claude Code Routines (scheduled triggers) do this:
+
+- **"Day Sheet refresh — weekday 7am Sydney"** (`trig_01FTx3VWrcmbajecAYaxddsF`) — cron `0 21 * * 0-4` (UTC).
+- **"Day Sheet refresh — weekday 5pm Sydney"** (`trig_01GcqZa8GKBh6SUh114VUdcT`) — cron `0 7 * * 1-5` (UTC).
+
+Both fire into *this specific persistent session* (`session_01UxCH8vvkTYLSRyeEscZ7gM`), not a fresh session per firing. This was a deliberate workaround, not the first choice: fresh-session-per-fire Routines need a `connectors` grant to get Rentman MCP access in the new session, and this org's plan doesn't support that parameter at all (`create_trigger` rejects it outright) — a fresh-session Routine created without it fires into a session with no MCP connector tools, which can't do anything useful here. Binding to this already-running session sidesteps that entirely, since it already holds live Rentman + GitHub access. **The real implication: these Routines only work as long as this session stays alive.** If it's ever archived/expires, recreate them (same two cron expressions, prompts describing the refresh task — see git history or ask a Claude session to reconstruct from this section) bound to whatever session replaces it, or try `connectors: ["Rentman"]` on a fresh-session Routine again in case the org's plan changes.
+
+**Cron expressions are UTC-only — no timezone support** — the two above assume AEST (Sydney standard time, UTC+10), correct now (September). Once DST starts (~2026-10-04, first Sunday of October) Sydney moves to AEDT (UTC+11), and these will fire an hour early Sydney-time until adjusted: change the 7am trigger to `0 20 * * 0-4` and the 5pm trigger to `0 6 * * 1-5`. Revert both when DST ends (~2026-04, first Sunday of April) back to `0 21 * * 0-4` / `0 7 * * 1-5`. Use `update_trigger` with the trigger IDs above — no need to delete/recreate.
 
 ## Rentman fetch recipe (authoritative — follow exactly, every refresh)
 
