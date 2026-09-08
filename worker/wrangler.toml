@@ -12,10 +12,12 @@ binding = "DAY_SHEET_KV"
 id = "f02d047a1e6b4cfeab61cd5e261effb0"
 
 [triggers]
-# Every 3 hours — refreshes the baked-nowhere-anymore Rentman schedule via
-# the Worker's own scheduled() handler, writing to DAY_SHEET_KV. See
-# CLAUDE.md "Live schedule refresh (Cron Trigger)". Requires the
-# RENTMAN_API_TOKEN secret to be set (Cloudflare dashboard or
+# Fires hourly (UTC) — the scheduled() handler in src/index.js then checks
+# the current Sydney-local hour and only actually pulls from Rentman at
+# 8am/11am/2pm/5pm (REFRESH_HOURS), so refreshes stay within business hours
+# without a DST-fragile UTC-only cron expression trying to encode that
+# directly. See CLAUDE.md "Live schedule refresh (Cron Trigger)". Requires
+# the RENTMAN_API_TOKEN secret to be set (Cloudflare dashboard or
 # `wrangler secret put`) — that can't be done from Claude's sandbox, see
 # CLAUDE.md for why.
-crons = ["0 */3 * * *"]
+crons = ["0 * * * *"]
