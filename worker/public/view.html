@@ -577,6 +577,7 @@
   var API_BASE = '/api/items';
   var NOTES_API = '/api/notes';
   var REMINDER_API = '/api/reminder';
+  var SCHEDULE_API = '/api/schedule';
   var selectedDayOffset = 0;
   var dayCache = {0:[], 1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[],
                 9:[], 10:[], 11:[], 12:[], 13:[]};
@@ -713,7 +714,7 @@
     operator:'Operator', test:'Test', other:'Other'
   };
 
-  /* ------------------------- state (baked-in snapshot) ------------------------- */
+  /* ------------------------- schedule (live via /api/schedule) ------------------------- */
 
   function getState(){
     try{
@@ -728,12 +729,8 @@
     }
   }
 
-  // This is a static build: the schedule was fetched once at build time
-  // and baked into the #app-state script tag below. There is no network
-  // call here — every viewer just reads the same embedded snapshot.
-  function loadScheduleFromState(){
-    var state = getState();
-    var sched = state.schedule || {updatedAt:null, days:{}};
+  function applySchedule(sched){
+    sched = sched || {updatedAt:null, days:{}};
     var nextCache = {};
     DAY_OFFSETS.forEach(function(off){
       var iso = isoDateForOffset(off);
@@ -741,6 +738,29 @@
     });
     dayCache = nextCache;
     lastUpdated = sched.updatedAt ? new Date(sched.updatedAt) : null;
+  }
+
+  // First paint uses whatever snapshot is baked into #app-state (a leftover
+  // from before the Worker's Cron Trigger took over refreshes — see
+  // CLAUDE.md) so the page isn't blank while the live fetch is in flight.
+  // fetchSchedule() below then replaces it with the current KV snapshot
+  // the Worker's scheduled() handler maintains.
+  function loadScheduleFromState(){
+    applySchedule(getState().schedule);
+  }
+
+  function fetchSchedule(){
+    return fetch(SCHEDULE_API)
+      .then(function(res){
+        if(!res.ok) throw new Error('load failed');
+        return res.json();
+      })
+      .then(function(data){
+        applySchedule(data && data.schedule);
+        renderSnapshotLabel();
+        renderCurrentDay();
+      })
+      .catch(function(){ /* keep last known (baked or previously fetched) */ });
   }
 
   function renderSnapshotLabel(){
@@ -963,9 +983,10 @@
     fetchItems();
     fetchNotes();
     fetchReminder();
-    pollTimer = window.setInterval(function(){ fetchItems(); fetchNotes(); fetchReminder(); }, 20000);
+    fetchSchedule();
+    pollTimer = window.setInterval(function(){ fetchItems(); fetchNotes(); fetchReminder(); fetchSchedule(); }, 20000);
     document.addEventListener('visibilitychange', function(){
-      if(document.visibilityState === 'visible'){ fetchItems(); fetchNotes(); fetchReminder(); }
+      if(document.visibilityState === 'visible'){ fetchItems(); fetchNotes(); fetchReminder(); fetchSchedule(); }
     });
   }
 
