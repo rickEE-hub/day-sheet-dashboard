@@ -65,13 +65,7 @@ Both fire into *this specific persistent session* (`session_01UxCH8vvkTYLSRyeEsc
 
 ## Active manual overrides (do not overwrite from Rentman until resolved)
 
-Rick has told us Rentman's own data for these specific jobs is wrong, and given exact replacement times to use instead — verbatim, "These are manual overrides and stay as written, even where Rentman shows something different." On every future refresh, resolve these subprojects' listed rows to the override times below, not whatever `projectfunctions` currently returns — but do still refresh their crew/vehicle assignments from Rentman normally, since only the times are disputed.
-
-- ~~AV Setup (function id 5187)~~ — still moot: stuck at 2026-09-07 06:58, now in the past. No replacement time was ever supplied despite Rick being asked twice — don't add an override for it; ask him first if it resurfaces.
-- **Project 1449 / subproject 1491 (LED Poster Board Hire) — AV Packdown is back, under a new function id.** The old 5188 is gone; Rentman now has a *freshly created* function **5548** ("AV Packdown", created 2026-09-08 14:47 by Rick himself) at **2026-09-09 10:30–11:30**, `in_planning: true`, with all 4 crew (Rick Sanchez, Mick Rocco, Yvette Paci, PJ Hamilton-Shailer) and the NSW NNR200 Truck. Manually added to the 2026-09-09 bake since it was created *after* that day's refresh already ran (a real gap in the "one bake per day" model, not a filter bug — see "Baked data mechanics" below on same-day re-refreshes). No override needed here — Rentman's own value is correct, just pull it normally on the next refresh.
-- **Project 1468 / subproject 1510 (6M x 3M LED Wall Ground Built)** — AV Packdown (function id 5248): fixed at **2026-09-09 (Wed) 11:30–14:00**, not Rentman's value (still showing 10:30–12:00 as of the 2026-09-09 refresh). **Still active — today.** (Its AV Setup, function id 5247, is NOT overridden — keep pulling that one from Rentman normally.)
-
-These are one-off date/time corrections tied to this specific occurrence of each job, not a recurring weekday rule. Once 2026-09-09 rolls out of the visible 14-day window (i.e. once "today" passes 2026-09-09), the 5248 override above is moot too and this whole section can be deleted — check with Rick before removing it if in doubt.
+None currently active. (Last entry — the 2026-09-09 6M x 3M LED Wall Ground Built / function 5248 packdown-time override — expired once 2026-09-09 rolled out of the 14-day window on the 2026-09-10 7am refresh; subproject 1510 no longer appears in the pull at all. If Rick gives a new override, add it here with the exact wording he used, the subproject/function id, and the replacement time — see git history for the format previously used.)
 
 ## Resolving a Rentman "project number" the user gives you
 
