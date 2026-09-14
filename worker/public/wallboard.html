@@ -433,11 +433,25 @@
     return parsed;
   }
 
+  // Jobs within a day must appear in start-time order, same as the main
+  // Daily Schedule pages — sort by each job's earliest (already row-sorted)
+  // row so the column reads top-to-bottom chronologically.
+  function sortDayJobs(jobs){
+    jobs.forEach(function(job){ sortJobRows(job); });
+    jobs.sort(function(a, b){
+      var ma = a.rows.length ? timeToMinutes(fmtTime(a.rows[0].start)) : null;
+      var mb = b.rows.length ? timeToMinutes(fmtTime(b.rows[0].start)) : null;
+      if(ma == null) return mb == null ? 0 : 1;
+      if(mb == null) return -1;
+      return ma - mb;
+    });
+  }
+
   var state = getState();
   var dayKeys = Object.keys(state.schedule.days).sort();
   var days = dayKeys.map(function(key, idx){
     var jobs = state.schedule.days[key] || [];
-    jobs.forEach(function(job){ sortJobRows(job); });
+    sortDayJobs(jobs);
     return {key:key, jobs:jobs, today: idx === 0};
   });
 
