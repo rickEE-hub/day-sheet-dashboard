@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Daily Schedule — Wall Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFFFF;
+    --surface:#FFFFFF;
+    --surface-2:#EEF1F5;
+    --ink:#171B21;
+    --ink-dim:#5B6472;
+    --ink-faint:#94A0AF;
+    --border:#E3E7ED;
+    --border-strong:#C9D0DA;
+    --accent:#2454E8;
+    --accent-ink:#FFFFFF;
+    --accent-soft:#E4EBFD;
+    --cat-install:#2454E8;
+    --cat-install-soft:#E4EBFD;
+    --cat-packdown:#7B3FE4;
+    --cat-packdown-soft:#EEE5FD;
+    --cat-delivery:#0E9F6E;
+    --cat-delivery-soft:#DCF7EC;
+    --cat-collection:#DD6B20;
+    --cat-collection-soft:#FDE9D8;
+    --cat-driver:#0891B2;
+    --cat-driver-soft:#DBF4F9;
+    --cat-test:#DB2777;
+    --cat-test-soft:#FBE1EC;
+    --cat-warehouse:#4D7C0F;
+    --cat-warehouse-soft:#E7F2D5;
+    --cat-operator:#B91C1C;
+    --cat-operator-soft:#FBE2E2;
+    --cat-other:#6B7280;
+    --cat-other-soft:#EBEDF0;
+    --vehicle:#1E3A5F;
+    --vehicle-soft:#E1E9F1;
+    --vehicle-ink:#1E3A5F;
+    --status-confirmed:#0E9F6E;
+    --status-confirmed-soft:#DCF7EC;
+    --status-pending:#B45309;
+    --status-pending-soft:#FDECD3;
+    --status-prepped:#7B3FE4;
+    --status-prepped-soft:#EEE5FD;
+    --status-onlocation:#2454E8;
+    --status-onlocation-soft:#E4EBFD;
+    --status-returned:#6B7280;
+    --status-returned-soft:#EBEDF0;
+    --warn:#C2410C;
+    --warn-soft:#FDE7DA;
+    --shadow: 0 1px 2px rgba(20,25,35,.04), 0 8px 24px rgba(20,25,35,.06);
+    --radius: 14px;
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#12161C;
+      --surface:#1B212B;
+      --surface-2:#232A35;
+      --ink:#EDEFF3;
+      --ink-dim:#9AA3B2;
+      --ink-faint:#6B7484;
+      --border:#2A313D;
+      --border-strong:#3A4250;
+      --accent:#6B93F7;
+      --accent-ink:#0B1220;
+      --accent-soft:#1E2A4A;
+      --cat-install:#6B93F7;
+      --cat-install-soft:#1E2A4A;
+      --cat-packdown:#B49CFB;
+      --cat-packdown-soft:#2C2350;
+      --cat-delivery:#3EDCA0;
+      --cat-delivery-soft:#123528;
+      --cat-collection:#FB923C;
+      --cat-collection-soft:#3A2411;
+      --cat-driver:#3FD0E8;
+      --cat-driver-soft:#0E323A;
+      --cat-test:#F472B6;
+      --cat-test-soft:#3A1C2C;
+      --cat-warehouse:#A3D45F;
+      --cat-warehouse-soft:#25320F;
+      --cat-operator:#F87171;
+      --cat-operator-soft:#3B1A1A;
+      --cat-other:#9CA3AF;
+      --cat-other-soft:#262B33;
+      --vehicle:#9CC0F0;
+      --vehicle-soft:#1E2A3D;
+      --vehicle-ink:#BFD9F5;
+      --status-confirmed:#3EDCA0;
+      --status-confirmed-soft:#123528;
+      --status-pending:#FBBF6D;
+      --status-pending-soft:#3A2A11;
+      --status-prepped:#B49CFB;
+      --status-prepped-soft:#2C2350;
+      --status-onlocation:#6B93F7;
+      --status-onlocation-soft:#1E2A4A;
+      --status-returned:#9CA3AF;
+      --status-returned-soft:#262B33;
+      --warn:#FB923C;
+      --warn-soft:#3A2411;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.45);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#12161C;
+    --surface:#1B212B;
+    --surface-2:#232A35;
+    --ink:#EDEFF3;
+    --ink-dim:#9AA3B2;
+    --ink-faint:#6B7484;
+    --border:#2A313D;
+    --border-strong:#3A4250;
+    --accent:#6B93F7;
+    --accent-ink:#0B1220;
+    --accent-soft:#1E2A4A;
+    --cat-install:#6B93F7;
+    --cat-install-soft:#1E2A4A;
+    --cat-packdown:#B49CFB;
+    --cat-packdown-soft:#2C2350;
+    --cat-delivery:#3EDCA0;
+    --cat-delivery-soft:#123528;
+    --cat-collection:#FB923C;
+    --cat-collection-soft:#3A2411;
+    --cat-driver:#3FD0E8;
+    --cat-driver-soft:#0E323A;
+    --cat-test:#F472B6;
+    --cat-test-soft:#3A1C2C;
+    --cat-warehouse:#A3D45F;
+    --cat-warehouse-soft:#25320F;
+    --cat-operator:#F87171;
+    --cat-operator-soft:#3B1A1A;
+    --cat-other:#9CA3AF;
+    --cat-other-soft:#262B33;
+    --vehicle:#9CC0F0;
+    --vehicle-soft:#1E2A3D;
+    --vehicle-ink:#BFD9F5;
+    --status-confirmed:#3EDCA0;
+    --status-confirmed-soft:#123528;
+    --status-pending:#FBBF6D;
+    --status-pending-soft:#3A2A11;
+    --status-prepped:#B49CFB;
+    --status-prepped-soft:#2C2350;
+    --status-onlocation:#6B93F7;
+    --status-onlocation-soft:#1E2A4A;
+    --status-returned:#9CA3AF;
+    --status-returned-soft:#262B33;
+    --warn:#FB923C;
+    --warn-soft:#3A2411;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.45);
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter', system-ui, -apple-system, sans-serif;
+    font-size:15px;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--accent-soft);}
+  .wrap{max-width:1760px; margin:0 auto; padding:24px 24px 60px;}
+
+  /* ---- Header ---- */
+  .masthead{display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:16px; flex-wrap:wrap;}
+  .eyebrow{font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); font-weight:600;}
+  h1{font-weight:800; letter-spacing:-.02em; font-size:clamp(24px,3.4vw,32px); margin:2px 0 2px; text-wrap:balance;}
+  .date-line{font-size:14px; color:var(--ink-dim); font-weight:500;}
+  .snapshot-badge{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px; font-weight:600; letter-spacing:.05em; text-transform:uppercase;
+    padding:5px 11px; border-radius:100px;
+    background:var(--surface-2); color:var(--ink-dim); border:1px solid var(--border);
+    white-space:nowrap;
+  }
+
+  /* ---- View switcher ---- */
+  .switcher{
+    display:inline-flex; gap:4px; background:var(--surface-2);
+    padding:4px; border-radius:12px; border:1px solid var(--border); margin-bottom:16px;
+  }
+  .switch-btn{
+    appearance:none; border:none; background:none; cursor:pointer;
+    font-family:inherit; font-size:13.5px; font-weight:700; color:var(--ink-dim);
+    padding:9px 20px; border-radius:9px;
+  }
+  .switch-btn:hover{color:var(--ink);}
+  .switch-btn.active{background:var(--surface); color:var(--accent); box-shadow:var(--shadow);}
+  .switch-btn:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+
+  /* ---- Legend ---- */
+  .legend{display:flex; flex-wrap:wrap; gap:8px 14px; padding:0 0 18px; font-size:12px; color:var(--ink-dim);}
+  .legend-item{display:inline-flex; align-items:center; gap:6px;}
+  .legend-swatch{width:9px;height:9px;border-radius:3px;flex:none;}
+
+  [hidden]{display:none !important;}
+
+  /* ---- Shared job-card components (identical to the main Daily Schedule pages) ---- */
+  .job{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden;}
+  .job-head{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:14px 18px; border-bottom:1px solid var(--border); flex-wrap:wrap;}
+  .job-title-block{min-width:0;}
+  .job-title{font-weight:700; font-size:17px; letter-spacing:.01em; margin:0; overflow-wrap:anywhere;}
+  .job-sub{font-size:12.5px; color:var(--ink-dim); margin-top:2px;}
+  .pill{font-size:11px; font-weight:700; letter-spacing:.03em; text-transform:uppercase; padding:4px 10px; border-radius:100px; white-space:nowrap;}
+  .pill-confirmed{background:var(--status-confirmed-soft); color:var(--status-confirmed);}
+  .pill-pending{background:var(--status-pending-soft); color:var(--status-pending);}
+  .pill-prepped{background:var(--status-prepped-soft); color:var(--status-prepped);}
+  .pill-onlocation{background:var(--status-onlocation-soft); color:var(--status-onlocation);}
+  .pill-returned{background:var(--status-returned-soft); color:var(--status-returned);}
+  .rows{display:flex; flex-direction:column;}
+  .row{display:grid; grid-template-columns:80px 116px 1fr; gap:12px; padding:13px 18px; border-top:1px solid var(--border); align-items:start;}
+  .rows .row:first-child{border-top:none;}
+  .row-time{font-family:'JetBrains Mono', monospace; font-variant-numeric:tabular-nums; font-size:13px; font-weight:600; color:var(--ink); padding-top:2px; white-space:nowrap;}
+  .row-time .end{color:var(--ink-faint); display:block; font-size:11px; font-weight:500; margin-top:1px;}
+  .cat-chip{font-size:10.5px; font-weight:700; letter-spacing:.03em; text-transform:uppercase; padding:4px 8px; border-radius:7px; display:inline-block; white-space:nowrap; width:fit-content;}
+  .cat-install{background:var(--cat-install-soft); color:var(--cat-install);}
+  .cat-packdown{background:var(--cat-packdown-soft); color:var(--cat-packdown);}
+  .cat-delivery{background:var(--cat-delivery-soft); color:var(--cat-delivery);}
+  .cat-collection{background:var(--cat-collection-soft); color:var(--cat-collection);}
+  .cat-driver{background:var(--cat-driver-soft); color:var(--cat-driver);}
+  .cat-test{background:var(--cat-test-soft); color:var(--cat-test);}
+  .cat-warehouse{background:var(--cat-warehouse-soft); color:var(--cat-warehouse);}
+  .cat-operator{background:var(--cat-operator-soft); color:var(--cat-operator);}
+  .cat-other{background:var(--cat-other-soft); color:var(--cat-other);}
+  .row-body{min-width:0;}
+  .fn-name{font-weight:600; font-size:14.5px;}
+  .crew-line{margin-top:6px; display:flex; flex-wrap:wrap; gap:6px; align-items:center;}
+  .crew-chip{font-size:12px; background:var(--surface-2); color:var(--ink); padding:3px 9px; border-radius:100px; font-weight:500;}
+  .crew-unassigned{font-size:12px; color:var(--warn); font-weight:600;}
+  .vehicle-line{margin-top:6px; display:flex; flex-wrap:wrap; gap:7px; align-items:center;}
+  .vehicle-tag{font-size:10.5px; letter-spacing:.05em; text-transform:uppercase; color:var(--vehicle); font-weight:700;}
+  .vehicle-chip{font-size:12px; background:var(--vehicle-soft); color:var(--vehicle-ink); padding:3px 10px; border-radius:7px; font-weight:600;}
+  .vehicle-missing{font-size:12px; color:var(--warn); font-weight:600;}
+  .empty-state{text-align:center; padding:60px 20px; color:var(--ink-dim);}
+  .empty-state .big{font-size:19px; font-weight:700; color:var(--ink); margin-bottom:6px;}
+
+  /* ---- 1-Day view ---- */
+  #view-1{max-width:680px;}
+  #view-1 .groups{display:flex; flex-direction:column; gap:14px;}
+
+  /* ---- Multi-day column views ---- */
+  .wall-scroll{overflow-x:auto; padding-bottom:6px; margin:0 -24px; padding-left:24px; padding-right:24px;}
+  .wall-grid{display:grid; gap:12px; align-items:start;}
+  .wall-grid.cols-4{grid-template-columns:repeat(4,minmax(270px,1fr));}
+  .wall-grid.cols-7{grid-template-columns:repeat(7,minmax(196px,1fr));}
+
+  .wcol-head{
+    background:var(--surface-2); border:1px solid var(--border); border-radius:10px;
+    padding:9px 12px; margin-bottom:10px; display:flex; align-items:baseline; justify-content:space-between; gap:8px;
+  }
+  .wcol-head.today{background:var(--accent); border-color:var(--accent);}
+  .wcol-wd{font-size:12px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; color:var(--ink-dim);}
+  .wcol-head.today .wcol-wd{color:var(--accent-ink); opacity:.85;}
+  .wcol-date{font-size:12px; font-weight:600; color:var(--ink-faint);}
+  .wcol-head.today .wcol-date{color:var(--accent-ink); opacity:.85;}
+  .wcol-count{font-size:11px; font-weight:700; color:var(--ink-faint);}
+  .wcol-head.today .wcol-count{color:var(--accent-ink);}
+
+  .wcard{background:var(--surface); border:1px solid var(--border); border-radius:11px; box-shadow:var(--shadow); padding:11px 13px; margin-bottom:9px;}
+  .wcard-head{display:flex; align-items:flex-start; justify-content:space-between; gap:6px; margin-bottom:2px;}
+  .wcard-title{font-weight:700; font-size:13.5px; line-height:1.28; overflow-wrap:anywhere;}
+  .wcard-venue{font-size:11px; color:var(--ink-dim); margin-bottom:8px;}
+  .wcard .pill{font-size:9px; padding:3px 7px; flex:none;}
+  .wrow{display:flex; align-items:center; gap:6px; padding:5px 0; border-top:1px dashed var(--border);}
+  .wrow:first-child{border-top:none;}
+  .wrow-time{font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums; font-size:11.5px; font-weight:700; color:var(--ink); flex:none; width:40px;}
+  .wrow .cat-chip{font-size:9px; padding:2.5px 6px; flex:none;}
+  .wrow-crew{font-size:11px; color:var(--ink-dim); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1; min-width:0;}
+  .wrow-crewcount{font-size:10.5px; font-weight:700; color:var(--ink-faint); flex:none; margin-left:auto;}
+  .wempty{font-size:11.5px; color:var(--ink-faint); font-style:italic; padding:14px 4px; text-align:center;}
+
+  footer{
+    margin-top:36px; padding-top:14px; border-top:1px solid var(--border);
+    font-size:11.5px; color:var(--ink-faint); font-family:'JetBrains Mono', monospace;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+  }
+
+  @media (max-width:640px){
+    .wall-grid.cols-4{grid-template-columns:repeat(4,minmax(230px,1fr));}
+    .wall-grid.cols-7{grid-template-columns:repeat(7,minmax(180px,1fr));}
+    .row{grid-template-columns:64px 1fr;}
+    .row .cat-chip{grid-column:2;}
+    .row-time{grid-row:1/3;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <div class="eyebrow">Event Equipment Group &middot; NSW Warehouse Ops &middot; Wall Board &middot; Read-only</div>
+      <h1>Daily Schedule &mdash; Wall Board</h1>
+      <div class="date-line" id="date-line">&nbsp;</div>
+    </div>
+    <span class="snapshot-badge" id="snapshot-label">snapshot: &mdash;</span>
+  </header>
+
+  <div class="switcher" role="tablist" aria-label="Day range">
+    <button class="switch-btn" data-view="1" role="tab" id="tab-1">1 Day</button>
+    <button class="switch-btn" data-view="4" role="tab" id="tab-4">4 Day</button>
+    <button class="switch-btn" data-view="7" role="tab" id="tab-7">7 Day</button>
+  </div>
+
+  <div class="legend" id="legend">
+    <span class="legend-item"><span class="legend-swatch" style="background:var(--cat-install)"></span>Install</span>
+    <span class="legend-item"><span class="legend-swatch" style="background:var(--cat-packdown)"></span>Pack down</span>
+    <span class="legend-item"><span class="legend-swatch" style="background:var(--cat-delivery)"></span>Delivery</span>
+    <span class="legend-item"><span class="legend-swatch" style="background:var(--cat-collection)"></span>Collection</span>
+    <span class="legend-item"><span class="legend-swatch" style="background:var(--cat-driver)"></span>Driver</span>
+    <span class="legend-item"><span class="legend-swatch" style="background:var(--cat-test)"></span>Test</span>
+    <span class="legend-item"><span class="legend-swatch" style="background:var(--cat-warehouse)"></span>Warehouse</span>
+    <span class="legend-item"><span class="legend-swatch" style="background:var(--cat-operator)"></span>Operator</span>
+    <span class="legend-item"><span class="legend-swatch" style="background:var(--cat-other)"></span>Other</span>
+  </div>
+
+  <div id="view-1" hidden><div class="groups" id="groups-1"></div></div>
+  <div id="view-4" hidden><div class="wall-scroll"><div class="wall-grid cols-4" id="grid-4"></div></div></div>
+  <div id="view-7" hidden><div class="wall-scroll"><div class="wall-grid cols-7" id="grid-7"></div></div></div>
+
+  <footer>
+    <span>Read-only wall board for the warehouse TV &middot; refreshes automatically with the Daily Schedule.</span>
+    <span id="footer-count"></span>
+  </footer>
+</div>
+
+<script id="app-state" type="application/json">{"items":[],"notes":{},"schedule":{"updatedAt":"2026-09-13T21:20:00Z","days":{"2026-09-14":[{"id":"sub1537","title":"EVSYSEP26 - Merck","status":"confirmed","venue":"Randwick Racecourse","rows":[{"id":"fn5334","name":"AV Setup","category":"install","start":"2026-09-14T14:00:00+10:00","end":"2026-09-14T14:00:00+10:00","needed":1,"crew":["Rick Sanchez","Yvette Paci"],"vehicles":["NSW Transit Van · 1UE4DI"]}]}],"2026-09-15":[{"id":"sub1485","title":"CLODCS26 - Panduit","status":"onlocation","venue":"International Convention Centre Sydney (ICC)","rows":[{"id":"fn5165","name":"AV Setup","category":"install","start":"2026-09-15T11:00:00+10:00","end":"2026-09-15T11:00:00+10:00","needed":2,"crew":["PJ Hamilton-Shailer","Bryan Kent"],"vehicles":["NSW NNR200 Truck · 2FD9AT"]}]},{"id":"sub1486","title":"CLODCS26 - Superior SDI Limited/Schneider","status":"onlocation","venue":"International Convention Centre Sydney (ICC)","rows":[{"id":"fn5167","name":"AV Setup","category":"install","start":"2026-09-15T11:00:00+10:00","end":"2026-09-15T11:00:00+10:00","needed":2,"crew":["Yvette Paci","Rick Sanchez"],"vehicles":["NSW NNR200 Truck · 2FD9AT"]}]},{"id":"sub1494","title":"CLODCS26 - Exhibitor Orders","status":"confirmed","venue":"International Convention Centre Sydney (ICC)","rows":[{"id":"fn5198","name":"AV Setup","category":"install","start":"2026-09-15T11:00:00+10:00","end":"2026-09-15T11:00:00+10:00","needed":3,"crew":["PJ Hamilton-Shailer","Bryan Kent","Luca Floyd"],"vehicles":[]}]}],"2026-09-16":[{"id":"sub1471","title":"The Big Design Market 2026","status":"confirmed","venue":"Carriage Works","rows":[{"id":"fn5117","name":"AV Setup","category":"install","start":"2026-09-16T12:00:00+10:00","end":"2026-09-16T17:30:00+10:00","needed":2,"crew":["PJ Hamilton-Shailer","Yvette Paci","Rick Sanchez"],"vehicles":["NSW Sprinter Van · DL55LR"]}]},{"id":"sub1494","title":"CLODCS26 - Exhibitor Orders","status":"confirmed","venue":"International Convention Centre Sydney (ICC)","rows":[{"id":"fn5200","name":"Exhibition Check Off","category":"other","start":"2026-09-16T07:00:00+10:00","end":"2026-09-16T12:00:00+10:00","needed":1,"crew":["Rick Sanchez","Yvette Paci"],"vehicles":[]}]},{"id":"sub1602","title":"Novartis Event @ I-Maccheroni","status":"pending","venue":"I Maccheroni","rows":[{"id":"fn5554","name":"AV Setup","category":"install","start":"2026-09-16T16:00:00+10:00","end":"2026-09-16T17:30:00+10:00","needed":2,"crew":["Yvette Paci","Rick Sanchez"],"vehicles":[]}]}],"2026-09-17":[{"id":"sub1485","title":"CLODCS26 - Panduit","status":"onlocation","venue":"International Convention Centre Sydney (ICC)","rows":[{"id":"fn5166","name":"AV Packdown","category":"packdown","start":"2026-09-17T19:00:00+10:00","end":"2026-09-17T19:00:00+10:00","needed":2,"crew":["PJ Hamilton-Shailer","Bryan Kent"],"vehicles":["NSW NNR200 Truck · 2FD9AT"]}]},{"id":"sub1486","title":"CLODCS26 - Superior SDI Limited/Schneider","status":"onlocation","venue":"International Convention Centre Sydney (ICC)","rows":[{"id":"fn5168","name":"AV Packdown","category":"packdown","start":"2026-09-17T19:00:00+10:00","end":"2026-09-17T19:00:00+10:00","needed":2,"crew":["Yvette Paci","Rick Sanchez"],"vehicles":["NSW NNR200 Truck · 2FD9AT"]}]},{"id":"sub1494","title":"CLODCS26 - Exhibitor Orders","status":"confirmed","venue":"International Convention Centre Sydney (ICC)","rows":[{"id":"fn5199","name":"AV Packdown","category":"packdown","start":"2026-09-17T19:00:00+10:00","end":"2026-09-17T19:00:00+10:00","needed":3,"crew":["PJ Hamilton-Shailer","Bryan Kent","Luca Floyd"],"vehicles":[]}]},{"id":"sub1537","title":"EVSYSEP26 - Merck","status":"confirmed","venue":"Randwick Racecourse","rows":[{"id":"fn5335","name":"AV Packdown","category":"packdown","start":"2026-09-17T16:00:00+10:00","end":"2026-09-17T16:00:00+10:00","needed":1,"crew":["Yvette Paci"],"vehicles":["NSW Transit Van · 1UE4DI"]}]},{"id":"sub1602","title":"Novartis Event @ I-Maccheroni","status":"pending","venue":"I Maccheroni","rows":[{"id":"fn5555","name":"AV Packdown","category":"packdown","start":"2026-09-17T09:00:00+10:00","end":"2026-09-17T10:00:00+10:00","needed":2,"crew":["Yvette Paci"],"vehicles":[]}]}],"2026-09-18":[{"id":"sub1449","title":"Equipment Dryhire","status":"onlocation","venue":"Event Equipment Sydney","rows":[{"id":"fn5546","name":"Warehouse De-Prep","category":"warehouse","start":"2026-09-18T12:00:00+10:00","end":"2026-09-18T12:00:00+10:00","needed":1,"crew":["Yvette Paci"],"vehicles":[]}]},{"id":"sub1471","title":"The Big Design Market 2026","status":"confirmed","venue":"Carriage Works","rows":[{"id":"fn5120","name":"Exhibition Check Off","category":"other","start":"2026-09-18T07:00:00+10:00","end":"2026-09-18T10:00:00+10:00","needed":1,"crew":["PJ Hamilton-Shailer"],"vehicles":["NSW Transit Van · 1UE4DI"]}]},{"id":"sub1586","title":"Seiko Sydney Boutique AV Solution","status":"confirmed","venue":"Seiko Boutique Sydney","rows":[{"id":"fn5510","name":"AV Setup","category":"install","start":"2026-09-18T09:00:00+10:00","end":"2026-09-18T10:00:00+10:00","needed":1,"crew":["Rick Sanchez","Yvette Paci"],"vehicles":["NSW Transit Van · 1UE4DI"]}]}],"2026-09-19":[],"2026-09-20":[{"id":"sub1471","title":"The Big Design Market 2026","status":"confirmed","venue":"Carriage Works","rows":[{"id":"fn5118","name":"AV Packdown","category":"packdown","start":"2026-09-20T18:00:00+10:00","end":"2026-09-20T20:30:00+10:00","needed":2,"crew":["PJ Hamilton-Shailer","Mick Rocco"],"vehicles":["NSW Sprinter Van · DL55LR"]}]}],"2026-09-21":[{"id":"sub1473","title":"Year 12 Graduation Mass & Ceremony 2026","status":"confirmed","venue":"Gilroy Catholic College","rows":[{"id":"fn5124","name":"AV Setup","category":"install","start":"2026-09-21T15:00:00+10:00","end":"2026-09-21T19:00:00+10:00","needed":3,"crew":["PJ Hamilton-Shailer","Mick Rocco","Yvette Paci"],"vehicles":["NSW Sprinter Van · DL55LR"]}]},{"id":"sub1586","title":"Seiko Sydney Boutique AV Solution","status":"confirmed","venue":"Seiko Boutique Sydney","rows":[{"id":"fn5511","name":"AV Packdown","category":"packdown","start":"2026-09-21T09:00:00+10:00","end":"2026-09-21T10:00:00+10:00","needed":1,"crew":["Yvette Paci"],"vehicles":["NSW Transit Van · 1UE4DI"]}]}],"2026-09-22":[{"id":"sub1504","title":"Gamuda SPW | CCD AV (Parramatta Event)","status":"confirmed","venue":"PHIVE, 5 Parramatta Square","rows":[{"id":"fn5229","name":"AV Setup","category":"install","start":"2026-09-22T08:00:00+10:00","end":"2026-09-22T09:30:00+10:00","needed":1,"crew":["Mick Rocco","Yvette Paci"],"vehicles":["NSW Transit Van · 1UE4DI"]}]}],"2026-09-23":[{"id":"sub1473","title":"Year 12 Graduation Mass & Ceremony 2026","status":"confirmed","venue":"Gilroy Catholic College","rows":[{"id":"fn5125","name":"AV Packdown","category":"packdown","start":"2026-09-23T13:00:00+10:00","end":"2026-09-23T16:00:00+10:00","needed":2,"crew":["Mick Rocco","Yvette Paci","Bryan Kent"],"vehicles":["NSW Sprinter Van · DL55LR"]},{"id":"fn5126","name":"AV Show Engineer","category":"other","start":"2026-09-23T09:00:00+10:00","end":"2026-09-23T12:00:00+10:00","needed":1,"crew":["Mick Rocco"],"vehicles":["NSW Staff Vehicle · "]}]}],"2026-09-24":[{"id":"sub1504","title":"Gamuda SPW | CCD AV (Parramatta Event)","status":"confirmed","venue":"PHIVE, 5 Parramatta Square","rows":[{"id":"fn5230","name":"AV Packdown","category":"packdown","start":"2026-09-24T17:30:00+10:00","end":"2026-09-24T19:00:00+10:00","needed":1,"crew":["Mick Rocco","Yvette Paci"],"vehicles":["NSW Transit Van · 1UE4DI"]}]},{"id":"sub1583","title":"BLOOD 2026 + RANZCO National 2026 (Auckland - New Zealand)","status":"pending","venue":"Concept Craft Pty Ltd","rows":[{"id":"fn5498","name":"Delivery","category":"delivery","start":"2026-09-24T08:00:00+10:00","end":"2026-09-24T08:00:00+10:00","needed":1,"crew":["Mick Rocco"],"vehicles":["NSW NNR200 Truck · 2FD9AT"]}]}],"2026-09-25":[],"2026-09-26":[],"2026-09-27":[]}}}</script>
+
+<script id="app-script">
+(function(){
+  "use strict";
+
+  var STATUS_META = {
+    pending:{key:'pending', label:'Pending'},
+    confirmed:{key:'confirmed', label:'Confirmed'},
+    prepped:{key:'prepped', label:'Prepped'},
+    onlocation:{key:'onlocation', label:'On location'},
+    returned:{key:'returned', label:'Returned'}
+  };
+
+  var CAT_LABEL = {
+    install:'Install', packdown:'Pack down', delivery:'Delivery',
+    collection:'Collection', driver:'Driver', warehouse:'Warehouse',
+    operator:'Operator', test:'Test', other:'Other'
+  };
+
+  var els = {
+    dateLine: document.getElementById('date-line'),
+    snapshotLabel: document.getElementById('snapshot-label'),
+    footerCount: document.getElementById('footer-count'),
+    groups1: document.getElementById('groups-1'),
+    grid4: document.getElementById('grid-4'),
+    grid7: document.getElementById('grid-7')
+  };
+
+  function escapeHtml(str){
+    return String(str == null ? '' : str).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+  function fmtTime(iso){
+    if(!iso) return null;
+    var d = new Date(iso);
+    if(isNaN(d)) return null;
+    var fmt = new Intl.DateTimeFormat('en-AU', {
+      timeZone:'Australia/Sydney', hour:'2-digit', minute:'2-digit', hour12:false
+    });
+    return fmt.format(d);
+  }
+
+  function timeToMinutes(hhmm){
+    if(!hhmm) return null;
+    var bits = hhmm.split(':');
+    if(bits.length !== 2) return null;
+    var n = (+bits[0]) * 60 + (+bits[1]);
+    return isNaN(n) ? null : n;
+  }
+
+  function sortJobRows(job){
+    if(!job.rows || job.rows.length < 2) return;
+    job.rows.sort(function(a, b){
+      var ma = timeToMinutes(fmtTime(a.start));
+      var mb = timeToMinutes(fmtTime(b.start));
+      if(ma == null) return mb == null ? 0 : 1;
+      if(mb == null) return -1;
+      return ma - mb;
+    });
+  }
+
+  // Parses a "YYYY-MM-DD" schedule key into a fixed UTC-noon Date so
+  // weekday/day/month formatting below is immune to the viewer's own
+  // timezone and to DST edges (same approach as the main pages' date helpers).
+  function dateFromKey(key){
+    var bits = key.split('-');
+    return new Date(Date.UTC(+bits[0], +bits[1]-1, +bits[2], 12, 0, 0));
+  }
+
+  function fmtWeekday(key){
+    return new Intl.DateTimeFormat('en-AU', {weekday:'short'}).format(dateFromKey(key)).toUpperCase();
+  }
+  function fmtDateShort(key){
+    return new Intl.DateTimeFormat('en-AU', {day:'numeric', month:'short'}).format(dateFromKey(key));
+  }
+  function fmtWeekdayLong(key){
+    return new Intl.DateTimeFormat('en-AU', {weekday:'long'}).format(dateFromKey(key));
+  }
+  function fmtDateLine(key){
+    return new Intl.DateTimeFormat('en-AU', {weekday:'long', day:'numeric', month:'long', year:'numeric'}).format(dateFromKey(key));
+  }
+  function fmtSnapshot(iso){
+    if(!iso) return '—';
+    var d = new Date(iso);
+    if(isNaN(d)) return '—';
+    var fmt = new Intl.DateTimeFormat('en-AU', {
+      timeZone:'Australia/Sydney', weekday:'short', day:'numeric', month:'short',
+      year:'numeric', hour:'2-digit', minute:'2-digit', hour12:false
+    });
+    return fmt.format(d) + ' AEST/AEDT';
+  }
+
+  function getState(){
+    var raw = document.getElementById('app-state').textContent;
+    var parsed = JSON.parse(raw);
+    if(!parsed.schedule) parsed.schedule = {updatedAt:null, days:{}};
+    if(!parsed.schedule.days) parsed.schedule.days = {};
+    return parsed;
+  }
+
+  var state = getState();
+  var dayKeys = Object.keys(state.schedule.days).sort();
+  var days = dayKeys.map(function(key, idx){
+    var jobs = state.schedule.days[key] || [];
+    jobs.forEach(function(job){ sortJobRows(job); });
+    return {key:key, jobs:jobs, today: idx === 0};
+  });
+
+  /* ------------------------- 1-Day view (full detail, matches the main Daily Schedule pages) ------------------------- */
+
+  function renderRow(row){
+    var start = fmtTime(row.start);
+    var end = fmtTime(row.end);
+    var crewHtml;
+    if(row.crew.length){
+      crewHtml = row.crew.map(function(name){ return '<span class="crew-chip">' + escapeHtml(name) + '</span>'; }).join('');
+      if(row.needed && row.needed > row.crew.length){
+        crewHtml += '<span class="crew-unassigned">' + (row.needed - row.crew.length) + ' more needed</span>';
+      }
+    } else {
+      crewHtml = '<span class="crew-unassigned">Unassigned' + (row.needed ? ' — ' + row.needed + ' needed' : '') + '</span>';
+    }
+    var vehicleHtml = '<div class="vehicle-line"><span class="vehicle-tag">Vehicle</span>' +
+      (row.vehicles.length
+        ? row.vehicles.map(function(v){ return '<span class="vehicle-chip">' + escapeHtml(v) + '</span>'; }).join('')
+        : '<span class="vehicle-missing">Not assigned</span>') +
+      '</div>';
+    return (
+      '<div class="row">' +
+        '<div class="row-time">' + (start || '—') + (end && end !== start ? '<span class="end">' + end + '</span>' : '') + '</div>' +
+        '<div><span class="cat-chip cat-' + row.category + '">' + CAT_LABEL[row.category] + '</span></div>' +
+        '<div class="row-body">' +
+          '<div class="fn-name">' + escapeHtml(row.name) + '</div>' +
+          '<div class="crew-line">' + crewHtml + '</div>' +
+          vehicleHtml +
+        '</div>' +
+      '</div>'
+    );
+  }
+
+  function jobCardHtml(job){
+    var meta = STATUS_META[job.status] || {key:'other', label:job.status};
+    var rowsHtml = job.rows.map(renderRow).join('');
+    return (
+      '<div class="job">' +
+        '<div class="job-head">' +
+          '<div class="job-title-block">' +
+            '<h3 class="job-title">' + escapeHtml(job.title) + '</h3>' +
+            (job.venue ? '<div class="job-sub">' + escapeHtml(job.venue) + '</div>' : '') +
+          '</div>' +
+          '<span class="pill pill-' + meta.key + '">' + escapeHtml(meta.label) + '</span>' +
+        '</div>' +
+        '<div class="rows">' + rowsHtml + '</div>' +
+      '</div>'
+    );
+  }
+
+  function renderDay1(){
+    var today = days[0];
+    if(!today){ els.groups1.innerHTML = ''; return; }
+    els.dateLine.textContent = fmtDateLine(today.key);
+    if(!today.jobs.length){
+      els.groups1.innerHTML =
+        '<div class="empty-state">' +
+          '<div class="big">Nothing scheduled</div>' +
+          '<div>No jobs for ' + escapeHtml(fmtWeekdayLong(today.key)) + '.</div>' +
+        '</div>';
+      return;
+    }
+    els.groups1.innerHTML = today.jobs.map(jobCardHtml).join('');
+  }
+
+  /* ------------------------- Multi-day column views ------------------------- */
+
+  function statusPill(status){
+    var meta = STATUS_META[status] || {key:'other', label:status};
+    return '<span class="pill pill-' + meta.key + '">' + escapeHtml(meta.label) + '</span>';
+  }
+
+  function renderColumns(gridEl, dayList, compact){
+    gridEl.innerHTML = dayList.map(function(day){
+      var head = '<div class="wcol-head' + (day.today ? ' today' : '') + '">' +
+        '<span><span class="wcol-wd">' + fmtWeekday(day.key) + '</span> <span class="wcol-date">' + fmtDateShort(day.key) + '</span></span>' +
+        '<span class="wcol-count">' + day.jobs.length + '</span></div>';
+      var body;
+      if(!day.jobs.length){
+        body = '<div class="wempty">No jobs</div>';
+      } else {
+        body = day.jobs.map(function(job){
+          var rows = job.rows.map(function(r){
+            var start = fmtTime(r.start);
+            if(compact){
+              return '<div class="wrow">' +
+                '<span class="wrow-time">' + (start || '—') + '</span>' +
+                '<span class="cat-chip cat-' + r.category + '">' + CAT_LABEL[r.category] + '</span>' +
+                '<span class="wrow-crewcount">' + r.crew.length + (r.crew.length === 1 ? ' crew' : ' crew') + '</span>' +
+              '</div>';
+            }
+            return '<div class="wrow">' +
+              '<span class="wrow-time">' + (start || '—') + '</span>' +
+              '<span class="cat-chip cat-' + r.category + '">' + CAT_LABEL[r.category] + '</span>' +
+              '<span class="wrow-crew">' + (r.crew.length ? escapeHtml(r.crew.join(', ')) : 'Unassigned') + '</span>' +
+            '</div>';
+          }).join('');
+          return '<div class="wcard">' +
+            '<div class="wcard-head"><div class="wcard-title">' + escapeHtml(job.title) + '</div>' + statusPill(job.status) + '</div>' +
+            (job.venue ? '<div class="wcard-venue">' + escapeHtml(job.venue) + '</div>' : '') +
+            rows +
+          '</div>';
+        }).join('');
+      }
+      return '<div class="wcol">' + head + body + '</div>';
+    }).join('');
+  }
+
+  /* ------------------------- wiring ------------------------- */
+
+  renderDay1();
+  renderColumns(els.grid4, days.slice(0, 4), false);
+  renderColumns(els.grid7, days.slice(0, 7), true);
+
+  els.snapshotLabel.textContent = 'snapshot: ' + fmtSnapshot(state.schedule.updatedAt);
+  var totalJobsToday = days[0] ? days[0].jobs.length : 0;
+  els.footerCount.textContent = totalJobsToday ? (totalJobsToday + ' job' + (totalJobsToday === 1 ? '' : 's') + ' today') : '';
+
+  var views = {'1':document.getElementById('view-1'), '4':document.getElementById('view-4'), '7':document.getElementById('view-7')};
+  var tabs = {'1':document.getElementById('tab-1'), '4':document.getElementById('tab-4'), '7':document.getElementById('tab-7')};
+  function setView(v){
+    Object.keys(views).forEach(function(k){
+      views[k].hidden = (k !== v);
+      tabs[k].classList.toggle('active', k === v);
+      tabs[k].setAttribute('aria-selected', k === v ? 'true' : 'false');
+    });
+    try{ localStorage.setItem('wallboard-view', v); }catch(e){}
+  }
+  Object.keys(tabs).forEach(function(k){
+    tabs[k].addEventListener('click', function(){ setView(k); });
+  });
+  var initial = '7';
+  try{ initial = localStorage.getItem('wallboard-view') || '7'; }catch(e){}
+  setView(initial);
+
+  // Unattended TV display: nobody is at the warehouse screen to hit reload,
+  // so pick up each baked refresh (7am/5pm Sydney weekdays) automatically.
+  setInterval(function(){ location.reload(); }, 10 * 60 * 1000);
+})();
+</script>
+
+</body>
+</html>

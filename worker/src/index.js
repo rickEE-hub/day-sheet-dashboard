@@ -204,6 +204,11 @@ export default {
         indexUrl.pathname = "/index.html";
         return env.ASSETS.fetch(new Request(indexUrl, req));
       }
+      if (url.pathname === "/wallboard") {
+        const wallboardUrl = new URL(req.url);
+        wallboardUrl.pathname = "/wallboard.html";
+        return env.ASSETS.fetch(new Request(wallboardUrl, req));
+      }
       return env.ASSETS.fetch(req);
     }
 
