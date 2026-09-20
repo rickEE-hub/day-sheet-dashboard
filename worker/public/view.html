@@ -274,6 +274,8 @@
     background:var(--surface);
     color:var(--ink);
     white-space:nowrap;
+    display:inline-block;
+    text-decoration:none;
   }
   .btn:hover{border-color:var(--accent); color:var(--accent);}
   .btn:active{transform:translateY(1px);}
@@ -511,6 +513,7 @@
     <div class="masthead-right">
       <span class="snapshot-badge" id="snapshot-label">snapshot: &mdash;</span>
       <button class="btn" id="reload-btn" type="button">Reload</button>
+      <a class="btn" href="/history">History</a>
     </div>
   </header>
 

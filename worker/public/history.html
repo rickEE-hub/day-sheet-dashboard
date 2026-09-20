@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Daily Schedule — History</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFFFF;
+    --surface:#FFFFFF;
+    --surface-2:#EEF1F5;
+    --ink:#171B21;
+    --ink-dim:#5B6472;
+    --ink-faint:#94A0AF;
+    --border:#E3E7ED;
+    --border-strong:#C9D0DA;
+    --accent:#2454E8;
+    --accent-ink:#FFFFFF;
+    --accent-soft:#E4EBFD;
+    --cat-install:#2454E8;
+    --cat-install-soft:#E4EBFD;
+    --cat-packdown:#7B3FE4;
+    --cat-packdown-soft:#EEE5FD;
+    --cat-delivery:#0E9F6E;
+    --cat-delivery-soft:#DCF7EC;
+    --cat-collection:#DD6B20;
+    --cat-collection-soft:#FDE9D8;
+    --cat-driver:#0891B2;
+    --cat-driver-soft:#DBF4F9;
+    --cat-test:#DB2777;
+    --cat-test-soft:#FBE1EC;
+    --cat-warehouse:#4D7C0F;
+    --cat-warehouse-soft:#E7F2D5;
+    --cat-operator:#B91C1C;
+    --cat-operator-soft:#FBE2E2;
+    --cat-other:#6B7280;
+    --cat-other-soft:#EBEDF0;
+    --vehicle:#1E3A5F;
+    --vehicle-soft:#E1E9F1;
+    --vehicle-ink:#1E3A5F;
+    --status-confirmed:#0E9F6E;
+    --status-confirmed-soft:#DCF7EC;
+    --status-pending:#B45309;
+    --status-pending-soft:#FDECD3;
+    --status-prepped:#7B3FE4;
+    --status-prepped-soft:#EEE5FD;
+    --status-onlocation:#2454E8;
+    --status-onlocation-soft:#E4EBFD;
+    --status-returned:#6B7280;
+    --status-returned-soft:#EBEDF0;
+    --warn:#C2410C;
+    --warn-soft:#FDE7DA;
+    --shadow: 0 1px 2px rgba(20,25,35,.04), 0 8px 24px rgba(20,25,35,.06);
+    --radius: 14px;
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#12161C;
+      --surface:#1B212B;
+      --surface-2:#232A35;
+      --ink:#EDEFF3;
+      --ink-dim:#9AA3B2;
+      --ink-faint:#6B7484;
+      --border:#2A313D;
+      --border-strong:#3A4250;
+      --accent:#6B93F7;
+      --accent-ink:#0B1220;
+      --accent-soft:#1E2A4A;
+      --cat-install:#6B93F7;
+      --cat-install-soft:#1E2A4A;
+      --cat-packdown:#B49CFB;
+      --cat-packdown-soft:#2C2350;
+      --cat-delivery:#3EDCA0;
+      --cat-delivery-soft:#123528;
+      --cat-collection:#FB923C;
+      --cat-collection-soft:#3A2411;
+      --cat-driver:#3FD0E8;
+      --cat-driver-soft:#0E323A;
+      --cat-test:#F472B6;
+      --cat-test-soft:#3A1C2C;
+      --cat-warehouse:#A3D45F;
+      --cat-warehouse-soft:#25320F;
+      --cat-operator:#F87171;
+      --cat-operator-soft:#3B1A1A;
+      --cat-other:#9CA3AF;
+      --cat-other-soft:#262B33;
+      --vehicle:#9CC0F0;
+      --vehicle-soft:#1E2A3D;
+      --vehicle-ink:#BFD9F5;
+      --status-confirmed:#3EDCA0;
+      --status-confirmed-soft:#123528;
+      --status-pending:#FBBF6D;
+      --status-pending-soft:#3A2A11;
+      --status-prepped:#B49CFB;
+      --status-prepped-soft:#2C2350;
+      --status-onlocation:#6B93F7;
+      --status-onlocation-soft:#1E2A4A;
+      --status-returned:#9CA3AF;
+      --status-returned-soft:#262B33;
+      --warn:#FB923C;
+      --warn-soft:#3A2411;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.45);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#12161C;
+    --surface:#1B212B;
+    --surface-2:#232A35;
+    --ink:#EDEFF3;
+    --ink-dim:#9AA3B2;
+    --ink-faint:#6B7484;
+    --border:#2A313D;
+    --border-strong:#3A4250;
+    --accent:#6B93F7;
+    --accent-ink:#0B1220;
+    --accent-soft:#1E2A4A;
+    --cat-install:#6B93F7;
+    --cat-install-soft:#1E2A4A;
+    --cat-packdown:#B49CFB;
+    --cat-packdown-soft:#2C2350;
+    --cat-delivery:#3EDCA0;
+    --cat-delivery-soft:#123528;
+    --cat-collection:#FB923C;
+    --cat-collection-soft:#3A2411;
+    --cat-driver:#3FD0E8;
+    --cat-driver-soft:#0E323A;
+    --cat-test:#F472B6;
+    --cat-test-soft:#3A1C2C;
+    --cat-warehouse:#A3D45F;
+    --cat-warehouse-soft:#25320F;
+    --cat-operator:#F87171;
+    --cat-operator-soft:#3B1A1A;
+    --cat-other:#9CA3AF;
+    --cat-other-soft:#262B33;
+    --vehicle:#9CC0F0;
+    --vehicle-soft:#1E2A3D;
+    --vehicle-ink:#BFD9F5;
+    --status-confirmed:#3EDCA0;
+    --status-confirmed-soft:#123528;
+    --status-pending:#FBBF6D;
+    --status-pending-soft:#3A2A11;
+    --status-prepped:#B49CFB;
+    --status-prepped-soft:#2C2350;
+    --status-onlocation:#6B93F7;
+    --status-onlocation-soft:#1E2A4A;
+    --status-returned:#9CA3AF;
+    --status-returned-soft:#262B33;
+    --warn:#FB923C;
+    --warn-soft:#3A2411;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.45);
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter', system-ui, -apple-system, sans-serif;
+    font-size:15px;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--accent-soft);}
+  .wrap{max-width:900px; margin:0 auto; padding:24px 24px 60px;}
+
+  .logo-bar{display:flex; justify-content:flex-end;}
+
+  .masthead{margin-bottom:16px;}
+  .eyebrow{font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); font-weight:600;}
+  h1{font-weight:800; letter-spacing:-.02em; font-size:clamp(24px,3.4vw,32px); margin:2px 0 6px; text-wrap:balance;}
+  .lede{font-size:14px; color:var(--ink-dim); max-width:56ch;}
+
+  .controls{
+    display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+    margin:22px 0 16px; padding:14px 16px; background:var(--surface-2);
+    border:1px solid var(--border); border-radius:12px;
+  }
+  .controls label{font-size:12px; font-weight:700; color:var(--ink-dim); text-transform:uppercase; letter-spacing:.04em;}
+  select{
+    font-family:inherit; font-size:14px; font-weight:600; color:var(--ink);
+    background:var(--surface); border:1px solid var(--border-strong); border-radius:8px;
+    padding:8px 12px; cursor:pointer;
+  }
+  select:focus-visible{outline:2px solid var(--accent); outline-offset:1px;}
+
+  .day-chips{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:22px;}
+  .day-chip{
+    appearance:none; font-family:'JetBrains Mono', monospace; font-size:12.5px; font-weight:600;
+    color:var(--ink-dim); background:var(--surface); border:1px solid var(--border-strong);
+    border-radius:9px; padding:8px 12px; cursor:pointer;
+  }
+  .day-chip:hover{border-color:var(--accent); color:var(--ink);}
+  .day-chip.active{background:var(--accent); border-color:var(--accent); color:var(--accent-ink);}
+  .day-chip:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+
+  .selected-date{font-size:15px; font-weight:700; margin-bottom:14px;}
+
+  [hidden]{display:none !important;}
+
+  .job{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; margin-bottom:14px;}
+  .job-head{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:14px 18px; border-bottom:1px solid var(--border); flex-wrap:wrap;}
+  .job-title-block{min-width:0;}
+  .job-title{font-weight:700; font-size:17px; letter-spacing:.01em; margin:0; overflow-wrap:anywhere;}
+  .job-sub{font-size:12.5px; color:var(--ink-dim); margin-top:2px;}
+  .pill{font-size:11px; font-weight:700; letter-spacing:.03em; text-transform:uppercase; padding:4px 10px; border-radius:100px; white-space:nowrap;}
+  .pill-confirmed{background:var(--status-confirmed-soft); color:var(--status-confirmed);}
+  .pill-pending{background:var(--status-pending-soft); color:var(--status-pending);}
+  .pill-prepped{background:var(--status-prepped-soft); color:var(--status-prepped);}
+  .pill-onlocation{background:var(--status-onlocation-soft); color:var(--status-onlocation);}
+  .pill-returned{background:var(--status-returned-soft); color:var(--status-returned);}
+  .rows{display:flex; flex-direction:column;}
+  .row{display:grid; grid-template-columns:80px 116px 1fr; gap:12px; padding:13px 18px; border-top:1px solid var(--border); align-items:start;}
+  .rows .row:first-child{border-top:none;}
+  .row-time{font-family:'JetBrains Mono', monospace; font-variant-numeric:tabular-nums; font-size:13px; font-weight:600; color:var(--ink); padding-top:2px; white-space:nowrap;}
+  .row-time .end{color:var(--ink-faint); display:block; font-size:11px; font-weight:500; margin-top:1px;}
+  .cat-chip{font-size:10.5px; font-weight:700; letter-spacing:.03em; text-transform:uppercase; padding:4px 8px; border-radius:7px; display:inline-block; white-space:nowrap; width:fit-content;}
+  .cat-install{background:var(--cat-install-soft); color:var(--cat-install);}
+  .cat-packdown{background:var(--cat-packdown-soft); color:var(--cat-packdown);}
+  .cat-delivery{background:var(--cat-delivery-soft); color:var(--cat-delivery);}
+  .cat-collection{background:var(--cat-collection-soft); color:var(--cat-collection);}
+  .cat-driver{background:var(--cat-driver-soft); color:var(--cat-driver);}
+  .cat-test{background:var(--cat-test-soft); color:var(--cat-test);}
+  .cat-warehouse{background:var(--cat-warehouse-soft); color:var(--cat-warehouse);}
+  .cat-operator{background:var(--cat-operator-soft); color:var(--cat-operator);}
+  .cat-other{background:var(--cat-other-soft); color:var(--cat-other);}
+  .row-body{min-width:0;}
+  .fn-name{font-weight:600; font-size:14.5px;}
+  .crew-line{margin-top:6px; display:flex; flex-wrap:wrap; gap:6px; align-items:center;}
+  .crew-chip{font-size:12px; background:var(--surface-2); color:var(--ink); padding:3px 9px; border-radius:100px; font-weight:500;}
+  .crew-unassigned{font-size:12px; color:var(--warn); font-weight:600;}
+  .vehicle-line{margin-top:6px; display:flex; flex-wrap:wrap; gap:7px; align-items:center;}
+  .vehicle-tag{font-size:10.5px; letter-spacing:.05em; text-transform:uppercase; color:var(--vehicle); font-weight:700;}
+  .vehicle-chip{font-size:12px; background:var(--vehicle-soft); color:var(--vehicle-ink); padding:3px 10px; border-radius:7px; font-weight:600;}
+  .vehicle-missing{font-size:12px; color:var(--warn); font-weight:600;}
+  .empty-state{text-align:center; padding:60px 20px; color:var(--ink-dim);}
+  .empty-state .big{font-size:19px; font-weight:700; color:var(--ink); margin-bottom:6px;}
+
+  footer{
+    margin-top:36px; padding-top:14px; border-top:1px solid var(--border);
+    font-size:11.5px; color:var(--ink-faint); font-family:'JetBrains Mono', monospace;
+  }
+  footer a{color:var(--ink-faint);}
+
+  @media (max-width:640px){
+    .row{grid-template-columns:64px 1fr;}
+    .row .cat-chip{grid-column:2;}
+    .row-time{grid-row:1/3;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">Event Equipment Group &middot; NSW Warehouse Ops &middot; History &middot; Read-only</div>
+    <h1>Schedule Archive</h1>
+    <div class="lede">Past jobs from the Daily Schedule, kept after they roll off the live 14-day window. Pick a month, then a date.</div>
+  </header>
+
+  <div class="controls">
+    <label for="month-select">Month</label>
+    <select id="month-select"></select>
+  </div>
+
+  <div class="day-chips" id="day-chips"></div>
+
+  <div id="result"></div>
+
+  <footer>
+    <span>Static archive &middot; part of the Daily Schedule &middot; <a href="/">Today's schedule</a></span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var STATUS_META = {
+    pending:{key:'pending', label:'Pending'},
+    confirmed:{key:'confirmed', label:'Confirmed'},
+    prepped:{key:'prepped', label:'Prepped'},
+    onlocation:{key:'onlocation', label:'On location'},
+    returned:{key:'returned', label:'Returned'}
+  };
+
+  var CAT_LABEL = {
+    install:'Install', packdown:'Pack down', delivery:'Delivery',
+    collection:'Collection', driver:'Driver', warehouse:'Warehouse',
+    operator:'Operator', test:'Test', other:'Other'
+  };
+
+  var els = {
+    monthSelect: document.getElementById('month-select'),
+    dayChips: document.getElementById('day-chips'),
+    result: document.getElementById('result')
+  };
+
+  function escapeHtml(str){
+    return String(str == null ? '' : str).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+  function fmtTime(iso){
+    if(!iso) return null;
+    var d = new Date(iso);
+    if(isNaN(d)) return null;
+    var fmt = new Intl.DateTimeFormat('en-AU', {
+      timeZone:'Australia/Sydney', hour:'2-digit', minute:'2-digit', hour12:false
+    });
+    return fmt.format(d);
+  }
+
+  function timeToMinutes(hhmm){
+    if(!hhmm) return null;
+    var bits = hhmm.split(':');
+    if(bits.length !== 2) return null;
+    var n = (+bits[0]) * 60 + (+bits[1]);
+    return isNaN(n) ? null : n;
+  }
+
+  function sortJobRows(job){
+    if(!job.rows || job.rows.length < 2) return;
+    job.rows.sort(function(a, b){
+      var ma = timeToMinutes(fmtTime(a.start));
+      var mb = timeToMinutes(fmtTime(b.start));
+      if(ma == null) return mb == null ? 0 : 1;
+      if(mb == null) return -1;
+      return ma - mb;
+    });
+  }
+
+  function sortDayJobs(jobs){
+    jobs.forEach(function(job){ sortJobRows(job); });
+    jobs.sort(function(a, b){
+      var ma = a.rows.length ? timeToMinutes(fmtTime(a.rows[0].start)) : null;
+      var mb = b.rows.length ? timeToMinutes(fmtTime(b.rows[0].start)) : null;
+      if(ma == null) return mb == null ? 0 : 1;
+      if(mb == null) return -1;
+      return ma - mb;
+    });
+  }
+
+  // Parses a "YYYY-MM-DD" key into a fixed UTC-noon Date so weekday/day/month
+  // formatting is immune to the viewer's own timezone and DST edges.
+  function dateFromKey(key){
+    var bits = key.split('-');
+    return new Date(Date.UTC(+bits[0], +bits[1]-1, +bits[2], 12, 0, 0));
+  }
+  function fmtMonthLabel(monthKey){
+    var bits = monthKey.split('-');
+    var d = new Date(Date.UTC(+bits[0], +bits[1]-1, 1, 12, 0, 0));
+    return new Intl.DateTimeFormat('en-AU', {month:'long', year:'numeric'}).format(d);
+  }
+  function fmtChip(key){
+    var d = dateFromKey(key);
+    return new Intl.DateTimeFormat('en-AU', {weekday:'short', day:'numeric'}).format(d);
+  }
+  function fmtDateLine(key){
+    return new Intl.DateTimeFormat('en-AU', {weekday:'long', day:'numeric', month:'long', year:'numeric'}).format(dateFromKey(key));
+  }
+
+  function renderRow(row){
+    var start = fmtTime(row.start);
+    var end = fmtTime(row.end);
+    var crewHtml;
+    if(row.crew.length){
+      crewHtml = row.crew.map(function(name){ return '<span class="crew-chip">' + escapeHtml(name) + '</span>'; }).join('');
+      if(row.needed && row.needed > row.crew.length){
+        crewHtml += '<span class="crew-unassigned">' + (row.needed - row.crew.length) + ' more needed</span>';
+      }
+    } else {
+      crewHtml = '<span class="crew-unassigned">Unassigned' + (row.needed ? ' — ' + row.needed + ' needed' : '') + '</span>';
+    }
+    var vehicleHtml = '<div class="vehicle-line"><span class="vehicle-tag">Vehicle</span>' +
+      (row.vehicles.length
+        ? row.vehicles.map(function(v){ return '<span class="vehicle-chip">' + escapeHtml(v) + '</span>'; }).join('')
+        : '<span class="vehicle-missing">Not assigned</span>') +
+      '</div>';
+    return (
+      '<div class="row">' +
+        '<div class="row-time">' + (start || '—') + (end && end !== start ? '<span class="end">' + end + '</span>' : '') + '</div>' +
+        '<div><span class="cat-chip cat-' + row.category + '">' + (CAT_LABEL[row.category] || row.category) + '</span></div>' +
+        '<div class="row-body">' +
+          '<div class="fn-name">' + escapeHtml(row.name) + '</div>' +
+          '<div class="crew-line">' + crewHtml + '</div>' +
+          vehicleHtml +
+        '</div>' +
+      '</div>'
+    );
+  }
+
+  function jobCardHtml(job){
+    var meta = STATUS_META[job.status] || {key:'other', label:job.status};
+    var rowsHtml = job.rows.map(renderRow).join('');
+    return (
+      '<div class="job">' +
+        '<div class="job-head">' +
+          '<div class="job-title-block">' +
+            '<h3 class="job-title">' + escapeHtml(job.title) + '</h3>' +
+            (job.venue ? '<div class="job-sub">' + escapeHtml(job.venue) + '</div>' : '') +
+          '</div>' +
+          '<span class="pill pill-' + meta.key + '">' + escapeHtml(meta.label) + '</span>' +
+        '</div>' +
+        '<div class="rows">' + rowsHtml + '</div>' +
+      '</div>'
+    );
+  }
+
+  function renderDay(dateKey, jobs){
+    sortDayJobs(jobs);
+    var html = '<div class="selected-date">' + escapeHtml(fmtDateLine(dateKey)) + '</div>';
+    if(!jobs.length){
+      html += '<div class="empty-state"><div class="big">Nothing on the sheet</div><div>No jobs recorded for this date.</div></div>';
+    } else {
+      html += jobs.map(jobCardHtml).join('');
+    }
+    els.result.innerHTML = html;
+  }
+
+  function renderMessage(big, small){
+    els.result.innerHTML = '<div class="empty-state"><div class="big">' + escapeHtml(big) + '</div><div>' + escapeHtml(small || '') + '</div></div>';
+  }
+
+  var monthCache = {};
+  var currentMonthData = null;
+
+  function loadMonth(monthKey, preselectDate){
+    els.dayChips.innerHTML = '';
+    if(monthCache[monthKey]){
+      onMonthLoaded(monthKey, monthCache[monthKey], preselectDate);
+      return;
+    }
+    renderMessage('Loading…', '');
+    fetch('archive/' + monthKey + '.json')
+      .then(function(r){ if(!r.ok) throw new Error('not found'); return r.json(); })
+      .then(function(data){
+        monthCache[monthKey] = data;
+        onMonthLoaded(monthKey, data, preselectDate);
+      })
+      .catch(function(){
+        renderMessage('Could not load this month', 'The archive file for ' + fmtMonthLabel(monthKey) + ' is missing or unreadable.');
+      });
+  }
+
+  function onMonthLoaded(monthKey, data, preselectDate){
+    currentMonthData = data;
+    var dateKeys = Object.keys(data.days || {}).sort();
+    if(!dateKeys.length){
+      renderMessage('No archived dates', 'Nothing recorded yet for ' + fmtMonthLabel(monthKey) + '.');
+      return;
+    }
+    els.dayChips.innerHTML = dateKeys.map(function(key){
+      return '<button type="button" class="day-chip" data-date="' + key + '">' + fmtChip(key) + '</button>';
+    }).join('');
+    Array.prototype.forEach.call(els.dayChips.querySelectorAll('.day-chip'), function(btn){
+      btn.addEventListener('click', function(){ selectDate(btn.dataset.date); });
+    });
+    var target = (preselectDate && dateKeys.indexOf(preselectDate) !== -1) ? preselectDate : dateKeys[dateKeys.length - 1];
+    selectDate(target);
+  }
+
+  function selectDate(dateKey){
+    Array.prototype.forEach.call(els.dayChips.querySelectorAll('.day-chip'), function(btn){
+      btn.classList.toggle('active', btn.dataset.date === dateKey);
+    });
+    var jobs = (currentMonthData && currentMonthData.days && currentMonthData.days[dateKey]) || [];
+    renderDay(dateKey, jobs.slice());
+    try{
+      var url = new URL(location.href);
+      url.searchParams.set('date', dateKey);
+      history.replaceState(null, '', url);
+    }catch(e){}
+  }
+
+  var params = new URLSearchParams(location.search);
+  var requestedDate = params.get('date');
+
+  fetch('archive/index.json')
+    .then(function(r){ if(!r.ok) throw new Error('not found'); return r.json(); })
+    .then(function(idx){
+      var months = (idx.months || []).slice().sort();
+      if(!months.length){
+        renderMessage('No archive yet', 'Past days will appear here once they roll off the live 14-day schedule.');
+        return;
+      }
+      els.monthSelect.innerHTML = months.map(function(m){
+        return '<option value="' + m + '">' + fmtMonthLabel(m) + '</option>';
+      }).join('');
+      els.monthSelect.addEventListener('change', function(){ loadMonth(els.monthSelect.value); });
+      var initialMonth = (requestedDate && requestedDate.slice(0,7) && months.indexOf(requestedDate.slice(0,7)) !== -1)
+        ? requestedDate.slice(0,7)
+        : months[months.length - 1];
+      els.monthSelect.value = initialMonth;
+      loadMonth(initialMonth, requestedDate);
+    })
+    .catch(function(){
+      renderMessage('Archive unavailable', 'Could not load the archive index.');
+    });
+})();
+</script>
+
+</body>
+</html>

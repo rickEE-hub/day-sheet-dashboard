@@ -209,6 +209,11 @@ export default {
         wallboardUrl.pathname = "/wallboard.html";
         return env.ASSETS.fetch(new Request(wallboardUrl, req));
       }
+      if (url.pathname === "/history") {
+        const historyUrl = new URL(req.url);
+        historyUrl.pathname = "/history.html";
+        return env.ASSETS.fetch(new Request(historyUrl, req));
+      }
       return env.ASSETS.fetch(req);
     }
 
