@@ -4,7 +4,7 @@ import { getStore } from "@netlify/blobs";
 // A single optional banner shown at the top of the day sheet. Reads (GET)
 // stay open; writes (PUT) require the shared passcode. Setting an empty
 // text clears the banner.
-const PASSCODE = "4242";
+const PASSCODE = "ee123";
 
 function store() {
   return getStore("day-sheet-reminder");

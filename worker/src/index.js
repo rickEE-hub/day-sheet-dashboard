@@ -11,7 +11,7 @@
 // x-day-sheet-passcode header on writes. GETs stay open for the
 // read-only contractor link.
 
-const PASSCODE = "4242";
+const PASSCODE = "ee123";
 const CATEGORIES = ["install", "packdown", "delivery", "collection", "driver", "warehouse", "operator", "test", "other"];
 const STATES = ["NSW", "VIC", "QLD"];
 
