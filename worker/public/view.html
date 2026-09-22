@@ -486,6 +486,7 @@
 
   .row-body{min-width:0;}
   .fn-name{font-weight:600; font-size:14.5px;}
+  .row-body-head{display:flex; align-items:flex-start; justify-content:space-between; gap:10px;}
   .crew-line{
     margin-top:6px;
     display:flex;
@@ -915,7 +916,9 @@
     jobs.forEach(function(job){ sortJobRows(job); });
     var iso = isoDateForOffset(selectedDayOffset);
     var itemsForDay = manualItems.filter(function(i){
-      return (i.date || isoDateForOffset(0)) === iso;
+      if((i.date || isoDateForOffset(0)) !== iso) return false;
+      if(selectedState === 'ALL') return true;
+      return (i.state || 'NSW') === selectedState;
     });
 
     var entries = jobs.map(function(job){
@@ -1011,13 +1014,16 @@
   function manualCardHtml(item){
     var start = item.start || '';
     var end = item.end || '';
+    var stateKey = (item.state || 'NSW').toLowerCase();
+    var borderStyle = ' style="border-left:4px solid var(--state-' + stateKey + ')"';
+    var stateBadge = '<span class="state-badge state-badge-' + stateKey + '">' + escapeHtml((item.state || 'NSW')) + '</span>';
     return (
-      '<div class="manual-item">' +
+      '<div class="manual-item"' + borderStyle + '>' +
         '<div class="row">' +
           '<div class="row-time">' + (start || '—') + (end && end !== start ? '<span class="end">' + escapeHtml(end) + '</span>' : '') + '</div>' +
           '<div><span class="cat-chip cat-' + (item.category || 'other') + '">' + CAT_LABEL[item.category || 'other'] + '</span></div>' +
           '<div class="row-body">' +
-            '<div class="fn-name">' + escapeHtml(item.title || 'Untitled') + '</div>' +
+            '<div class="row-body-head"><div class="fn-name">' + escapeHtml(item.title || 'Untitled') + '</div>' + stateBadge + '</div>' +
             (item.crew ? '<div class="crew-line"><span class="crew-chip">' + escapeHtml(item.crew) + '</span></div>' : '') +
             (item.note ? '<div class="row-note">' + escapeHtml(item.note) + '</div>' : '') +
           '</div>' +

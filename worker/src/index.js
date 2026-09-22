@@ -13,6 +13,7 @@
 
 const PASSCODE = "4242";
 const CATEGORIES = ["install", "packdown", "delivery", "collection", "driver", "warehouse", "operator", "test", "other"];
+const STATES = ["NSW", "VIC", "QLD"];
 
 const JSON_HEADERS = { "content-type": "application/json; charset=utf-8" };
 
@@ -38,11 +39,13 @@ function clamp(s, n) {
 
 function sanitizeItem(input) {
   const category = CATEGORIES.includes(input?.category) ? input.category : "other";
+  const state = STATES.includes(input?.state) ? input.state : "NSW";
   return {
     date: clamp(input?.date, 10),
     start: clamp(input?.start, 5),
     end: clamp(input?.end, 5),
     category,
+    state,
     title: clamp(input?.title, 200),
     crew: clamp(input?.crew, 200),
     note: clamp(input?.note, 4000)

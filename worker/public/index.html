@@ -1211,7 +1211,9 @@
     jobs.forEach(function(job){ sortJobRows(job); });
     var iso = isoDateForOffset(selectedDayOffset);
     var itemsForDay = manualItems.filter(function(i){
-      return (i.date || isoDateForOffset(0)) === iso;
+      if((i.date || isoDateForOffset(0)) !== iso) return false;
+      if(selectedState === 'ALL') return true;
+      return (i.state || 'NSW') === selectedState;
     });
 
     var entries = jobs.map(function(job){
@@ -1359,20 +1361,25 @@
   function manualCardHtml(item){
     var start = item.start || '';
     var end = item.end || '';
+    var stateKey = (item.state || 'NSW').toLowerCase();
+    var borderStyle = ' style="border-left:4px solid var(--state-' + stateKey + ')"';
+    var stateBadge = '<span class="state-badge state-badge-' + stateKey + '">' + escapeHtml((item.state || 'NSW')) + '</span>';
     return (
-      '<div class="manual-item">' +
+      '<div class="manual-item"' + borderStyle + '>' +
         '<div class="row">' +
           '<div class="row-time">' + (start || '—') + (end && end !== start ? '<span class="end">' + escapeHtml(end) + '</span>' : '') + '</div>' +
           '<div><span class="cat-chip cat-' + (item.category || 'other') + '">' + CAT_LABEL[item.category || 'other'] + '</span></div>' +
           '<div class="row-body">' +
             '<div class="row-body-head">' +
               '<div class="fn-name">' + escapeHtml(item.title || 'Untitled') + '</div>' +
+              '<div class="job-badges">' + stateBadge +
               (UNLOCKED
                 ? '<div class="manual-actions">' +
                     '<button class="icon-btn" type="button" data-edit="' + item.id + '" title="Edit" aria-label="Edit item">&#9998;</button>' +
                     '<button class="icon-btn" type="button" data-del="' + item.id + '" title="Delete" aria-label="Delete item">&times;</button>' +
                   '</div>'
                 : '') +
+              '</div>' +
             '</div>' +
             (item.crew ? '<div class="crew-line"><span class="crew-chip">' + escapeHtml(item.crew) + '</span></div>' : '') +
             (item.note ? '<div class="row-note"><span class="row-note-text">' + escapeHtml(item.note) + '</span></div>' : '') +
@@ -1500,7 +1507,9 @@
     editingItemId = itemId || null;
     var item = editingItemId ? manualItems.find(function(i){ return i.id === editingItemId; }) : null;
     var itemDate = (item && item.date) || isoDateForOffset(selectedDayOffset);
-    item = item || {start:'', end:'', title:'', category:'other', crew:'', note:''};
+    var defaultState = (selectedState === 'NSW' || selectedState === 'VIC' || selectedState === 'QLD') ? selectedState : 'NSW';
+    item = item || {start:'', end:'', title:'', category:'other', state:defaultState, crew:'', note:''};
+    if(!item.state) item.state = defaultState;
 
     els.formSlot.innerHTML =
       '<div class="form-card">' +
@@ -1508,10 +1517,17 @@
         '<div class="form-grid">' +
           '<div class="field"><label for="f-start">Start time</label><input id="f-start" type="time" value="' + escapeHtml(item.start) + '"></div>' +
           '<div class="field"><label for="f-end">Finish time</label><input id="f-end" type="time" value="' + escapeHtml(item.end) + '"></div>' +
-          '<div class="field full"><label for="f-cat">Category</label>' +
+          '<div class="field"><label for="f-cat">Category</label>' +
             '<select id="f-cat">' +
               Object.keys(CAT_LABEL).map(function(k){
                 return '<option value="' + k + '"' + (k === item.category ? ' selected' : '') + '>' + CAT_LABEL[k] + '</option>';
+              }).join('') +
+            '</select>' +
+          '</div>' +
+          '<div class="field"><label for="f-state">Stock location</label>' +
+            '<select id="f-state">' +
+              ['NSW', 'VIC', 'QLD'].map(function(s){
+                return '<option value="' + s + '"' + (s === item.state ? ' selected' : '') + '>' + s + '</option>';
               }).join('') +
             '</select>' +
           '</div>' +
@@ -1539,6 +1555,7 @@
     var start = document.getElementById('f-start').value;
     var end = document.getElementById('f-end').value;
     var category = document.getElementById('f-cat').value;
+    var state = document.getElementById('f-state').value;
     var title = document.getElementById('f-title').value.trim();
     var crew = document.getElementById('f-crew').value.trim();
     var note = document.getElementById('f-note').value.trim();
@@ -1547,7 +1564,7 @@
       return;
     }
 
-    var payload = {date: itemDate, start: start, end: end, category: category, title: title, crew: crew, note: note};
+    var payload = {date: itemDate, start: start, end: end, category: category, state: state, title: title, crew: crew, note: note};
     var isEdit = !!editingItemId;
     if(isEdit) payload.id = editingItemId;
 
