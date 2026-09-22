@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Daily Schedule</title>
+<title>Daily Schedule — NSW</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -204,10 +204,10 @@
   .wrap{
     max-width:960px;
     margin:0 auto;
-    padding:28px 20px 80px;
+    padding:28px 20px 60px;
   }
 
-  /* ---- Reminder banner ---- */
+  /* ---- Reminder banner (read-only) ---- */
   .reminder{
     display:flex;
     align-items:flex-start;
@@ -222,36 +222,6 @@
   .reminder .reminder-ico{font-size:18px; line-height:1.3;}
   .reminder .reminder-txt{font-size:13.5px; color:var(--reminder-ink); flex:1; min-width:0; overflow-wrap:anywhere; white-space:pre-wrap;}
   .reminder .reminder-txt b{display:block; font-size:11px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:3px; color:var(--reminder-label); font-weight:700;}
-  .reminder-actions{display:flex; gap:6px; flex:none;}
-  .reminder-add-btn{
-    display:block;
-    background:none;
-    border:1px dashed var(--border-strong);
-    color:var(--ink-faint);
-    border-radius:var(--radius);
-    padding:9px 14px;
-    font-size:12.5px;
-    cursor:pointer;
-    margin-bottom:20px;
-    width:100%;
-    text-align:left;
-  }
-  .reminder-add-btn:hover{color:var(--ink-dim); border-color:var(--ink-faint);}
-  .reminder-edit{align-items:stretch;}
-  .reminder-edit-body{flex:1; min-width:0;}
-  .reminder-edit-body textarea{
-    width:100%;
-    font-family:inherit;
-    font-size:13.5px;
-    padding:8px 9px;
-    border-radius:8px;
-    border:1px solid var(--border-strong);
-    background:var(--surface);
-    color:var(--ink);
-    resize:vertical;
-    min-height:60px;
-  }
-  .reminder-edit-actions{display:flex; justify-content:flex-end; gap:8px; margin-top:8px;}
 
   /* ---- Header / masthead ---- */
   .masthead{
@@ -311,7 +281,6 @@
     border:1px solid var(--border);
     white-space:nowrap;
   }
-  .button-row{display:flex; gap:8px;}
   .btn{
     font-family:inherit;
     font-size:13px;
@@ -328,92 +297,7 @@
   }
   .btn:hover{border-color:var(--accent); color:var(--accent);}
   .btn:active{transform:translateY(1px);}
-  .btn:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible{
-    outline:2px solid var(--accent); outline-offset:2px;
-  }
-  .btn.primary{background:var(--accent); color:var(--accent-ink); border:none;}
-  .btn.primary:hover{filter:brightness(1.06); color:var(--accent-ink);}
-
-  .save-flag{
-    font-family:'JetBrains Mono', monospace;
-    font-size:11.5px;
-    color:var(--ink-faint);
-    margin:0;
-    min-height:14px;
-    text-align:right;
-  }
-  .save-flag.err{color:var(--warn);}
-
-  .form-card{
-    background:var(--surface);
-    border:1px solid var(--border-strong);
-    border-radius:var(--radius);
-    padding:16px;
-    margin-bottom:18px;
-    box-shadow:var(--shadow);
-  }
-  .form-for{
-    font-size:12px;
-    color:var(--ink-dim);
-    margin-bottom:12px;
-  }
-  .form-for strong{color:var(--ink);}
-  .form-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px 12px;
-  }
-  .form-grid .full{grid-column:1/-1;}
-  .field label{
-    display:block;
-    font-size:11px;
-    text-transform:uppercase;
-    letter-spacing:.04em;
-    color:var(--ink-faint);
-    margin-bottom:4px;
-    font-weight:600;
-  }
-  .field input, .field select, .field textarea{
-    width:100%;
-    font-family:inherit;
-    font-size:13.5px;
-    padding:8px 9px;
-    border-radius:8px;
-    border:1px solid var(--border-strong);
-    background:var(--surface);
-    color:var(--ink);
-  }
-  .field textarea{resize:vertical; min-height:104px;}
-  .form-actions{
-    display:flex;
-    justify-content:flex-end;
-    gap:8px;
-    margin-top:12px;
-  }
-  .btn-secondary{
-    background:none;
-    border:1px solid var(--border-strong);
-    color:var(--ink-dim);
-    border-radius:9px;
-    padding:8px 14px;
-    font-size:13px;
-    cursor:pointer;
-    font-family:inherit;
-  }
-  .btn-secondary:hover{border-color:var(--ink-faint); color:var(--ink);}
-  .btn-primary{
-    background:var(--accent);
-    color:var(--accent-ink);
-    border:none;
-    border-radius:9px;
-    padding:8px 14px;
-    font-size:13px;
-    font-weight:600;
-    cursor:pointer;
-    font-family:inherit;
-  }
-  .btn-primary:hover{filter:brightness(1.06);}
-  .btn-primary:disabled, .btn-secondary:disabled{opacity:.6; cursor:default;}
+  .btn:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
 
   /* ---- Day tabs ---- */
   .day-tabs{
@@ -437,6 +321,7 @@
   .day-tab.active{background:var(--accent); border-color:var(--accent);}
   .day-tab.active .wd, .day-tab.active .num{color:var(--accent-ink);}
 
+  /* ---- Legend ---- */
   /* ---- State switcher (ALL / NSW / VIC / QLD) ---- */
   .state-tabs{
     display:flex;
@@ -479,7 +364,6 @@
   .state-badge-vic{background:var(--state-vic-soft); color:var(--state-vic);}
   .state-badge-qld{background:var(--state-qld-soft); color:var(--state-qld);}
 
-  /* ---- Legend ---- */
   .legend{
     display:flex;
     flex-wrap:wrap;
@@ -499,7 +383,7 @@
   }
   .empty-state .big{font-size:19px; font-weight:700; color:var(--ink); margin-bottom:6px;}
 
-  /* ---- Timeline (jobs + manual items, interleaved by time) ---- */
+  /* ---- Timeline ---- */
   .groups{display:flex; flex-direction:column; gap:14px; margin-top:0;}
 
   .job, .manual-item{
@@ -601,7 +485,6 @@
   .cat-other{background:var(--cat-other-soft); color:var(--cat-other);}
 
   .row-body{min-width:0;}
-  .row-body-head{display:flex; align-items:flex-start; justify-content:space-between; gap:10px;}
   .fn-name{font-weight:600; font-size:14.5px;}
   .crew-line{
     margin-top:6px;
@@ -660,80 +543,12 @@
     padding:8px 10px;
     white-space:pre-wrap;
     overflow-wrap:anywhere;
-    display:flex;
-    align-items:flex-start;
-    justify-content:space-between;
-    gap:8px;
   }
-  .row-note-text{flex:1; min-width:0;}
-  .note-link{
-    background:none;
-    border:none;
-    color:var(--accent);
-    font-size:11.5px;
-    font-weight:600;
-    cursor:pointer;
-    padding:0;
-    flex:none;
-  }
-  .note-link:hover{text-decoration:underline;}
-  .note-link.add{
-    margin-top:7px;
-    color:var(--ink-faint);
-    border:1px dashed var(--border-strong);
-    border-radius:7px;
-    padding:5px 9px;
-    display:inline-block;
-  }
-  .note-link.add:hover{color:var(--ink-dim); border-color:var(--ink-faint); text-decoration:none;}
-  .note-edit{margin-top:7px;}
-  .note-edit textarea{
-    width:100%;
-    font-family:inherit;
-    font-size:12.5px;
-    padding:8px 9px;
-    border-radius:8px;
-    border:1px solid var(--border-strong);
-    background:var(--surface);
-    color:var(--ink);
-    resize:vertical;
-    min-height:96px;
-  }
-  .note-edit-actions{display:flex; justify-content:flex-end; gap:8px; margin-top:6px;}
   .no-tasks{
     padding:14px 18px;
     font-size:13px;
     color:var(--ink-faint);
     font-style:italic;
-  }
-
-  .manual-actions{display:flex; gap:6px; flex:none;}
-  .icon-btn{
-    background:none;
-    border:1px solid var(--border);
-    color:var(--ink-dim);
-    border-radius:7px;
-    width:26px;height:26px;
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    cursor:pointer;
-    font-size:13px;
-    flex:none;
-  }
-  .icon-btn:hover{border-color:var(--accent); color:var(--accent);}
-
-  footer{
-    margin-top:40px;
-    padding-top:14px;
-    border-top:1px solid var(--border);
-    font-size:11.5px;
-    color:var(--ink-faint);
-    font-family:'JetBrains Mono', monospace;
-    display:flex;
-    justify-content:space-between;
-    flex-wrap:wrap;
-    gap:8px;
   }
 
   [hidden]{display:none !important;}
@@ -743,7 +558,6 @@
     .row{grid-template-columns:64px 1fr; }
     .row .cat-chip{grid-column:2; }
     .row-time{grid-row:1/3;}
-    .form-grid{grid-template-columns:1fr;}
   }
 </style>
 </head>
@@ -757,28 +571,16 @@
 
   <header class="masthead">
     <div class="masthead-left">
-      <div class="eyebrow">Event Equipment Group &middot; Warehouse Ops &middot; 14-day view &middot; Shared &amp; editable</div>
+      <div class="eyebrow">Event Equipment Group &middot; NSW Warehouse Ops &middot; 14-day view &middot; Read-only</div>
       <h1>Daily Schedule</h1>
       <div class="date-line" id="date-line">&nbsp;</div>
     </div>
     <div class="masthead-right">
       <span class="snapshot-badge" id="snapshot-label">snapshot: &mdash;</span>
-      <div class="button-row">
-        <button class="btn primary" id="add-item-btn" type="button" hidden>+ Add item</button>
-        <button class="btn" id="lock-btn" type="button">Unlock editing</button>
-        <button class="btn" id="reload-btn" type="button">Reload</button>
-        <a class="btn" href="/history">History</a>
-      </div>
-      <span class="save-flag" id="save-flag"></span>
+      <button class="btn" id="reload-btn" type="button">Reload</button>
+      <a class="btn" href="/history">History</a>
     </div>
   </header>
-
-  <div class="state-tabs" id="state-tabs" role="tablist" aria-label="Select state">
-    <button class="state-tab state-tab-all" type="button" data-state="ALL" role="tab">All</button>
-    <button class="state-tab state-tab-nsw" type="button" data-state="NSW" role="tab">NSW</button>
-    <button class="state-tab state-tab-vic" type="button" data-state="VIC" role="tab">VIC</button>
-    <button class="state-tab state-tab-qld" type="button" data-state="QLD" role="tab">QLD</button>
-  </div>
 
   <nav class="day-tabs" id="day-tabs" role="tablist" aria-label="Select day">
     <button class="day-tab" type="button" data-offset="0" role="tab"><span class="wd"></span><span class="num"></span></button>
@@ -809,14 +611,8 @@
     <span class="legend-item"><span class="legend-swatch" style="background:var(--cat-other)"></span>Other</span>
   </div>
 
-  <div id="form-slot"></div>
-
   <main id="groups" class="groups" aria-live="polite"></main>
 
-  <footer>
-    <span>Rentman-sourced jobs are read-only here &middot; manual items are shared and editable by anyone with this link.</span>
-    <span id="footer-count"></span>
-  </footer>
 </div>
 
 <script id="app-state" type="application/json">{"items":[],"notes":{},"schedule":{"updatedAt":"2026-09-22T08:10:00Z","days":{"2026-09-22":[{"id":"sub1504","title":"Gamuda SPW | CCD AV (Parramatta Event)","status":"prepped","venue":"PHIVE, 5 Parramatta Square","state":"NSW","rows":[{"id":"fn5229","name":"AV Setup","category":"install","start":"2026-09-22T08:00:00+10:00","end":"2026-09-22T09:30:00+10:00","needed":1,"crew":["Mick Rocco","Yvette Paci"],"vehicles":["NSW Transit Van \u00b7 1UE4DI"]}],"address":"5 Parramatta Square, Parramatta NSW 2150"}],"2026-09-23":[{"id":"sub1611","title":"Transfer NSW > VIC (CISCO - Part1)","status":"confirmed","venue":"","state":"NSW","rows":[{"id":"fn5585","name":"Interstate Truck Transfer","category":"other","start":"2026-09-23T07:00:00+10:00","end":"2026-09-23T17:00:00+10:00","needed":1,"crew":[],"vehicles":[]}]},{"id":"sub1618","title":"Transfer VIC > NSW (NZ LED Wall)","status":"onlocation","venue":"","state":"VIC","rows":[{"id":"fn5602","name":"Interstate Truck Transfer","category":"other","start":"2026-09-23T07:00:00+10:00","end":"2026-09-23T17:00:00+10:00","needed":1,"crew":[],"vehicles":[]}]},{"id":"sub1473","title":"Year 12 Graduation Mass & Ceremony 2026","status":"onlocation","venue":"Gilroy Catholic College","state":"NSW","rows":[{"id":"fn5126","name":"AV Show Engineer","category":"other","start":"2026-09-23T09:00:00+10:00","end":"2026-09-23T12:00:00+10:00","needed":1,"crew":["Mick Rocco"],"vehicles":["NSW Staff Vehicle \u00b7 "]},{"id":"fn5125","name":"AV Packdown","category":"packdown","start":"2026-09-23T13:00:00+10:00","end":"2026-09-23T16:00:00+10:00","needed":2,"crew":["Mick Rocco","Yvette Paci","Luca Floyd"],"vehicles":["NSW Sprinter Van \u00b7 DL55LR"]}],"address":"17-37 Marie Street, Castle Hill NSW 2154"}],"2026-09-24":[{"id":"sub1583","title":"BLOOD 2026 + RANZCO National 2026 (Auckland - New Zealand)","status":"confirmed","venue":"Concept Craft Pty Ltd","state":"NSW","rows":[{"id":"fn5498","name":"Delivery","category":"delivery","start":"2026-09-24T08:00:00+10:00","end":"2026-09-24T08:00:00+10:00","needed":1,"crew":["Mick Rocco"],"vehicles":["NSW NNR200 Truck \u00b7 2FD9AT"]}],"address":"24 Egerton Street, Silverwater NSW 2128"},{"id":"sub1498","title":"ITSSM26 - Exhibitor Orders","status":"onlocation","venue":"Melbourne Convention & Exhibition Centre","state":"VIC","rows":[{"id":"fn5209","name":"AV Packdown","category":"packdown","start":"2026-09-24T15:30:00+10:00","end":"2026-09-24T15:30:00+10:00","needed":2,"crew":["Emma McLoughlin"],"vehicles":["VIC Master Van \u00b7 2FG6UP"]}],"address":"1 Convention Centre Pl, South Wharf VIC 3006"},{"id":"sub1480","title":"Retail Show Australia 2026 - Schneider Electric","status":"onlocation","venue":"Melbourne Convention & Exhibition Centre","state":"VIC","rows":[{"id":"fn5156","name":"AV Packdown","category":"packdown","start":"2026-09-24T17:00:00+10:00","end":"2026-09-24T17:00:00+10:00","needed":1,"crew":["Emma McLoughlin"],"vehicles":["VIC Master Van \u00b7 2FG6UP"]}],"address":"1 Convention Centre Pl, South Wharf VIC 3006"},{"id":"sub1504","title":"Gamuda SPW | CCD AV (Parramatta Event)","status":"prepped","venue":"PHIVE, 5 Parramatta Square","state":"NSW","rows":[{"id":"fn5230","name":"AV Packdown","category":"packdown","start":"2026-09-24T17:00:00+10:00","end":"2026-09-24T18:30:00+10:00","needed":1,"crew":["Mick Rocco"],"vehicles":["NSW Transit Van \u00b7 1UE4DI"]}],"address":"5 Parramatta Square, Parramatta NSW 2150"}],"2026-09-25":[],"2026-09-26":[{"id":"sub1549","title":"ANZICS/ACCCN 2026 - Philips Healthcare","status":"confirmed","venue":"Melbourne Convention & Exhibition Centre","state":"VIC","rows":[{"id":"fn5376","name":"AV Setup (Weekend Surcharge)","category":"install","start":"2026-09-26T14:30:00+10:00","end":"2026-09-26T14:30:00+10:00","needed":2,"crew":["Emma McLoughlin","Ezequiel Vico"],"vehicles":["VIC iLoad Van \u00b7 CSU84Y"]}],"address":"1 Convention Centre Pl, South Wharf VIC 3006"}],"2026-09-27":[],"2026-09-28":[{"id":"sub1617","title":"ICHEM26 - Exhibitor Orders","status":"confirmed","venue":"Marvel Stadium","state":"VIC","rows":[{"id":"fn5598","name":"AV Setup","category":"install","start":"2026-09-28T13:30:00+10:00","end":"2026-09-28T14:00:00+10:00","needed":2,"crew":["Emma McLoughlin"],"vehicles":[]},{"id":"fn5600","name":"Exhibition Check Off","category":"other","start":"2026-09-28T14:00:00+10:00","end":"2026-09-28T15:30:00+10:00","needed":1,"crew":["Emma McLoughlin"],"vehicles":[]}],"address":"740 Bourke Street, Docklands VIC 3008"},{"id":"sub1575","title":"Dior Cruise Screening (Sydney)","status":"prepped","venue":"Dior","state":"NSW","rows":[{"id":"fn5469","name":"AV Setup","category":"install","start":"2026-09-28T18:30:00+10:00","end":"2026-09-28T18:30:00+10:00","needed":2,"crew":["Mick Rocco","Rick Sanchez"],"vehicles":["NSW Transit Van \u00b7 1UE4DI"]}],"address":"65 Castlereagh Street, Sydney NSW 2000"}],"2026-09-29":[{"id":"sub1549","title":"ANZICS/ACCCN 2026 - Philips Healthcare","status":"confirmed","venue":"Melbourne Convention & Exhibition Centre","state":"VIC","rows":[{"id":"fn5601","name":"AV Floating Operator","category":"operator","start":"2026-09-29T10:00:00+10:00","end":"2026-09-29T14:00:00+10:00","needed":1,"crew":["Ezequiel Vico"],"vehicles":["VIC Staff Vehicle \u00b7 "]}],"address":"1 Convention Centre Pl, South Wharf VIC 3006"},{"id":"sub1507","title":"FSRACA 2026 - Steris","status":"pending","venue":"Gold Coast Exhibition & Convention Centre","state":"QLD","rows":[{"id":"fn5240","name":"AV Setup","category":"install","start":"2026-09-29T13:00:00+10:00","end":"2026-09-29T13:00:00+10:00","needed":2,"crew":[],"vehicles":[]}],"address":"2684-2690 Gold Coast Highway, Broadbeach QLD 4218"},{"id":"sub1616","title":"Chartwells - AV Order","status":"confirmed","venue":"Park Hyatt Melbourne","state":"VIC","rows":[{"id":"fn5595","name":"AV Setup","category":"install","start":"2026-09-29T13:00:00+10:00","end":"2026-09-29T13:00:00+10:00","needed":2,"crew":["Emma McLoughlin"],"vehicles":[]}],"address":"1 Parlimanent Square, East Melbourne VIC 3002"}],"2026-09-30":[{"id":"sub1626","title":"LEISFM26 - Exhibitor Orders","status":"confirmed","venue":"Sandown Racecourse","state":"VIC","rows":[{"id":"fn5623","name":"AV Setup","category":"install","start":"2026-09-30T09:00:00+10:00","end":"2026-09-30T09:00:00+10:00","needed":1,"crew":["Emma McLoughlin"],"vehicles":[]}],"address":"591-659 Princes Hwy, Springvale VIC 3171"},{"id":"sub1552","title":"Caravan Camping Leisurefest (Sandown)","status":"confirmed","venue":"Sandown Racecourse","state":"VIC","rows":[{"id":"fn5384","name":"AV Setup","category":"install","start":"2026-09-30T10:00:00+10:00","end":"2026-09-30T16:00:00+10:00","needed":3,"crew":["Emma McLoughlin"],"vehicles":[]}],"address":"591-659 Princes Hwy, Springvale VIC 3171"},{"id":"sub1549","title":"ANZICS/ACCCN 2026 - Philips Healthcare","status":"confirmed","venue":"Melbourne Convention & Exhibition Centre","state":"VIC","rows":[{"id":"fn5377","name":"AV Packdown","category":"packdown","start":"2026-09-30T15:00:00+10:00","end":"2026-09-30T15:00:00+10:00","needed":2,"crew":["Emma McLoughlin","Ezequiel Vico"],"vehicles":["VIC iLoad Van \u00b7 CSU84Y"]}],"address":"1 Convention Centre Pl, South Wharf VIC 3006"},{"id":"sub1617","title":"ICHEM26 - Exhibitor Orders","status":"confirmed","venue":"Marvel Stadium","state":"VIC","rows":[{"id":"fn5597","name":"AV Packdown","category":"packdown","start":"2026-09-30T16:00:00+10:00","end":"2026-09-30T16:00:00+10:00","needed":2,"crew":["Emma McLoughlin"],"vehicles":[]}],"address":"740 Bourke Street, Docklands VIC 3008"}],"2026-10-01":[{"id":"sub1552","title":"Caravan Camping Leisurefest (Sandown)","status":"confirmed","venue":"Sandown Racecourse","state":"VIC","rows":[{"id":"fn5387","name":"AV Show Engineer","category":"other","start":"2026-10-01T09:00:00+10:00","end":"2026-10-01T15:00:00+10:00","needed":1,"crew":["Emma McLoughlin"],"vehicles":[]}],"address":"591-659 Princes Hwy, Springvale VIC 3171"},{"id":"sub1575","title":"Dior Cruise Screening (Sydney)","status":"prepped","venue":"Dior","state":"NSW","rows":[{"id":"fn5472","name":"AV Show Engineer","category":"other","start":"2026-10-01T09:00:00+10:00","end":"2026-10-01T12:00:00+10:00","needed":1,"crew":["Mick Rocco"],"vehicles":["NSW Staff Vehicle \u00b7 "]}],"address":"65 Castlereagh Street, Sydney NSW 2000"},{"id":"sub1609","title":"MASLM26 - Exhibitor Orders","status":"confirmed","venue":"Marvel Stadium","state":"VIC","rows":[{"id":"fn5583","name":"AV Setup","category":"install","start":"2026-10-01T09:00:00+10:00","end":"2026-10-01T09:00:00+10:00","needed":1,"crew":[],"vehicles":["VIC iLoad Van \u00b7 CSU84Y"]}],"address":"740 Bourke Street, Docklands VIC 3008"}],"2026-10-02":[{"id":"sub1552","title":"Caravan Camping Leisurefest (Sandown)","status":"confirmed","venue":"Sandown Racecourse","state":"VIC","rows":[{"id":"fn5388","name":"AV Show Engineer","category":"other","start":"2026-10-02T09:30:00+10:00","end":"2026-10-02T15:00:00+10:00","needed":1,"crew":["Emma McLoughlin"],"vehicles":[]}],"address":"591-659 Princes Hwy, Springvale VIC 3171"},{"id":"sub1507","title":"FSRACA 2026 - Steris","status":"pending","venue":"Gold Coast Exhibition & Convention Centre","state":"QLD","rows":[{"id":"fn5241","name":"AV Packdown","category":"packdown","start":"2026-10-02T16:00:00+10:00","end":"2026-10-02T16:00:00+10:00","needed":2,"crew":[],"vehicles":[]}],"address":"2684-2690 Gold Coast Highway, Broadbeach QLD 4218"},{"id":"sub1616","title":"Chartwells - AV Order","status":"confirmed","venue":"Park Hyatt Melbourne","state":"VIC","rows":[{"id":"fn5594","name":"AV Packdown","category":"packdown","start":"2026-10-02T16:00:00+10:00","end":"2026-10-02T16:00:00+10:00","needed":2,"crew":["Emma McLoughlin"],"vehicles":[]}],"address":"1 Parlimanent Square, East Melbourne VIC 3002"}],"2026-10-03":[{"id":"sub1552","title":"Caravan Camping Leisurefest (Sandown)","status":"confirmed","venue":"Sandown Racecourse","state":"VIC","rows":[{"id":"fn5389","name":"AV Show Engineer","category":"other","start":"2026-10-03T08:30:00+10:00","end":"2026-10-03T15:00:00+10:00","needed":1,"crew":["Emma McLoughlin"],"vehicles":[]}],"address":"591-659 Princes Hwy, Springvale VIC 3171"}],"2026-10-04":[{"id":"sub1552","title":"Caravan Camping Leisurefest (Sandown)","status":"confirmed","venue":"Sandown Racecourse","state":"VIC","rows":[{"id":"fn5390","name":"AV Show Engineer","category":"other","start":"2026-10-04T08:30:00+11:00","end":"2026-10-04T15:00:00+11:00","needed":1,"crew":["Emma McLoughlin"],"vehicles":[]},{"id":"fn5385","name":"AV Packdown","category":"packdown","start":"2026-10-04T15:00:00+11:00","end":"2026-10-04T18:00:00+11:00","needed":3,"crew":["Emma McLoughlin"],"vehicles":[]}],"address":"591-659 Princes Hwy, Springvale VIC 3171"},{"id":"sub1609","title":"MASLM26 - Exhibitor Orders","status":"confirmed","venue":"Marvel Stadium","state":"VIC","rows":[{"id":"fn5582","name":"AV Packdown","category":"packdown","start":"2026-10-04T12:00:00+11:00","end":"2026-10-04T12:00:00+11:00","needed":1,"crew":[],"vehicles":["VIC iLoad Van \u00b7 CSU84Y"]}],"address":"740 Bourke Street, Docklands VIC 3008"},{"id":"sub1626","title":"LEISFM26 - Exhibitor Orders","status":"confirmed","venue":"Sandown Racecourse","state":"VIC","rows":[{"id":"fn5622","name":"AV Packdown","category":"packdown","start":"2026-10-04T16:00:00+11:00","end":"2026-10-04T16:00:00+11:00","needed":1,"crew":["Emma McLoughlin"],"vehicles":[]}],"address":"591-659 Princes Hwy, Springvale VIC 3171"}],"2026-10-05":[]}}}</script>
@@ -840,38 +636,26 @@
   var els = {
     dateLine: document.getElementById('date-line'),
     groups: document.getElementById('groups'),
-    footerCount: document.getElementById('footer-count'),
     dayTabs: document.getElementById('day-tabs'),
-    stateTabs: document.getElementById('state-tabs'),
     snapshotLabel: document.getElementById('snapshot-label'),
     reloadBtn: document.getElementById('reload-btn'),
-    addItemBtn: document.getElementById('add-item-btn'),
-    lockBtn: document.getElementById('lock-btn'),
-    formSlot: document.getElementById('form-slot'),
-    saveFlag: document.getElementById('save-flag'),
     reminderSlot: document.getElementById('reminder-slot')
   };
 
   var API_BASE = '/api/items';
   var NOTES_API = '/api/notes';
   var REMINDER_API = '/api/reminder';
-  var PASSCODE = '4242';
-  var PASSCODE_STORAGE_KEY = 'ds-passcode';
-  var UNLOCKED = false;
   var STATE_STORAGE_KEY = 'ds-state';
   var selectedDayOffset = 0;
-  var selectedState = 'ALL';
+  var selectedState = 'NSW'; // locked contractor page — no switcher
   var rawDayCache = {0:[], 1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[],
                 9:[], 10:[], 11:[], 12:[], 13:[]};
   var dayCache = {0:[], 1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[],
                 9:[], 10:[], 11:[], 12:[], 13:[]};
   var lastUpdated = null;
   var manualItems = [];
-  var editingItemId = null;
   var liveNotes = {};
-  var noteEditingId = null;
   var reminderText = '';
-  var reminderEditing = false;
   var pollTimer = null;
 
   /* ------------------------- helpers: dates ------------------------- */
@@ -936,14 +720,6 @@
       year:'numeric', hour:'2-digit', minute:'2-digit', hour12:false
     });
     return fmt.format(date) + ' AEST/AEDT';
-  }
-
-  function fmtFullDateFromISO(iso){
-    var bits = (iso || '').split('-');
-    if(bits.length !== 3) return '';
-    var d = new Date(Date.UTC(+bits[0], +bits[1]-1, +bits[2], 12, 0, 0));
-    var fmt = new Intl.DateTimeFormat('en-AU', {weekday:'long', day:'numeric', month:'long'});
-    return fmt.format(d);
   }
 
   function fmtTime(iso){
@@ -1055,21 +831,6 @@
     dayCache = next;
   }
 
-  function updateStateTabs(){
-    els.stateTabs.querySelectorAll('.state-tab').forEach(function(btn){
-      var isActive = btn.getAttribute('data-state') === selectedState;
-      btn.classList.toggle('active', isActive);
-      btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
-    });
-  }
-
-  function loadStateFromStorage(){
-    try{
-      var saved = localStorage.getItem(STATE_STORAGE_KEY);
-      if(saved === 'ALL' || saved === 'NSW' || saved === 'VIC' || saved === 'QLD') selectedState = saved;
-    }catch(e){}
-  }
-
   function renderSnapshotLabel(){
     els.snapshotLabel.textContent = lastUpdated
       ? ('Snapshot generated ' + fmtSnapshotDateTime(lastUpdated))
@@ -1092,98 +853,18 @@
     });
   }
 
-  /* ------------------------- reminder banner ------------------------- */
-
-  function reminderHtml(){
-    if(reminderEditing){
-      return (
-        '<div class="reminder reminder-edit">' +
-          '<span class="reminder-ico">&#128204;</span>' +
-          '<div class="reminder-edit-body">' +
-            '<textarea id="reminder-ta" maxlength="2000" rows="3" placeholder="e.g. Forklift #2 is due for its annual safety inspection this Friday">' + escapeHtml(reminderText) + '</textarea>' +
-            '<div class="reminder-edit-actions">' +
-              '<button class="btn-secondary" type="button" id="reminder-cancel">Cancel</button>' +
-              '<button class="btn-primary" type="button" id="reminder-save">Save reminder</button>' +
-            '</div>' +
-          '</div>' +
-        '</div>'
-      );
-    }
-    if(reminderText){
-      return (
-        '<div class="reminder">' +
-          '<span class="reminder-ico">&#128204;</span>' +
-          '<div class="reminder-txt"><b>Reminder</b>' + escapeHtml(reminderText) + '</div>' +
-          (UNLOCKED
-            ? '<div class="reminder-actions">' +
-                '<button class="icon-btn" type="button" id="reminder-edit-btn" title="Edit reminder" aria-label="Edit reminder">&#9998;</button>' +
-                '<button class="icon-btn" type="button" id="reminder-clear-btn" title="Clear reminder" aria-label="Clear reminder">&times;</button>' +
-              '</div>'
-            : '') +
-        '</div>'
-      );
-    }
-    if(UNLOCKED){
-      return '<button class="reminder-add-btn" type="button" id="reminder-add-btn">+ Add reminder</button>';
-    }
-    return '';
-  }
+  /* ------------------------- reminder banner (read-only) ------------------------- */
 
   function renderReminder(){
-    els.reminderSlot.innerHTML = reminderHtml();
-    wireReminderActions();
-  }
-
-  function wireReminderActions(){
-    var addBtn = document.getElementById('reminder-add-btn');
-    if(addBtn) addBtn.addEventListener('click', function(){
-      if(!UNLOCKED){ promptUnlock(); return; }
-      reminderEditing = true;
-      renderReminder();
-    });
-    var editBtn = document.getElementById('reminder-edit-btn');
-    if(editBtn) editBtn.addEventListener('click', function(){ reminderEditing = true; renderReminder(); });
-    var clearBtn = document.getElementById('reminder-clear-btn');
-    if(clearBtn) clearBtn.addEventListener('click', function(){
-      if(!window.confirm('Clear the reminder banner for everyone with this link?')) return;
-      putReminder('');
-    });
-    var cancelBtn = document.getElementById('reminder-cancel');
-    if(cancelBtn) cancelBtn.addEventListener('click', function(){ reminderEditing = false; renderReminder(); });
-    var saveBtn = document.getElementById('reminder-save');
-    if(saveBtn) saveBtn.addEventListener('click', function(){
-      var ta = document.getElementById('reminder-ta');
-      putReminder(ta ? ta.value.trim() : '');
-    });
-  }
-
-  function putReminder(text){
-    var saveBtn = document.getElementById('reminder-save');
-    if(saveBtn) saveBtn.disabled = true;
-    return fetch(REMINDER_API, {
-      method: 'PUT',
-      headers: {'Content-Type': 'application/json', 'x-day-sheet-passcode': PASSCODE},
-      body: JSON.stringify({text: text})
-    })
-      .then(function(res){
-        if(res.status === 401){
-          lockEditing();
-          flagSave('Editing was locked — click Unlock editing and try again.', true);
-          throw null;
-        }
-        if(!res.ok) throw new Error('save failed');
-        return res.json();
-      })
-      .then(function(data){
-        reminderText = (data && data.text) || '';
-        reminderEditing = false;
-        renderReminder();
-        flagSave(reminderText ? 'Reminder saved.' : 'Reminder cleared.', false);
-      })
-      .catch(function(err){
-        if(err) flagSave('Couldn’t save reminder — check your connection and try again.', true);
-        if(saveBtn) saveBtn.disabled = false;
-      });
+    if(!reminderText){
+      els.reminderSlot.innerHTML = '';
+      return;
+    }
+    els.reminderSlot.innerHTML =
+      '<div class="reminder">' +
+        '<span class="reminder-ico">&#128204;</span>' +
+        '<div class="reminder-txt"><b>Reminder</b>' + escapeHtml(reminderText) + '</div>' +
+      '</div>';
   }
 
   function fetchReminder(){
@@ -1196,7 +877,7 @@
         reminderText = (data && data.text) || '';
         renderReminder();
       })
-      .catch(function(){ /* keep last known */ });
+      .catch(function(){ /* silent — passive display link */ });
   }
 
   /* ------------------------- rendering: unified timeline ------------------------- */
@@ -1224,43 +905,16 @@
 
     entries.sort(function(a,b){ return a.sortKey - b.sortKey; });
 
-    els.footerCount.textContent = (jobs.length || itemsForDay.length)
-      ? (jobs.length + ' job' + (jobs.length === 1 ? '' : 's') + (itemsForDay.length ? ', ' + itemsForDay.length + ' manual' : ''))
-      : '';
-
     if(!entries.length){
       els.groups.innerHTML =
         '<div class="empty-state">' +
           '<div class="big">Nothing scheduled</div>' +
           '<div>No jobs or tasks for ' + escapeHtml(fmtWeekdayTitleFor(currentDate)) + '.</div>' +
         '</div>';
-      wireRowActions();
       return;
     }
 
     els.groups.innerHTML = entries.map(function(e){ return e.html; }).join('');
-    wireRowActions();
-  }
-
-  function wireRowActions(){
-    els.groups.querySelectorAll('[data-edit]').forEach(function(btn){
-      btn.addEventListener('click', function(){ openForm(btn.getAttribute('data-edit')); });
-    });
-    els.groups.querySelectorAll('[data-del]').forEach(function(btn){
-      btn.addEventListener('click', function(){ deleteItem(btn.getAttribute('data-del')); });
-    });
-    els.groups.querySelectorAll('[data-note-open]').forEach(function(btn){
-      btn.addEventListener('click', function(){
-        noteEditingId = btn.getAttribute('data-note-open');
-        renderCurrentDay();
-      });
-    });
-    els.groups.querySelectorAll('[data-note-cancel]').forEach(function(btn){
-      btn.addEventListener('click', function(){ noteEditingId = null; renderCurrentDay(); });
-    });
-    els.groups.querySelectorAll('[data-note-save]').forEach(function(btn){
-      btn.addEventListener('click', function(){ saveNote(btn.getAttribute('data-note-save')); });
-    });
   }
 
   function jobCardHtml(job){
@@ -1293,34 +947,6 @@
     );
   }
 
-  function noteHtmlFor(rowId){
-    var id = String(rowId);
-    var text = (liveNotes[id] && liveNotes[id].text) || '';
-    if(noteEditingId === id){
-      return (
-        '<div class="note-edit">' +
-          '<textarea id="note-ta-' + id + '" maxlength="4000" rows="4" placeholder="Add a note for this task">' + escapeHtml(text) + '</textarea>' +
-          '<div class="note-edit-actions">' +
-            '<button class="btn-secondary" type="button" data-note-cancel="' + id + '">Cancel</button>' +
-            '<button class="btn-primary" type="button" data-note-save="' + id + '">Save note</button>' +
-          '</div>' +
-        '</div>'
-      );
-    }
-    if(text){
-      return (
-        '<div class="row-note">' +
-          '<span class="row-note-text">' + escapeHtml(text) + '</span>' +
-          (UNLOCKED ? '<button class="note-link" type="button" data-note-open="' + id + '">Edit</button>' : '') +
-        '</div>'
-      );
-    }
-    if(UNLOCKED){
-      return '<button class="note-link add" type="button" data-note-open="' + id + '">+ Add note</button>';
-    }
-    return '';
-  }
-
   function renderRow(row){
     var start = fmtTime(row.start);
     var end = fmtTime(row.end);
@@ -1342,6 +968,9 @@
         : '<span class="vehicle-missing">Not assigned</span>') +
       '</div>';
 
+    var note = liveNotes[String(row.id)] || '';
+    var noteHtml = note ? '<div class="row-note">' + escapeHtml(note) + '</div>' : '';
+
     return (
       '<div class="row">' +
         '<div class="row-time">' + (start || '—') + (end && end !== start ? '<span class="end">' + end + '</span>' : '') + '</div>' +
@@ -1350,7 +979,7 @@
           '<div class="fn-name">' + escapeHtml(row.name) + '</div>' +
           '<div class="crew-line">' + crewHtml + '</div>' +
           vehicleHtml +
-          noteHtmlFor(row.id) +
+          noteHtml +
         '</div>' +
       '</div>'
     );
@@ -1365,33 +994,16 @@
           '<div class="row-time">' + (start || '—') + (end && end !== start ? '<span class="end">' + escapeHtml(end) + '</span>' : '') + '</div>' +
           '<div><span class="cat-chip cat-' + (item.category || 'other') + '">' + CAT_LABEL[item.category || 'other'] + '</span></div>' +
           '<div class="row-body">' +
-            '<div class="row-body-head">' +
-              '<div class="fn-name">' + escapeHtml(item.title || 'Untitled') + '</div>' +
-              (UNLOCKED
-                ? '<div class="manual-actions">' +
-                    '<button class="icon-btn" type="button" data-edit="' + item.id + '" title="Edit" aria-label="Edit item">&#9998;</button>' +
-                    '<button class="icon-btn" type="button" data-del="' + item.id + '" title="Delete" aria-label="Delete item">&times;</button>' +
-                  '</div>'
-                : '') +
-            '</div>' +
+            '<div class="fn-name">' + escapeHtml(item.title || 'Untitled') + '</div>' +
             (item.crew ? '<div class="crew-line"><span class="crew-chip">' + escapeHtml(item.crew) + '</span></div>' : '') +
-            (item.note ? '<div class="row-note"><span class="row-note-text">' + escapeHtml(item.note) + '</span></div>' : '') +
+            (item.note ? '<div class="row-note">' + escapeHtml(item.note) + '</div>' : '') +
           '</div>' +
         '</div>' +
       '</div>'
     );
   }
 
-  /* ------------------------- manual items: shared via /api/items ------------------------- */
-
-  function flagSave(msg, isErr){
-    els.saveFlag.textContent = msg;
-    els.saveFlag.classList.toggle('err', !!isErr);
-    if(msg){
-      window.clearTimeout(flagSave._t);
-      flagSave._t = window.setTimeout(function(){ els.saveFlag.textContent = ''; }, 4000);
-    }
-  }
+  /* ------------------------- manual items + notes: read-only ------------------------- */
 
   function fetchItems(){
     return fetch(API_BASE)
@@ -1404,7 +1016,7 @@
         renderCurrentDay();
       })
       .catch(function(){
-        flagSave('Couldn’t load shared items — showing last known copy.', true);
+        /* silent — this is a passive display link; a stale/missing manual list isn't worth surfacing */
       });
   }
 
@@ -1415,235 +1027,27 @@
         return res.json();
       })
       .then(function(data){
-        liveNotes = (data && data.notes) || {};
+        var raw = (data && data.notes) || {};
+        var flat = {};
+        Object.keys(raw).forEach(function(k){ flat[k] = raw[k] && raw[k].text; });
+        liveNotes = flat;
         renderCurrentDay();
       })
-      .catch(function(){ /* keep last known */ });
-  }
-
-  function saveNote(id){
-    var ta = document.getElementById('note-ta-' + id);
-    var text = ta ? ta.value.trim() : '';
-    var btn = document.querySelector('[data-note-save="' + id + '"]');
-    if(btn) btn.disabled = true;
-
-    fetch(NOTES_API, {
-      method: 'PUT',
-      headers: {'Content-Type': 'application/json', 'x-day-sheet-passcode': PASSCODE},
-      body: JSON.stringify({id: id, text: text})
-    })
-      .then(function(res){
-        if(res.status === 401){
-          lockEditing();
-          flagSave('Editing was locked — click Unlock editing and try again.', true);
-          throw null;
-        }
-        if(!res.ok) throw new Error('save failed');
-        return res.json();
-      })
-      .then(function(data){
-        liveNotes = (data && data.notes) || liveNotes;
-        noteEditingId = null;
-        renderCurrentDay();
-        flagSave(text ? 'Note saved.' : 'Note cleared.', false);
-      })
-      .catch(function(err){
-        if(err) flagSave('Couldn’t save note — check your connection and try again.', true);
-        if(btn) btn.disabled = false;
-      });
-  }
-
-  /* ------------------------- passcode lock ------------------------- */
-
-  function loadUnlockState(){
-    try{
-      UNLOCKED = window.localStorage.getItem(PASSCODE_STORAGE_KEY) === PASSCODE;
-    }catch(e){
-      UNLOCKED = false;
-    }
-  }
-
-  function applyLockUI(){
-    els.addItemBtn.hidden = !UNLOCKED;
-    els.lockBtn.textContent = UNLOCKED ? 'Lock editing' : 'Unlock editing';
-  }
-
-  function promptUnlock(){
-    var entered = window.prompt('Enter the passcode to edit this day sheet:');
-    if(entered === null) return;
-    if(entered.trim() === PASSCODE){
-      try{ window.localStorage.setItem(PASSCODE_STORAGE_KEY, PASSCODE); }catch(e){}
-      UNLOCKED = true;
-      applyLockUI();
-      closeForm();
-      renderCurrentDay();
-      renderReminder();
-      flagSave('Editing unlocked on this device.', false);
-    } else {
-      flagSave('Wrong passcode.', true);
-    }
-  }
-
-  function lockEditing(){
-    try{ window.localStorage.removeItem(PASSCODE_STORAGE_KEY); }catch(e){}
-    UNLOCKED = false;
-    closeForm();
-    noteEditingId = null;
-    reminderEditing = false;
-    applyLockUI();
-    renderCurrentDay();
-    renderReminder();
-  }
-
-  function openForm(itemId){
-    if(!UNLOCKED){ promptUnlock(); return; }
-    editingItemId = itemId || null;
-    var item = editingItemId ? manualItems.find(function(i){ return i.id === editingItemId; }) : null;
-    var itemDate = (item && item.date) || isoDateForOffset(selectedDayOffset);
-    item = item || {start:'', end:'', title:'', category:'other', crew:'', note:''};
-
-    els.formSlot.innerHTML =
-      '<div class="form-card">' +
-        '<div class="form-for">For <strong>' + escapeHtml(fmtFullDateFromISO(itemDate)) + '</strong></div>' +
-        '<div class="form-grid">' +
-          '<div class="field"><label for="f-start">Start time</label><input id="f-start" type="time" value="' + escapeHtml(item.start) + '"></div>' +
-          '<div class="field"><label for="f-end">Finish time</label><input id="f-end" type="time" value="' + escapeHtml(item.end) + '"></div>' +
-          '<div class="field full"><label for="f-cat">Category</label>' +
-            '<select id="f-cat">' +
-              Object.keys(CAT_LABEL).map(function(k){
-                return '<option value="' + k + '"' + (k === item.category ? ' selected' : '') + '>' + CAT_LABEL[k] + '</option>';
-              }).join('') +
-            '</select>' +
-          '</div>' +
-          '<div class="field full"><label for="f-title">What</label><input id="f-title" type="text" placeholder="e.g. Borrowed forklift return — Acme Hire" value="' + escapeHtml(item.title) + '"></div>' +
-          '<div class="field full"><label for="f-crew">Who</label><input id="f-crew" type="text" placeholder="e.g. Mick, Rick" value="' + escapeHtml(item.crew) + '"></div>' +
-          '<div class="field full"><label for="f-note">Note</label><textarea id="f-note" maxlength="4000" placeholder="Any detail worth flagging">' + escapeHtml(item.note) + '</textarea></div>' +
-        '</div>' +
-        '<div class="form-actions">' +
-          '<button class="btn-secondary" type="button" id="f-cancel">Cancel</button>' +
-          '<button class="btn-primary" type="button" id="f-save">' + (editingItemId ? 'Save changes' : 'Add item') + '</button>' +
-        '</div>' +
-      '</div>';
-
-    document.getElementById('f-cancel').addEventListener('click', closeForm);
-    document.getElementById('f-save').addEventListener('click', function(){ saveForm(itemDate); });
-    document.getElementById('f-title').focus();
-  }
-
-  function closeForm(){
-    editingItemId = null;
-    els.formSlot.innerHTML = '';
-  }
-
-  function saveForm(itemDate){
-    var start = document.getElementById('f-start').value;
-    var end = document.getElementById('f-end').value;
-    var category = document.getElementById('f-cat').value;
-    var title = document.getElementById('f-title').value.trim();
-    var crew = document.getElementById('f-crew').value.trim();
-    var note = document.getElementById('f-note').value.trim();
-    if(!title){
-      document.getElementById('f-title').focus();
-      return;
-    }
-
-    var payload = {date: itemDate, start: start, end: end, category: category, title: title, crew: crew, note: note};
-    var isEdit = !!editingItemId;
-    if(isEdit) payload.id = editingItemId;
-
-    var saveBtn = document.getElementById('f-save');
-    if(saveBtn){ saveBtn.disabled = true; }
-
-    fetch(API_BASE, {
-      method: isEdit ? 'PUT' : 'POST',
-      headers: {'Content-Type': 'application/json', 'x-day-sheet-passcode': PASSCODE},
-      body: JSON.stringify(payload)
-    })
-      .then(function(res){
-        if(res.status === 401){
-          lockEditing();
-          flagSave('Editing was locked — click Unlock editing and try again.', true);
-          throw null;
-        }
-        if(!res.ok) throw new Error('save failed');
-        return res.json();
-      })
-      .then(function(data){
-        manualItems = (data && data.items) || manualItems;
-        closeForm();
-        renderCurrentDay();
-        flagSave(isEdit ? 'Item updated.' : 'Item added.', false);
-      })
-      .catch(function(err){
-        if(err) flagSave('Couldn’t save — check your connection and try again.', true);
-        if(saveBtn){ saveBtn.disabled = false; }
-      });
-  }
-
-  function deleteItem(id){
-    if(!id) return;
-    if(!UNLOCKED){ promptUnlock(); return; }
-    if(!window.confirm('Delete this item for everyone with this link?')) return;
-
-    fetch(API_BASE + '?id=' + encodeURIComponent(id), {
-      method: 'DELETE',
-      headers: {'x-day-sheet-passcode': PASSCODE}
-    })
-      .then(function(res){
-        if(res.status === 401){
-          lockEditing();
-          flagSave('Editing was locked — click Unlock editing and try again.', true);
-          throw null;
-        }
-        if(!res.ok) throw new Error('delete failed');
-        return res.json();
-      })
-      .then(function(data){
-        manualItems = (data && data.items) || manualItems.filter(function(i){ return i.id !== id; });
-        renderCurrentDay();
-        flagSave('Item deleted.', false);
-      })
-      .catch(function(err){
-        if(err) flagSave('Couldn’t delete — check your connection and try again.', true);
-      });
+      .catch(function(){ /* silent */ });
   }
 
   /* ------------------------- wiring ------------------------- */
 
   els.reloadBtn.addEventListener('click', function(){ location.reload(); });
 
-  els.addItemBtn.addEventListener('click', function(){ openForm(null); });
-
-  els.lockBtn.addEventListener('click', function(){
-    if(UNLOCKED) lockEditing(); else promptUnlock();
-  });
-
   els.dayTabs.querySelectorAll('.day-tab').forEach(function(btn){
     btn.addEventListener('click', function(){
       selectedDayOffset = parseInt(btn.getAttribute('data-offset'), 10);
-      closeForm();
-      noteEditingId = null;
-      renderCurrentDay();
-    });
-  });
-
-  els.stateTabs.querySelectorAll('.state-tab').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      selectedState = btn.getAttribute('data-state');
-      try{ localStorage.setItem(STATE_STORAGE_KEY, selectedState); }catch(e){}
-      applyStateFilter();
-      updateStateTabs();
-      closeForm();
-      noteEditingId = null;
       renderCurrentDay();
     });
   });
 
   function init(){
-    loadUnlockState();
-    applyLockUI();
-    loadStateFromStorage();
-    updateStateTabs();
     updateDayTabs();
     loadScheduleFromState();
     renderCurrentDay();

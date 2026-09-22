@@ -37,6 +37,12 @@
     --cat-operator-soft:#FBE2E2;
     --cat-other:#6B7280;
     --cat-other-soft:#EBEDF0;
+    --state-nsw:#2454E8;
+    --state-nsw-soft:#E4EBFD;
+    --state-vic:#0E9F6E;
+    --state-vic-soft:#DCF7EC;
+    --state-qld:#DC2626;
+    --state-qld-soft:#FBE2E2;
     --vehicle:#1E3A5F;
     --vehicle-soft:#E1E9F1;
     --vehicle-ink:#1E3A5F;
@@ -87,6 +93,12 @@
       --cat-operator-soft:#3B1A1A;
       --cat-other:#9CA3AF;
       --cat-other-soft:#262B33;
+      --state-nsw:#6B93F7;
+      --state-nsw-soft:#1E2A4A;
+      --state-vic:#3EDCA0;
+      --state-vic-soft:#123528;
+      --state-qld:#F87171;
+      --state-qld-soft:#3B1A1A;
       --vehicle:#9CC0F0;
       --vehicle-soft:#1E2A3D;
       --vehicle-ink:#BFD9F5;
@@ -135,6 +147,12 @@
     --cat-operator-soft:#3B1A1A;
     --cat-other:#9CA3AF;
     --cat-other-soft:#262B33;
+    --state-nsw:#6B93F7;
+    --state-nsw-soft:#1E2A4A;
+    --state-vic:#3EDCA0;
+    --state-vic-soft:#123528;
+    --state-qld:#F87171;
+    --state-qld-soft:#3B1A1A;
     --vehicle:#9CC0F0;
     --vehicle-soft:#1E2A3D;
     --vehicle-ink:#BFD9F5;
@@ -193,6 +211,29 @@
   .switch-btn.active{background:var(--surface); color:var(--accent); box-shadow:var(--shadow);}
   .switch-btn:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
 
+  /* ---- State switcher (ALL / NSW / VIC / QLD) ---- */
+  .state-switcher{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;}
+  .state-switch-btn{
+    font-family:inherit; font-size:13.5px; font-weight:700; letter-spacing:.02em;
+    border-radius:9px; padding:9px 18px; cursor:pointer;
+    border:1px solid var(--border-strong); background:var(--surface); color:var(--ink-dim);
+  }
+  .state-switch-btn:hover{color:var(--ink);}
+  .state-switch-btn.active{color:#fff; border-color:transparent;}
+  .state-switch-all{border-color:var(--border-strong); color:var(--ink-dim);}
+  .state-switch-all.active{background:var(--ink-dim); color:var(--surface);}
+  .state-switch-nsw{border-color:var(--state-nsw); background:var(--state-nsw-soft); color:var(--state-nsw);}
+  .state-switch-nsw.active{background:var(--state-nsw);}
+  .state-switch-vic{border-color:var(--state-vic); background:var(--state-vic-soft); color:var(--state-vic);}
+  .state-switch-vic.active{background:var(--state-vic);}
+  .state-switch-qld{border-color:var(--state-qld); background:var(--state-qld-soft); color:var(--state-qld);}
+  .state-switch-qld.active{background:var(--state-qld);}
+
+  .state-badge{font-size:10px; font-weight:800; letter-spacing:.04em; padding:3px 7px; border-radius:6px; white-space:nowrap;}
+  .state-badge-nsw{background:var(--state-nsw-soft); color:var(--state-nsw);}
+  .state-badge-vic{background:var(--state-vic-soft); color:var(--state-vic);}
+  .state-badge-qld{background:var(--state-qld-soft); color:var(--state-qld);}
+
   /* ---- Legend ---- */
   .legend{display:flex; flex-wrap:wrap; gap:8px 14px; padding:0 0 18px; font-size:12px; color:var(--ink-dim);}
   .legend-item{display:inline-flex; align-items:center; gap:6px;}
@@ -204,6 +245,7 @@
   .job{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden;}
   .job-head{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:14px 18px; border-bottom:1px solid var(--border); flex-wrap:wrap;}
   .job-title-block{min-width:0;}
+  .job-badges{display:flex; align-items:center; gap:6px; flex-wrap:wrap;}
   .job-title{font-weight:700; font-size:17px; letter-spacing:.01em; margin:0; overflow-wrap:anywhere;}
   .job-sub{font-size:12.5px; color:var(--ink-dim); margin-top:2px;}
   .job-address{font-size:11.5px; color:var(--ink-faint); margin-top:1px;}
@@ -296,12 +338,19 @@
 
   <header class="masthead">
     <div>
-      <div class="eyebrow">Event Equipment Group &middot; NSW Warehouse Ops &middot; Wall Board &middot; Read-only</div>
+      <div class="eyebrow">Event Equipment Group &middot; Warehouse Ops &middot; Wall Board &middot; Read-only</div>
       <h1>Daily Schedule &mdash; Wall Board</h1>
       <div class="date-line" id="date-line">&nbsp;</div>
     </div>
     <span class="snapshot-badge" id="snapshot-label">snapshot: &mdash;</span>
   </header>
+
+  <div class="state-switcher" id="state-switcher" role="tablist" aria-label="Select state">
+    <button class="state-switch-btn state-switch-all" type="button" data-state="ALL" role="tab">All</button>
+    <button class="state-switch-btn state-switch-nsw" type="button" data-state="NSW" role="tab">NSW</button>
+    <button class="state-switch-btn state-switch-vic" type="button" data-state="VIC" role="tab">VIC</button>
+    <button class="state-switch-btn state-switch-qld" type="button" data-state="QLD" role="tab">QLD</button>
+  </div>
 
   <div class="switcher" role="tablist" aria-label="Day range">
     <button class="switch-btn" data-view="1" role="tab" id="tab-1">1 Day</button>
@@ -331,7 +380,7 @@
   </footer>
 </div>
 
-<script id="app-state" type="application/json">{"items":[],"notes":{},"schedule":{"updatedAt":"2026-09-22T07:20:00Z","days":{"2026-09-22":[{"id":"sub1504","title":"Gamuda SPW | CCD AV (Parramatta Event)","status":"prepped","venue":"PHIVE, 5 Parramatta Square","rows":[{"id":"fn5229","name":"AV Setup","category":"install","start":"2026-09-22T08:00:00+10:00","end":"2026-09-22T09:30:00+10:00","needed":1,"crew":["Mick Rocco","Yvette Paci"],"vehicles":["NSW Transit Van \u00b7 1UE4DI"]}],"address":"5 Parramatta Square, Parramatta NSW 2150"}],"2026-09-23":[{"id":"sub1611","title":"Transfer NSW > VIC (CISCO - Part1)","status":"confirmed","venue":"","rows":[{"id":"fn5585","name":"Interstate Truck Transfer","category":"other","start":"2026-09-23T07:00:00+10:00","end":"2026-09-23T17:00:00+10:00","needed":1,"crew":[],"vehicles":[]}]},{"id":"sub1473","title":"Year 12 Graduation Mass & Ceremony 2026","status":"onlocation","venue":"Gilroy Catholic College","rows":[{"id":"fn5126","name":"AV Show Engineer","category":"other","start":"2026-09-23T09:00:00+10:00","end":"2026-09-23T12:00:00+10:00","needed":1,"crew":["Mick Rocco"],"vehicles":["NSW Staff Vehicle \u00b7 "]},{"id":"fn5125","name":"AV Packdown","category":"packdown","start":"2026-09-23T13:00:00+10:00","end":"2026-09-23T16:00:00+10:00","needed":2,"crew":["Mick Rocco","Yvette Paci","Luca Floyd"],"vehicles":["NSW Sprinter Van \u00b7 DL55LR"]}],"address":"17-37 Marie Street, Castle Hill NSW 2154"}],"2026-09-24":[{"id":"sub1583","title":"BLOOD 2026 + RANZCO National 2026 (Auckland - New Zealand)","status":"confirmed","venue":"Concept Craft Pty Ltd","rows":[{"id":"fn5498","name":"Delivery","category":"delivery","start":"2026-09-24T08:00:00+10:00","end":"2026-09-24T08:00:00+10:00","needed":1,"crew":["Mick Rocco"],"vehicles":["NSW NNR200 Truck \u00b7 2FD9AT"]}],"address":"24 Egerton Street, Silverwater NSW 2128"},{"id":"sub1504","title":"Gamuda SPW | CCD AV (Parramatta Event)","status":"prepped","venue":"PHIVE, 5 Parramatta Square","rows":[{"id":"fn5230","name":"AV Packdown","category":"packdown","start":"2026-09-24T17:00:00+10:00","end":"2026-09-24T18:30:00+10:00","needed":1,"crew":["Mick Rocco"],"vehicles":["NSW Transit Van \u00b7 1UE4DI"]}],"address":"5 Parramatta Square, Parramatta NSW 2150"}],"2026-09-25":[],"2026-09-26":[],"2026-09-27":[],"2026-09-28":[{"id":"sub1575","title":"Dior Cruise Screening (Sydney)","status":"prepped","venue":"Dior","rows":[{"id":"fn5469","name":"AV Setup","category":"install","start":"2026-09-28T18:30:00+10:00","end":"2026-09-28T18:30:00+10:00","needed":2,"crew":["Mick Rocco","Rick Sanchez"],"vehicles":["NSW Transit Van \u00b7 1UE4DI"]}],"address":"65 Castlereagh Street, Sydney NSW 2000"}],"2026-09-29":[],"2026-09-30":[],"2026-10-01":[{"id":"sub1575","title":"Dior Cruise Screening (Sydney)","status":"prepped","venue":"Dior","rows":[{"id":"fn5472","name":"AV Show Engineer","category":"other","start":"2026-10-01T09:00:00+10:00","end":"2026-10-01T12:00:00+10:00","needed":1,"crew":["Mick Rocco"],"vehicles":["NSW Staff Vehicle \u00b7 "]}],"address":"65 Castlereagh Street, Sydney NSW 2000"}],"2026-10-02":[],"2026-10-03":[],"2026-10-04":[],"2026-10-05":[]}}}</script>
+<script id="app-state" type="application/json">{"items":[],"notes":{},"schedule":{"updatedAt":"2026-09-22T08:10:00Z","days":{"2026-09-22":[{"id":"sub1504","title":"Gamuda SPW | CCD AV (Parramatta Event)","status":"prepped","venue":"PHIVE, 5 Parramatta Square","state":"NSW","rows":[{"id":"fn5229","name":"AV Setup","category":"install","start":"2026-09-22T08:00:00+10:00","end":"2026-09-22T09:30:00+10:00","needed":1,"crew":["Mick Rocco","Yvette Paci"],"vehicles":["NSW Transit Van \u00b7 1UE4DI"]}],"address":"5 Parramatta Square, Parramatta NSW 2150"}],"2026-09-23":[{"id":"sub1611","title":"Transfer NSW > VIC (CISCO - Part1)","status":"confirmed","venue":"","state":"NSW","rows":[{"id":"fn5585","name":"Interstate Truck Transfer","category":"other","start":"2026-09-23T07:00:00+10:00","end":"2026-09-23T17:00:00+10:00","needed":1,"crew":[],"vehicles":[]}]},{"id":"sub1618","title":"Transfer VIC > NSW (NZ LED Wall)","status":"onlocation","venue":"","state":"VIC","rows":[{"id":"fn5602","name":"Interstate Truck Transfer","category":"other","start":"2026-09-23T07:00:00+10:00","end":"2026-09-23T17:00:00+10:00","needed":1,"crew":[],"vehicles":[]}]},{"id":"sub1473","title":"Year 12 Graduation Mass & Ceremony 2026","status":"onlocation","venue":"Gilroy Catholic College","state":"NSW","rows":[{"id":"fn5126","name":"AV Show Engineer","category":"other","start":"2026-09-23T09:00:00+10:00","end":"2026-09-23T12:00:00+10:00","needed":1,"crew":["Mick Rocco"],"vehicles":["NSW Staff Vehicle \u00b7 "]},{"id":"fn5125","name":"AV Packdown","category":"packdown","start":"2026-09-23T13:00:00+10:00","end":"2026-09-23T16:00:00+10:00","needed":2,"crew":["Mick Rocco","Yvette Paci","Luca Floyd"],"vehicles":["NSW Sprinter Van \u00b7 DL55LR"]}],"address":"17-37 Marie Street, Castle Hill NSW 2154"}],"2026-09-24":[{"id":"sub1583","title":"BLOOD 2026 + RANZCO National 2026 (Auckland - New Zealand)","status":"confirmed","venue":"Concept Craft Pty Ltd","state":"NSW","rows":[{"id":"fn5498","name":"Delivery","category":"delivery","start":"2026-09-24T08:00:00+10:00","end":"2026-09-24T08:00:00+10:00","needed":1,"crew":["Mick Rocco"],"vehicles":["NSW NNR200 Truck \u00b7 2FD9AT"]}],"address":"24 Egerton Street, Silverwater NSW 2128"},{"id":"sub1498","title":"ITSSM26 - Exhibitor Orders","status":"onlocation","venue":"Melbourne Convention & Exhibition Centre","state":"VIC","rows":[{"id":"fn5209","name":"AV Packdown","category":"packdown","start":"2026-09-24T15:30:00+10:00","end":"2026-09-24T15:30:00+10:00","needed":2,"crew":["Emma McLoughlin"],"vehicles":["VIC Master Van \u00b7 2FG6UP"]}],"address":"1 Convention Centre Pl, South Wharf VIC 3006"},{"id":"sub1480","title":"Retail Show Australia 2026 - Schneider Electric","status":"onlocation","venue":"Melbourne Convention & Exhibition Centre","state":"VIC","rows":[{"id":"fn5156","name":"AV Packdown","category":"packdown","start":"2026-09-24T17:00:00+10:00","end":"2026-09-24T17:00:00+10:00","needed":1,"crew":["Emma McLoughlin"],"vehicles":["VIC Master Van \u00b7 2FG6UP"]}],"address":"1 Convention Centre Pl, South Wharf VIC 3006"},{"id":"sub1504","title":"Gamuda SPW | CCD AV (Parramatta Event)","status":"prepped","venue":"PHIVE, 5 Parramatta Square","state":"NSW","rows":[{"id":"fn5230","name":"AV Packdown","category":"packdown","start":"2026-09-24T17:00:00+10:00","end":"2026-09-24T18:30:00+10:00","needed":1,"crew":["Mick Rocco"],"vehicles":["NSW Transit Van \u00b7 1UE4DI"]}],"address":"5 Parramatta Square, Parramatta NSW 2150"}],"2026-09-25":[],"2026-09-26":[{"id":"sub1549","title":"ANZICS/ACCCN 2026 - Philips Healthcare","status":"confirmed","venue":"Melbourne Convention & Exhibition Centre","state":"VIC","rows":[{"id":"fn5376","name":"AV Setup (Weekend Surcharge)","category":"install","start":"2026-09-26T14:30:00+10:00","end":"2026-09-26T14:30:00+10:00","needed":2,"crew":["Emma McLoughlin","Ezequiel Vico"],"vehicles":["VIC iLoad Van \u00b7 CSU84Y"]}],"address":"1 Convention Centre Pl, South Wharf VIC 3006"}],"2026-09-27":[],"2026-09-28":[{"id":"sub1617","title":"ICHEM26 - Exhibitor Orders","status":"confirmed","venue":"Marvel Stadium","state":"VIC","rows":[{"id":"fn5598","name":"AV Setup","category":"install","start":"2026-09-28T13:30:00+10:00","end":"2026-09-28T14:00:00+10:00","needed":2,"crew":["Emma McLoughlin"],"vehicles":[]},{"id":"fn5600","name":"Exhibition Check Off","category":"other","start":"2026-09-28T14:00:00+10:00","end":"2026-09-28T15:30:00+10:00","needed":1,"crew":["Emma McLoughlin"],"vehicles":[]}],"address":"740 Bourke Street, Docklands VIC 3008"},{"id":"sub1575","title":"Dior Cruise Screening (Sydney)","status":"prepped","venue":"Dior","state":"NSW","rows":[{"id":"fn5469","name":"AV Setup","category":"install","start":"2026-09-28T18:30:00+10:00","end":"2026-09-28T18:30:00+10:00","needed":2,"crew":["Mick Rocco","Rick Sanchez"],"vehicles":["NSW Transit Van \u00b7 1UE4DI"]}],"address":"65 Castlereagh Street, Sydney NSW 2000"}],"2026-09-29":[{"id":"sub1549","title":"ANZICS/ACCCN 2026 - Philips Healthcare","status":"confirmed","venue":"Melbourne Convention & Exhibition Centre","state":"VIC","rows":[{"id":"fn5601","name":"AV Floating Operator","category":"operator","start":"2026-09-29T10:00:00+10:00","end":"2026-09-29T14:00:00+10:00","needed":1,"crew":["Ezequiel Vico"],"vehicles":["VIC Staff Vehicle \u00b7 "]}],"address":"1 Convention Centre Pl, South Wharf VIC 3006"},{"id":"sub1507","title":"FSRACA 2026 - Steris","status":"pending","venue":"Gold Coast Exhibition & Convention Centre","state":"QLD","rows":[{"id":"fn5240","name":"AV Setup","category":"install","start":"2026-09-29T13:00:00+10:00","end":"2026-09-29T13:00:00+10:00","needed":2,"crew":[],"vehicles":[]}],"address":"2684-2690 Gold Coast Highway, Broadbeach QLD 4218"},{"id":"sub1616","title":"Chartwells - AV Order","status":"confirmed","venue":"Park Hyatt Melbourne","state":"VIC","rows":[{"id":"fn5595","name":"AV Setup","category":"install","start":"2026-09-29T13:00:00+10:00","end":"2026-09-29T13:00:00+10:00","needed":2,"crew":["Emma McLoughlin"],"vehicles":[]}],"address":"1 Parlimanent Square, East Melbourne VIC 3002"}],"2026-09-30":[{"id":"sub1626","title":"LEISFM26 - Exhibitor Orders","status":"confirmed","venue":"Sandown Racecourse","state":"VIC","rows":[{"id":"fn5623","name":"AV Setup","category":"install","start":"2026-09-30T09:00:00+10:00","end":"2026-09-30T09:00:00+10:00","needed":1,"crew":["Emma McLoughlin"],"vehicles":[]}],"address":"591-659 Princes Hwy, Springvale VIC 3171"},{"id":"sub1552","title":"Caravan Camping Leisurefest (Sandown)","status":"confirmed","venue":"Sandown Racecourse","state":"VIC","rows":[{"id":"fn5384","name":"AV Setup","category":"install","start":"2026-09-30T10:00:00+10:00","end":"2026-09-30T16:00:00+10:00","needed":3,"crew":["Emma McLoughlin"],"vehicles":[]}],"address":"591-659 Princes Hwy, Springvale VIC 3171"},{"id":"sub1549","title":"ANZICS/ACCCN 2026 - Philips Healthcare","status":"confirmed","venue":"Melbourne Convention & Exhibition Centre","state":"VIC","rows":[{"id":"fn5377","name":"AV Packdown","category":"packdown","start":"2026-09-30T15:00:00+10:00","end":"2026-09-30T15:00:00+10:00","needed":2,"crew":["Emma McLoughlin","Ezequiel Vico"],"vehicles":["VIC iLoad Van \u00b7 CSU84Y"]}],"address":"1 Convention Centre Pl, South Wharf VIC 3006"},{"id":"sub1617","title":"ICHEM26 - Exhibitor Orders","status":"confirmed","venue":"Marvel Stadium","state":"VIC","rows":[{"id":"fn5597","name":"AV Packdown","category":"packdown","start":"2026-09-30T16:00:00+10:00","end":"2026-09-30T16:00:00+10:00","needed":2,"crew":["Emma McLoughlin"],"vehicles":[]}],"address":"740 Bourke Street, Docklands VIC 3008"}],"2026-10-01":[{"id":"sub1552","title":"Caravan Camping Leisurefest (Sandown)","status":"confirmed","venue":"Sandown Racecourse","state":"VIC","rows":[{"id":"fn5387","name":"AV Show Engineer","category":"other","start":"2026-10-01T09:00:00+10:00","end":"2026-10-01T15:00:00+10:00","needed":1,"crew":["Emma McLoughlin"],"vehicles":[]}],"address":"591-659 Princes Hwy, Springvale VIC 3171"},{"id":"sub1575","title":"Dior Cruise Screening (Sydney)","status":"prepped","venue":"Dior","state":"NSW","rows":[{"id":"fn5472","name":"AV Show Engineer","category":"other","start":"2026-10-01T09:00:00+10:00","end":"2026-10-01T12:00:00+10:00","needed":1,"crew":["Mick Rocco"],"vehicles":["NSW Staff Vehicle \u00b7 "]}],"address":"65 Castlereagh Street, Sydney NSW 2000"},{"id":"sub1609","title":"MASLM26 - Exhibitor Orders","status":"confirmed","venue":"Marvel Stadium","state":"VIC","rows":[{"id":"fn5583","name":"AV Setup","category":"install","start":"2026-10-01T09:00:00+10:00","end":"2026-10-01T09:00:00+10:00","needed":1,"crew":[],"vehicles":["VIC iLoad Van \u00b7 CSU84Y"]}],"address":"740 Bourke Street, Docklands VIC 3008"}],"2026-10-02":[{"id":"sub1552","title":"Caravan Camping Leisurefest (Sandown)","status":"confirmed","venue":"Sandown Racecourse","state":"VIC","rows":[{"id":"fn5388","name":"AV Show Engineer","category":"other","start":"2026-10-02T09:30:00+10:00","end":"2026-10-02T15:00:00+10:00","needed":1,"crew":["Emma McLoughlin"],"vehicles":[]}],"address":"591-659 Princes Hwy, Springvale VIC 3171"},{"id":"sub1507","title":"FSRACA 2026 - Steris","status":"pending","venue":"Gold Coast Exhibition & Convention Centre","state":"QLD","rows":[{"id":"fn5241","name":"AV Packdown","category":"packdown","start":"2026-10-02T16:00:00+10:00","end":"2026-10-02T16:00:00+10:00","needed":2,"crew":[],"vehicles":[]}],"address":"2684-2690 Gold Coast Highway, Broadbeach QLD 4218"},{"id":"sub1616","title":"Chartwells - AV Order","status":"confirmed","venue":"Park Hyatt Melbourne","state":"VIC","rows":[{"id":"fn5594","name":"AV Packdown","category":"packdown","start":"2026-10-02T16:00:00+10:00","end":"2026-10-02T16:00:00+10:00","needed":2,"crew":["Emma McLoughlin"],"vehicles":[]}],"address":"1 Parlimanent Square, East Melbourne VIC 3002"}],"2026-10-03":[{"id":"sub1552","title":"Caravan Camping Leisurefest (Sandown)","status":"confirmed","venue":"Sandown Racecourse","state":"VIC","rows":[{"id":"fn5389","name":"AV Show Engineer","category":"other","start":"2026-10-03T08:30:00+10:00","end":"2026-10-03T15:00:00+10:00","needed":1,"crew":["Emma McLoughlin"],"vehicles":[]}],"address":"591-659 Princes Hwy, Springvale VIC 3171"}],"2026-10-04":[{"id":"sub1552","title":"Caravan Camping Leisurefest (Sandown)","status":"confirmed","venue":"Sandown Racecourse","state":"VIC","rows":[{"id":"fn5390","name":"AV Show Engineer","category":"other","start":"2026-10-04T08:30:00+11:00","end":"2026-10-04T15:00:00+11:00","needed":1,"crew":["Emma McLoughlin"],"vehicles":[]},{"id":"fn5385","name":"AV Packdown","category":"packdown","start":"2026-10-04T15:00:00+11:00","end":"2026-10-04T18:00:00+11:00","needed":3,"crew":["Emma McLoughlin"],"vehicles":[]}],"address":"591-659 Princes Hwy, Springvale VIC 3171"},{"id":"sub1609","title":"MASLM26 - Exhibitor Orders","status":"confirmed","venue":"Marvel Stadium","state":"VIC","rows":[{"id":"fn5582","name":"AV Packdown","category":"packdown","start":"2026-10-04T12:00:00+11:00","end":"2026-10-04T12:00:00+11:00","needed":1,"crew":[],"vehicles":["VIC iLoad Van \u00b7 CSU84Y"]}],"address":"740 Bourke Street, Docklands VIC 3008"},{"id":"sub1626","title":"LEISFM26 - Exhibitor Orders","status":"confirmed","venue":"Sandown Racecourse","state":"VIC","rows":[{"id":"fn5622","name":"AV Packdown","category":"packdown","start":"2026-10-04T16:00:00+11:00","end":"2026-10-04T16:00:00+11:00","needed":1,"crew":["Emma McLoughlin"],"vehicles":[]}],"address":"591-659 Princes Hwy, Springvale VIC 3171"}],"2026-10-05":[]}}}</script>
 
 <script id="app-script">
 (function(){
@@ -357,7 +406,8 @@
     footerCount: document.getElementById('footer-count'),
     groups1: document.getElementById('groups-1'),
     grid4: document.getElementById('grid-4'),
-    grid7: document.getElementById('grid-7')
+    grid7: document.getElementById('grid-7'),
+    stateSwitcher: document.getElementById('state-switcher')
   };
 
   function escapeHtml(str){
@@ -450,11 +500,24 @@
 
   var state = getState();
   var dayKeys = Object.keys(state.schedule.days).sort();
-  var days = dayKeys.map(function(key, idx){
+  var rawDays = dayKeys.map(function(key, idx){
     var jobs = state.schedule.days[key] || [];
     sortDayJobs(jobs);
     return {key:key, jobs:jobs, today: idx === 0};
   });
+
+  /* ------------------------- state filter (ALL / NSW / VIC / QLD) ------------------------- */
+
+  var STATE_STORAGE_KEY = 'wallboard-state';
+  var selectedWallState = 'ALL';
+  var days = rawDays;
+
+  function applyWallStateFilter(){
+    days = rawDays.map(function(d){
+      var jobs = selectedWallState === 'ALL' ? d.jobs : d.jobs.filter(function(j){ return j.state === selectedWallState; });
+      return {key:d.key, today:d.today, jobs:jobs};
+    });
+  }
 
   /* ------------------------- 1-Day view (full detail, matches the main Daily Schedule pages) ------------------------- */
 
@@ -491,15 +554,18 @@
   function jobCardHtml(job){
     var meta = STATUS_META[job.status] || {key:'other', label:job.status};
     var rowsHtml = job.rows.map(renderRow).join('');
+    var stateKey = (job.state || '').toLowerCase();
+    var borderStyle = stateKey ? ' style="border-left:4px solid var(--state-' + stateKey + ')"' : '';
+    var stateBadge = stateKey ? '<span class="state-badge state-badge-' + stateKey + '">' + escapeHtml(job.state) + '</span>' : '';
     return (
-      '<div class="job">' +
+      '<div class="job"' + borderStyle + '>' +
         '<div class="job-head">' +
           '<div class="job-title-block">' +
             '<h3 class="job-title">' + escapeHtml(job.title) + '</h3>' +
             (job.venue ? '<div class="job-sub">' + escapeHtml(job.venue) + '</div>' : '') +
             (job.address ? '<div class="job-address">' + escapeHtml(job.address) + '</div>' : '') +
           '</div>' +
-          '<span class="pill pill-' + meta.key + '">' + escapeHtml(meta.label) + '</span>' +
+          '<div class="job-badges">' + stateBadge + '<span class="pill pill-' + meta.key + '">' + escapeHtml(meta.label) + '</span></div>' +
         '</div>' +
         '<div class="rows">' + rowsHtml + '</div>' +
       '</div>'
@@ -553,7 +619,9 @@
               '<span class="wrow-crew">' + (r.crew.length ? escapeHtml(r.crew.join(', ')) : 'Unassigned') + '</span>' +
             '</div>';
           }).join('');
-          return '<div class="wcard">' +
+          var stateKey = (job.state || '').toLowerCase();
+          var wcardBorder = stateKey ? ' style="border-left:4px solid var(--state-' + stateKey + ')"' : '';
+          return '<div class="wcard"' + wcardBorder + '>' +
             '<div class="wcard-head"><div class="wcard-title">' + escapeHtml(job.title) + '</div>' + statusPill(job.status) + '</div>' +
             (job.venue ? '<div class="wcard-venue">' + escapeHtml(job.venue) + '</div>' : '') +
             rows +
@@ -566,13 +634,34 @@
 
   /* ------------------------- wiring ------------------------- */
 
-  renderDay1();
-  renderColumns(els.grid4, days.slice(0, 4), false);
-  renderColumns(els.grid7, days.slice(0, 7), true);
+  function renderAll(){
+    renderDay1();
+    renderColumns(els.grid4, days.slice(0, 4), false);
+    renderColumns(els.grid7, days.slice(0, 7), true);
+    var totalJobsToday = days[0] ? days[0].jobs.length : 0;
+    els.footerCount.textContent = totalJobsToday ? (totalJobsToday + ' job' + (totalJobsToday === 1 ? '' : 's') + ' today') : '';
+  }
+
+  var stateBtns = els.stateSwitcher.querySelectorAll('.state-switch-btn');
+  function setWallState(v){
+    selectedWallState = v;
+    applyWallStateFilter();
+    stateBtns.forEach(function(btn){
+      var isActive = btn.getAttribute('data-state') === v;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+    renderAll();
+    try{ localStorage.setItem(STATE_STORAGE_KEY, v); }catch(e){}
+  }
+  stateBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){ setWallState(btn.getAttribute('data-state')); });
+  });
+  var initialState = 'ALL';
+  try{ initialState = localStorage.getItem(STATE_STORAGE_KEY) || 'ALL'; }catch(e){}
+  setWallState(initialState);
 
   els.snapshotLabel.textContent = 'snapshot: ' + fmtSnapshot(state.schedule.updatedAt);
-  var totalJobsToday = days[0] ? days[0].jobs.length : 0;
-  els.footerCount.textContent = totalJobsToday ? (totalJobsToday + ' job' + (totalJobsToday === 1 ? '' : 's') + ' today') : '';
 
   var views = {'1':document.getElementById('view-1'), '4':document.getElementById('view-4'), '7':document.getElementById('view-7')};
   var tabs = {'1':document.getElementById('tab-1'), '4':document.getElementById('tab-4'), '7':document.getElementById('tab-7')};

@@ -214,6 +214,11 @@ export default {
         historyUrl.pathname = "/history.html";
         return env.ASSETS.fetch(new Request(historyUrl, req));
       }
+      if (url.pathname === "/nsw" || url.pathname === "/vic" || url.pathname === "/qld") {
+        const stateUrl = new URL(req.url);
+        stateUrl.pathname = "/view-" + url.pathname.slice(1) + ".html";
+        return env.ASSETS.fetch(new Request(stateUrl, req));
+      }
       return env.ASSETS.fetch(req);
     }
 
