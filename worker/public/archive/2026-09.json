@@ -1099,6 +1099,106 @@
         ],
         "address": "17-37 Marie Street, Castle Hill NSW 2154"
       }
+    ],
+    "2026-09-24": [
+      {
+        "id": "sub1583",
+        "title": "BLOOD 2026 + RANZCO National 2026 (Auckland - New Zealand)",
+        "status": "onlocation",
+        "venue": "Concept Craft Pty Ltd",
+        "state": "NSW",
+        "rows": [
+          {
+            "id": "fn5498",
+            "name": "Delivery",
+            "category": "delivery",
+            "start": "2026-09-24T08:00:00+10:00",
+            "end": "2026-09-24T08:00:00+10:00",
+            "needed": 1,
+            "crew": [
+              "Mick Rocco"
+            ],
+            "vehicles": [
+              "NSW NNR200 Truck · 2FD9AT"
+            ]
+          }
+        ],
+        "address": "24 Egerton Street, Silverwater NSW 2128"
+      },
+      {
+        "id": "sub1498",
+        "title": "ITSSM26 - Exhibitor Orders",
+        "status": "onlocation",
+        "venue": "Melbourne Convention & Exhibition Centre",
+        "state": "VIC",
+        "rows": [
+          {
+            "id": "fn5209",
+            "name": "AV Packdown",
+            "category": "packdown",
+            "start": "2026-09-24T15:30:00+10:00",
+            "end": "2026-09-24T15:30:00+10:00",
+            "needed": 2,
+            "crew": [
+              "Emma McLoughlin",
+              "Lorencius Stefanus"
+            ],
+            "vehicles": [
+              "VIC Master Van · 2FG6UP"
+            ]
+          }
+        ],
+        "address": "1 Convention Centre Pl, South Wharf VIC 3006"
+      },
+      {
+        "id": "sub1480",
+        "title": "Retail Show Australia 2026 - Schneider Electric",
+        "status": "onlocation",
+        "venue": "Melbourne Convention & Exhibition Centre",
+        "state": "VIC",
+        "rows": [
+          {
+            "id": "fn5156",
+            "name": "AV Packdown",
+            "category": "packdown",
+            "start": "2026-09-24T17:00:00+10:00",
+            "end": "2026-09-24T17:00:00+10:00",
+            "needed": 1,
+            "crew": [
+              "Emma McLoughlin",
+              "Lorencius Stefanus"
+            ],
+            "vehicles": [
+              "VIC Master Van · 2FG6UP"
+            ]
+          }
+        ],
+        "address": "1 Convention Centre Pl, South Wharf VIC 3006"
+      },
+      {
+        "id": "sub1504",
+        "title": "Gamuda SPW | CCD AV  (Parramatta Event)",
+        "status": "prepped",
+        "venue": "PHIVE, 5 Parramatta Square",
+        "state": "NSW",
+        "rows": [
+          {
+            "id": "fn5230",
+            "name": "AV Packdown",
+            "category": "packdown",
+            "start": "2026-09-24T17:00:00+10:00",
+            "end": "2026-09-24T18:30:00+10:00",
+            "needed": 1,
+            "crew": [
+              "Mick Rocco"
+            ],
+            "vehicles": [
+              "NSW Transit Van · 1UE4DI"
+            ]
+          }
+        ],
+        "address": "5 Parramatta Square, Parramatta NSW 2150"
+      }
     ]
   }
 }
