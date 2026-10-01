@@ -222,6 +222,11 @@ export default {
         stateUrl.pathname = "/view-" + url.pathname.slice(1) + ".html";
         return env.ASSETS.fetch(new Request(stateUrl, req));
       }
+      if (url.pathname === "/crew-planner") {
+        const crewPlannerUrl = new URL(req.url);
+        crewPlannerUrl.pathname = "/crew-planner.html";
+        return env.ASSETS.fetch(new Request(crewPlannerUrl, req));
+      }
       return env.ASSETS.fetch(req);
     }
 
