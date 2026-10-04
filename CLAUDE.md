@@ -61,13 +61,13 @@ A Cron-Trigger-driven design was fully built, deployed, and then reverted within
 
 Rick wants refreshes to happen on their own, weekdays only, at 7am, 12pm (noon), and 5pm Sydney time — no need to ask a Claude session each time. Three Claude Code Routines (scheduled triggers) do this (the noon one added 2026-09-22, when the whole team got access and refresh frequency mattered more):
 
-- **"Day Sheet refresh — weekday 7am Sydney"** (`trig_01FTx3VWrcmbajecAYaxddsF`) — cron `0 21 * * 0-4` (UTC).
-- **"Day Sheet refresh — weekday 12pm Sydney"** (`trig_016rLaw4H5M1eQkX1G5rJ4X3`) — cron `0 2 * * 1-5` (UTC).
-- **"Day Sheet refresh — weekday 5pm Sydney"** (`trig_01GcqZa8GKBh6SUh114VUdcT`) — cron `0 7 * * 1-5` (UTC).
+- **"Day Sheet refresh — weekday 7am Sydney"** (`trig_01FTx3VWrcmbajecAYaxddsF`) — cron `0 20 * * 0-4` (UTC, AEDT).
+- **"Day Sheet refresh — weekday 12pm Sydney"** (`trig_016rLaw4H5M1eQkX1G5rJ4X3`) — cron `0 1 * * 1-5` (UTC, AEDT).
+- **"Day Sheet refresh — weekday 5pm Sydney"** (`trig_01GcqZa8GKBh6SUh114VUdcT`) — cron `0 6 * * 1-5` (UTC, AEDT).
 
 All three fire into *this specific persistent session* (`session_01UxCH8vvkTYLSRyeEscZ7gM`), not a fresh session per firing. This was a deliberate workaround, not the first choice: fresh-session-per-fire Routines need a `connectors` grant to get Rentman MCP access in the new session, and this org's plan doesn't support that parameter at all (`create_trigger` rejects it outright) — a fresh-session Routine created without it fires into a session with no MCP connector tools, which can't do anything useful here. Binding to this already-running session sidesteps that entirely, since it already holds live Rentman + GitHub access. **The real implication: these Routines only work as long as this session stays alive.** If it's ever archived/expires, recreate them (same three cron expressions, prompts describing the refresh task — see git history or ask a Claude session to reconstruct from this section) bound to whatever session replaces it, or try `connectors: ["Rentman"]` on a fresh-session Routine again in case the org's plan changes.
 
-**Cron expressions are UTC-only — no timezone support** — the three above assume AEST (Sydney standard time, UTC+10), correct now (September). Once DST starts (~2026-10-04, first Sunday of October) Sydney moves to AEDT (UTC+11), and these will fire an hour early Sydney-time until adjusted: change the 7am trigger to `0 20 * * 0-4`, the 12pm trigger to `0 1 * * 1-5`, and the 5pm trigger to `0 6 * * 1-5`. Revert all three when DST ends (~2026-04, first Sunday of April) back to `0 21 * * 0-4` / `0 2 * * 1-5` / `0 7 * * 1-5`. Use `update_trigger` with the trigger IDs above — no need to delete/recreate.
+**Cron expressions are UTC-only — no timezone support.** The three above are the **AEDT** (daylight saving, UTC+11) values, applied 2026-10-04 when DST started (first Sunday of October) — before that they were the AEST (UTC+10) values `0 21 * * 0-4` / `0 2 * * 1-5` / `0 7 * * 1-5`. **Revert all three back to those AEST values when DST ends (~2026-04, first Sunday of April)** — otherwise refreshes fire an hour later than intended Sydney-time. Use `update_trigger` with the trigger IDs above — no need to delete/recreate.
 
 ## Rentman fetch recipe (authoritative — follow exactly, every refresh)
 
