@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Moreton Hire — Wall Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFFFF;
+    --surface:#FFFFFF;
+    --surface-2:#EEF1F5;
+    --ink:#171B21;
+    --ink-dim:#5B6472;
+    --ink-faint:#94A0AF;
+    --border:#E3E7ED;
+    --border-strong:#C9D0DA;
+    --accent:#2454E8;
+    --accent-ink:#FFFFFF;
+    --accent-soft:#E4EBFD;
+    --status-confirmed:#0E9F6E;
+    --status-confirmed-soft:#DCF7EC;
+    --status-pending:#B45309;
+    --status-pending-soft:#FDECD3;
+    --level-1:#16A34A;
+    --level-1-soft:#DCFCE7;
+    --level-2:#D97706;
+    --level-2-soft:#FEF3C7;
+    --level-3:#DC2626;
+    --level-3-soft:#FEE2E2;
+    --shadow: 0 1px 2px rgba(20,25,35,.04), 0 8px 24px rgba(20,25,35,.06);
+    --radius: 14px;
+    --logo-plate:#FFFFFF;
+    --logo-plate-border:#E3E7ED;
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#12161C;
+      --surface:#1B212B;
+      --surface-2:#232A35;
+      --ink:#EDEFF3;
+      --ink-dim:#9AA3B2;
+      --ink-faint:#6B7484;
+      --border:#2A313D;
+      --border-strong:#3A4250;
+      --accent:#6B93F7;
+      --accent-ink:#0B1220;
+      --accent-soft:#1E2A4A;
+      --status-confirmed:#3EDCA0;
+      --status-confirmed-soft:#123528;
+      --status-pending:#FBBF6D;
+      --status-pending-soft:#3A2A11;
+      --level-1:#4ADE80;
+      --level-1-soft:#123528;
+      --level-2:#FBBF24;
+      --level-2-soft:#3A2A11;
+      --level-3:#F87171;
+      --level-3-soft:#3B1A1A;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.45);
+      --logo-plate:#EDEFF3;
+      --logo-plate-border:#2A313D;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#12161C;
+    --surface:#1B212B;
+    --surface-2:#232A35;
+    --ink:#EDEFF3;
+    --ink-dim:#9AA3B2;
+    --ink-faint:#6B7484;
+    --border:#2A313D;
+    --border-strong:#3A4250;
+    --accent:#6B93F7;
+    --accent-ink:#0B1220;
+    --accent-soft:#1E2A4A;
+    --status-confirmed:#3EDCA0;
+    --status-confirmed-soft:#123528;
+    --status-pending:#FBBF6D;
+    --status-pending-soft:#3A2A11;
+    --level-1:#4ADE80;
+    --level-1-soft:#123528;
+    --level-2:#FBBF24;
+    --level-2-soft:#3A2A11;
+    --level-3:#F87171;
+    --level-3-soft:#3B1A1A;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.45);
+    --logo-plate:#EDEFF3;
+    --logo-plate-border:#2A313D;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter', system-ui, -apple-system, sans-serif;
+    font-size:15px;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--accent-soft);}
+  .wrap{max-width:1760px; margin:0 auto; padding:20px 24px 60px;}
+
+  /* ---- Logo bar ---- */
+  .logo-bar{display:flex; justify-content:flex-end; align-items:center; gap:14px; margin-bottom:14px;}
+  .logo-plate{
+    background:var(--logo-plate); border:1px solid var(--logo-plate-border); border-radius:10px;
+    padding:8px 14px; display:flex; align-items:center; box-shadow:var(--shadow);
+  }
+  .logo-plate img{display:block; height:72px; width:auto;}
+  .logo-plate.ee img{height:60px;}
+
+  /* ---- Header ---- */
+  .masthead{display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:16px; flex-wrap:wrap;}
+  .eyebrow{font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); font-weight:600;}
+  h1{font-weight:800; letter-spacing:-.02em; font-size:clamp(24px,3.4vw,32px); margin:2px 0 2px; text-wrap:balance;}
+  .date-line{font-size:14px; color:var(--ink-dim); font-weight:500;}
+  .snapshot-badge{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px; font-weight:600; letter-spacing:.05em; text-transform:uppercase;
+    padding:5px 11px; border-radius:100px;
+    background:var(--surface-2); color:var(--ink-dim); border:1px solid var(--border);
+    white-space:nowrap;
+  }
+
+  /* ---- Week switcher ---- */
+  .switcher{
+    display:inline-flex; gap:4px; background:var(--surface-2);
+    padding:4px; border-radius:12px; border:1px solid var(--border); margin-bottom:16px;
+  }
+  .switch-btn{
+    appearance:none; border:none; background:none; cursor:pointer;
+    font-family:inherit; font-size:13.5px; font-weight:700; color:var(--ink-dim);
+    padding:9px 20px; border-radius:9px;
+  }
+  .switch-btn:hover{color:var(--ink);}
+  .switch-btn.active{background:var(--surface); color:var(--accent); box-shadow:var(--shadow);}
+  .switch-btn:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+
+  /* ---- Legend ---- */
+  .legend{display:flex; flex-wrap:wrap; gap:10px 16px; padding:0 0 18px; font-size:12px; color:var(--ink-dim);}
+  .legend-item{display:inline-flex; align-items:center; gap:6px;}
+  .legend-dot{width:10px;height:10px;border-radius:50%;flex:none;}
+
+  [hidden]{display:none !important;}
+
+  /* ---- Pills / badges ---- */
+  .pill{font-size:11px; font-weight:700; letter-spacing:.03em; text-transform:uppercase; padding:4px 10px; border-radius:100px; white-space:nowrap; display:inline-block;}
+  .pill-confirmed{background:var(--status-confirmed-soft); color:var(--status-confirmed);}
+  .pill-pending{background:var(--status-pending-soft); color:var(--status-pending);}
+
+  .level-badge{
+    width:26px; height:26px; border-radius:50%; flex:none;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'JetBrains Mono', monospace; font-weight:700; font-size:13px;
+    border:2px solid transparent;
+  }
+  .level-1 .level-badge{background:var(--level-1-soft); color:var(--level-1); border-color:var(--level-1);}
+  .level-2 .level-badge{background:var(--level-2-soft); color:var(--level-2); border-color:var(--level-2);}
+  .level-3 .level-badge{background:var(--level-3-soft); color:var(--level-3); border-color:var(--level-3);}
+
+  /* ---- 7-day grid ---- */
+  .wall-scroll{overflow-x:auto; padding-bottom:6px; margin:0 -24px; padding-left:24px; padding-right:24px;}
+  .wall-grid{display:grid; gap:12px; align-items:start; grid-template-columns:repeat(7,minmax(216px,1fr));}
+
+  .wcol-head{
+    background:var(--surface-2); border:1px solid var(--border); border-radius:10px;
+    padding:9px 12px; margin-bottom:10px; display:flex; align-items:baseline; justify-content:space-between; gap:8px;
+  }
+  .wcol-head.today{background:var(--accent); border-color:var(--accent);}
+  .wcol-wd{font-size:12px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; color:var(--ink-dim);}
+  .wcol-head.today .wcol-wd{color:var(--accent-ink); opacity:.85;}
+  .wcol-date{font-size:12px; font-weight:600; color:var(--ink-faint);}
+  .wcol-head.today .wcol-date{color:var(--accent-ink); opacity:.85;}
+  .wcol-count{font-size:11px; font-weight:700; color:var(--ink-faint);}
+  .wcol-head.today .wcol-count{color:var(--accent-ink);}
+
+  .wcard{background:var(--surface); border:1px solid var(--border); border-radius:11px; box-shadow:var(--shadow); padding:11px 13px; margin-bottom:9px;}
+  .wcard-head{display:flex; align-items:flex-start; justify-content:space-between; gap:8px; margin-bottom:4px;}
+  .wcard-title{font-weight:700; font-size:13.5px; line-height:1.3; overflow-wrap:anywhere;}
+  .wcard-time{font-family:'JetBrains Mono', monospace; font-variant-numeric:tabular-nums; font-size:10.5px; font-weight:600; color:var(--ink-faint); margin-bottom:6px;}
+  .wcard-venue{font-size:11.5px; color:var(--ink-dim); line-height:1.35;}
+  .wcard-venue .state{color:var(--ink-faint); font-weight:600;}
+  .wcard-am{font-size:11.5px; color:var(--ink-dim); margin-top:6px; padding-top:6px; border-top:1px dashed var(--border);}
+  .wcard-am .lbl{color:var(--ink-faint); font-size:10px; text-transform:uppercase; letter-spacing:.04em; font-weight:700; display:block; margin-bottom:2px;}
+  .wcard-foot{margin-top:8px; display:flex; justify-content:flex-end;}
+  .wempty{font-size:11.5px; color:var(--ink-faint); font-style:italic; padding:14px 4px; text-align:center;}
+
+  footer{
+    margin-top:36px; padding-top:14px; border-top:1px solid var(--border);
+    font-size:11.5px; color:var(--ink-faint); font-family:'JetBrains Mono', monospace;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+  }
+
+  @media (max-width:900px){
+    .wall-grid{grid-template-columns:repeat(7,minmax(190px,1fr));}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="logo-bar">
+    <div class="logo-plate moreton"><img src="data:image/webp;base64,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" alt="Moreton Hire"></div>
+    <div class="logo-plate ee"><img src="data:image/webp;base64,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" alt="Event Equipment Audio Visual"></div>
+  </div>
+
+  <header class="masthead">
+    <div>
+      <div class="eyebrow">Event Equipment Group &middot; Moreton Hire &middot; Wall Board &middot; Read-only</div>
+      <h1>Moreton Hire &mdash; Wall Board</h1>
+      <div class="date-line" id="date-line">&nbsp;</div>
+    </div>
+    <span class="snapshot-badge" id="snapshot-label">snapshot: &mdash;</span>
+  </header>
+
+  <div class="switcher" role="tablist" aria-label="Week">
+    <button class="switch-btn" data-week="0" role="tab" id="tab-w0">Week 1</button>
+    <button class="switch-btn" data-week="1" role="tab" id="tab-w1">Week 2</button>
+    <button class="switch-btn" data-week="2" role="tab" id="tab-w2">Week 3</button>
+  </div>
+
+  <div class="legend">
+    <span class="legend-item"><span class="legend-dot" style="background:var(--level-1)"></span>Level 1 &middot; up to 10 TVs</span>
+    <span class="legend-item"><span class="legend-dot" style="background:var(--level-2)"></span>Level 2 &middot; 11&ndash;20 TVs</span>
+    <span class="legend-item"><span class="legend-dot" style="background:var(--level-3)"></span>Level 3 &middot; 21+ TVs or an LED Wall</span>
+    <span class="legend-item"><span class="pill pill-confirmed">Confirmed</span>Crew assigned</span>
+    <span class="legend-item"><span class="pill pill-pending">Pending</span>Crew not yet assigned</span>
+  </div>
+
+  <div class="wall-scroll"><div class="wall-grid" id="grid"></div></div>
+
+  <footer>
+    <span>Read-only wall board for Moreton Hire jobs across all states &middot; manual refresh.</span>
+    <span id="footer-count"></span>
+  </footer>
+</div>
+
+<script id="wallboard-data" type="application/json">{"generatedAt":"2026-10-07T07:45:00Z","windowStart":"2026-10-07","days":{"2026-10-07":[{"id":"sub1593","title":"IQAB26 - Exhibitor Orders","state":"QLD","venue":"Gold Coast Exhibition & Convention Centre","accountManager":"Abby Mackay","crewStatus":"confirmed","level":3,"time":"2026-10-07T06:00:00+11:00"},{"id":"sub1643","title":"CONNCS26 - Exhibitor Orders","state":"NSW","venue":"Hyatt Regency","accountManager":"Jory Oram","crewStatus":"confirmed","level":1,"time":"2026-10-07T06:00:00+11:00"},{"id":"sub1624","title":"APESANZB26 - Exhibitor Orders","state":"QLD","venue":"Brisbane Convention & Exhibition Centre","accountManager":"Amanda Hunter","crewStatus":"confirmed","level":1,"time":"2026-10-07T07:00:00+11:00"}],"2026-10-08":[{"id":"sub1608","title":"APAM26 - Exhibitor Orders","state":"VIC","venue":"Crown Promenade Hotel","accountManager":"Abby Mackay","crewStatus":"confirmed","level":1,"time":"2026-10-08T04:00:00+11:00"},{"id":"sub1593","title":"IQAB26 - Exhibitor Orders","state":"QLD","venue":"Gold Coast Exhibition & Convention Centre","accountManager":"Abby Mackay","crewStatus":"confirmed","level":3,"time":"2026-10-08T15:00:00+11:00"},{"id":"sub1645","title":"SCCM26 - Exhibitor Orders","state":"VIC","venue":"Marvel Stadium","accountManager":"Lucy Duggan","crewStatus":"confirmed","level":1,"time":"2026-10-08T15:00:00+11:00"},{"id":"sub1643","title":"CONNCS26 - Exhibitor Orders","state":"NSW","venue":"Hyatt Regency","accountManager":"Jory Oram","crewStatus":"confirmed","level":1,"time":"2026-10-08T15:30:00+11:00"},{"id":"sub1668","title":"AISCB26 - Exhibitor Orders","state":"QLD","venue":"Brisbane Showgrounds","accountManager":"Mandy Scott","crewStatus":"pending","level":1,"time":"2026-10-08T16:00:00+11:00"}],"2026-10-09":[],"2026-10-10":[{"id":"sub1624","title":"APESANZB26 - Exhibitor Orders","state":"QLD","venue":"Brisbane Convention & Exhibition Centre","accountManager":"Amanda Hunter","crewStatus":"confirmed","level":1,"time":"2026-10-10T17:00:00+11:00"}],"2026-10-11":[{"id":"sub1663","title":"RACMM26 - Exhibitor Orders","state":"VIC","venue":"Melbourne Cricket Ground","accountManager":"Natalie Blauberg","crewStatus":"confirmed","level":1,"time":"2026-10-11T08:30:00+11:00"}],"2026-10-12":[],"2026-10-13":[{"id":"sub1682","title":"CALDM26 - Exhibitor Orders","state":"VIC","venue":"Half Acre","accountManager":"Abby Mackay","crewStatus":"confirmed","level":1,"time":"2026-10-13T07:00:00+11:00"},{"id":"sub1672","title":"RADIM26 - Exhibitor Orders","state":"VIC","venue":"Melbourne Convention & Exhibition Centre","accountManager":"Jory Oram","crewStatus":"confirmed","level":1,"time":"2026-10-13T10:30:00+11:00"},{"id":"sub1656","title":"HARBS26 - Exhibitor Orders","state":"NSW","venue":"International Convention Centre Sydney (ICC)","accountManager":"Tiarni Peardon","crewStatus":"pending","level":1,"time":"2026-10-13T13:00:00+11:00"},{"id":"sub1663","title":"RACMM26 - Exhibitor Orders","state":"VIC","venue":"Melbourne Cricket Ground","accountManager":"Natalie Blauberg","crewStatus":"confirmed","level":1,"time":"2026-10-13T15:45:00+11:00"}],"2026-10-14":[{"id":"sub1682","title":"CALDM26 - Exhibitor Orders","state":"VIC","venue":"Half Acre","accountManager":"Abby Mackay","crewStatus":"confirmed","level":1,"time":"2026-10-14T15:00:00+11:00"}],"2026-10-15":[{"id":"sub1588","title":"FCTEGS26 - Exhibitor Orders","state":"NSW","venue":"International Convention Centre Sydney (ICC)","accountManager":"Natalie Blauberg","crewStatus":"pending","level":3,"time":"2026-10-15T14:00:00+11:00"},{"id":"sub1606","title":"FCTEGS26 - Disney Destinations","state":"NSW","venue":"International Convention Centre Sydney (ICC)","accountManager":"Natalie Blauberg","crewStatus":"pending","level":3,"time":"2026-10-15T14:00:00+11:00"},{"id":"sub1672","title":"RADIM26 - Exhibitor Orders","state":"VIC","venue":"Melbourne Convention & Exhibition Centre","accountManager":"Jory Oram","crewStatus":"confirmed","level":1,"time":"2026-10-15T16:00:00+11:00"},{"id":"sub1656","title":"HARBS26 - Exhibitor Orders","state":"NSW","venue":"International Convention Centre Sydney (ICC)","accountManager":"Tiarni Peardon","crewStatus":"pending","level":1,"time":"2026-10-15T17:00:00+11:00"}],"2026-10-16":[{"id":"sub1588","title":"FCTEGS26 - Exhibitor Orders","state":"NSW","venue":"International Convention Centre Sydney (ICC)","accountManager":"Natalie Blauberg","crewStatus":"pending","level":3,"time":"2026-10-16T09:00:00+11:00"}],"2026-10-17":[],"2026-10-18":[{"id":"sub1588","title":"FCTEGS26 - Exhibitor Orders","state":"NSW","venue":"International Convention Centre Sydney (ICC)","accountManager":"Natalie Blauberg","crewStatus":"pending","level":3,"time":"2026-10-18T17:00:00+11:00"},{"id":"sub1606","title":"FCTEGS26 - Disney Destinations","state":"NSW","venue":"International Convention Centre Sydney (ICC)","accountManager":"Natalie Blauberg","crewStatus":"pending","level":3,"time":"2026-10-18T17:00:00+11:00"}],"2026-10-19":[{"id":"sub1686","title":"AUSBGC26 - Entrance Feature","state":"QLD","venue":"Gold Coast Exhibition & Convention Centre","accountManager":"Kevin Smith","crewStatus":"pending","level":3,"time":"2026-10-19T11:00:00+11:00"},{"id":"sub1567","title":"AUSBGC26 - Exhibitor Orders","state":"QLD","venue":"Gold Coast Exhibition & Convention Centre","accountManager":"Maddie Whitty","crewStatus":"confirmed","level":3,"time":"2026-10-19T12:00:00+11:00"},{"id":"sub1675","title":"ATPCS26 - Exhibitor Orders","state":"NSW","venue":"Commbank Stadium","accountManager":"Abby Mackay","crewStatus":"pending","level":1,"time":"2026-10-19T12:00:00+11:00"}],"2026-10-20":[{"id":"sub1597","title":"CPACM26 - Exhibitor Orders","state":"VIC","venue":"Melbourne Convention & Exhibition Centre","accountManager":"Natalie Blauberg","crewStatus":"pending","level":3,"time":"2026-10-20T07:00:00+11:00"},{"id":"sub1567","title":"AUSBGC26 - Exhibitor Orders","state":"QLD","venue":"Gold Coast Exhibition & Convention Centre","accountManager":"Maddie Whitty","crewStatus":"confirmed","level":3,"time":"2026-10-20T10:00:00+11:00"},{"id":"sub1675","title":"ATPCS26 - Exhibitor Orders","state":"NSW","venue":"Commbank Stadium","accountManager":"Abby Mackay","crewStatus":"pending","level":1,"time":"2026-10-20T16:30:00+11:00"}],"2026-10-21":[{"id":"sub1567","title":"AUSBGC26 - Exhibitor Orders","state":"QLD","venue":"Gold Coast Exhibition & Convention Centre","accountManager":"Maddie Whitty","crewStatus":"confirmed","level":3,"time":"2026-10-21T07:00:00+11:00"},{"id":"sub1597","title":"CPACM26 - Exhibitor Orders","state":"VIC","venue":"Melbourne Convention & Exhibition Centre","accountManager":"Natalie Blauberg","crewStatus":"pending","level":3,"time":"2026-10-21T07:30:00+11:00"}],"2026-10-22":[{"id":"sub1596","title":"SHPAB26 - Exhibitor Orders","state":"QLD","venue":"Brisbane Convention & Exhibition Centre","accountManager":"Abby Mackay","crewStatus":"pending","level":3,"time":"2026-10-22T11:00:00+11:00"},{"id":"sub1597","title":"CPACM26 - Exhibitor Orders","state":"VIC","venue":"Melbourne Convention & Exhibition Centre","accountManager":"Natalie Blauberg","crewStatus":"pending","level":3,"time":"2026-10-22T14:00:00+11:00"}],"2026-10-23":[{"id":"sub1567","title":"AUSBGC26 - Exhibitor Orders","state":"QLD","venue":"Gold Coast Exhibition & Convention Centre","accountManager":"Maddie Whitty","crewStatus":"confirmed","level":3,"time":"2026-10-23T17:30:00+11:00"},{"id":"sub1686","title":"AUSBGC26 - Entrance Feature","state":"QLD","venue":"Gold Coast Exhibition & Convention Centre","accountManager":"Kevin Smith","crewStatus":"pending","level":3,"time":"2026-10-23T17:30:00+11:00"}],"2026-10-24":[{"id":"sub1596","title":"SHPAB26 - Exhibitor Orders","state":"QLD","venue":"Brisbane Convention & Exhibition Centre","accountManager":"Abby Mackay","crewStatus":"pending","level":3,"time":"2026-10-24T16:45:00+11:00"}],"2026-10-25":[{"id":"sub1673","title":"HIMAASA26 - Exhibitor Orders","state":"NSW","venue":"Hilton Sydney","accountManager":"Simon Jacobs","crewStatus":"pending","level":1,"time":"2026-10-25T21:00:00+11:00"}],"2026-10-26":[{"id":"sub1673","title":"HIMAASA26 - Exhibitor Orders","state":"NSW","venue":"Hilton Sydney","accountManager":"Simon Jacobs","crewStatus":"pending","level":1,"time":"2026-10-26T07:00:00+11:00"},{"id":"sub1576","title":"ERESM26 - Exhibitor Orders","state":"VIC","venue":"Melbourne Convention & Exhibition Centre","accountManager":"Natalie Blauberg","crewStatus":"confirmed","level":1,"time":"2026-10-26T13:00:00+11:00"},{"id":"sub1677","title":"NSWPPS26 - Exhibitor Orders","state":"NSW","venue":"Sofitel Wentworth","accountManager":"Lucy Duggan","crewStatus":"pending","level":1,"time":"2026-10-26T13:00:00+11:00"}],"2026-10-27":[{"id":"sub1657","title":"IAP2CB26 - Organiser Order","state":"QLD","venue":"Sofitel Brisbane","accountManager":"Tiarni Peardon","crewStatus":"pending","level":1,"time":"2026-10-27T13:00:00+11:00"},{"id":"sub1664","title":"ALLEMCSB26 - Tutt Bryant","state":"VIC","venue":"Melbourne Convention & Exhibition Centre","accountManager":"Natalie Blauberg","crewStatus":"confirmed","level":1,"time":"2026-10-27T13:00:00+11:00"}]}}</script>
+
+<script id="app-script">
+(function(){
+  "use strict";
+
+  var els = {
+    dateLine: document.getElementById('date-line'),
+    snapshotLabel: document.getElementById('snapshot-label'),
+    footerCount: document.getElementById('footer-count'),
+    grid: document.getElementById('grid')
+  };
+
+  function escapeHtml(str){
+    return String(str == null ? '' : str).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+  function fmtTime(iso){
+    if(!iso) return null;
+    var d = new Date(iso);
+    if(isNaN(d)) return null;
+    var fmt = new Intl.DateTimeFormat('en-AU', {
+      timeZone:'Australia/Sydney', hour:'2-digit', minute:'2-digit', hour12:false
+    });
+    return fmt.format(d);
+  }
+
+  // Parses a "YYYY-MM-DD" schedule key into a fixed UTC-noon Date so
+  // weekday/day/month formatting is immune to the viewer's own timezone
+  // and to DST edges (same pattern as the main Daily Schedule pages).
+  function dateFromKey(key){
+    var bits = key.split('-');
+    return new Date(Date.UTC(+bits[0], +bits[1]-1, +bits[2], 12, 0, 0));
+  }
+  function keyForOffset(startKey, offsetDays){
+    var d = dateFromKey(startKey);
+    d.setUTCDate(d.getUTCDate() + offsetDays);
+    return d.toISOString().slice(0, 10);
+  }
+  function fmtWeekday(key){
+    return new Intl.DateTimeFormat('en-AU', {weekday:'short'}).format(dateFromKey(key)).toUpperCase();
+  }
+  function fmtDateShort(key){
+    return new Intl.DateTimeFormat('en-AU', {day:'numeric', month:'short'}).format(dateFromKey(key));
+  }
+  function fmtDateLine(startKey, endKey){
+    var fmt = new Intl.DateTimeFormat('en-AU', {day:'numeric', month:'long', year:'numeric'});
+    return fmt.format(dateFromKey(startKey)) + ' – ' + fmt.format(dateFromKey(endKey));
+  }
+  function fmtSnapshot(iso){
+    if(!iso) return '—';
+    var d = new Date(iso);
+    if(isNaN(d)) return '—';
+    var fmt = new Intl.DateTimeFormat('en-AU', {
+      timeZone:'Australia/Sydney', weekday:'short', day:'numeric', month:'short',
+      year:'numeric', hour:'2-digit', minute:'2-digit', hour12:false
+    });
+    return fmt.format(d) + ' AEST/AEDT';
+  }
+
+  function getData(){
+    var raw = document.getElementById('wallboard-data').textContent;
+    var parsed = JSON.parse(raw);
+    if(!parsed.days) parsed.days = {};
+    return parsed;
+  }
+
+  var data = getData();
+  var startKey = data.windowStart;
+  var dayKeys = [];
+  for(var i = 0; i < 21; i++){ dayKeys.push(keyForOffset(startKey, i)); }
+  var todayKey = dayKeys[0];
+
+  var days = dayKeys.map(function(key){
+    var jobs = (data.days[key] || []).slice();
+    jobs.sort(function(a, b){ return (a.time || '').localeCompare(b.time || ''); });
+    return {key:key, jobs:jobs, today: key === todayKey};
+  });
+
+  var weeks = [days.slice(0, 7), days.slice(7, 14), days.slice(14, 21)];
+
+  function statusPill(status){
+    var label = status === 'confirmed' ? 'Confirmed' : 'Pending';
+    return '<span class="pill pill-' + (status === 'confirmed' ? 'confirmed' : 'pending') + '">' + label + '</span>';
+  }
+
+  function levelBadge(level){
+    return '<span class="level-badge">' + level + '</span>';
+  }
+
+  function jobCardHtml(job){
+    var time = fmtTime(job.time);
+    return (
+      '<div class="wcard level-' + job.level + '">' +
+        '<div class="wcard-head">' +
+          '<div class="wcard-title">' + escapeHtml(job.title) + '</div>' +
+          levelBadge(job.level) +
+        '</div>' +
+        (time ? '<div class="wcard-time">' + time + '</div>' : '') +
+        '<div class="wcard-venue">' + escapeHtml(job.venue) + ' &middot; <span class="state">' + escapeHtml(job.state) + '</span></div>' +
+        '<div class="wcard-am"><span class="lbl">Account manager</span>' + escapeHtml(job.accountManager || '—') + '</div>' +
+        '<div class="wcard-foot">' + statusPill(job.crewStatus) + '</div>' +
+      '</div>'
+    );
+  }
+
+  function renderWeek(weekIdx){
+    var weekDays = weeks[weekIdx];
+    els.grid.innerHTML = weekDays.map(function(day){
+      var head = '<div class="wcol-head' + (day.today ? ' today' : '') + '">' +
+        '<span><span class="wcol-wd">' + fmtWeekday(day.key) + '</span> <span class="wcol-date">' + fmtDateShort(day.key) + '</span></span>' +
+        '<span class="wcol-count">' + day.jobs.length + '</span></div>';
+      var body = day.jobs.length
+        ? day.jobs.map(jobCardHtml).join('')
+        : '<div class="wempty">No Moreton jobs</div>';
+      return '<div class="wcol">' + head + body + '</div>';
+    }).join('');
+    els.dateLine.textContent = fmtDateLine(weekDays[0].key, weekDays[weekDays.length - 1].key);
+    var total = weekDays.reduce(function(sum, d){ return sum + d.jobs.length; }, 0);
+    els.footerCount.textContent = total + ' job' + (total === 1 ? '' : 's') + ' this week';
+  }
+
+  var tabs = {'0':document.getElementById('tab-w0'), '1':document.getElementById('tab-w1'), '2':document.getElementById('tab-w2')};
+  var WEEK_STORAGE_KEY = 'moreton-wallboard-week';
+  function setWeek(w){
+    Object.keys(tabs).forEach(function(k){
+      tabs[k].classList.toggle('active', k === w);
+      tabs[k].setAttribute('aria-selected', k === w ? 'true' : 'false');
+    });
+    renderWeek(+w);
+    try{ localStorage.setItem(WEEK_STORAGE_KEY, w); }catch(e){}
+  }
+  Object.keys(tabs).forEach(function(k){
+    tabs[k].addEventListener('click', function(){ setWeek(k); });
+  });
+  var initialWeek = '0';
+  try{ initialWeek = localStorage.getItem(WEEK_STORAGE_KEY) || '0'; }catch(e){}
+  setWeek(initialWeek);
+
+  els.snapshotLabel.textContent = 'snapshot: ' + fmtSnapshot(data.generatedAt);
+
+  // Unattended TV display: nobody is at the warehouse screen to hit reload,
+  // so pick up each manual refresh automatically.
+  setInterval(function(){ location.reload(); }, 10 * 60 * 1000);
+})();
+</script>
+
+</body>
+</html>

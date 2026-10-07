@@ -227,6 +227,11 @@ export default {
         crewPlannerUrl.pathname = "/crew-planner.html";
         return env.ASSETS.fetch(new Request(crewPlannerUrl, req));
       }
+      if (url.pathname === "/moreton") {
+        const moretonUrl = new URL(req.url);
+        moretonUrl.pathname = "/wallboard-moreton.html";
+        return env.ASSETS.fetch(new Request(moretonUrl, req));
+      }
       return env.ASSETS.fetch(req);
     }
 
