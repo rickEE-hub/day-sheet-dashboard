@@ -208,6 +208,17 @@ export default {
     if (pathname === "/projects") pathname = "/";
     else if (pathname.startsWith("/projects/")) pathname = pathname.slice("/projects".length);
 
+    // The Moreton Hire wall board is kept off eventequipment.app entirely
+    // (Rick's explicit ask, 2026-10-07) — only the original workers.dev
+    // link should ever reach it. eventequipment.app is wildcard-routed to
+    // this same Worker, so /moreton would otherwise resolve there too
+    // (with or without the /projects prefix); block it by hostname before
+    // it ever reaches the rewrite below. Every other page is unaffected.
+    const isEventEquipmentDomain = url.hostname === "eventequipment.app" || url.hostname.endsWith(".eventequipment.app");
+    if (isEventEquipmentDomain && pathname === "/moreton") {
+      return new Response("Not found", { status: 404 });
+    }
+
     // Everything else is a static asset. html_handling is set to "none"
     // in wrangler.toml so /index.html and /view.html are served at those
     // exact paths with no redirect (matching the links already shared
