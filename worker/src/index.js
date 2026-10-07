@@ -225,7 +225,7 @@ export default {
     // with the team) — the only rewrite needed is mapping "/" to
     // "/index.html" ("/" has no literal file of its own).
     if (env.ASSETS) {
-      if (pathname === "/") {
+      if (pathname === "/" || pathname === "/dailyschedule") {
         const indexUrl = new URL(req.url);
         indexUrl.pathname = "/index.html";
         return env.ASSETS.fetch(new Request(indexUrl, req));
@@ -245,7 +245,7 @@ export default {
         stateUrl.pathname = "/view-" + pathname.slice(1) + ".html";
         return env.ASSETS.fetch(new Request(stateUrl, req));
       }
-      if (pathname === "/crew-planner") {
+      if (pathname === "/crew-planner" || pathname === "/crewplanner") {
         const crewPlannerUrl = new URL(req.url);
         crewPlannerUrl.pathname = "/crew-planner.html";
         return env.ASSETS.fetch(new Request(crewPlannerUrl, req));
