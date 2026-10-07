@@ -196,41 +196,61 @@ export default {
     if (url.pathname === "/api/notes") return handleNotes(req, env);
     if (url.pathname === "/api/reminder") return handleReminder(req, env);
 
+    // eventequipment.app namespaces this Worker under /projects/* (a
+    // Cloudflare Route on that custom domain points the prefix here — see
+    // CLAUDE.md's "Custom domain (eventequipment.app)" section). Strip the
+    // prefix once so every rewrite below resolves the same page whether
+    // it's reached at the workers.dev root or at eventequipment.app/projects/<page>.
+    // The front-end's own API calls always hit absolute "/api/..." paths
+    // (see above), never "/projects/api/...", so no prefix handling is
+    // needed there.
+    let pathname = url.pathname;
+    if (pathname === "/projects") pathname = "/";
+    else if (pathname.startsWith("/projects/")) pathname = pathname.slice("/projects".length);
+
     // Everything else is a static asset. html_handling is set to "none"
     // in wrangler.toml so /index.html and /view.html are served at those
     // exact paths with no redirect (matching the links already shared
     // with the team) — the only rewrite needed is mapping "/" to
     // "/index.html" ("/" has no literal file of its own).
     if (env.ASSETS) {
-      if (url.pathname === "/") {
+      if (pathname === "/") {
         const indexUrl = new URL(req.url);
         indexUrl.pathname = "/index.html";
         return env.ASSETS.fetch(new Request(indexUrl, req));
       }
-      if (url.pathname === "/wallboard") {
+      if (pathname === "/wallboard") {
         const wallboardUrl = new URL(req.url);
         wallboardUrl.pathname = "/wallboard.html";
         return env.ASSETS.fetch(new Request(wallboardUrl, req));
       }
-      if (url.pathname === "/history") {
+      if (pathname === "/history") {
         const historyUrl = new URL(req.url);
         historyUrl.pathname = "/history.html";
         return env.ASSETS.fetch(new Request(historyUrl, req));
       }
-      if (url.pathname === "/nsw" || url.pathname === "/vic" || url.pathname === "/qld") {
+      if (pathname === "/nsw" || pathname === "/vic" || pathname === "/qld") {
         const stateUrl = new URL(req.url);
-        stateUrl.pathname = "/view-" + url.pathname.slice(1) + ".html";
+        stateUrl.pathname = "/view-" + pathname.slice(1) + ".html";
         return env.ASSETS.fetch(new Request(stateUrl, req));
       }
-      if (url.pathname === "/crew-planner") {
+      if (pathname === "/crew-planner") {
         const crewPlannerUrl = new URL(req.url);
         crewPlannerUrl.pathname = "/crew-planner.html";
         return env.ASSETS.fetch(new Request(crewPlannerUrl, req));
       }
-      if (url.pathname === "/moreton") {
+      if (pathname === "/moreton") {
         const moretonUrl = new URL(req.url);
         moretonUrl.pathname = "/wallboard-moreton.html";
         return env.ASSETS.fetch(new Request(moretonUrl, req));
+      }
+      if (pathname !== url.pathname) {
+        // A /projects/-prefixed request that isn't one of the named
+        // pages above (e.g. a direct asset fetch) — serve it from
+        // ASSETS using the de-prefixed path.
+        const assetUrl = new URL(req.url);
+        assetUrl.pathname = pathname;
+        return env.ASSETS.fetch(new Request(assetUrl, req));
       }
       return env.ASSETS.fetch(req);
     }
