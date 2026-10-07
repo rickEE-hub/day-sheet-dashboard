@@ -47,6 +47,23 @@ One-time setup (a human with dashboard access must do this, not Claude):
 
 Status as of 2026-09-06: **live and working** at https://day-sheet-dashboard.rick-120.workers.dev/ (team/edit page) — since 2026-09-22 `/view.html` is the internal all-states viewer, not the contractor link; contractors get `/nsw`, `/vic`, `/qld` instead (see "Multi-state expansion" above). Git integration deploys automatically on every push to `main`, confirmed repeatedly via `workers_get_worker_code`. Edit passcode `ee123` (changed 2026-09-22 — was `4242`).
 
+## Custom domain (`eventequipment.app`) — requested 2026-10-07, pending manual Cloudflare setup
+
+Rick bought `eventequipment.app` and wants it to front this Worker under a `/projects/*` path namespace, e.g. `eventequipment.app/projects/wallboard` → the same page as `https://day-sheet-dashboard.rick-120.workers.dev/wallboard`. The `/projects/*` prefix (rather than mapping the bare domain root) implies this domain is meant to host more than just this one project eventually — don't assume `eventequipment.app/` itself should ever serve this Worker's `index.html`.
+
+- **Worker-side code is done and live** (`b14c560`, 2026-10-07): `worker/src/index.js`'s `fetch` handler now strips a leading `/projects` (or `/projects/...`) prefix from the pathname *before* every existing rewrite (`/` → `/index.html`, `/wallboard` → `/wallboard.html`, `/nsw`/`/vic`/`/qld` → `/view-<state>.html`, `/crew-planner`, `/moreton`, and the ASSETS fallback), so `/projects/wallboard` now resolves identically to `/wallboard` — on **any** domain this Worker is reached through, not just `eventequipment.app`. `/api/items`/`/api/notes`/`/api/reminder` are untouched by this and keep working as absolute root paths, which is what the front-end's `fetch()` calls already use (confirmed by reading `API_BASE`/`NOTES_API`/`REMINDER_API` in `index.html` — they're hardcoded `/api/...`, never prefix-relative), so no `/projects/api/...` handling was needed.
+- **Cloudflare-side domain/Route setup is NOT done yet** — it's a dashboard-only sequence that needs a human with both registrar access (to repoint nameservers) and Cloudflare account access; Claude has no authenticated Cloudflare connector in this sandbox and can't reach `api.cloudflare.com` directly (same network policy as the main Cloudflare deploy, see above). **Do this via the dashboard UI, not by adding `[[routes]]` to `worker/wrangler.toml`** — a wrangler.toml route pointing at a zone that doesn't exist yet (or isn't Active) would make every subsequent Cloudflare Workers Build fail, which would silently break the 7am/noon/5pm/Moreton-daily automated refresh deploys until someone noticed and reverted it. The dashboard Route is independent of the Git-based build/deploy pipeline, so it carries none of that risk.
+  1. Cloudflare dashboard → **Websites** → **Add a site** → enter `eventequipment.app` → pick the Free plan.
+  2. Cloudflare shows two assigned nameservers — update them at whichever registrar `eventequipment.app` was bought through (outside Cloudflare, e.g. the registrar's DNS/nameserver settings page).
+  3. Wait for the zone to flip from "Pending" to **Active** in the Cloudflare dashboard (DNS propagation — anywhere from minutes to ~24h).
+  4. Once Active: **Workers & Pages** → `day-sheet-dashboard` → **Settings** → **Domains & Routes** (or **Triggers**, depending on dashboard version) → **Add** → **Route**, and add:
+     - `eventequipment.app/projects` (exact, no trailing content — covers the bare `/projects` path)
+     - `eventequipment.app/projects/*`
+     - `eventequipment.app/api/*` (needed because the front-end's API calls are absolute `/api/...`, not `/projects/api/...` — see above)
+     all three targeting the `day-sheet-dashboard` Worker.
+  5. Test `https://eventequipment.app/projects/wallboard` (and a couple of others — `/projects`, `/projects/nsw`, `/projects/moreton`) once the Route shows Active.
+- Once confirmed working, update this section: replace "pending" with the live date, and consider whether `eventequipment.app`'s *root* (bare `/`) should eventually get its own landing page linking out to `/projects/<thing>` — not decided yet, don't build it unasked.
+
 ## Live schedule refresh — tried and reverted (2026-09-08/09)
 
 A Cron-Trigger-driven design was fully built, deployed, and then reverted within about a day. Recorded here so nobody re-derives this from scratch:
