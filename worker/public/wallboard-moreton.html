@@ -150,7 +150,15 @@
   /* ---- Legend ---- */
   .legend{display:flex; flex-wrap:wrap; gap:10px 16px; padding:0 0 18px; font-size:12px; color:var(--ink-dim);}
   .legend-item{display:inline-flex; align-items:center; gap:6px;}
-  .legend-dot{width:10px;height:10px;border-radius:50%;flex:none;}
+  .legend-circle{
+    width:18px; height:18px; border-radius:50%; flex:none;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'JetBrains Mono', monospace; font-weight:700; font-size:10.5px;
+    border:2px solid transparent;
+  }
+  .legend-circle-1{background:var(--level-1-soft); color:var(--level-1); border-color:var(--level-1);}
+  .legend-circle-2{background:var(--level-2-soft); color:var(--level-2); border-color:var(--level-2);}
+  .legend-circle-3{background:var(--level-3-soft); color:var(--level-3); border-color:var(--level-3);}
 
   [hidden]{display:none !important;}
 
@@ -243,9 +251,9 @@
   </div>
 
   <div class="legend">
-    <span class="legend-item"><span class="legend-dot" style="background:var(--level-1)"></span>Level 1 &middot; up to 10 TVs</span>
-    <span class="legend-item"><span class="legend-dot" style="background:var(--level-2)"></span>Level 2 &middot; 11&ndash;20 TVs</span>
-    <span class="legend-item"><span class="legend-dot" style="background:var(--level-3)"></span>Level 3 &middot; +21 TVs or LED Wall</span>
+    <span class="legend-item"><span class="legend-circle legend-circle-1">1</span>Level 1 &middot; up to 10 TVs</span>
+    <span class="legend-item"><span class="legend-circle legend-circle-2">2</span>Level 2 &middot; 11&ndash;20 TVs</span>
+    <span class="legend-item"><span class="legend-circle legend-circle-3">3</span>Level 3 &middot; +21 TVs or LED Wall</span>
   </div>
 
   <div class="wall-scroll"><div class="wall-grid" id="grid"></div></div>
@@ -382,12 +390,11 @@
   function jobCardHtml(job){
     var time = fmtTime(job.time);
     var stateKey = (job.state || '').toLowerCase();
-    var borderStyle = stateKey ? ' style="border-left:4px solid var(--state-' + stateKey + ')"' : '';
     var stateBadge = stateKey ? '<span class="state-badge state-badge-' + stateKey + '">' + escapeHtml(job.state) + '</span>' : '';
     var funcLabel = functionLabel(job.function);
     var funcChip = funcLabel ? '<span class="func-chip">' + escapeHtml(funcLabel.toUpperCase()) + '</span>' : '';
     return (
-      '<div class="wcard level-' + job.level + '"' + borderStyle + '>' +
+      '<div class="wcard level-' + job.level + '">' +
         '<div class="wcard-head">' +
           '<div class="wcard-title">' + escapeHtml(job.title) + '</div>' +
           levelBadge(job.level) +
