@@ -61,7 +61,7 @@ Rick bought `eventequipment.app` and wants it to front this Worker under a `/pro
 
 ## Cisco Live Chess (`worker/public/clients/chess/`, added 2026-10-13) — client project, not part of the Day Sheet
 
-Rick's Cisco Live touchscreen chess game, hosted here only so it gets an `eventequipment.app` address. Three self-contained pages built outside this repo (source lives in the separate "Cisco Chess" project) and copied in as-is: `index.html` (table TVs, opened as `/clients/chess/?table=N&code=…`), `operator.html`, `leaderboard.html`. They talk to their own Supabase project, not this Worker's KV or `/api/*`.
+Rick's Cisco Live touchscreen chess game, hosted here only so it gets an `eventequipment.app` address. Three self-contained pages built outside this repo (source lives in the separate "Cisco Chess" project) and copied in as-is: `index.html` (table TVs, opened as `/clients/chess/?table=N&code=000N` — each table has its own 4-digit password, table 1 = 0001 … table 6 = 0006), `operator.html`, `leaderboard.html`. They talk to their own Supabase project, not this Worker's KV or `/api/*`.
 
 - `worker/src/index.js` rewrites `/clients/chess` and `/clients/chess/` to `/clients/chess/index.html` (needed because `html_handling = "none"`); the other two are served at their exact paths.
 - **Never touch these files during Day Sheet refreshes** — they are not part of the six byte-identical `app-state` files, the archive, or any Routine. Only replace them when Rick sends a new chess build.

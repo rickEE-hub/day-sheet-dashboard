@@ -530,7 +530,7 @@ input[type=range]{width:100%;accent-color:var(--text)}
 <div class="setup" id="setup" hidden><div class="setupcard">
   <img class="setlogo" id="setLogo" alt="Cisco Live">
   <h3>Set up this table</h3>
-  <p class="note">Choose the table number, then enter the table code from the operator.</p>
+  <p class="note">Choose the table number, then enter this table’s 4-digit password.</p>
   <div class="setnums" id="setNums"><button data-n="1">1</button><button data-n="2">2</button><button data-n="3">3</button><button data-n="4">4</button><button data-n="5">5</button><button data-n="6">6</button></div>
   <div class="dots six" id="setDots"></div>
   <div class="pad" id="setPad"><button data-k="1">1</button><button data-k="2">2</button><button data-k="3">3</button><button data-k="4">4</button><button data-k="5">5</button><button data-k="6">6</button><button data-k="7">7</button><button data-k="8">8</button><button data-k="9">9</button><button data-k="x" class="soft">Cancel</button><button data-k="0">0</button><button data-k="del" class="soft">Delete</button></div>
@@ -899,7 +899,7 @@ function poll(){
     applyState(res.table);setConn();flushPending();
   },function(e){
     polling=false;
-    if(e&&(e.code==="42501"||/wrong code/i.test(e.message))){S.tableCode="";save();showSetup("That table code is not right. Ask the operator for the code.");return}
+    if(e&&(e.code==="42501"||/wrong code/i.test(e.message))){S.tableCode="";save();showSetup("This table’s password has changed. Enter the 4-digit password.");return}
     if(e&&/unknown table/i.test(e.message)){showSetup("Table "+tableNo()+" is not set up in the operator console.");return}
     setConn();
   });
@@ -1115,22 +1115,24 @@ function showSetup(msg){
 }
 function drawSetup(){
   $$("#setNums button").forEach(function(b){b.setAttribute("aria-pressed",+b.dataset.n===setNum)});
-  $("setDots").innerHTML=[0,1,2,3,4,5].map(function(i){return '<b class="dg'+(i<setBuf.length?' on':'')+'">'+(setBuf[i]||"")+'</b>'}).join("");
+  $("setDots").innerHTML=[0,1,2,3].map(function(i){return '<b class="dg'+(i<setBuf.length?' on':'')+'">'+(setBuf[i]||"")+'</b>'}).join("");
 }
 $("setNums").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;setNum=+b.dataset.n;$("setErr").textContent="";drawSetup()});
 $("setPad").addEventListener("click",function(e){
   var b=e.target.closest("button");if(!b||setBusy)return;var k=b.dataset.k;
   if(k==="x"){if(tableNo()&&tableCode())$("setup").hidden=true;return}
   if(k==="del"){setBuf=setBuf.slice(0,-1);drawSetup();return}
-  if(setBuf.length<6)setBuf+=k;drawSetup();
-  if(setBuf.length===6){
+  if(setBuf.length<4)setBuf+=k;drawSetup();
+  if(setBuf.length===4){
+    /* the password also tells us the table: 0001 is table 1 ... 0006 is table 6 */
+    if(!setNum){var guess=parseInt(setBuf,10);if(guess>=1&&guess<=6){setNum=guess;drawSetup()}}
     if(!setNum){$("setErr").textContent="Choose the table number first.";setBuf="";drawSetup();return}
     var code=setBuf;setBusy=true;$("setErr").textContent="Checking…";
     rpc("table_state",{p_code:code,p_table:setNum},6000).then(function(res){
       setBusy=false;S.tableNo=String(setNum);S.tableCode=code;save();$("setup").hidden=true;toast("This screen is now Table "+setNum);
       lastSig="";resetLocal();localSid=null;TS.offset=Date.parse(res.now)-Date.now();applyState(res.table);syncDrawer();
     },function(e){
-      $("setErr").textContent=/wrong code/i.test(e.message)?"That code is not right. Try again.":/unknown table/i.test(e.message)?"Table "+setNum+" is not set up in the operator console.":"Can’t reach the operator. Check the internet and try again.";
+      $("setErr").textContent=/wrong code/i.test(e.message)?"That password is not right for table "+setNum+". Try again.":/unknown table/i.test(e.message)?"Table "+setNum+" is not set up in the operator console.":"Can’t reach the operator. Check the internet and try again.";
       var d=$("setDots");d.classList.remove("shake");void d.offsetWidth;d.classList.add("shake");setTimeout(function(){setBuf="";setBusy=false},1350);setTimeout(drawSetup,1400);
     });
   }
