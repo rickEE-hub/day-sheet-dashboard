@@ -869,7 +869,9 @@ var API={url:"https://kagbjutxhptqurpkojsk.supabase.co",key:"sb_publishable_PLDK
 var VAL={p:1,n:5,b:5,r:5,q:12};               /* points for each piece captured */
 var TS={state:"idle",white:null,black:null,session:null,minutes:15,offset:0,lastOk:0,polled:false};
 var localSid=null,caps={w:0,b:0},timeUp=false,opEnded=false,clockTick=null,lastBeep=-1,lastSig="",overShownFor=null;
-var MOVE_MS=30000,turnStart=0,note="";        /* 30 seconds per move */
+var MOVE_MS=30000,turnStart=0,note="";
+/* ?demo in the address: a self-contained test game, no operator or server needed. Refresh = new game. */
+var DEMO=/[?&]demo(=|&|$)/.test(location.search);        /* 30 seconds per move */
 
 function rpc(fn,body,ms){
   var ctl=window.AbortController?new AbortController():null,t=setTimeout(function(){if(ctl)ctl.abort()},ms||6000);
@@ -889,7 +891,7 @@ function colorName(c){return c==="w"?"White":"Black"}
 /* ---------- polling the operator's state ---------- */
 var polling=false;
 function poll(){
-  if(polling)return;
+  if(DEMO||polling)return;
   if(!tableNo()||!tableCode()){showSetup();return}
   polling=true;
   rpc("table_state",{p_code:tableCode(),p_table:tableNo()},5000).then(function(res){
@@ -946,14 +948,14 @@ function movesText(){return hist.map(function(x){return x.san}).join(" ")}
 function pushProgress(){
   clearTimeout(progT);
   progT=setTimeout(function(){
-    if(!localSid||!playing())return;
+    if(DEMO||!localSid||!playing())return;
     rpc("table_progress",{p_code:tableCode(),p_session:localSid,p_moves:movesText(),p_turn:game.turn(),p_white_cap:caps.w,p_black_cap:caps.b}).catch(function(){progT=null;setTimeout(pushProgress,3000)});
   },250);
 }
 function pendingList(){try{return JSON.parse(localStorage.getItem("cl-pending")||"[]")}catch(e){return []}}
 function setPending(l){try{localStorage.setItem("cl-pending",JSON.stringify(l))}catch(e){}}
 function reportFinish(r){
-  if(!localSid||r.reason==="operator")return;
+  if(DEMO||!localSid||r.reason==="operator")return;
   var item={p_code:tableCode(),p_session:localSid,p_result:r.w==="w"?"white":r.w==="b"?"black":"draw",p_reason:r.reason,p_moves:movesText(),p_white_cap:caps.w,p_black_cap:caps.b};
   var l=pendingList().filter(function(x){return x.p_session!==localSid});l.push(item);setPending(l);flushPending();
 }
@@ -976,6 +978,8 @@ function commit(mv){
 }
 function remaining(){if(!TS.session)return 0;return Math.max(0,Date.parse(TS.session.ends_at)-(Date.now()+TS.offset))}
 function startClock(){stopClock();lastBeep=-1;clockTick=setInterval(function(){
+  /* demo: both clocks wait for White's first move */
+  if(DEMO&&!hist.length&&TS.session){turnStart=Date.now();TS.session.ends_at=new Date(Date.now()+TS.session.minutes*60000).toISOString()}
   if(!playing()||isOver()){stopClock();renderTimers();return}
   var r=remaining();if(r<=0){stopClock();return onTimeUp()}
   var mr=moveLeft();if(mr<=0){moveTimeout();return}
@@ -1101,7 +1105,7 @@ function showOver(){
     card.querySelector(".ovT").textContent=r.reason==="checkmate"?(r.w===c?"You win!":"Checkmate"):r.t;
     card.querySelector(".ovX").textContent=r.x;
     card.querySelector(".ovR").textContent=(p?p.name.split(" ")[0]+", you":"You")+" scored "+pts+" point"+(pts===1?"":"s")+" this game";
-    card.querySelector(".ovN").textContent=(p&&p.points!=null&&TS.session&&TS.session.status==="finished"?"Event total: "+p.points+(p.points===1?" point. ":" points. "):"")+"Thanks for playing! Please vacate the table for the next players.";
+    card.querySelector(".ovN").textContent=(p&&p.points!=null&&TS.session&&TS.session.status==="finished"?"Event total: "+p.points+(p.points===1?" point. ":" points. "):"")+(DEMO?"Refresh the page to play again.":"Thanks for playing! Please vacate the table for the next players.");
   });
   if(overShownFor!==localSid){overShownFor=localSid;setTimeout(function(){if(isOver()||(TS.session&&TS.session.status==="finished"))$("over").hidden=false},game.in_checkmate()?700:200)}
 }
@@ -1143,7 +1147,14 @@ $("setupBtn").onclick=function(){closeDrawer();showSetup()};
 (function(){try{var q=new URLSearchParams(location.search);if(q.get("table")){S.tableNo=String(parseInt(q.get("table"),10)||"");save()}if(q.get("code")){S.tableCode=q.get("code").replace(/\D/g,"");save()}}catch(e){}})();
 $$(".eeglogo").forEach(function(im){im.src=IMG.eeg});
 orient=baseOrient();applyLayout();syncDrawer();resetLocal();applyLook();
-poll();setInterval(poll,1500);setInterval(setConn,2000);
+if(DEMO){
+  var dn=Date.now(),dm=20;
+  $("setup").hidden=true;
+  applyState({table_no:0,state:"playing",last_seen:null,
+    white:{id:"demo-w",name:"White",company:"Demo game",games:0,points:null},
+    black:{id:"demo-b",name:"Black",company:"Demo game",games:0,points:null},
+    session:{id:"demo-"+dn,status:"playing",minutes:dm,started_at:new Date(dn).toISOString(),ends_at:new Date(dn+dm*60000).toISOString(),moves:"",turn:"w",white_cap:0,black_cap:0,live_at:new Date(dn).toISOString()}});
+}else{poll();setInterval(poll,1500);setInterval(setConn,2000)}
 })();</script>
 
 </body>
