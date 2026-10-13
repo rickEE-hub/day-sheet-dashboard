@@ -869,7 +869,7 @@ var API={url:"https://kagbjutxhptqurpkojsk.supabase.co",key:"sb_publishable_PLDK
 var VAL={p:1,n:5,b:5,r:5,q:12};               /* points for each piece captured */
 var TS={state:"idle",white:null,black:null,session:null,minutes:15,offset:0,lastOk:0,polled:false};
 var localSid=null,caps={w:0,b:0},timeUp=false,opEnded=false,clockTick=null,lastBeep=-1,lastSig="",overShownFor=null;
-var MOVE_MS=60000,turnStart=0,note="";        /* 1 minute per move */
+var MOVE_MS=30000,turnStart=0,note="";        /* 30 seconds per move */
 
 function rpc(fn,body,ms){
   var ctl=window.AbortController?new AbortController():null,t=setTimeout(function(){if(ctl)ctl.abort()},ms||6000);
@@ -1017,7 +1017,7 @@ function renderTimers(){
   [[$("tFar"),far()],[$("tNear"),near()]].forEach(function(x){
     var el=x[0].querySelector(".ttimer"),c=x[1],mine=t===c;
     el.classList.toggle("mine",live&&mine);el.classList.toggle("notime",st==="idle"||st==="seating");el.classList.toggle("urgent",urgent);
-    el.querySelector(".tlabel").textContent=live?(mine?"Your move":colorName(t)+"’s move")+" · 1 minute":over?"Game over":st==="ready"?"1 minute per move":"Next game";
+    el.querySelector(".tlabel").textContent=live?(mine?"Your move":colorName(t)+"’s move")+" · 30 sec":over?"Game over":st==="ready"?"30 seconds per move":"Next game";
     el.querySelector(".tval").textContent=(st==="idle"||st==="seating"||over)?"":live&&!mine?"":fmt(live?mv:MOVE_MS);
     el.classList.toggle("wait",live&&!mine);
     var bar=el.querySelector(".tbar i");bar.style.width=(over||(live&&!mine)?0:pct)+"%";bar.style.setProperty("--bgw",(pct>0?10000/pct:100)+"%");
@@ -1079,7 +1079,7 @@ function renderStatus(){
     var h=x[0].querySelector(".tstatus h2"),p=x[0].querySelector(".tstatus p"),c=x[1],me=playerOf(c),fn=firstName(c);
     if(r){var pts=pointsFor(c);h.textContent=r.reason==="checkmate"?(r.w===c?"You win!":"Checkmate"):r.t;p.textContent=(r.reason==="checkmate"?(r.w===c?"+100 points":"0 points this game"):"+"+pts+" points")+". Thanks for playing!";return}
     if(st==="playing"&&playing()){
-      if(t===c){h.textContent=game.in_check()?"Check":"Your move";p.textContent=note?note:game.in_check()?"Get your king to safety.":(hist.length?"":(c==="w"?"White moves first. ":"")+"You have 1 minute for each move.")}
+      if(t===c){h.textContent=game.in_check()?"Check":"Your move";p.textContent=note?note:game.in_check()?"Get your king to safety.":(hist.length?"":(c==="w"?"White moves first. ":"")+"You have 30 seconds for each move.")}
       else{h.textContent="Waiting for "+(firstName(t)||colorName(t));p.textContent=note?note:game.in_check()?"You gave check.":""}
       return;
     }
