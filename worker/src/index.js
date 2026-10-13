@@ -225,6 +225,15 @@ export default {
     // with the team) — the only rewrite needed is mapping "/" to
     // "/index.html" ("/" has no literal file of its own).
     if (env.ASSETS) {
+      // Cisco Live Chess (client project, added 2026-10-13): the table page
+      // lives at /clients/chess/index.html; html_handling "none" means the
+      // folder URL needs this explicit rewrite. operator.html and
+      // leaderboard.html are served at their exact paths by the fallback.
+      if (pathname === "/clients/chess" || pathname === "/clients/chess/") {
+        const chessUrl = new URL(req.url);
+        chessUrl.pathname = "/clients/chess/index.html";
+        return env.ASSETS.fetch(new Request(chessUrl, req));
+      }
       if (pathname === "/" || pathname === "/dailyschedule") {
         const indexUrl = new URL(req.url);
         indexUrl.pathname = "/index.html";

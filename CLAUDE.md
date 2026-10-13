@@ -59,6 +59,13 @@ Rick bought `eventequipment.app` and wants it to front this Worker under a `/pro
 - **`/moreton` is explicitly excluded from `eventequipment.app`** (Rick's ask, 2026-10-07, right after confirming the domain worked: "remove moreton access to my new domain... leave MORETON with the old link"). Because the Route is the full-domain wildcard above, `/moreton` would otherwise have resolved there too (with or without the `/projects` prefix). `worker/src/index.js` (`4b3da00`) now checks the request `Host` header — if it's `eventequipment.app` or any `*.eventequipment.app` subdomain, `/moreton` returns a plain 404, regardless of path prefix; every other hostname (the `workers.dev` link, and any future domain) is unaffected. The Moreton Hire wall board's only live link stays `https://day-sheet-dashboard.rick-120.workers.dev/moreton` — never give out an `eventequipment.app` link for it, and don't remove this hostname check without Rick asking first.
 - Confirmed working: `https://eventequipment.app/projects/wallboard`, `/projects`, and others resolve correctly. Not yet decided: whether `eventequipment.app`'s bare root should eventually get its own landing page (right now it just shows the Daily Schedule edit page, same as `/projects` — a side effect of the wildcard route, not a deliberate design) — don't build anything there unasked.
 
+## Cisco Live Chess (`worker/public/clients/chess/`, added 2026-10-13) — client project, not part of the Day Sheet
+
+Rick's Cisco Live touchscreen chess game, hosted here only so it gets an `eventequipment.app` address. Three self-contained pages built outside this repo (source lives in the separate "Cisco Chess" project) and copied in as-is: `index.html` (table TVs, opened as `/clients/chess/?table=N&code=…`), `operator.html`, `leaderboard.html`. They talk to their own Supabase project, not this Worker's KV or `/api/*`.
+
+- `worker/src/index.js` rewrites `/clients/chess` and `/clients/chess/` to `/clients/chess/index.html` (needed because `html_handling = "none"`); the other two are served at their exact paths.
+- **Never touch these files during Day Sheet refreshes** — they are not part of the six byte-identical `app-state` files, the archive, or any Routine. Only replace them when Rick sends a new chess build.
+
 ## Live schedule refresh — tried and reverted (2026-09-08/09)
 
 A Cron-Trigger-driven design was fully built, deployed, and then reverted within about a day. Recorded here so nobody re-derives this from scratch:
