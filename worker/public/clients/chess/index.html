@@ -1101,7 +1101,7 @@ function showOver(){
     card.querySelector(".ovT").textContent=r.reason==="checkmate"?(r.w===c?"You win!":"Checkmate"):r.t;
     card.querySelector(".ovX").textContent=r.x;
     card.querySelector(".ovR").textContent=(p?p.name.split(" ")[0]+", you":"You")+" scored "+pts+" point"+(pts===1?"":"s")+" this game";
-    card.querySelector(".ovN").textContent=(p&&p.points!=null&&TS.session&&TS.session.status==="finished"?"Event total: "+p.points+(p.points===1?" point. ":" points. "):"")+"Thanks for playing! Please leave the table for the next players.";
+    card.querySelector(".ovN").textContent=(p&&p.points!=null&&TS.session&&TS.session.status==="finished"?"Event total: "+p.points+(p.points===1?" point. ":" points. "):"")+"Thanks for playing! Please vacate the table for the next players.";
   });
   if(overShownFor!==localSid){overShownFor=localSid;setTimeout(function(){if(isOver()||(TS.session&&TS.session.status==="finished"))$("over").hidden=false},game.in_checkmate()?700:200)}
 }
