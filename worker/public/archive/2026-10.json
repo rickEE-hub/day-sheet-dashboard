@@ -1236,6 +1236,76 @@
     ],
     "address": "14 Darling Drive, Sydney NSW 2000"
    }
+  ],
+  "2026-10-16": [
+   {
+    "id": "sub1583",
+    "title": "BLOOD 2026 + RANZCO National 2026 (Auckland - New Zealand)",
+    "status": "onlocation",
+    "venue": "Concept Craft Pty Ltd",
+    "state": "NSW",
+    "rows": [
+     {
+      "id": "fn5500",
+      "name": "AV Setup",
+      "category": "install",
+      "start": "2026-10-16T13:00:00+11:00",
+      "end": "2026-10-16T19:00:00+11:00",
+      "needed": 2,
+      "crew": [
+       "Victor Ip"
+      ],
+      "vehicles": []
+     }
+    ],
+    "address": "24 Egerton Street, Silverwater NSW 2128"
+   },
+   {
+    "id": "sub1588",
+    "title": "FCTEGS26 - Exhibitor Orders",
+    "status": "onlocation",
+    "venue": "International Convention Centre Sydney (ICC)",
+    "state": "NSW",
+    "rows": [
+     {
+      "id": "fn5519",
+      "name": "Exhibition Check Off",
+      "category": "other",
+      "start": "2026-10-16T09:00:00+11:00",
+      "end": "2026-10-16T12:00:00+11:00",
+      "needed": 1,
+      "crew": [
+       "Rick Sanchez"
+      ],
+      "vehicles": [
+       "NSW Staff Vehicle · "
+      ]
+     }
+    ],
+    "address": "14 Darling Drive, Sydney NSW 2000"
+   },
+   {
+    "id": "sub1694",
+    "title": "Adhoc Westin Brisbane - TBA",
+    "status": "onlocation",
+    "venue": "Moreton Hire QLD",
+    "state": "QLD",
+    "rows": [
+     {
+      "id": "fn5758",
+      "name": "Warehouse Prep",
+      "category": "warehouse",
+      "start": "2026-10-16T15:00:00+11:00",
+      "end": "2026-10-16T15:00:00+11:00",
+      "needed": 1,
+      "crew": [
+       "Justin Kennon"
+      ],
+      "vehicles": []
+     }
+    ],
+    "address": "29B Brickworks Place, Rochedale QLD 4123"
+   }
   ]
  }
 }
