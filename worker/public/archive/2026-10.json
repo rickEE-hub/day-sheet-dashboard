@@ -3355,6 +3355,655 @@
           }
         ]
       }
+    ],
+    "2026-10-22": [
+      {
+        "id": "sub1692",
+        "title": "Cobblebank Train Station (Melton) - Welcome to Country",
+        "status": "confirmed",
+        "venue": "Cobblebank Railway Station",
+        "state": "VIC",
+        "rows": [
+          {
+            "id": "fn5751",
+            "name": "AV Setup",
+            "category": "install",
+            "start": "2026-10-22T09:00:00+11:00",
+            "end": "2026-10-22T09:00:00+11:00",
+            "needed": 1,
+            "crew": [
+              "Emma McLoughlin"
+            ],
+            "vehicles": [
+              "VIC Staff Vehicle"
+            ]
+          },
+          {
+            "id": "fn5752",
+            "name": "AV Packdown",
+            "category": "packdown",
+            "start": "2026-10-22T11:30:00+11:00",
+            "end": "2026-10-22T11:30:00+11:00",
+            "needed": 1,
+            "crew": [
+              "Emma McLoughlin"
+            ],
+            "vehicles": [
+              "VIC Staff Vehicle"
+            ]
+          }
+        ],
+        "equipment": [
+          {
+            "name": "LD Portable PA Speaker",
+            "qty": 1
+          },
+          {
+            "name": "Mic Stand - K&M 21070 Tall Boom (Silver)",
+            "qty": 1
+          },
+          {
+            "name": "GRAVITY Tripod Speaker Stand",
+            "qty": 1
+          },
+          {
+            "name": "Mipro 707 70w CD & UHF",
+            "qty": 1
+          }
+        ],
+        "address": "Ferris Road, Cobblebank VIC 3338"
+      },
+      {
+        "id": "sub1694",
+        "title": "Adhoc Westin Brisbane - TBA",
+        "status": "onlocation",
+        "venue": "Moreton Hire QLD",
+        "state": "QLD",
+        "rows": [
+          {
+            "id": "fn5759",
+            "name": "Warehouse De-Prep",
+            "category": "warehouse",
+            "start": "2026-10-22T10:00:00+11:00",
+            "end": "2026-10-22T10:00:00+11:00",
+            "needed": 1,
+            "crew": [
+              "Justin Kennon"
+            ],
+            "vehicles": []
+          }
+        ],
+        "equipment": [
+          {
+            "name": "32\" Hisense 32Q6QAU Desk Stand",
+            "qty": 2
+          },
+          {
+            "name": "32\" QLED Android TV - Hisense",
+            "qty": 1
+          }
+        ],
+        "address": "29B Brickworks Place, Rochedale QLD 4123"
+      },
+      {
+        "id": "sub1722",
+        "title": "Bryan Kent - Dryhire",
+        "status": "confirmed",
+        "venue": "Dry Hire - Sydney",
+        "state": "NSW",
+        "rows": [
+          {
+            "id": "fn5849",
+            "name": "Warehouse Prep",
+            "category": "warehouse",
+            "start": "2026-10-22T10:00:00+11:00",
+            "end": "2026-10-22T10:00:00+11:00",
+            "needed": 1,
+            "crew": [],
+            "vehicles": []
+          }
+        ],
+        "equipment": [
+          {
+            "name": "Allen & Heath SQ5 16 Channel 12 Bus Kit",
+            "qty": 1
+          },
+          {
+            "name": "Allen & Heath AR2412 - 24IN/12OUT Stage Box",
+            "qty": 1
+          },
+          {
+            "name": "Cat 5e Ethernet Cable - 10m",
+            "qty": 1
+          }
+        ],
+        "address": "2/14a Underwood Avenue, Botany NSW 2019"
+      },
+      {
+        "id": "sub1596",
+        "title": "SHPAB26 - Exhibitor Orders",
+        "status": "onlocation",
+        "venue": "Brisbane Convention & Exhibition Centre",
+        "state": "QLD",
+        "rows": [
+          {
+            "id": "fn5538",
+            "name": "AV Setup",
+            "category": "install",
+            "start": "2026-10-22T11:00:00+11:00",
+            "end": "2026-10-22T11:00:00+11:00",
+            "needed": 2,
+            "crew": [
+              "Odin Runga Covington",
+              "Justin Kennon"
+            ],
+            "vehicles": []
+          }
+        ],
+        "equipment": [
+          {
+            "name": "43\" LED TV - Philips",
+            "qty": 1
+          },
+          {
+            "name": "43\" LED TV - Philips",
+            "qty": 1
+          },
+          {
+            "name": "1.8m SLIM TV Stand - Black",
+            "qty": 1
+          },
+          {
+            "name": "1.8m SLIM TV Stand - Black",
+            "qty": 1
+          },
+          {
+            "name": "55\" LED TV 4K - Philips",
+            "qty": 1
+          },
+          {
+            "name": "Wall Mount System - Custom Stand",
+            "qty": 1
+          },
+          {
+            "name": "55\" LED TV 4K - Philips",
+            "qty": 1
+          },
+          {
+            "name": "55\" LED TV 4K - Philips",
+            "qty": 1
+          },
+          {
+            "name": "LED Display Poster (P2) - 0.8mW x 1.9mH",
+            "qty": 3
+          },
+          {
+            "name": "3 x Joined as 1 x LED Wall",
+            "qty": 0
+          },
+          {
+            "name": "43\" LED TV - Philips",
+            "qty": 1
+          },
+          {
+            "name": "1.8m SLIM TV Stand - Black",
+            "qty": 1
+          },
+          {
+            "name": "43\" LED TV - Philips",
+            "qty": 1
+          },
+          {
+            "name": "1.8m SLIM TV Stand - Black",
+            "qty": 1
+          },
+          {
+            "name": "55\" LED TV 4K - Philips",
+            "qty": 1
+          },
+          {
+            "name": "1.8m TV Stand - Black",
+            "qty": 1
+          },
+          {
+            "name": "1.8m TV Stand - Black",
+            "qty": 1
+          },
+          {
+            "name": "1.8m TV Stand - Black",
+            "qty": 1
+          },
+          {
+            "name": "48\" LED TV - Philips",
+            "qty": 1
+          },
+          {
+            "name": "1.8m TV Stand - Black",
+            "qty": 1
+          }
+        ],
+        "address": "Cnr Merivale & Glenelg Sts, Southbank QLD 4101"
+      },
+      {
+        "id": "sub1382",
+        "title": "Accru Felsers Event (James Craig - Tall Ship)",
+        "status": "onlocation",
+        "venue": "Tall Ship James Craig",
+        "state": "NSW",
+        "rows": [
+          {
+            "id": "fn4796",
+            "name": "AV Setup",
+            "category": "install",
+            "start": "2026-10-22T13:00:00+11:00",
+            "end": "2026-10-22T17:00:00+11:00",
+            "needed": 1,
+            "crew": [
+              "Rick Sanchez",
+              "Mick Rocco"
+            ],
+            "vehicles": [
+              "NSW Transit Van \u00b7 1UE4DI"
+            ]
+          },
+          {
+            "id": "fn4797",
+            "name": "AV Show Engineer",
+            "category": "other",
+            "start": "2026-10-22T17:30:00+11:00",
+            "end": "2026-10-22T20:30:00+11:00",
+            "needed": 1,
+            "crew": [
+              "Rick Sanchez"
+            ],
+            "vehicles": [
+              "NSW Transit Van \u00b7 1UE4DI"
+            ]
+          },
+          {
+            "id": "fn4798",
+            "name": "AV Packdown",
+            "category": "packdown",
+            "start": "2026-10-22T21:00:00+11:00",
+            "end": "2026-10-22T22:30:00+11:00",
+            "needed": 1,
+            "crew": [
+              "Rick Sanchez",
+              "Mick Rocco"
+            ],
+            "vehicles": [
+              "NSW Transit Van \u00b7 1UE4DI"
+            ]
+          }
+        ],
+        "equipment": [
+          {
+            "name": "LED Battery Par - IP Rated",
+            "qty": 12
+          },
+          {
+            "name": "LED Pixel Bar 12 x 12W RGBWAU",
+            "qty": 4
+          },
+          {
+            "name": "JBL IRX108BT Speaker",
+            "qty": 3
+          },
+          {
+            "name": "Round Base Speaker Stand Kit",
+            "qty": 3
+          },
+          {
+            "name": "Behringer Xenyx X1222 Console USB (6 XLR)",
+            "qty": 1
+          },
+          {
+            "name": "Lectern - L101/L20S Black (Flat Front)",
+            "qty": 1
+          },
+          {
+            "name": "Shure Lectern Mic EZG/12",
+            "qty": 2
+          },
+          {
+            "name": "LED Propar RGBW - 5 Pin",
+            "qty": 6
+          },
+          {
+            "name": "LED Battery Par - IP Rated",
+            "qty": 6
+          }
+        ],
+        "address": "Wharf 7, 58 Pirrama Road, Pyrmont, NSW"
+      },
+      {
+        "id": "sub1597",
+        "title": "CPACM26 - Exhibitor Orders",
+        "status": "onlocation",
+        "venue": "Melbourne Convention & Exhibition Centre",
+        "state": "VIC",
+        "rows": [
+          {
+            "id": "fn5540",
+            "name": "AV Packdown",
+            "category": "packdown",
+            "start": "2026-10-22T14:00:00+11:00",
+            "end": "2026-10-22T14:00:00+11:00",
+            "needed": 3,
+            "crew": [
+              "Emma McLoughlin",
+              "Jess Penson",
+              "Lorencius Stefanus"
+            ],
+            "vehicles": [
+              "VIC  NNR200 Truck \u00b7 WEW349"
+            ]
+          }
+        ],
+        "equipment": [
+          {
+            "name": "Wall Mount System - Custom Stand",
+            "qty": 1
+          },
+          {
+            "name": "55\" LED TV 4K - Philips",
+            "qty": 1
+          },
+          {
+            "name": "Wall Mount System - Custom Stand",
+            "qty": 1
+          },
+          {
+            "name": "55\" LED TV 4K - Philips",
+            "qty": 1
+          },
+          {
+            "name": "Wall Mount System - Custom Stand",
+            "qty": 1
+          },
+          {
+            "name": "43\" LED TV - Philips 4K",
+            "qty": 1
+          },
+          {
+            "name": "Wall Mount System - Custom Stand",
+            "qty": 1
+          },
+          {
+            "name": "43\" LED TV - Philips 4K",
+            "qty": 1
+          },
+          {
+            "name": "Wall Mount System - Custom Stand",
+            "qty": 1
+          },
+          {
+            "name": "43\" LED TV - Philips 4K",
+            "qty": 1
+          },
+          {
+            "name": "Wall Mount System - Custom Stand",
+            "qty": 1
+          },
+          {
+            "name": "43\" LED TV - Philips 4K",
+            "qty": 1
+          },
+          {
+            "name": "Wall Mount System - Custom Stand",
+            "qty": 1
+          },
+          {
+            "name": "43\" LED TV - Philips 4K",
+            "qty": 1
+          },
+          {
+            "name": "Wall Mount System - Custom Stand",
+            "qty": 1
+          },
+          {
+            "name": "43\" LED TV - Philips 4K",
+            "qty": 1
+          },
+          {
+            "name": "Wall Mount System - Custom Stand",
+            "qty": 3
+          },
+          {
+            "name": "55\" LED TV 4K - Philips",
+            "qty": 2
+          },
+          {
+            "name": "Wall Mount System - Custom Stand",
+            "qty": 1
+          },
+          {
+            "name": "55\" LED TV 4K - Philips",
+            "qty": 1
+          },
+          {
+            "name": "Wall Mount System - Custom Stand",
+            "qty": 1
+          },
+          {
+            "name": "43\" LED TV - Philips 4K",
+            "qty": 1
+          },
+          {
+            "name": "Wall Mount System - Custom Stand",
+            "qty": 1
+          },
+          {
+            "name": "55\" LED TV 4K - Philips",
+            "qty": 1
+          },
+          {
+            "name": "Wall Mount System - Custom Stand",
+            "qty": 1
+          },
+          {
+            "name": "43\" LED TV - Philips 4K",
+            "qty": 1
+          },
+          {
+            "name": "Wall Mount System - Custom Stand",
+            "qty": 1
+          },
+          {
+            "name": "43\" LED TV - Philips 4K",
+            "qty": 1
+          },
+          {
+            "name": "Wall Mount System - Custom Stand",
+            "qty": 1
+          },
+          {
+            "name": "43\" LED TV - Philips 4K",
+            "qty": 1
+          },
+          {
+            "name": "Wall Mount System - Custom Stand",
+            "qty": 1
+          },
+          {
+            "name": "43\" LED TV - Philips 4K",
+            "qty": 1
+          },
+          {
+            "name": "Wall Mount System - Custom Stand",
+            "qty": 1
+          },
+          {
+            "name": "43\" LED TV - Philips 4K",
+            "qty": 1
+          },
+          {
+            "name": "Wall Mount System - Custom Stand",
+            "qty": 1
+          },
+          {
+            "name": "43\" LED TV - Philips 4K",
+            "qty": 1
+          },
+          {
+            "name": "Wall Mount System - Custom Stand",
+            "qty": 1
+          },
+          {
+            "name": "43\" LED TV - Philips 4K",
+            "qty": 1
+          },
+          {
+            "name": "Wall Mount System - Custom Stand",
+            "qty": 1
+          },
+          {
+            "name": "43\" LED TV - Philips 4K",
+            "qty": 1
+          },
+          {
+            "name": "Wall Mount System - Custom Stand",
+            "qty": 1
+          },
+          {
+            "name": "43\" LED TV - Philips 4K",
+            "qty": 1
+          },
+          {
+            "name": "Wall Mount System - Custom Stand",
+            "qty": 1
+          },
+          {
+            "name": "43\" LED TV - Philips 4K",
+            "qty": 1
+          },
+          {
+            "name": "Wall Mount System - Custom Stand",
+            "qty": 1
+          },
+          {
+            "name": "43\" LED TV - Philips 4K",
+            "qty": 1
+          },
+          {
+            "name": "Wall Mount System - Custom Stand",
+            "qty": 1
+          },
+          {
+            "name": "43\" LED TV - Philips 4K",
+            "qty": 1
+          },
+          {
+            "name": "Wall Mount System - Custom Stand",
+            "qty": 1
+          },
+          {
+            "name": "43\" LED TV - Philips 4K",
+            "qty": 1
+          },
+          {
+            "name": "Wall Mount System - Custom Stand",
+            "qty": 1
+          },
+          {
+            "name": "43\" LED TV - Philips 4K",
+            "qty": 1
+          },
+          {
+            "name": "Wall Mount System - Custom Stand",
+            "qty": 1
+          },
+          {
+            "name": "43\" LED TV - Philips 4K",
+            "qty": 1
+          },
+          {
+            "name": "32\" LED TV - Philips",
+            "qty": 1
+          },
+          {
+            "name": "iPad Wall Mount  - Evo X (White)",
+            "qty": 1
+          },
+          {
+            "name": "iPad 11-inch A16 (11th Gen)",
+            "qty": 1
+          },
+          {
+            "name": "Wall Mount System - Custom Stand",
+            "qty": 1
+          },
+          {
+            "name": "43\" LED TV - Philips 4K",
+            "qty": 1
+          }
+        ],
+        "address": "1 Convention Centre Pl, South Wharf VIC 3006"
+      },
+      {
+        "id": "sub1696",
+        "title": "MACSB26 - Exhibitor Orders",
+        "status": "onlocation",
+        "venue": "Royal International Convention Centre",
+        "state": "QLD",
+        "rows": [
+          {
+            "id": "fn5761",
+            "name": "AV Packdown",
+            "category": "packdown",
+            "start": "2026-10-22T17:00:00+11:00",
+            "end": "2026-10-22T17:00:00+11:00",
+            "needed": 1,
+            "crew": [
+              "Justin Kennon"
+            ],
+            "vehicles": []
+          }
+        ],
+        "equipment": [
+          {
+            "name": "32\" QLED Android TV - Hisense",
+            "qty": 1
+          },
+          {
+            "name": "1.8m SLIM TV Stand - Black",
+            "qty": 1
+          },
+          {
+            "name": "41.5\" LED TV UHD 4K - DSE",
+            "qty": 1
+          },
+          {
+            "name": "1.8m SLIM TV Stand - Black",
+            "qty": 1
+          },
+          {
+            "name": "41.5\" LED TV UHD 4K - DSE",
+            "qty": 1
+          },
+          {
+            "name": "1.8m SLIM TV Stand - Black",
+            "qty": 1
+          },
+          {
+            "name": "55\" LED TV - TCL",
+            "qty": 1
+          },
+          {
+            "name": "1.8m TV Stand - Black",
+            "qty": 1
+          },
+          {
+            "name": "41.5\" LED TV UHD 4K - DSE",
+            "qty": 1
+          },
+          {
+            "name": "1.8m SLIM TV Stand - Black",
+            "qty": 1
+          }
+        ],
+        "address": "600 Gregory Tce, Bowen Hills QLD 4006"
+      }
     ]
   }
 }
