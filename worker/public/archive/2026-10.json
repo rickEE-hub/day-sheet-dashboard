@@ -5346,6 +5346,445 @@
     ],
     "address": "2/14a Underwood Avenue, Botany NSW 2019"
    }
+  ],
+  "2026-10-27": [
+   {
+    "id": "sub1576",
+    "title": "ERESM26 - Exhibitor Orders",
+    "status": "onlocation",
+    "venue": "Melbourne Cricket Ground",
+    "state": "VIC",
+    "rows": [
+     {
+      "id": "fn5862",
+      "name": "Exhibition Check Off",
+      "category": "other",
+      "start": "2026-10-27T07:00:00+11:00",
+      "end": "2026-10-27T10:00:00+11:00",
+      "needed": 1,
+      "crew": [
+       "Lorencius Stefanus"
+      ],
+      "vehicles": [
+       "VIC Master Van \u00b7 2FG6UP"
+      ]
+     }
+    ],
+    "equipment": [
+     {
+      "name": "43\" LED TV - Philips 4K",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "Shelf -  TV Stand SLIM - Black",
+      "qty": 1
+     },
+     {
+      "name": "Wall Mount System - Custom Stand",
+      "qty": 1
+     },
+     {
+      "name": "55\" LED TV 4K - Philips",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "Wall Mount System - Custom Stand",
+      "qty": 2
+     },
+     {
+      "name": "43\" LED TV - Philips 4K",
+      "qty": 2
+     },
+     {
+      "name": "Wall Mount System - Custom Stand",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K",
+      "qty": 1
+     },
+     {
+      "name": "Wall Mount System - Custom Stand",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "Wall Mount System - Custom Stand",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "Wall Mount System - Custom Stand",
+      "qty": 2
+     },
+     {
+      "name": "55\" Philips Android Touchscreen",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K",
+      "qty": 1
+     },
+     {
+      "name": "HP ProBook 450  15.6 FHD G10 Laptop",
+      "qty": 2
+     },
+     {
+      "name": "55\" LED TV 4K - Philips",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "1.8m TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "Shelf - TV Stand - Black",
+      "qty": 1
+     }
+    ],
+    "address": "Brunton Avenue, Richmond VIC 3002"
+   },
+   {
+    "id": "sub1599",
+    "title": "Transfer QLD > NSW (CISCO)",
+    "status": "onlocation",
+    "venue": null,
+    "state": "QLD",
+    "rows": [
+     {
+      "id": "fn5544",
+      "name": "Interstate Truck Transfer",
+      "category": "other",
+      "start": "2026-10-27T04:00:00+11:00",
+      "end": "2026-10-27T14:00:00+11:00",
+      "needed": 1,
+      "crew": [
+       "Tony Van Boxtel"
+      ],
+      "vehicles": [
+       "VIC Hire Truck \u00b7 "
+      ]
+     }
+    ],
+    "equipment": [
+     {
+      "name": "43\" LED TV - Philips",
+      "qty": 13
+     },
+     {
+      "name": "48\" LED TV - Philips",
+      "qty": 3
+     },
+     {
+      "name": "55\" LED TV 4K - Philips",
+      "qty": 6
+     },
+     {
+      "name": "43\" Philips Touchscreen V2",
+      "qty": 1
+     },
+     {
+      "name": "LED Display Poster (P2) - 0.8mW x 1.9mH",
+      "qty": 6
+     },
+     {
+      "name": "Wireless Shure BLX Kit - Handheld Only",
+      "qty": 3
+     },
+     {
+      "name": "Wireless Shure BLX Kit - Headset Only",
+      "qty": 1
+     },
+     {
+      "name": "Unilumin 2.6mm LED Panel - 500x500mm",
+      "qty": 40
+     },
+     {
+      "name": "Novastar TB60 LED Processor Kit",
+      "qty": 1
+     },
+     {
+      "name": "55\" Dell LCD Integrated Touchscreen",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 5
+     },
+     {
+      "name": "RCF ART310A Speaker",
+      "qty": 1
+     },
+     {
+      "name": "JBL EON612 Speaker",
+      "qty": 2
+     },
+     {
+      "name": "41.5\" LED TV UHD 4K - DSE",
+      "qty": 5
+     },
+     {
+      "name": "1.8m TV Stand - Black",
+      "qty": 4
+     },
+     {
+      "name": "HP Pavillion 14 x360 Laptop (Silver)",
+      "qty": 1
+     },
+     {
+      "name": "Custom Alum - REAR FRAME 600mmW x 2500mmH",
+      "qty": 2
+     },
+     {
+      "name": "Custom Alum - REAR FRAME 500mmW x 2000mmH",
+      "qty": 2
+     },
+     {
+      "name": "Decimator MD-HX HDMI/SDI Cross",
+      "qty": 4
+     },
+     {
+      "name": "Custom Alum - BOTTOM BAR 40x80mm - 3mts ",
+      "qty": 1
+     },
+     {
+      "name": "Custom Alum - BOTTOM BAR 40x80mm - 2mts ",
+      "qty": 1
+     },
+     {
+      "name": "Custom Alum - BOTTOM BAR 40x80mm - 3.5mts ",
+      "qty": 1
+     }
+    ]
+   },
+   {
+    "id": "sub1623",
+    "title": "The Careers Department (SYD)",
+    "status": "returned",
+    "venue": "NSW Art Gallery",
+    "state": "NSW",
+    "rows": [
+     {
+      "id": "fn5613",
+      "name": "AV Setup",
+      "category": "install",
+      "start": "2026-10-27T07:00:00+11:00",
+      "end": "2026-10-27T09:00:00+11:00",
+      "needed": 2,
+      "crew": [
+       "Yvette Paci",
+       "Mick Rocco"
+      ],
+      "vehicles": [
+       "NSW Transit Van \u00b7 1UE4DI"
+      ]
+     },
+     {
+      "id": "fn5614",
+      "name": "AV Packdown",
+      "category": "packdown",
+      "start": "2026-10-27T13:30:00+11:00",
+      "end": "2026-10-27T14:30:00+11:00",
+      "needed": 2,
+      "crew": [
+       "Yvette Paci",
+       "Mick Rocco"
+      ],
+      "vehicles": [
+       "NSW Transit Van \u00b7 1UE4DI"
+      ]
+     }
+    ],
+    "equipment": [
+     {
+      "name": "1.8m TV Stand - Black",
+      "qty": 4
+     },
+     {
+      "name": "PORTRAIT MOUNTED",
+      "qty": 0
+     },
+     {
+      "name": "65\"  Philips 4K Ultra HD ",
+      "qty": 4
+     }
+    ],
+    "address": "Art Gallery Road,, Sydney NSW 2000"
+   },
+   {
+    "id": "sub1657",
+    "title": "IAP2CB26 - Organiser Order",
+    "status": "onlocation",
+    "venue": "Sofitel Brisbane",
+    "state": "QLD",
+    "rows": [
+     {
+      "id": "fn5639",
+      "name": "AV Setup",
+      "category": "install",
+      "start": "2026-10-27T13:00:00+11:00",
+      "end": "2026-10-27T13:00:00+11:00",
+      "needed": 1,
+      "crew": [
+       "Ray Sackett"
+      ],
+      "vehicles": []
+     }
+    ],
+    "equipment": [
+     {
+      "name": "Wall Mount System - Custom Stand",
+      "qty": 1
+     },
+     {
+      "name": "43\" QLED 4K TV - TCL",
+      "qty": 1
+     }
+    ],
+    "address": "249 Turbot St, Brisbane QLD 4000"
+   },
+   {
+    "id": "sub1708",
+    "title": "PECS26 - Exhibitor Orders",
+    "status": "confirmed",
+    "venue": "Sydney Masonic Centre",
+    "state": "NSW",
+    "rows": [
+     {
+      "id": "fn5791",
+      "name": "AV Setup",
+      "category": "install",
+      "start": "2026-10-27T14:00:00+11:00",
+      "end": "2026-10-27T16:00:00+11:00",
+      "needed": 2,
+      "crew": [
+       "PJ Hamilton-Shailer"
+      ],
+      "vehicles": [
+       "NSW Transit Van \u00b7 1UE4DI"
+      ]
+     },
+     {
+      "id": "fn5881",
+      "name": "Exhibition Check Off",
+      "category": "other",
+      "start": "2026-10-27T16:00:00+11:00",
+      "end": "2026-10-27T17:00:00+11:00",
+      "needed": 1,
+      "crew": [
+       "PJ Hamilton-Shailer"
+      ],
+      "vehicles": [
+       "NSW Transit Van \u00b7 1UE4DI"
+      ]
+     }
+    ],
+    "equipment": [
+     {
+      "name": "55\" LED TV 4K - Philips",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "LED Pixel Bar 12 x 12W RGBWAU",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "55\" LED TV 4K - Philips",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "65\"  Philips 4K Ultra HD ",
+      "qty": 1
+     },
+     {
+      "name": "1.8m TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     }
+    ],
+    "address": "66 Goulburn Street, Sydney NSW 2000"
+   }
   ]
  }
 }
