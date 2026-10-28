@@ -229,6 +229,18 @@ export default {
       // lives at /clients/chess/index.html; html_handling "none" means the
       // folder URL needs this explicit rewrite. operator.html and
       // leaderboard.html are served at their exact paths by the fallback.
+      // Show-playbook autoplay deck (2026-10-29). Relative img/ paths need
+      // the trailing slash, so the bare folder URL redirects to it.
+      if (pathname === "/clients/chess/playbook") {
+        const pbUrl = new URL(req.url);
+        pbUrl.pathname = url.pathname + "/";
+        return Response.redirect(pbUrl.toString(), 301);
+      }
+      if (pathname === "/clients/chess/playbook/") {
+        const pbUrl = new URL(req.url);
+        pbUrl.pathname = "/clients/chess/playbook/index.html";
+        return env.ASSETS.fetch(new Request(pbUrl, req));
+      }
       if (pathname === "/clients/chess" || pathname === "/clients/chess/") {
         const chessUrl = new URL(req.url);
         chessUrl.pathname = "/clients/chess/index.html";

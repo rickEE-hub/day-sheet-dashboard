@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cisco Live Chess – Show Playbook</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&display=swap">
+<style>
+*{box-sizing:border-box;margin:0}
+html,body{height:100%;background:#020913;overflow:hidden;font-family:'Inter',Arial,sans-serif;-webkit-font-smoothing:antialiased}
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:0 0}
+.slide{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;opacity:0;visibility:hidden;transition:opacity .7s ease,visibility 0s .7s}
+.slide.on{opacity:1;visibility:visible;transition:opacity .7s ease}
+.slide p,.slide h1,.slide h2,.slide h3{font-weight:inherit}
+.slide h1{font-size:96px;font-weight:600;line-height:1.1}
+.slide h2{font-size:64px;font-weight:600;line-height:1.15}
+.slide h3{font-size:44px;font-weight:600;line-height:1.2}
+.slide p{font-size:32px;line-height:1.4}
+.slide ul{padding-left:1.2em}
+.slide img,.slide video{display:block;flex:none}
+.slide .ic svg{display:block}
+.slide table{border-collapse:collapse;width:100%}
+.slide th,.slide td{padding:.35em .6em;text-align:left;border-bottom:1px solid #DBE3EC;vertical-align:top}
+.slide th{font-weight:700;border-bottom:2px solid #07182D}
+/* controls */
+#bar{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);display:flex;align-items:center;gap:6px;padding:8px 10px;border-radius:999px;
+  background:rgba(4,15,30,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.12);color:#F4F7FA;
+  transition:opacity .4s;z-index:5;font-size:14px;user-select:none}
+body.idle #bar{opacity:0;pointer-events:none}
+body.idle{cursor:none}
+#bar button{all:unset;cursor:pointer;width:38px;height:38px;border-radius:50%;display:grid;place-items:center}
+#bar button:hover{background:rgba(255,255,255,.12)}
+#bar svg{width:20px;height:20px}
+#count{min-width:58px;text-align:center;font-variant-numeric:tabular-nums;color:#BFD0E3}
+#prog{position:fixed;left:0;bottom:0;height:4px;width:0;background:linear-gradient(90deg,#0A60FF 5%,#02C8FF 40%,#FF007F 75%,#FF9000 95%);z-index:5}
+body.paused #prog{opacity:.35}
+</style>
+</head>
+<body>
+<div id="stage">
+<section class="slide" data-id="cover" data-dur="7" style="background:radial-gradient(ellipse at 50% 0%, #14365F 0%, #07182D 60%, #040F1E 100%);color:#F4F7FA;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:40px">
+<div style="position:absolute;left:0;top:0;width:1920px;height:12px;background:linear-gradient(90deg, #0A60FF 5%, #02C8FF 37%, #02C8FF 44%, #FF007F 75%, #FF9000 95%)"></div>
+<img src="img/eeg_white.png" alt="Event Equipment logo" style="width:1040px;height:193px;object-fit:contain">
+<p style="font-size:32px;font-weight:500;letter-spacing:8px;text-transform:uppercase;color:#02C8FF">presents</p>
+<h1 style="font-size:132px;font-weight:700;letter-spacing:-3px;line-height:1.05;text-align:center;color:#F4F7FA">Cisco Live Chess</h1>
+<p style="font-size:40px;font-weight:300;color:#BFD0E3;text-align:center">The show playbook: how it runs, what the operator does, and how we crown the Grandmaster</p>
+<p style="font-size:28px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#FF9000">Melbourne · 9–11 November 2026</p>
+<img src="img/cl_white.png" alt="Cisco Live logo" style="position:absolute;left:810px;bottom:72px;width:300px;height:54px;object-fit:contain">
+
+</section>
+<section class="slide" data-id="whatsnew" data-dur="11" style="background:#F4F7FA;color:#07182D;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:56px">
+<div style="position:absolute;left:0;top:0;width:1920px;height:12px;background:linear-gradient(90deg, #0A60FF 5%, #02C8FF 37%, #02C8FF 44%, #FF007F 75%, #FF9000 95%)"></div>
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#0A60FF">What’s new</p>
+<h2 style="font-size:72px;font-weight:700;letter-spacing:-1.5px;line-height:1.1">Five changes for Melbourne</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:28px">
+<div style="display:flex;flex-direction:column;gap:18px;background:#FFFFFF;padding:36px;border:1px solid #DBE3EC;border-radius:24px;box-shadow:0 12px 32px rgba(7,24,45,0.08)">
+<span class="ic" style="display:inline-block;flex:none;width:48px;height:48px;color:#0A60FF"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></span>
+<h3 style="font-size:36px;font-weight:700;line-height:1.15">Typed check-in</h3>
+<p style="font-size:28px;line-height:1.4;color:#4A5A70">No scanning. The welcome desk types full name and company.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:18px;background:#FFFFFF;padding:36px;border:1px solid #DBE3EC;border-radius:24px;box-shadow:0 12px 32px rgba(7,24,45,0.08)">
+<span class="ic" style="display:inline-block;flex:none;width:48px;height:48px;color:#FF007F"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg"><path d="m15.5 7.5 2.3 2.3a1 1 0 0 0 1.4 0l2.1-2.1a1 1 0 0 0 0-1.4L19 4"></path><path d="m21 2-9.6 9.6"></path><circle cx="7.5" cy="15.5" r="5.5"></circle></svg></span>
+<h3 style="font-size:36px;font-weight:700;line-height:1.15">Optional alias</h3>
+<p style="font-size:28px;line-height:1.4;color:#4A5A70">A unique gamer name. The leaderboard shows aliases only.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:18px;background:#FFFFFF;padding:36px;border:1px solid #DBE3EC;border-radius:24px;box-shadow:0 12px 32px rgba(7,24,45,0.08)">
+<span class="ic" style="display:inline-block;flex:none;width:48px;height:48px;color:#02A3D1"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></span>
+<h3 style="font-size:36px;font-weight:700;line-height:1.15">Fair queue</h3>
+<p style="font-size:28px;line-height:1.4;color:#4A5A70">Players are seated in arrival order, so everyone meets someone new.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:18px;background:#FFFFFF;padding:36px;border:1px solid #DBE3EC;border-radius:24px;box-shadow:0 12px 32px rgba(7,24,45,0.08)">
+<span class="ic" style="display:inline-block;flex:none;width:48px;height:48px;color:#FF9000"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg"><path d="M3 3v16a2 2 0 0 0 2 2h16"></path><path d="M7 16h8"></path><path d="M7 11h12"></path><path d="M7 6h3"></path></svg></span>
+<h3 style="font-size:36px;font-weight:700;line-height:1.15">Daily + overall</h3>
+<p style="font-size:28px;line-height:1.4;color:#4A5A70">Today’s top 10 resets at midnight. The overall total keeps growing.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:18px;background:#07182D;padding:36px;border-radius:24px;box-shadow:0 12px 32px rgba(7,24,45,0.18)">
+<span class="ic" style="display:inline-block;flex:none;width:48px;height:48px;color:#FFC83D"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg></span>
+<h3 style="font-size:36px;font-weight:700;line-height:1.15;color:#F4F7FA">The Grandmaster</h3>
+<p style="font-size:28px;line-height:1.4;color:#BFD0E3">Overall winner crowned on screen, Wednesday 7pm.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:18px;background:#E6EEF8;padding:36px;border-radius:24px">
+<span class="ic" style="display:inline-block;flex:none;width:48px;height:48px;color:#0A60FF"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg></span>
+<h3 style="font-size:36px;font-weight:700;line-height:1.15">Unchanged</h3>
+<p style="font-size:28px;line-height:1.4;color:#4A5A70">Branding, game play, timings, moves and points.</p>
+</div>
+</div>
+
+</section>
+<section class="slide" data-id="journey" data-dur="10" style="background:#F4F7FA;color:#07182D;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:56px;justify-content:space-between">
+<div style="position:absolute;left:0;top:0;width:1920px;height:12px;background:linear-gradient(90deg, #0A60FF 5%, #02C8FF 37%, #02C8FF 44%, #FF007F 75%, #FF9000 95%)"></div>
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#0A60FF">The player journey</p>
+<h2 style="font-size:72px;font-weight:700;letter-spacing:-1.5px;line-height:1.1">From the welcome desk to the leaderboard</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:20px;align-items:center">
+<div style="display:flex;flex-direction:column;gap:20px;flex:1;padding:40px;background:#FFFFFF;border:1px solid #DBE3EC;border-radius:24px;box-shadow:0 12px 32px rgba(7,24,45,0.08)">
+<div style="display:flex;flex-direction:row;gap:16px;align-items:center"><p style="padding:8px 18px;font-size:28px;font-weight:700;color:#FFFFFF;background:#07182D;border-radius:256px">1</p><span class="ic" style="display:inline-block;flex:none;width:56px;height:56px;color:#0A60FF"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></span></div>
+<h3 style="font-size:40px;font-weight:700;line-height:1.15">Check in</h3>
+<p style="font-size:28px;line-height:1.4;color:#4A5A70">The host types name, company and an optional alias.</p>
+</div>
+<svg class="shape" viewBox="0 0 100 50" preserveAspectRatio="none" style="flex:none;width:56px;height:30px;"><polygon points="0,14 60,14 60,0 100,25 60,50 60,36 0,36" fill="#02C8FF"/></svg>
+<div style="display:flex;flex-direction:column;gap:20px;flex:1;padding:40px;background:#FFFFFF;border:1px solid #DBE3EC;border-radius:24px;box-shadow:0 12px 32px rgba(7,24,45,0.08)">
+<div style="display:flex;flex-direction:row;gap:16px;align-items:center"><p style="padding:8px 18px;font-size:28px;font-weight:700;color:#FFFFFF;background:#07182D;border-radius:256px">2</p><span class="ic" style="display:inline-block;flex:none;width:56px;height:56px;color:#0A60FF"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></span></div>
+<h3 style="font-size:40px;font-weight:700;line-height:1.15">Queue</h3>
+<p style="font-size:28px;line-height:1.4;color:#4A5A70">The next free seat is theirs. The host calls them to the table.</p>
+</div>
+<svg class="shape" viewBox="0 0 100 50" preserveAspectRatio="none" style="flex:none;width:56px;height:30px;"><polygon points="0,14 60,14 60,0 100,25 60,50 60,36 0,36" fill="#02C8FF"/></svg>
+<div style="display:flex;flex-direction:column;gap:20px;flex:1;padding:40px;background:#FFFFFF;border:1px solid #DBE3EC;border-radius:24px;box-shadow:0 12px 32px rgba(7,24,45,0.08)">
+<div style="display:flex;flex-direction:row;gap:16px;align-items:center"><p style="padding:8px 18px;font-size:28px;font-weight:700;color:#FFFFFF;background:#07182D;border-radius:256px">3</p><span class="ic" style="display:inline-block;flex:none;width:56px;height:56px;color:#0A60FF"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg></span></div>
+<h3 style="font-size:40px;font-weight:700;line-height:1.15">Play</h3>
+<p style="font-size:28px;line-height:1.4;color:#4A5A70">Touch to move. 30 seconds per move, 20 minutes per game.</p>
+</div>
+<svg class="shape" viewBox="0 0 100 50" preserveAspectRatio="none" style="flex:none;width:56px;height:30px;"><polygon points="0,14 60,14 60,0 100,25 60,50 60,36 0,36" fill="#02C8FF"/></svg>
+<div style="display:flex;flex-direction:column;gap:20px;flex:1;padding:40px;background:#07182D;border-radius:24px;box-shadow:0 12px 32px rgba(7,24,45,0.18)">
+<div style="display:flex;flex-direction:row;gap:16px;align-items:center"><p style="padding:8px 18px;font-size:28px;font-weight:700;color:#07182D;background:#02C8FF;border-radius:256px">4</p><span class="ic" style="display:inline-block;flex:none;width:56px;height:56px;color:#02C8FF"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg></span></div>
+<h3 style="font-size:40px;font-weight:700;line-height:1.15;color:#F4F7FA">Climb</h3>
+<p style="font-size:28px;line-height:1.4;color:#BFD0E3">Points go to today’s top 10 and the overall race.</p>
+</div>
+</div>
+<p style="font-size:30px;color:#4A5A70">Come back as often as you like: <b style="color:#07182D">every game adds to the same player.</b></p>
+
+</section>
+<section class="slide" data-id="checkin" data-dur="12" style="background:#F4F7FA;color:#07182D;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:row;gap:72px;align-items:center">
+<div style="position:absolute;left:0;top:0;width:1920px;height:12px;background:linear-gradient(90deg, #0A60FF 5%, #02C8FF 37%, #02C8FF 44%, #FF007F 75%, #FF9000 95%)"></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#0A60FF">Welcome desk</p>
+<h2 style="font-size:72px;font-weight:700;letter-spacing:-1.5px;line-height:1.1">Typed check-in, in seconds</h2>
+</div>
+<div style="display:flex;flex-direction:column;gap:22px">
+<div style="display:flex;flex-direction:row;gap:20px;align-items:center"><p style="width:56px;height:56px;font-size:28px;font-weight:700;text-align:center;line-height:2;color:#FFFFFF;background:#0A60FF;border-radius:50%">1</p><p style="flex:1;font-size:30px;line-height:1.35"><b>Full name + company.</b> No alias? The leaderboard shows the full name.</p></div>
+<div style="display:flex;flex-direction:row;gap:20px;align-items:center"><p style="width:56px;height:56px;font-size:28px;font-weight:700;text-align:center;line-height:2;color:#FFFFFF;background:#0A60FF;border-radius:50%">2</p><p style="flex:1;font-size:30px;line-height:1.35"><b>Alias taken?</b> Blocked, with a free version suggested.</p></div>
+<div style="display:flex;flex-direction:row;gap:20px;align-items:center"><p style="width:56px;height:56px;font-size:28px;font-weight:700;text-align:center;line-height:2;color:#FFFFFF;background:#FF007F;border-radius:50%">3</p><p style="flex:1;font-size:30px;line-height:1.35"><b>Same full name?</b> “Same person?” check. A different person adds an alias.</p></div>
+<div style="display:flex;flex-direction:row;gap:20px;align-items:center"><p style="width:56px;height:56px;font-size:28px;font-weight:700;text-align:center;line-height:2;color:#FFFFFF;background:#FF9000;border-radius:50%">4</p><p style="flex:1;font-size:30px;line-height:1.35"><b>Rude aliases</b> are refused automatically.</p></div>
+</div>
+</div>
+<div style="display:flex;flex-direction:row;gap:28px;align-items:flex-start">
+<div style="display:flex;flex-direction:column;gap:14px;align-items:center">
+<img src="img/op_alias.png" alt="Check-in form showing an alias that is already taken, with a suggested free alias" style="width:340px;height:720px;object-fit:contain;background:#FFFFFF;border:1px solid #DBE3EC;border-radius:20px;box-shadow:0 18px 44px rgba(7,24,45,0.14)">
+<p style="font-size:24px;font-weight:600;color:#4A5A70">Alias taken</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:14px;align-items:center">
+<img src="img/op_same.png" alt="Check-in form warning that a player with the same full name already exists" style="width:340px;height:720px;object-fit:contain;background:#FFFFFF;border:1px solid #DBE3EC;border-radius:20px;box-shadow:0 18px 44px rgba(7,24,45,0.14)">
+<p style="font-size:24px;font-weight:600;color:#4A5A70">Same person?</p>
+</div>
+</div>
+
+</section>
+<section class="slide" data-id="queue" data-dur="11" style="background:#F4F7FA;color:#07182D;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:row;gap:64px;align-items:center">
+<div style="position:absolute;left:0;top:0;width:1920px;height:12px;background:linear-gradient(90deg, #0A60FF 5%, #02C8FF 37%, #02C8FF 44%, #FF007F 75%, #FF9000 95%)"></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#0A60FF">The fair queue</p>
+<h2 style="font-size:64px;font-weight:700;letter-spacing:-1.5px;line-height:1.1">First in, first seated</h2>
+</div>
+<p style="font-size:30px;line-height:1.45;color:#4A5A70">Players are never told a table at check-in. The queue fills the next free seat in arrival order, so friends don’t just play each other.</p>
+<div style="display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;flex-direction:row;gap:18px;align-items:center;background:#FFFFFF;padding:22px 26px;border:1px solid #DBE3EC;border-radius:16px"><span class="ic" style="display:inline-block;flex:none;width:40px;height:40px;color:#0A60FF"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path></svg></span><p style="flex:1;font-size:28px;line-height:1.3">Seats refill a minute after a game ends</p></div>
+<div style="display:flex;flex-direction:row;gap:18px;align-items:center;background:#FFFFFF;padding:22px 26px;border:1px solid #DBE3EC;border-radius:16px"><span class="ic" style="display:inline-block;flex:none;width:40px;height:40px;color:#FF007F"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg></span><p style="flex:1;font-size:28px;line-height:1.3">The host can still seat someone by hand</p></div>
+<div style="display:flex;flex-direction:row;gap:18px;align-items:center;background:#FFFFFF;padding:22px 26px;border:1px solid #DBE3EC;border-radius:16px"><span class="ic" style="display:inline-block;flex:none;width:40px;height:40px;color:#FF9000"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></span><p style="flex:1;font-size:28px;line-height:1.3">A paused table is skipped</p></div>
+</div>
+</div>
+<img src="img/op_tables.png" alt="Operator Tables view: check-in panel, a queue of two players, and six table cards with players seated" style="width:1000px;height:625px;object-fit:contain;background:#FFFFFF;border:1px solid #DBE3EC;border-radius:20px;box-shadow:0 24px 56px rgba(7,24,45,0.16)">
+
+</section>
+<section class="slide" data-id="table" data-dur="11" style="background:#07182D;color:#F4F7FA;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:48px">
+<div style="position:absolute;left:0;top:0;width:1920px;height:12px;background:linear-gradient(90deg, #0A60FF 5%, #02C8FF 37%, #02C8FF 44%, #FF007F 75%, #FF9000 95%)"></div>
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#02C8FF">At the table</p>
+<h2 style="font-size:72px;font-weight:700;letter-spacing:-1.5px;line-height:1.1">Touch, move, beat the clock</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:56px;align-items:center">
+<img src="img/tv_play.png" alt="Table TV lying flat: chessboard in the middle, each player's name, move timer and points at their own end" style="width:1040px;height:585px;object-fit:contain;border-radius:20px;border:2px solid #1C3A63;box-shadow:0 30px 70px rgba(0,0,0,0.5)">
+<div style="flex:1;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;flex-direction:row;gap:28px">
+<div style="flex:1;display:flex;flex-direction:column;gap:6px;background:#0F2747;padding:28px;border-radius:20px"><p style="font-size:88px;font-weight:700;line-height:1;color:#02C8FF">30s</p><p style="font-size:26px;color:#BFD0E3">per move</p></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:6px;background:#0F2747;padding:28px;border-radius:20px"><p style="font-size:88px;font-weight:700;line-height:1;color:#FF9000">20</p><p style="font-size:26px;color:#BFD0E3">minutes a game</p></div>
+</div>
+<p style="font-size:28px;line-height:1.45;color:#BFD0E3">Each player reads the board, timers and points from their own end.</p>
+<p style="font-size:28px;line-height:1.45;color:#BFD0E3"><b style="color:#F4F7FA">Move timer runs out?</b> The turn passes. In check, a random legal move is played for you.</p>
+</div>
+</div>
+
+</section>
+<section class="slide" data-id="points" data-dur="10" style="background:#F4F7FA;color:#07182D;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:56px">
+<div style="position:absolute;left:0;top:0;width:1920px;height:12px;background:linear-gradient(90deg, #0A60FF 5%, #02C8FF 37%, #02C8FF 44%, #FF007F 75%, #FF9000 95%)"></div>
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#0A60FF">Points</p>
+<h2 style="font-size:72px;font-weight:700;letter-spacing:-1.5px;line-height:1.1">Capture to score, checkmate to win big</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:28px">
+<div style="flex:1;display:flex;flex-direction:column;gap:10px;align-items:center;background:#FFFFFF;padding:36px;border:1px solid #DBE3EC;border-radius:24px"><p style="font-size:96px;line-height:1;font-weight:700;color:#07182D">♟</p><p style="font-size:30px;font-weight:600">Pawn</p><p style="font-size:56px;font-weight:700;color:#0A60FF">1</p></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:10px;align-items:center;background:#FFFFFF;padding:36px;border:1px solid #DBE3EC;border-radius:24px"><p style="font-size:96px;line-height:1;font-weight:700;color:#07182D">♞</p><p style="font-size:30px;font-weight:600">Knight</p><p style="font-size:56px;font-weight:700;color:#0A60FF">5</p></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:10px;align-items:center;background:#FFFFFF;padding:36px;border:1px solid #DBE3EC;border-radius:24px"><p style="font-size:96px;line-height:1;font-weight:700;color:#07182D">♝</p><p style="font-size:30px;font-weight:600">Bishop</p><p style="font-size:56px;font-weight:700;color:#0A60FF">5</p></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:10px;align-items:center;background:#FFFFFF;padding:36px;border:1px solid #DBE3EC;border-radius:24px"><p style="font-size:96px;line-height:1;font-weight:700;color:#07182D">♜</p><p style="font-size:30px;font-weight:600">Rook</p><p style="font-size:56px;font-weight:700;color:#0A60FF">5</p></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:10px;align-items:center;background:#FFFFFF;padding:36px;border:1px solid #DBE3EC;border-radius:24px"><p style="font-size:96px;line-height:1;font-weight:700;color:#07182D">♛</p><p style="font-size:30px;font-weight:600">Queen</p><p style="font-size:56px;font-weight:700;color:#FF007F">12</p></div>
+<div style="flex:1.4;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;background:#07182D;padding:36px;border-radius:24px"><p style="font-size:30px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#02C8FF">Checkmate</p><p style="font-size:120px;font-weight:700;line-height:1;color:#FF9000">100</p><p style="font-size:26px;color:#BFD0E3;text-align:center">to the winner, 0 to the loser</p></div>
+</div>
+<p style="font-size:30px;line-height:1.45;color:#4A5A70">Time up, a draw or an operator end: <b style="color:#07182D">each player keeps the points they captured.</b></p>
+
+</section>
+<section class="slide" data-id="finish" data-dur="10" style="background:radial-gradient(ellipse at 70% 40%, #14365F 0%, #07182D 65%);color:#F4F7FA;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:row;gap:80px;align-items:center">
+<div style="position:absolute;left:0;top:0;width:1920px;height:12px;background:linear-gradient(90deg, #0A60FF 5%, #02C8FF 37%, #02C8FF 44%, #FF007F 75%, #FF9000 95%)"></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#02C8FF">Game over</p>
+<h2 style="font-size:72px;font-weight:700;letter-spacing:-1.5px;line-height:1.1">Stand up, walk away, come back later</h2>
+</div>
+<p style="font-size:30px;line-height:1.45;color:#BFD0E3">Each player sees their result and points for the game, then a polite nudge:</p>
+<p style="font-size:34px;font-weight:600;line-height:1.35;color:#F4F7FA;background:#0F2747;padding:28px 36px;border-radius:20px">“Thanks for playing! Please vacate the table for the next players.”</p>
+<p style="font-size:30px;line-height:1.45;color:#BFD0E3">No need to go back to the desk. To play again, they simply rejoin the queue.</p>
+</div>
+<img src="img/result3.png" alt="End-of-game cards for both players showing the result, points and the vacate message" style="width:740px;height:600px;object-fit:contain">
+
+</section>
+<section class="slide" data-id="leaderboard" data-dur="11" style="background:#07182D;color:#F4F7FA;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:row;align-items:center;gap:112px">
+<div style="position:absolute;left:0;top:0;width:1920px;height:12px;background:linear-gradient(90deg, #0A60FF 5%, #02C8FF 37%, #02C8FF 44%, #FF007F 75%, #FF9000 95%)"></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#02C8FF">The leaderboard</p>
+<h2 style="font-size:72px;font-weight:700;letter-spacing:-1.5px;line-height:1.1">One portrait screen, four stories</h2>
+</div>
+<p style="font-size:30px;line-height:1.45;color:#BFD0E3">1080 × 1920, next to the tables. Aliases only, refreshed every few seconds.</p>
+<div style="display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;flex-direction:row;gap:22px;align-items:center;background:#0F2747;padding:24px 28px;border-radius:16px"><span class="ic" style="display:inline-block;flex:none;color:#FFC83D;width:44px;height:44px"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg></span><p style="flex:1;font-size:28px;line-height:1.3"><b>Overall top 3</b> across all three days</p></div>
+<div style="display:flex;flex-direction:row;gap:22px;align-items:center;background:#0F2747;padding:24px 28px;border-radius:16px"><span class="ic" style="display:inline-block;flex:none;color:#02C8FF;width:44px;height:44px"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg"><path d="M3 3v16a2 2 0 0 0 2 2h16"></path><path d="M7 16h8"></path><path d="M7 11h12"></path><path d="M7 6h3"></path></svg></span><p style="flex:1;font-size:28px;line-height:1.3"><b>Today’s top 10</b>, resets at midnight Melbourne time</p></div>
+<div style="display:flex;flex-direction:row;gap:22px;align-items:center;background:#0F2747;padding:24px 28px;border-radius:16px"><span class="ic" style="display:inline-block;flex:none;color:#FF007F;width:44px;height:44px"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"></path></svg></span><p style="flex:1;font-size:28px;line-height:1.3"><b>Live tables</b>: who’s playing, points and clock</p></div>
+<div style="display:flex;flex-direction:row;gap:22px;align-items:center;background:#0F2747;padding:24px 28px;border-radius:16px"><span class="ic" style="display:inline-block;flex:none;color:#FF9000;width:44px;height:44px"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></span><p style="flex:1;font-size:28px;line-height:1.3"><b>Grandmaster countdown</b> to Wednesday 7pm</p></div>
+</div>
+</div>
+<img src="img/lb_live.png" alt="Portrait leaderboard: overall podium, today's top 10, live tables and Grandmaster countdown" style="width:464px;height:824px;object-fit:contain;border-radius:24px;box-shadow:0 30px 70px rgba(0,0,0,0.55);border:2px solid #1C3A63">
+
+</section>
+<section class="slide" data-id="opshow" data-dur="13" style="background:#F4F7FA;color:#07182D;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:56px">
+<div style="position:absolute;left:0;top:0;width:1920px;height:12px;background:linear-gradient(90deg, #0A60FF 5%, #02C8FF 37%, #02C8FF 44%, #FF007F 75%, #FF9000 95%)"></div>
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#FF007F">Operator playbook</p>
+<h2 style="font-size:72px;font-weight:700;letter-spacing:-1.5px;line-height:1.1">A day at the chess desk</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:24px">
+<div style="display:flex;flex-direction:column;gap:16px;background:#FFFFFF;padding:32px;border:1px solid #DBE3EC;border-radius:24px;box-shadow:0 12px 32px rgba(7,24,45,0.08)">
+<p style="font-size:24px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#0A60FF">Before doors</p>
+<ul style="font-size:26px;line-height:1.6;color:#4A5A70">
+<li>Log in to the operator screen</li>
+<li>All 6 tables show “Screen online”</li>
+<li>Leaderboard is up and live</li>
+<li>Event tab: challenge open</li>
+</ul>
+</div>
+<div style="display:flex;flex-direction:column;gap:16px;background:#FFFFFF;padding:32px;border:1px solid #DBE3EC;border-radius:24px;box-shadow:0 12px 32px rgba(7,24,45,0.08)">
+<p style="font-size:24px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#0A60FF">During the show</p>
+<ul style="font-size:26px;line-height:1.6;color:#4A5A70">
+<li>Check players in, add to queue</li>
+<li>Call seated players over</li>
+<li>Press Start game</li>
+<li>Help players, watch the clocks</li>
+</ul>
+</div>
+<div style="display:flex;flex-direction:column;gap:16px;background:#FFFFFF;padding:32px;border:1px solid #DBE3EC;border-radius:24px;box-shadow:0 12px 32px rgba(7,24,45,0.08)">
+<p style="font-size:24px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#0A60FF">End of day</p>
+<ul style="font-size:26px;line-height:1.6;color:#4A5A70">
+<li>Close the challenge</li>
+<li>Let last games finish</li>
+<li>Fix any names, export CSV</li>
+<li>Today’s top 10 resets at midnight</li>
+</ul>
+</div>
+<div style="display:flex;flex-direction:column;gap:16px;background:#07182D;padding:32px;border-radius:24px;box-shadow:0 12px 32px rgba(7,24,45,0.18)">
+<p style="font-size:24px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#FFC83D">Wed 11 Nov, 7pm</p>
+<ul style="font-size:26px;line-height:1.6;color:#BFD0E3">
+<li>Final rankings checked</li>
+<li>Grandmaster reveal on screen</li>
+<li>Hold or show early if needed</li>
+<li>Winners to the prize moment</li>
+</ul>
+</div>
+</div>
+<p style="font-size:30px;color:#4A5A70">The operator screen runs on any laptop or tablet browser. <b style="color:#07182D">One person can run the whole stand.</b></p>
+
+</section>
+<section class="slide" data-id="opcontrols" data-dur="12" style="background:#07182D;color:#F4F7FA;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:56px">
+<div style="position:absolute;left:0;top:0;width:1920px;height:12px;background:linear-gradient(90deg, #0A60FF 5%, #02C8FF 37%, #02C8FF 44%, #FF007F 75%, #FF9000 95%)"></div>
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#FF007F">Operator controls · Tables tab</p>
+<h2 style="font-size:72px;font-weight:700;letter-spacing:-1.5px;line-height:1.1">The right button for every moment</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:24px">
+<div style="display:flex;flex-direction:column;gap:20px;background:#0F2747;padding:32px;border-radius:24px">
+<p style="font-size:24px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#02C8FF">Table ready</p>
+<p style="font-size:26px;font-weight:600;color:#07182D;background:#02C8FF;padding:14px 20px;border-radius:12px">Start game</p>
+<p style="font-size:26px;font-weight:600;padding:12px 18px;border:2px solid #2B4C78;border-radius:12px">Swap colours</p>
+<p style="font-size:26px;font-weight:600;padding:12px 18px;border:2px solid #2B4C78;border-radius:12px">Clear table</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:20px;background:#0F2747;padding:32px;border-radius:24px">
+<p style="font-size:24px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#FF9000">Playing</p>
+<p style="font-size:26px;font-weight:600;padding:12px 18px;border:2px solid #2B4C78;border-radius:12px">End, keep points</p>
+<p style="font-size:26px;font-weight:600;color:#FF6BAE;padding:12px 18px;border:2px solid #7A2350;border-radius:12px">Reset (no points)</p>
+<p style="font-size:24px;line-height:1.4;color:#BFD0E3">Player has to leave? End and keep. Something went wrong? Reset.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:20px;background:#0F2747;padding:32px;border-radius:24px">
+<p style="font-size:24px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#3EDCA0">Finished</p>
+<p style="font-size:26px;font-weight:600;padding:12px 18px;border:2px solid #2B4C78;border-radius:12px">Rematch</p>
+<p style="font-size:26px;font-weight:600;padding:12px 18px;border:2px solid #2B4C78;border-radius:12px">Clear table</p>
+<p style="font-size:24px;line-height:1.4;color:#BFD0E3">Or do nothing: the queue refills the seats a minute later.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:20px;background:#0F2747;padding:32px;border-radius:24px">
+<p style="font-size:24px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#FFC83D">Any time</p>
+<p style="font-size:26px;font-weight:600;padding:12px 18px;border:2px solid #2B4C78;border-radius:12px">Pause / Resume table</p>
+<p style="font-size:26px;font-weight:600;padding:12px 18px;border:2px solid #2B4C78;border-radius:12px">Seat at… / ✕ queue</p>
+<p style="font-size:26px;font-weight:600;padding:12px 18px;border:2px solid #2B4C78;border-radius:12px">10 · 15 · 20 min</p>
+</div>
+</div>
+<p style="font-size:28px;line-height:1.45;color:#BFD0E3">Each table card shows who’s seated, “Screen online”, today’s points and the game clock.</p>
+
+</section>
+<section class="slide" data-id="opedit" data-dur="12" style="background:#F4F7FA;color:#07182D;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:48px">
+<div style="position:absolute;left:0;top:0;width:1920px;height:12px;background:linear-gradient(90deg, #0A60FF 5%, #02C8FF 37%, #02C8FF 44%, #FF007F 75%, #FF9000 95%)"></div>
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#FF007F">Operator controls · Players &amp; Event</p>
+<h2 style="font-size:72px;font-weight:700;letter-spacing:-1.5px;line-height:1.1">Edit rankings, run the event</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:48px">
+<div style="flex:1;display:flex;flex-direction:column;gap:24px">
+<img src="img/op_players.png" alt="Players tab: editable alias, full name, company and points per day for every player" style="width:808px;height:314px;object-fit:contain;background:#FFFFFF;border:1px solid #DBE3EC;border-radius:16px;box-shadow:0 16px 40px rgba(7,24,45,0.12)">
+<h3 style="font-size:32px;font-weight:700">Players</h3>
+<ul style="font-size:26px;line-height:1.55;color:#4A5A70">
+<li>Fix an alias, name or company</li>
+<li>Edit any day’s points or today’s total</li>
+<li>Hide or delete a player</li>
+<li>Export everyone to CSV</li>
+</ul>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:24px">
+<img src="img/op_event.png" alt="Event tab: event days, Grandmaster reveal time and mode, and the open or close challenge switch" style="width:808px;height:314px;object-fit:contain;background:#FFFFFF;border:1px solid #DBE3EC;border-radius:16px;box-shadow:0 16px 40px rgba(7,24,45,0.12)">
+<h3 style="font-size:32px;font-weight:700">Event</h3>
+<ul style="font-size:26px;line-height:1.55;color:#4A5A70">
+<li>Set the three event days</li>
+<li>Grandmaster time: Auto, Show now or Hold</li>
+<li>Close the challenge any time (tap twice)</li>
+<li>Running games may finish when closed</li>
+</ul>
+</div>
+</div>
+
+</section>
+<section class="slide" data-id="opskills" data-dur="12" style="background:#F4F7FA;color:#07182D;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:48px">
+<div style="position:absolute;left:0;top:0;width:1920px;height:12px;background:linear-gradient(90deg, #0A60FF 5%, #02C8FF 37%, #02C8FF 44%, #FF007F 75%, #FF9000 95%)"></div>
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#FF007F">Operator skills</p>
+<h2 style="font-size:72px;font-weight:700;letter-spacing:-1.5px;line-height:1.1">What makes a great chess host</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:56px">
+<div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:20px">
+<div style="display:flex;flex-direction:row;gap:18px;align-items:center;background:#FFFFFF;padding:22px 24px;border:1px solid #DBE3EC;border-radius:16px"><span class="ic" style="display:inline-block;flex:none;width:40px;height:40px;color:#0A60FF"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg></span><p style="flex:1;font-size:26px;line-height:1.3"><b>Warm host</b>, pulls people in</p></div>
+<div style="display:flex;flex-direction:row;gap:18px;align-items:center;background:#FFFFFF;padding:22px 24px;border:1px solid #DBE3EC;border-radius:16px"><span class="ic" style="display:inline-block;flex:none;width:40px;height:40px;color:#0A60FF"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 9 17l-5-5"></path></svg></span><p style="flex:1;font-size:26px;line-height:1.3"><b>Fast, accurate typing</b>, spells names back</p></div>
+<div style="display:flex;flex-direction:row;gap:18px;align-items:center;background:#FFFFFF;padding:22px 24px;border:1px solid #DBE3EC;border-radius:16px"><span class="ic" style="display:inline-block;flex:none;width:40px;height:40px;color:#0A60FF"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"></path><path d="M22 10v6"></path><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"></path></svg></span><p style="flex:1;font-size:26px;line-height:1.3"><b>Chess basics</b> and the points rules</p></div>
+<div style="display:flex;flex-direction:row;gap:18px;align-items:center;background:#FFFFFF;padding:22px 24px;border:1px solid #DBE3EC;border-radius:16px"><span class="ic" style="display:inline-block;flex:none;width:40px;height:40px;color:#0A60FF"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg></span><p style="flex:1;font-size:26px;line-height:1.3"><b>Fair</b>: the queue decides, not friends</p></div>
+<div style="display:flex;flex-direction:row;gap:18px;align-items:center;background:#FFFFFF;padding:22px 24px;border:1px solid #DBE3EC;border-radius:16px"><span class="ic" style="display:inline-block;flex:none;width:40px;height:40px;color:#0A60FF"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></span><p style="flex:1;font-size:26px;line-height:1.3"><b>Discreet</b> with names and passwords</p></div>
+<div style="display:flex;flex-direction:row;gap:18px;align-items:center;background:#FFFFFF;padding:22px 24px;border:1px solid #DBE3EC;border-radius:16px"><span class="ic" style="display:inline-block;flex:none;width:40px;height:40px;color:#0A60FF"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg></span><p style="flex:1;font-size:26px;line-height:1.3"><b>Calm fixer</b> when a screen hiccups</p></div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<h3 style="font-size:32px;font-weight:700">Quick fixes</h3>
+<table style="font-size:26px;color:#07182D">
+<tr><th style="width:48%">If…</th><th style="width:52%">Then…</th></tr>
+<tr><td>A table says “Screen offline”</td><td>Refresh that TV’s browser</td></tr>
+<tr><td>A player has to leave</td><td>End, keep points</td></tr>
+<tr><td>Name typed wrong</td><td>Fix it in Players</td></tr>
+<tr><td>A table has a problem</td><td>Pause table</td></tr>
+<tr><td>Doors are closing</td><td>Close the challenge</td></tr>
+</table>
+</div>
+</div>
+
+</section>
+<section class="slide" data-id="grandmaster" data-dur="16" style="background:radial-gradient(ellipse at 72% 40%, #3A3420 0%, #14365F 35%, #07182D 70%, #040F1E 100%);color:#F4F7FA;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:row;align-items:center;gap:112px">
+<div style="position:absolute;left:0;top:0;width:1920px;height:12px;background:linear-gradient(90deg, #0A60FF 5%, #02C8FF 37%, #02C8FF 44%, #FF007F 75%, #FF9000 95%)"></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:36px">
+<div style="display:flex;flex-direction:column;gap:16px">
+<p style="font-size:28px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#FFC83D">The Grandmaster reveal</p>
+<h2 style="font-size:80px;font-weight:700;letter-spacing:-2px;line-height:1.05">Wednesday 11 November, 7pm</h2>
+</div>
+<p style="font-size:30px;line-height:1.45;color:#BFD0E3">When the countdown hits zero, the leaderboard turns gold: crown, confetti and the overall winner by points across all three days.</p>
+<div style="display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;flex-direction:row;gap:22px;align-items:center;background:rgba(255,200,61,0.10);padding:24px 28px;border:1px solid rgba(255,200,61,0.35);border-radius:16px"><span class="ic" style="display:inline-block;flex:none;color:#FFC83D;width:44px;height:44px"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg></span><p style="flex:1;font-size:28px;line-height:1.3">2nd and 3rd place shown under the winner</p></div>
+<div style="display:flex;flex-direction:row;gap:22px;align-items:center;background:rgba(255,200,61,0.10);padding:24px 28px;border:1px solid rgba(255,200,61,0.35);border-radius:16px"><span class="ic" style="display:inline-block;flex:none;color:#FFC83D;width:44px;height:44px"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></span><p style="flex:1;font-size:28px;line-height:1.3">A tie? They share the Grandmaster title</p></div>
+<div style="display:flex;flex-direction:row;gap:22px;align-items:center;background:rgba(255,200,61,0.10);padding:24px 28px;border:1px solid rgba(255,200,61,0.35);border-radius:16px"><span class="ic" style="display:inline-block;flex:none;color:#FFC83D;width:44px;height:44px"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg></span><p style="flex:1;font-size:28px;line-height:1.3">Operator can hold it, or show it early</p></div>
+</div>
+</div>
+<video class="reveal" muted playsinline preload="auto" style="width:464px;height:824px;object-fit:contain;border-radius:24px;box-shadow:0 0 90px rgba(255,200,61,0.35);border:2px solid #6B5A26"><source src="img/gm_reveal.mp4" type="video/mp4"><source src="img/gm_reveal.webm" type="video/webm"></video>
+
+</section>
+<section class="slide" data-id="close" data-dur="8" style="background:radial-gradient(ellipse at 50% 0%, #14365F 0%, #07182D 60%, #040F1E 100%);color:#F4F7FA;font-family:'Inter', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:48px">
+<div style="position:absolute;left:0;top:0;width:1920px;height:12px;background:linear-gradient(90deg, #0A60FF 5%, #02C8FF 37%, #02C8FF 44%, #FF007F 75%, #FF9000 95%)"></div>
+<img src="img/cl_white.png" alt="Cisco Live logo" style="width:440px;height:80px;object-fit:contain">
+<h1 style="font-size:112px;font-weight:700;letter-spacing:-3px;line-height:1.05;text-align:center">Your move, Melbourne</h1>
+<div style="display:flex;flex-direction:row;gap:28px">
+<div style="display:flex;flex-direction:column;gap:8px;align-items:center;background:#0F2747;padding:28px 48px;border-radius:20px"><p style="font-size:26px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#02C8FF">Day 1</p><p style="font-size:36px;font-weight:600">Mon 9 Nov</p></div>
+<div style="display:flex;flex-direction:column;gap:8px;align-items:center;background:#0F2747;padding:28px 48px;border-radius:20px"><p style="font-size:26px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#02C8FF">Day 2</p><p style="font-size:36px;font-weight:600">Tue 10 Nov</p></div>
+<div style="display:flex;flex-direction:column;gap:8px;align-items:center;background:#0F2747;padding:28px 48px;border-radius:20px"><p style="font-size:26px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#FF9000">Day 3</p><p style="font-size:36px;font-weight:600">Wed 11 Nov</p></div>
+<div style="display:flex;flex-direction:column;gap:8px;align-items:center;background:#3A3420;padding:28px 48px;border:1px solid #6B5A26;border-radius:20px"><p style="font-size:26px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#FFC83D">Grandmaster</p><p style="font-size:36px;font-weight:600">Wed 7pm</p></div>
+</div>
+<img src="img/eeg_white.png" alt="Event Equipment logo" style="position:absolute;left:760px;bottom:72px;width:400px;height:74px;object-fit:contain">
+
+</section>
+</div>
+<div id="prog"></div>
+<div id="bar" role="toolbar" aria-label="Presentation controls">
+  <button id="prev" aria-label="Previous slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
+  <button id="play" aria-label="Pause"><svg id="icPause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><svg id="icPlay" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg></button>
+  <button id="next" aria-label="Next slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
+  <span id="count">1 / 1</span>
+  <button id="fs" aria-label="Full screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></button>
+</div>
+<script>
+(function(){
+var slides=[].slice.call(document.querySelectorAll('.slide')),stage=document.getElementById('stage'),prog=document.getElementById('prog');
+var q=new URLSearchParams(location.search),fixed=parseFloat(q.get('t'))||0,loop=q.get('loop')!=='0';
+var i=Math.min(Math.max((parseInt(q.get('slide'))||1)-1,0),slides.length-1),playing=q.get('autoplay')!=='0',start=0,elapsed=0,raf;
+function fit(){var s=Math.min(innerWidth/1920,innerHeight/1080);stage.style.transform='scale('+s+') translate(-50%,-50%)'}
+addEventListener('resize',fit);fit();
+function dur(k){return (fixed||parseFloat(slides[k].dataset.dur)||10)*1000}
+function show(k){
+  slides.forEach(function(s,n){s.classList.toggle('on',n===k);var v=s.querySelector('video');if(v){if(n===k){v.currentTime=0;var p=v.play();if(p&&p.catch)p.catch(function(){})}else v.pause()}});
+  i=k;elapsed=0;start=performance.now();document.getElementById('count').textContent=(k+1)+' / '+slides.length;
+}
+function go(d){var k=i+d;if(k>=slides.length)k=loop?0:slides.length-1;if(k<0)k=slides.length-1;show(k)}
+function tick(t){
+  if(playing){var e=elapsed+(t-start);prog.style.width=Math.min(e/dur(i),1)*100+'%';if(e>=dur(i)){if(i===slides.length-1&&!loop){setPlay(false)}else go(1)}}
+  raf=requestAnimationFrame(tick);
+}
+function setPlay(on){
+  if(on===playing)return;var now=performance.now();
+  if(on)start=now;else elapsed+=now-start;playing=on;
+  document.body.classList.toggle('paused',!on);
+  document.getElementById('icPause').style.display=on?'':'none';document.getElementById('icPlay').style.display=on?'none':'';
+  document.getElementById('play').setAttribute('aria-label',on?'Pause':'Play');
+  var v=slides[i].querySelector('video');if(v){on?v.play():v.pause()}
+}
+document.getElementById('prev').onclick=function(){go(-1)};
+document.getElementById('next').onclick=function(){go(1)};
+document.getElementById('play').onclick=function(){setPlay(!playing)};
+document.getElementById('fs').onclick=function(){var d=document;if(d.fullscreenElement)d.exitFullscreen();else(d.documentElement.requestFullscreen||d.documentElement.webkitRequestFullscreen).call(d.documentElement)};
+stage.onclick=function(){go(1)};
+addEventListener('keydown',function(e){
+  if(e.key==='ArrowRight'||e.key==='PageDown'){go(1)}else if(e.key==='ArrowLeft'||e.key==='PageUp'){go(-1)}
+  else if(e.key===' '){e.preventDefault();setPlay(!playing)}else if(e.key==='f'){document.getElementById('fs').click()}else return;wake()});
+var idleT;function wake(){document.body.classList.remove('idle');clearTimeout(idleT);idleT=setTimeout(function(){document.body.classList.add('idle')},2500)}
+['mousemove','touchstart','click'].forEach(function(ev){addEventListener(ev,wake,{passive:true})});wake();
+var tx=null;addEventListener('touchstart',function(e){tx=e.touches[0].clientX},{passive:true});
+addEventListener('touchend',function(e){if(tx===null)return;var dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)go(dx<0?1:-1);tx=null},{passive:true});
+if(!playing){playing=true;setPlay(false)}
+show(i);raf=requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>
