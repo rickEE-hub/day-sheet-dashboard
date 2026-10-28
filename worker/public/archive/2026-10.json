@@ -5785,6 +5785,793 @@
     ],
     "address": "66 Goulburn Street, Sydney NSW 2000"
    }
+  ],
+  "2026-10-28": [
+   {
+    "id": "sub1560",
+    "title": "THE ARC Melbourne October 2026 - POWER + LIGHTING",
+    "status": "confirmed",
+    "venue": "1 Hotel Melbourne",
+    "state": "VIC",
+    "rows": [
+     {
+      "id": "fn5416",
+      "name": "AV Setup",
+      "category": "install",
+      "start": "2026-10-28T07:00:00+11:00",
+      "end": "2026-10-28T15:00:00+11:00",
+      "needed": 5,
+      "crew": [
+       "Emma McLoughlin",
+       "Lorencius Stefanus",
+       "Jess Penson",
+       "Simon Pentz",
+       "Jade Shanahan"
+      ],
+      "vehicles": [
+       "VIC  NNR200 Truck \u00b7 WEW349"
+      ]
+     },
+     {
+      "id": "fn5417",
+      "name": "AV Show Engineer",
+      "category": "other",
+      "start": "2026-10-28T15:00:00+11:00",
+      "end": "2026-10-28T20:00:00+11:00",
+      "needed": 1,
+      "crew": [
+       "Emma McLoughlin"
+      ],
+      "vehicles": [
+       "VIC  NNR200 Truck \u00b7 WEW349"
+      ]
+     },
+     {
+      "id": "fn5418",
+      "name": "AV Packdown",
+      "category": "packdown",
+      "start": "2026-10-28T20:00:00+11:00",
+      "end": "2026-10-29T00:00:00+11:00",
+      "needed": 4,
+      "crew": [
+       "Ezequiel Vico",
+       "Emma McLoughlin",
+       "Lorencius Stefanus",
+       "Steve Smith"
+      ],
+      "vehicles": [
+       "VIC  NNR200 Truck \u00b7 WEW349"
+      ]
+     }
+    ],
+    "equipment": [
+     {
+      "name": "LED Battery Par - IP Rated",
+      "qty": 24
+     },
+     {
+      "name": "LED Propar 12x8 RGBA ",
+      "qty": 16
+     },
+     {
+      "name": "32Amp 3Ph Cable - 20m",
+      "qty": 1
+     },
+     {
+      "name": "32Amp 3Ph Cable - 10m",
+      "qty": 2
+     },
+     {
+      "name": "J Series 12 Channel 10Amp 3Ph Distro",
+      "qty": 2
+     },
+     {
+      "name": "5-Way Wieland Tail",
+      "qty": 3
+     },
+     {
+      "name": "5-Way Wieland Header",
+      "qty": 3
+     },
+     {
+      "name": "5-Way Wieland Cable - 20m",
+      "qty": 1
+     },
+     {
+      "name": "5-Way Wieland Cable - 30m",
+      "qty": 1
+     },
+     {
+      "name": "Jands PDS12R 3Ph Distro",
+      "qty": 1
+     },
+     {
+      "name": "Power Ext Cable - 240v 10A - Black - 5m",
+      "qty": 41
+     },
+     {
+      "name": "Powerboard - 4 Way - 240v 10A",
+      "qty": 41
+     },
+     {
+      "name": "Consumables",
+      "qty": 1
+     },
+     {
+      "name": "LED Propar 12x8 RGBA ",
+      "qty": 3
+     },
+     {
+      "name": "2CH Cable Tray 1m",
+      "qty": 8
+     },
+     {
+      "name": "5-Way Wieland Cable - 25m",
+      "qty": 1
+     },
+     {
+      "name": "LED Propar 12x8 RGBA ",
+      "qty": 1
+     }
+    ],
+    "address": "9 Maritime Place, Docklands VIC 3008"
+   },
+   {
+    "id": "sub1605",
+    "title": "CICAS26 - Exhibitor Orders",
+    "status": "prepped",
+    "venue": "Rydges Resort Hunter Valley",
+    "state": "NSW",
+    "rows": [
+     {
+      "id": "fn5577",
+      "name": "Travel Time",
+      "category": "other",
+      "start": "2026-10-28T09:00:00+11:00",
+      "end": "2026-10-28T11:30:00+11:00",
+      "needed": 1,
+      "crew": [
+       "Mick Rocco"
+      ],
+      "vehicles": [
+       "NSW Sprinter Van \u00b7 DL55LR"
+      ]
+     },
+     {
+      "id": "fn5573",
+      "name": "AV Setup",
+      "category": "install",
+      "start": "2026-10-28T12:00:00+11:00",
+      "end": "2026-10-28T12:00:00+11:00",
+      "needed": 1,
+      "crew": [
+       "Mick Rocco"
+      ],
+      "vehicles": [
+       "NSW Sprinter Van \u00b7 DL55LR"
+      ]
+     }
+    ],
+    "equipment": [
+     {
+      "name": "Wall Mount System - Custom Stand",
+      "qty": 2
+     },
+     {
+      "name": "55\" LED TV 4K  Android (Tuner) - Philips ",
+      "qty": 1
+     },
+     {
+      "name": "55\" LED TV 4K  Android (Tuner) - Philips ",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "55\" LED TV 4K  Android (Tuner) - Philips ",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "55\" LED TV 4K  Android (Tuner) - Philips ",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "Wall Mount System - Custom Stand",
+      "qty": 1
+     },
+     {
+      "name": "65\" LED TV 4K  Android (Tuner) - Philips",
+      "qty": 2
+     },
+     {
+      "name": "Wall Mount System - Custom Stand",
+      "qty": 1
+     },
+     {
+      "name": "55\" LED TV 4K  Android (Tuner) - Philips ",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K Android",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "1.8m TV Stand - Black",
+      "qty": 2
+     },
+     {
+      "name": "1.8m TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "55\" LED TV 4K - Philips",
+      "qty": 1
+     },
+     {
+      "name": "Shelf - TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K Android",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "55\" LED TV 4K - Philips",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K Android",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K Android",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K Android",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K Android",
+      "qty": 1
+     },
+     {
+      "name": "55\" LED TV 4K - Philips",
+      "qty": 1
+     },
+     {
+      "name": "1.8m TV Stand - Black",
+      "qty": 3
+     },
+     {
+      "name": "Shelf - TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K",
+      "qty": 2
+     }
+    ],
+    "address": "430 Wine Country Drive, Lovedale NSW 2325"
+   },
+   {
+    "id": "sub1659",
+    "title": "Transfer NSW > VIC (CISCO - Part2)",
+    "status": "onlocation",
+    "venue": "Transfer NSW > VIC (CISCO - Part2)",
+    "state": "NSW",
+    "rows": [
+     {
+      "id": "fn5643",
+      "name": "Interstate Truck Transfer",
+      "category": "other",
+      "start": "2026-10-28T11:00:00+11:00",
+      "end": "2026-10-28T14:00:00+11:00",
+      "needed": 1,
+      "crew": [],
+      "vehicles": []
+     }
+    ],
+    "equipment": [
+     {
+      "name": "32\" LED TV - Philips",
+      "qty": 2
+     },
+     {
+      "name": "43\" LED TV - Philips",
+      "qty": 13
+     },
+     {
+      "name": "48\" LED TV - Philips",
+      "qty": 10
+     },
+     {
+      "name": "55\" LED TV 4K  Android (Tuner) - Philips ",
+      "qty": 2
+     },
+     {
+      "name": "55\" LED TV 4K UHD Android - Philips",
+      "qty": 2
+     },
+     {
+      "name": "98\"LED Screen 4K - CHiQ",
+      "qty": 4
+     },
+     {
+      "name": "43\" Philips Touchscreen",
+      "qty": 1
+     },
+     {
+      "name": "55\" Philips Android Touchscreen",
+      "qty": 2
+     },
+     {
+      "name": "43\" Philips Touchscreen V2",
+      "qty": 1
+     },
+     {
+      "name": "55\" Dell LCD Integrated Touchscreen",
+      "qty": 1
+     },
+     {
+      "name": "LED Display Poster (P2) - 0.8mW x 1.9mH",
+      "qty": 6
+     },
+     {
+      "name": "LED Display Poster Foldable (P1.86) - 0.64mW x 1.92mH",
+      "qty": 6
+     },
+     {
+      "name": "Unilumin 2.6mm LED Panel - 500x500mm",
+      "qty": 120
+     },
+     {
+      "name": "Novastar TB60 LED Processor Kit",
+      "qty": 1
+     },
+     {
+      "name": "Wireless Shure BLX Kit - Handheld Only",
+      "qty": 3
+     },
+     {
+      "name": "Wireless Shure BLX Kit - Headset Only",
+      "qty": 1
+     },
+     {
+      "name": "RCF ART310A Speaker",
+      "qty": 1
+     },
+     {
+      "name": "JBL EON612 Speaker",
+      "qty": 2
+     },
+     {
+      "name": "JBL EON610 Speaker",
+      "qty": 2
+     },
+     {
+      "name": "LED Battery Par - IP Rated",
+      "qty": 18
+     },
+     {
+      "name": "LCD Kiosk 55\" Touch 4K UHD",
+      "qty": 2
+     },
+     {
+      "name": "Portable 3ch Transmitter for Silent Conference Headphones V2",
+      "qty": 1
+     },
+     {
+      "name": "Novastar VX1000 LED Processor Kit",
+      "qty": 2
+     },
+     {
+      "name": "Unilumin LED Suspension Beam / Rigging Bar Bar 0.5m / 500mm",
+      "qty": 10
+     },
+     {
+      "name": "Unilumin LED Suspension Beam / Rigging Bar Bar 1m / 1000mm",
+      "qty": 9
+     },
+     {
+      "name": "Unilumin LED Rigging Bar Feet",
+      "qty": 54
+     },
+     {
+      "name": "Unilumin LED Rigging Offset Arm",
+      "qty": 24
+     },
+     {
+      "name": "Unilumin LED Ground Support Ladders",
+      "qty": 30
+     },
+     {
+      "name": "Unilumin LED Ground Support Frame extension (rear)",
+      "qty": 10
+     },
+     {
+      "name": "Roland VR-50HD Vision Switcher",
+      "qty": 1
+     },
+     {
+      "name": "Expo Black Passive Speaker ",
+      "qty": 2
+     },
+     {
+      "name": "Wireless Dual RX - Sennheiser EM 2050 (GW) ",
+      "qty": 3
+     },
+     {
+      "name": "Sennheiser - Handheld SKM300-845 G3 (G)",
+      "qty": 2
+     },
+     {
+      "name": "Sennheiser - Beltpack SK300 G3 (G)",
+      "qty": 2
+     },
+     {
+      "name": "Wireless Single RX - Sennheiser EW300 (G)",
+      "qty": 2
+     },
+     {
+      "name": "Sennheiser - Handheld SKM2000XP (GW)",
+      "qty": 4
+     },
+     {
+      "name": "Sennheiser - ew300/2050 Antenna Kit",
+      "qty": 2
+     },
+     {
+      "name": "Waterproof Bag - JBL EON 7 Series Speaker",
+      "qty": 2
+     },
+     {
+      "name": "Waterproof Bag - JBL EON 6 Series Speaker",
+      "qty": 2
+     },
+     {
+      "name": "RCF ART312A Speaker",
+      "qty": 8
+     },
+     {
+      "name": "RCF ART315A Speaker",
+      "qty": 1
+     },
+     {
+      "name": "Sennheiser 4 Way Radio Quad Kit - EM2050",
+      "qty": 1
+     },
+     {
+      "name": "RCF ART322A Speaker",
+      "qty": 1
+     },
+     {
+      "name": "LED Profile Body - Source4 Luster+ v.1",
+      "qty": 4
+     },
+     {
+      "name": "Unilumin flight case for Structure parts and Cables",
+      "qty": 3
+     }
+    ]
+   },
+   {
+    "id": "sub1443",
+    "title": "Vertex CF Patient Display Event",
+    "status": "onlocation",
+    "venue": "Parliament House Canberra",
+    "state": "NSW",
+    "rows": [
+     {
+      "id": "fn5047",
+      "name": "Driver + Vehicle",
+      "category": "driver",
+      "start": "2026-10-28T13:00:00+11:00",
+      "end": "2026-10-28T17:00:00+11:00",
+      "needed": 1,
+      "crew": [
+       "Tony Van Boxtel"
+      ],
+      "vehicles": [
+       "VIC Hino FD Pro 10 Pallett Box \u00b7 XX54BH"
+      ]
+     }
+    ],
+    "equipment": [
+     {
+      "name": "Wall Mount System - Custom Stand",
+      "qty": 7
+     },
+     {
+      "name": "75\" LED TV - CHIQ",
+      "qty": 2
+     },
+     {
+      "name": "75\" LED TV - CHIQ 4K BEZEL LESS",
+      "qty": 2
+     },
+     {
+      "name": "75\" LED TV - Philips (w/ Tuner)",
+      "qty": 2
+     },
+     {
+      "name": "65\" LED TV 4K w/Tuner - Phillips",
+      "qty": 1
+     },
+     {
+      "name": "All Screens Portrait Mounted",
+      "qty": 0
+     }
+    ],
+    "address": "Parliament Drive, Canberra ACT 2600"
+   },
+   {
+    "id": "sub1693",
+    "title": "ACSS26 - Exhibitor Orders",
+    "status": "onlocation",
+    "venue": "Roundhouse - UNSW",
+    "state": "NSW",
+    "rows": [
+     {
+      "id": "fn5755",
+      "name": "AV Packdown",
+      "category": "packdown",
+      "start": "2026-10-28T14:30:00+11:00",
+      "end": "2026-10-28T14:30:00+11:00",
+      "needed": 1,
+      "crew": [
+       "Yvette Paci",
+       "PJ Hamilton-Shailer"
+      ],
+      "vehicles": [
+       "NSW Transit Van \u00b7 1UE4DI"
+      ]
+     }
+    ],
+    "equipment": [
+     {
+      "name": "43\" LED TV - Philips 4K",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "Shelf -  TV Stand SLIM - Black",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "Shelf -  TV Stand SLIM - Black",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "32\" - 55\" Glass Desktop TV Stand",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K",
+      "qty": 1
+     }
+    ],
+    "address": "International Road, Kensington NSW 2052"
+   },
+   {
+    "id": "sub1673",
+    "title": "HIMAASA26 - Exhibitor Orders",
+    "status": "onlocation",
+    "venue": "Hilton Sydney",
+    "state": "NSW",
+    "rows": [
+     {
+      "id": "fn5683",
+      "name": "AV Packdown",
+      "category": "packdown",
+      "start": "2026-10-28T15:30:00+11:00",
+      "end": "2026-10-28T15:30:00+11:00",
+      "needed": 2,
+      "crew": [
+       "Yvette Paci",
+       "PJ Hamilton-Shailer"
+      ],
+      "vehicles": [
+       "NSW Transit Van \u00b7 1UE4DI"
+      ]
+     }
+    ],
+    "equipment": [
+     {
+      "name": "32\" Hisense 32Q6QAU Desk Stand",
+      "qty": 2
+     },
+     {
+      "name": "32\" QLED Android TV - Hisense",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "65\" LED TV 4K - Philips",
+      "qty": 1
+     },
+     {
+      "name": "Wall Mount System - Custom Stand",
+      "qty": 1
+     },
+     {
+      "name": "55\" LED TV 4K - Philips",
+      "qty": 1
+     },
+     {
+      "name": "Shelf -  TV Stand SLIM - Black",
+      "qty": 2
+     },
+     {
+      "name": "43\" LED TV - Philips 4K",
+      "qty": 2
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 2
+     },
+     {
+      "name": "Shelf -  TV Stand SLIM - Black",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     }
+    ],
+    "address": "488 George Street, Sydney NSW 2000"
+   },
+   {
+    "id": "sub1708",
+    "title": "PECS26 - Exhibitor Orders",
+    "status": "confirmed",
+    "venue": "Sydney Masonic Centre",
+    "state": "NSW",
+    "rows": [
+     {
+      "id": "fn5792",
+      "name": "AV Packdown",
+      "category": "packdown",
+      "start": "2026-10-28T18:00:00+11:00",
+      "end": "2026-10-28T18:00:00+11:00",
+      "needed": 2,
+      "crew": [
+       "Yvette Paci",
+       "PJ Hamilton-Shailer"
+      ],
+      "vehicles": [
+       "NSW Transit Van \u00b7 1UE4DI"
+      ]
+     }
+    ],
+    "equipment": [
+     {
+      "name": "55\" LED TV 4K - Philips",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "LED Pixel Bar 12 x 12W RGBWAU",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "55\" LED TV 4K - Philips",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "65\"  Philips 4K Ultra HD ",
+      "qty": 1
+     },
+     {
+      "name": "1.8m TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     }
+    ],
+    "address": "66 Goulburn Street, Sydney NSW 2000"
+   }
   ]
  }
 }
