@@ -64,6 +64,7 @@ Rick bought `eventequipment.app` and wants it to front this Worker under a `/pro
 Rick's Cisco Live touchscreen chess game, hosted here only so it gets an `eventequipment.app` address. Three self-contained pages built outside this repo (source lives in the separate "Cisco Chess" project) and copied in as-is: `index.html` (table TVs, opened as `/clients/chess/?table=N&code=000N` — each table has its own 4-digit password, table 1 = 0001 … table 6 = 0006), `operator.html`, `leaderboard.html`. They talk to their own Supabase project, not this Worker's KV or `/api/*`.
 
 - `worker/src/index.js` rewrites `/clients/chess` and `/clients/chess/` to `/clients/chess/index.html` (needed because `html_handling = "none"`); the other two are served at their exact paths.
+- v3 (2026-10-28): no badge scanning. The welcome desk types full name + company (+ optional unique alias), players join a fair queue that auto-seats in arrival order, and the portrait leaderboard shows overall top 3, today's top 10, finished days' top 3 and a Grandmaster reveal (Wed 11 Nov 7pm Melbourne). All logic lives in Supabase functions; these files only call them.
 - **Never touch these files during Day Sheet refreshes** — they are not part of the six byte-identical `app-state` files, the archive, or any Routine. Only replace them when Rick sends a new chess build.
 
 ## Live schedule refresh — tried and reverted (2026-09-08/09)
