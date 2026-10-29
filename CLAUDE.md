@@ -68,10 +68,6 @@ Rick's Cisco Live touchscreen chess game, hosted here only so it gets an `evente
 - **Show playbook autoplay deck** (`worker/public/clients/chess/playbook/`, added 2026-10-29): a public, no-login, auto-advancing web version of Rick's "Cisco Live Chess – Show Playbook" Slides artifact, made so his client can watch it without Google Drive access. Served at `/clients/chess/playbook/` (the bare folder URL 301s to the trailing-slash form because the page uses relative `img/` paths). Generated from the deck's slide HTML by a one-off build script (x-icons → inline Lucide SVGs, the reveal GIF swapped for `gm_reveal.mp4`/`.webm`), so it does **not** follow later edits to the artifact or a downloaded PowerPoint — regenerate it if Rick changes the deck. Query params: `?t=<seconds per slide>`, `?slide=<n>`, `?autoplay=0`, `?loop=0`.
 - **Never touch these files during Day Sheet refreshes** — they are not part of the six byte-identical `app-state` files, the archive, or any Routine. Only replace them when Rick sends a new chess build.
 
-## ExtraHop Memory Challenge (`worker/public/clients/memogame/`, added 2026-10-29) — client project
-
-A single self-contained HTML memory card game (v2.0) Rick's client sent, copied in as-is to `index.html` and served at `eventequipment.app/clients/memogame` (rewrite in `worker/src/index.js`). No backend. Never touch it during Day Sheet refreshes; only replace it when Rick sends a new build.
-
 ## Live schedule refresh — tried and reverted (2026-09-08/09)
 
 A Cron-Trigger-driven design was fully built, deployed, and then reverted within about a day. Recorded here so nobody re-derives this from scratch:
