@@ -246,6 +246,12 @@ export default {
         chessUrl.pathname = "/clients/chess/index.html";
         return env.ASSETS.fetch(new Request(chessUrl, req));
       }
+      // ExtraHop Memory Challenge (client project, added 2026-10-29).
+      if (pathname === "/clients/memogame" || pathname === "/clients/memogame/") {
+        const memoUrl = new URL(req.url);
+        memoUrl.pathname = "/clients/memogame/index.html";
+        return env.ASSETS.fetch(new Request(memoUrl, req));
+      }
       if (pathname === "/" || pathname === "/dailyschedule") {
         const indexUrl = new URL(req.url);
         indexUrl.pathname = "/index.html";
