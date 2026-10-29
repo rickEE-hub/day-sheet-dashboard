@@ -30,6 +30,14 @@ header h1{margin:0;font-size:18px;font-weight:500;border-left:1px solid var(--li
 .seg{display:inline-flex;background:var(--soft);border-radius:999px;padding:3px}
 .seg button{border:0;background:none;border-radius:999px;padding:6px 10px;font-weight:500;color:var(--muted);white-space:nowrap}
 .seg button[aria-pressed="true"]{background:var(--card);color:var(--text);box-shadow:0 1px 3px rgba(7,24,45,.18)}
+.pact{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.seatpick{font:inherit;font-size:13.5px;font-weight:600;padding:8px 10px;border:1px solid var(--blue);border-radius:10px;background:var(--blue);color:#fff;max-width:100%;cursor:pointer}
+.seatpick option{background:#fff;color:var(--text);font-weight:400}
+.seatpick:disabled{background:var(--soft);border-color:var(--line);color:var(--muted);cursor:not-allowed}
+#nSeat{display:block;width:100%;margin-top:10px;font-size:14.5px;padding:10px 12px}
+#findList .person{flex-direction:column;align-items:stretch}
+#findList .pact,.samebox .pact{justify-content:flex-start}
+#findList .pact .seatpick,.samebox .pact .seatpick{flex:1;min-width:0}
 .lbl{color:var(--muted);font-size:13px;margin-right:-6px;white-space:nowrap}
 header .btn,.conn{white-space:nowrap}
 .conn{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:13px;white-space:nowrap}
@@ -181,7 +189,7 @@ table.list input.ed{width:70px}
 <main>
   <section class="panel checkin" id="checkin">
     <h2>Check in a player</h2>
-    <p class="sub">Add each player to the queue. The queue seats them in arrival order at the next free seat, so everyone plays someone new.</p>
+    <p class="sub">Register each player, then choose their table. Every table busy? Add them to the queue and seat them from there when a table frees up.</p>
     <label class="fl" for="find">Played before? Find them</label>
     <input class="scan" id="find" placeholder="Search name, alias or company" autocomplete="off" spellcheck="false">
     <div id="findList" class="plist"></div>
@@ -193,7 +201,8 @@ table.list input.ed{width:70px}
       <div id="aliasRow" hidden><label for="nAlias">Alias</label><input id="nAlias" maxlength="24" autocomplete="off" placeholder="e.g. KnightRider"></div>
       <div class="check" id="nCheck"></div>
       <div class="samebox" id="nSame" hidden></div>
-      <div class="row"><button class="btn primary" id="nSave" disabled>Add to queue</button><button class="btn" id="nClear">Clear</button></div>
+      <select class="seatpick" id="nSeat" aria-label="Seat the new player at a table" disabled><option value="">Seat at table…</option></select>
+      <div class="row"><button class="btn" id="nSave" disabled>Add to queue</button><button class="btn" id="nClear">Clear</button></div>
     </div>
     <div class="msg" id="msg"></div>
     <div class="divider"><span>Queue <i id="qCount"></i></span></div>
@@ -280,7 +289,7 @@ function refresh(){
   if(!OP||busy)return;
   op("op_overview",{}).then(got,function(){setConn()});
 }
-function got(d){data=d;offset=Date.parse(d.now)-Date.now();lastOk=Date.now();setConn();renderMinutes();renderTables();renderQueue();announceSeats();renderEvent();if(view==="results")renderResults()}
+function got(d){data=d;offset=Date.parse(d.now)-Date.now();lastOk=Date.now();setConn();renderMinutes();renderTables();renderQueue();renderSeatPickers();announceSeats();renderEvent();if(view==="results")renderResults()}
 function setConn(){var off=Date.now()-lastOk>6000;$("conn").classList.toggle("off",off);$("conn").querySelector("span").textContent=off?"No connection":"Live"}
 setInterval(refresh,1500);setInterval(function(){setConn();tickClocks()},500);
 
@@ -303,7 +312,7 @@ function seatHTML(t,side){
   var canClear=p&&!(s&&s.status==="playing");
   return '<div class="seat '+side[0]+(turn?" turn":"")+'"><span class="chip" title="'+(side==="white"?"White":"Black")+'"></span><div class="who">'+
     (p?'<div class="n">'+esc(p.name)+'</div><div class="c">'+(p.has_alias?esc(p.full_name)+" · ":"")+esc(p.company||"")+" · today "+(p.today||0)+", overall "+p.points+" pts</div>"
-      :'<div class="e">'+(side==="white"?"White":"Black")+(t.paused?": paused":": next from the queue")+'</div>')+
+      :'<div class="e">'+(side==="white"?"White":"Black")+(t.paused?": paused":": empty seat")+'</div>')+
     '</div><div class="pts">'+pts+'</div>'+(canClear?'<button class="x" data-act="clear" data-side="'+side+'" title="Remove from this seat">✕</button>':'<span></span>')+'</div>';
 }
 function cardHTML(t){
@@ -320,7 +329,7 @@ function cardHTML(t){
   else if(st==="playing")h+='<button class="btn sm" data-act="endkeep">End, keep points</button><button class="btn sm danger" data-act="reset">Reset (no points)</button>';
   else if(st==="finished")h+='<button class="btn go" data-act="rematch">Rematch</button><button class="btn sm" data-act="clearall">Clear table</button>';
   else if(st==="seating")h+='<button class="btn sm danger" data-act="clearall">Clear table</button>';
-  if(st!=="playing")h+=t.paused?'<button class="btn sm" data-act="resume">Resume table</button>':'<button class="btn sm" data-act="pause" title="The queue skips a paused table">Pause table</button>';
+  if(st!=="playing")h+=t.paused?'<button class="btn sm" data-act="resume">Resume table</button>':'<button class="btn sm" data-act="pause" title="A paused table is left out of the seat lists">Pause table</button>';
   h+='</div></div>';
   return h;
 }
@@ -345,7 +354,7 @@ $("grid").addEventListener("click",function(e){
   else if(a==="swap")act(op("op_swap",{p_table:n}));
   else if(a==="clear")act(op("op_clear",{p_table:n,p_side:b.dataset.side}));
   else if(a==="clearall")act(op("op_clear",{p_table:n,p_side:"both"}));
-  else if(a==="pause")act(op("op_pause",{p_table:n,p_paused:true})).then(function(){toast("Table "+n+" paused: the queue skips it")});
+  else if(a==="pause")act(op("op_pause",{p_table:n,p_paused:true})).then(function(){toast("Table "+n+" paused")});
   else if(a==="resume")act(op("op_pause",{p_table:n,p_paused:false})).then(function(){toast("Table "+n+" back in use")});
   else if(a==="rematch")act(op("op_reset",{p_table:n})).then(function(){return act(op("op_swap",{p_table:n}))}).then(function(){toast("Table "+n+": same players, colours swapped. Press Start game.")});
   else if(a==="endkeep")armed(b,"Tap again to end",function(){act(op("op_end",{p_table:n,p_keep:true})).then(function(){toast("Table "+n+" ended. Points kept.")})});
@@ -354,7 +363,7 @@ $("grid").addEventListener("click",function(e){
 });
 
 
-/* ---------- check-in: typed at the welcome desk, then a fair queue seats players in arrival order ---------- */
+/* ---------- check-in: typed at the welcome desk; the operator chooses each table (the queue is a waiting list) ---------- */
 function focusFind(){var a=document.activeElement;if(a&&(a.tagName==="INPUT"||a.tagName==="TEXTAREA"||a.tagName==="SELECT"))return;$("find").focus()}
 function queued(id){return data&&data.queue?data.queue.some(function(q){return q.id===id}):false}
 
@@ -371,14 +380,15 @@ function personHTML(p){
   return '<div class="person" data-id="'+p.id+'"><div><div class="nm">'+esc(p.name)+(p.hidden?' <span class="tag">Hidden</span>':"")+st+'</div>'+
     '<div class="co">'+(p.has_alias?esc(p.full_name)+" · ":"")+esc(p.company||"")+'</div>'+
     '<div class="stats">Today '+p.today+' pts · Overall '+p.points+' pts · '+p.games+' game'+(p.games===1?"":"s")+'</div></div>'+
-    '<button class="btn go sm" data-queue="'+p.id+'" data-name="'+esc(p.name)+'"'+(queued(p.id)?" disabled":"")+'>Add to queue</button></div>';
+    '<div class="pact">'+seatSelect(p.id,p.name)+'<button class="btn sm" data-queue="'+p.id+'" data-name="'+esc(p.name)+'"'+(queued(p.id)?" disabled":"")+'>Add to queue</button></div></div>';
 }
+$("findList").addEventListener("change",function(e){var s=e.target.closest(".seatpick");if(s&&s.value)seatPlayer(s.dataset.id,s.dataset.name,s.value)});
 $("findList").addEventListener("click",function(e){var b=e.target.closest("[data-queue]");if(!b||b.disabled)return;enqueue({id:b.dataset.queue,name:b.dataset.name})});
 function enqueue(p){
   return act(op("op_queue",{p_player:p.id,p_on:true})).then(function(q){
     var i=q.map(function(x){return x.id}).indexOf(p.id);$("find").value="";$("findList").innerHTML="";
     return op("op_overview",{}).then(got).then(function(){
-      if(i>=0){msg(p.name+" is in the queue, position "+(i+1)+". They'll go to the next free seat.","ok");return}
+      if(i>=0){msg(p.name+" is in the queue, position "+(i+1)+". Seat them from the queue when a table is free.","ok");return}
       var at=null;data.tables.forEach(function(t){["white","black"].forEach(function(sd){if(t[sd]&&t[sd].id===p.id)at={t:t.table_no,side:sd}})});
       msg(at?p.name+" → Table "+at.t+" ("+(at.side==="white"?"White":"Black")+"). Send them to the table.":p.name+" has been seated.","ok");
     });
@@ -387,21 +397,31 @@ function enqueue(p){
 
 /* the queue: shown in order; the host can seat someone at a chosen table, or take them out */
 function freeSeats(){var out=[];(data&&data.tables||[]).forEach(function(t){if(t.paused||t.state==="playing")return;
-  if(t.state==="finished"){out.push({t:t.table_no,side:"white",label:"Table "+t.table_no+" (new pair)"});return}
-  if(!t.white)out.push({t:t.table_no,side:"white",label:"Table "+t.table_no+" · White"});
-  if(!t.black)out.push({t:t.table_no,side:"black",label:"Table "+t.table_no+" · Black"})});return out}
+  if(t.state==="finished"){out.push({t:t.table_no,side:"white",label:"Table "+t.table_no+" · new game"});return}
+  if(!t.white)out.push({t:t.table_no,side:"white",label:seatLabel(t,"white")});
+  if(!t.black)out.push({t:t.table_no,side:"black",label:seatLabel(t,"black")})});return out}
+function seatLabel(t,side){var o=side==="white"?t.black:t.white;return "Table "+t.table_no+" · "+(side==="white"?"White":"Black")+(o?" · vs "+o.name:"")}
+function seatOpts(){return '<option value="">Seat at table…</option>'+freeSeats().map(function(s){return '<option value="'+s.t+'|'+s.side+'">'+esc(s.label)+'</option>'}).join("")}
+function seatSelect(id,name){var n=freeSeats().length;return '<select class="seatpick" data-id="'+id+'" data-name="'+esc(name)+'" aria-label="Seat at a table"'+(n?"":" disabled title=\"No free seats: add them to the queue\"")+'>'+(n?seatOpts():'<option value="">No free seats</option>')+'</select>'}
+function seatPlayer(id,name,v){
+  var x=v.split("|"),t=+x[0],side=x[1],tb=data.tables.filter(function(z){return z.table_no===t})[0];if(tb&&tb.state==="finished")side="white";
+  return act(op("op_assign",{p_table:t,p_side:side,p_player:id})).then(function(){$("find").value="";$("findList").innerHTML="";
+    msg(name+" → Table "+t+" ("+(side==="white"?"White":"Black")+"). Send them to the table.","ok")}).catch(function(err){msg(err.message,"err");renderSeatPickers()});
+}
+/* keep every seat list in step with the tables (skips a list the host has open) */
+function renderSeatPickers(){var n=freeSeats().length;Array.prototype.forEach.call(document.querySelectorAll("#findList .seatpick,#nSame .seatpick,#nSeat"),function(s){
+  if(s===document.activeElement)return;s.innerHTML=n?seatOpts():'<option value="">No free seats</option>';if(s.id!=="nSeat")s.disabled=!n});if($("nSeat"))formState()}
 function since(iso){var m=Math.floor((Date.now()+offset-Date.parse(iso))/60000);return m<1?"just now":m+" min"}
 function renderQueue(){
   if(!data)return;var q=data.queue||[],box=$("queue");if(box.querySelector("select:focus"))return;
   $("qCount").textContent=q.length?"("+q.length+")":"";
-  var seats=freeSeats(),opts='<option value="">Seat at…</option>'+seats.map(function(s){return '<option value="'+s.t+'|'+s.side+'">'+s.label+'</option>'}).join("");
+  var seats=freeSeats(),opts=seatOpts();
   box.innerHTML=q.length?q.map(function(p,i){return '<div class="qitem" data-id="'+p.id+'"><b class="qn">'+(i+1)+'</b><div class="qw"><div class="nm">'+esc(p.name)+'</div><div class="co">'+(p.has_alias?esc(p.full_name)+" · ":"")+esc(p.company||"")+' · waiting '+since(p.queued_at)+'</div></div>'+
     '<select class="qseat" aria-label="Seat at a table"'+(seats.length?"":" disabled")+'>'+opts+'</select><button class="x" data-unq title="Take out of the queue">✕</button></div>'}).join("")
-    :'<div class="none">Nobody waiting. Players added here are seated automatically at the next free seat.</div>';
+    :'<div class="none">Nobody waiting. When every table is busy, add players here and seat them as tables free up.</div>';
 }
 $("queue").addEventListener("change",function(e){var s=e.target.closest(".qseat");if(!s||!s.value)return;var it=s.closest(".qitem"),v=s.value.split("|"),t=+v[0],side=v[1];
-  var tb=data.tables.filter(function(x){return x.table_no===t})[0],name=it.querySelector(".nm").textContent;
-  act(op("op_assign",{p_table:t,p_side:tb&&tb.state==="finished"?"white":side,p_player:it.dataset.id})).then(function(){msg(name+" seated at table "+t+".","ok")}).catch(function(err){msg(err.message,"err")})});
+  seatPlayer(it.dataset.id,it.querySelector(".nm").textContent,s.value)});
 $("queue").addEventListener("click",function(e){var b=e.target.closest("[data-unq]");if(!b)return;var it=b.closest(".qitem");
   act(op("op_queue",{p_player:it.dataset.id,p_on:false})).then(function(){msg(it.querySelector(".nm").textContent+" taken out of the queue.","ok")}).catch(function(err){msg(err.message,"err")})});
 
@@ -435,11 +455,12 @@ function renderCheck(){
   if(chk.same_name&&chk.same_name.length&&!sameOK){
     same.hidden=false;
     same.innerHTML='<b>'+(chk.same_name.length>1?chk.same_name.length+" players are":"There's already a player")+' called "'+esc($("nName").value.trim())+'".</b> Is this the same person?'+
-      chk.same_name.map(function(p){return '<div class="person"><div><div class="nm">'+esc(p.name)+'</div><div class="co">'+(p.name!==p.full_name?esc(p.full_name)+' · ':'')+esc(p.company||"")+' · '+p.points+' pts overall</div></div><button class="btn go sm" data-same="'+p.id+'" data-name="'+esc(p.name)+'">Same person: add to queue</button></div>'}).join("")+
+      chk.same_name.map(function(p){return '<div class="person"><div><div class="nm">'+esc(p.name)+'</div><div class="co">'+(p.name!==p.full_name?esc(p.full_name)+' · ':'')+esc(p.company||"")+' · '+p.points+' pts overall</div></div><div class="pact">'+seatSelect(p.id,p.name)+'<button class="btn sm" data-same="'+p.id+'" data-name="'+esc(p.name)+'">Same person: add to queue</button></div></div>'}).join("")+
       '<button class="btn sm" id="nDiff">No, a different person</button>';
   }else same.hidden=true;
   formState();
 }
+$("nSame").addEventListener("change",function(e){var s=e.target.closest(".seatpick");if(s&&s.value){var v=s.value;clearForm();seatPlayer(s.dataset.id,s.dataset.name,v)}});
 $("nSame").addEventListener("click",function(e){
   var b=e.target.closest("[data-same]");
   if(b){enqueue({id:b.dataset.same,name:b.dataset.name});clearForm();return}
@@ -450,7 +471,7 @@ $("nSame").addEventListener("click",function(e){
 $("nCheck").addEventListener("click",function(e){var b=e.target.closest("[data-use]");if(!b)return;$("nUseAlias").checked=true;$("aliasRow").hidden=false;$("nAlias").value=b.dataset.use;check()});
 function formState(){
   var ok=$("nName").value.trim()&&$("nCo").value.trim()&&(!$("nUseAlias").checked||$("nAlias").value.trim())&&chk&&chk.board_ok&&!(chk.same_name&&chk.same_name.length&&!sameOK);
-  $("nSave").disabled=!ok;
+  $("nSave").disabled=!ok;var ns=$("nSeat");if(ns&&ns!==document.activeElement){ns.disabled=!ok||!freeSeats().length}
 }
 function clearForm(){$("nName").value="";$("nCo").value="";$("nAlias").value="";$("nUseAlias").checked=false;$("aliasRow").hidden=true;chk=null;sameOK=false;renderCheck()}
 $("nClear").onclick=function(){clearForm();msg("")};
@@ -458,6 +479,9 @@ $("nSave").onclick=function(){
   if(this.disabled)return;this.disabled=true;
   op("op_add_player",{p_name:$("nName").value,p_company:$("nCo").value,p_alias:aliasVal()}).then(function(p){clearForm();return enqueue(p)}).catch(function(e){msg(e.message,"err");formState()});
 };
+$("nSeat").addEventListener("change",function(){var v=this.value;if(!v||$("nSave").disabled)return;this.disabled=true;$("nSave").disabled=true;
+  op("op_add_player",{p_name:$("nName").value,p_company:$("nCo").value,p_alias:aliasVal()}).then(function(p){clearForm();return seatPlayer(p.id,p.name,v)}).catch(function(e){msg(e.message,"err");formState()});
+});
 $("nCo").addEventListener("keydown",function(e){if(e.key==="Enter")$("nSave").click()});
 $("nAlias").addEventListener("keydown",function(e){if(e.key==="Enter")$("nSave").click()});
 
