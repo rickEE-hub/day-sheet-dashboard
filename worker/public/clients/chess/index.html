@@ -869,9 +869,12 @@ var API={url:"https://kagbjutxhptqurpkojsk.supabase.co",key:"sb_publishable_PLDK
 var VAL={p:1,n:5,b:5,r:5,q:12};               /* points for each piece captured */
 var TS={state:"idle",white:null,black:null,session:null,minutes:15,offset:0,lastOk:0,polled:false};
 var localSid=null,caps={w:0,b:0},timeUp=false,opEnded=false,clockTick=null,lastBeep=-1,lastSig="",overShownFor=null;
-var MOVE_MS=30000,turnStart=0,note="";
+var turnStart=0,note="";
+/* time per move: the running game keeps the value it started with; otherwise the operator's current choice (30/45/60 s) */
+function moveMs(){var s=TS.session;return ((s&&s.status==="playing"&&s.move_seconds)||TS.moveSec||30)*1000}
+function moveSecTxt(){return Math.round(moveMs()/1000)}
 /* ?demo in the address: a self-contained test game, no operator or server needed. Refresh = new game. */
-var DEMO=/[?&]demo(=|&|$)/.test(location.search);        /* 30 seconds per move */
+var DEMO=/[?&]demo(=|&|$)/.test(location.search);        /* operator-set seconds per move */
 
 function rpc(fn,body,ms){
   var ctl=window.AbortController?new AbortController():null,t=setTimeout(function(){if(ctl)ctl.abort()},ms||6000);
@@ -898,6 +901,7 @@ function poll(){
     polling=false;TS.lastOk=Date.now();TS.polled=true;
     TS.offset=Date.parse(res.now)-Date.now();
     if(res.minutes)TS.minutes=res.minutes;
+    if(res.move_seconds)TS.moveSec=res.move_seconds;
     TS.open=res.open!==false;
     applyState(res.table);setConn();flushPending();
   },function(e){
@@ -986,7 +990,7 @@ function startClock(){stopClock();lastBeep=-1;clockTick=setInterval(function(){
   var mr=moveLeft();if(mr<=0){moveTimeout();return}
   renderTimers();var s=Math.ceil(Math.min(r,mr)/1000);if(s<=10&&s!==lastBeep){lastBeep=s;beep(880,.06)}},250);renderTimers()}
 window.__cl={skip:function(ms){turnStart-=ms},turn:function(){return game.turn()},hist:function(){return hist.map(function(h){return h.san}).join(" ")}};
-function moveLeft(){return Math.max(0,MOVE_MS-(Date.now()-turnStart))}
+function moveLeft(){return Math.max(0,moveMs()-(Date.now()-turnStart))}
 /* the 1-minute move clock ran out: the turn passes to the other player.
    You can't pass while in check, so then a move is played for the player instead. */
 function passTurn(){
@@ -1015,14 +1019,14 @@ function renderTimers(){
   var st=tState(),t=game.turn(),over=isOver()||st==="finished",live=playing()&&!over;
   var total=((TS.session&&TS.session.minutes)||TS.minutes||15)*60000;
   var rem=live?remaining():(st==="playing"?remaining():over?0:total);
-  var mrem=live?moveLeft():MOVE_MS,mv=Math.min(mrem,rem);
+  var MOVE_MS=moveMs(),mrem=live?moveLeft():MOVE_MS,mv=Math.min(mrem,rem);
   var pct=live?mv/MOVE_MS*100:100,urgent=live&&mv<=10000,gUrgent=live&&rem<=60000;
   [[$("pTop"),far()],[$("pBot"),near()]].forEach(function(x){var c=x[0].querySelector(".clock");
     c.hidden=!live;if(!live)return;c.textContent=fmt(mv);c.classList.toggle("on",t===x[1]);c.classList.toggle("urgent",urgent)});
   [[$("tFar"),far()],[$("tNear"),near()]].forEach(function(x){
     var el=x[0].querySelector(".ttimer"),c=x[1],mine=t===c;
     el.classList.toggle("mine",live&&mine);el.classList.toggle("notime",st==="idle"||st==="seating");el.classList.toggle("urgent",urgent);
-    el.querySelector(".tlabel").textContent=live?(mine?"Your move":colorName(t)+"’s move")+" · 30 sec":over?"Game over":st==="ready"?"30 seconds per move":"Next game";
+    el.querySelector(".tlabel").textContent=live?(mine?"Your move":colorName(t)+"’s move")+" · "+moveSecTxt()+" sec":over?"Game over":st==="ready"?moveSecTxt()+" seconds per move":"Next game";
     el.querySelector(".tval").textContent=(st==="idle"||st==="seating"||over)?"":live&&!mine?"":fmt(live?mv:MOVE_MS);
     el.classList.toggle("wait",live&&!mine);
     var bar=el.querySelector(".tbar i");bar.style.width=(over||(live&&!mine)?0:pct)+"%";bar.style.setProperty("--bgw",(pct>0?10000/pct:100)+"%");
@@ -1085,7 +1089,7 @@ function renderStatus(){
     var h=x[0].querySelector(".tstatus h2"),p=x[0].querySelector(".tstatus p"),c=x[1],me=playerOf(c),fn=firstName(c);
     if(r){var pts=pointsFor(c);h.textContent=r.reason==="checkmate"?(r.w===c?"You win!":"Checkmate"):r.t;p.textContent=(r.reason==="checkmate"?(r.w===c?"+100 points":"0 points this game"):"+"+pts+" points")+". Thanks for playing!";return}
     if(st==="playing"&&playing()){
-      if(t===c){h.textContent=game.in_check()?"Check":"Your move";p.textContent=note?note:game.in_check()?"Get your king to safety.":(hist.length?"":(c==="w"?"White moves first. ":"")+"You have 30 seconds for each move.")}
+      if(t===c){h.textContent=game.in_check()?"Check":"Your move";p.textContent=note?note:game.in_check()?"Get your king to safety.":(hist.length?"":(c==="w"?"White moves first. ":"")+"You have "+moveSecTxt()+" seconds for each move.")}
       else{h.textContent="Waiting for "+(firstName(t)||colorName(t));p.textContent=note?note:game.in_check()?"You gave check.":""}
       return;
     }
