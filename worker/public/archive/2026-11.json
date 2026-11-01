@@ -1,0 +1,39 @@
+{
+  "days": {
+    "2026-11-01": [
+      {
+        "id": "sub1706",
+        "title": "ESA SRB 2026 - Novo Nordisk",
+        "status": "confirmed",
+        "venue": "International Convention Centre Sydney (ICC)",
+        "state": "NSW",
+        "address": "14 Darling Drive, Sydney NSW 2000",
+        "rows": [
+          {
+            "id": "fn5788",
+            "name": "AV Setup (Weekend Surcharge)",
+            "category": "install",
+            "start": "2026-11-01T12:30:00+11:00",
+            "end": "2026-11-01T12:30:00+11:00",
+            "needed": 2,
+            "crew": [
+              "Yvette Paci",
+              "Mick Rocco"
+            ],
+            "vehicles": []
+          }
+        ],
+        "equipment": [
+          {
+            "name": "Wall Mount System - Custom Stand",
+            "qty": 1
+          },
+          {
+            "name": "65\"  Philips 4K Ultra HD ",
+            "qty": 1
+          }
+        ]
+      }
+    ]
+  }
+}
