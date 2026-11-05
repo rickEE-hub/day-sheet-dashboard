@@ -929,7 +929,7 @@ function applyState(t){
       caps.w=s.white_cap;caps.b=s.black_cap;
     }
   }
-  var sig=JSON.stringify([t.state,t.white&&[t.white.id,t.white.name,t.white.company,t.white.points],t.black&&[t.black.id,t.black.name,t.black.company,t.black.points],s&&[s.id,s.status,s.white_points,s.black_points,s.reason,s.result]]);
+  var sig=JSON.stringify([t.state,t.white&&[t.white.id,t.white.name,t.white.points],t.black&&[t.black.id,t.black.name,t.black.points],s&&[s.id,s.status,s.white_points,s.black_points,s.reason,s.result]]);
   if(sig!==lastSig){lastSig=sig;renderAll()}
   if(s&&s.status==="finished")showOver();else if(!s||s.status!=="finished"){if(!isOver()){$("over").hidden=true;overShownFor=null}}
 }
@@ -1053,7 +1053,7 @@ function renderPlayers(){
     if(table()&&el.classList.contains("tpanel")){var sp=document.createElement("span");sp.className="seat";sp.textContent=colorName(c);nm.insertBefore(sp,nm.firstChild)}
     el.querySelector(".dot").style.background=col.f;
     el.querySelector(".caps").innerHTML=cap.lost[opp].map(function(t){return miniPiece(t,opp)}).join("");
-    var vs=el.querySelector(".vs");if(vs)vs.textContent=p&&p.company?p.company:"";
+    var vs=el.querySelector(".vs");if(vs)vs.textContent="";
     el.classList.toggle("turn",playing()&&!isOver()&&game.turn()===c);
     var tp=el.querySelector(".tpts");
     if(tp){var on=!!TS.session;tp.hidden=!on;
@@ -1157,8 +1157,8 @@ if(DEMO){
   var dn=Date.now(),dm=20;
   $("setup").hidden=true;
   applyState({table_no:0,state:"playing",last_seen:null,
-    white:{id:"demo-w",name:"White",company:"Demo game",games:0,points:null},
-    black:{id:"demo-b",name:"Black",company:"Demo game",games:0,points:null},
+    white:{id:"demo-w",name:"White",games:0,points:null},
+    black:{id:"demo-b",name:"Black",games:0,points:null},
     session:{id:"demo-"+dn,status:"playing",minutes:dm,started_at:new Date(dn).toISOString(),ends_at:new Date(dn+dm*60000).toISOString(),moves:"",turn:"w",white_cap:0,black_cap:0,live_at:new Date(dn).toISOString()}});
 }else{poll();setInterval(poll,1500);setInterval(setConn,2000)}
 })();</script>

@@ -193,12 +193,11 @@ table.list input.ed{width:70px}
     <h2>Check in a player</h2>
     <p class="sub">Register each player, then choose their table. Every table busy? Add them to the queue and seat them from there when a table frees up.</p>
     <label class="fl" for="find">Played before? Find them</label>
-    <input class="scan" id="find" placeholder="Search name, alias or company" autocomplete="off" spellcheck="false">
+    <input class="scan" id="find" placeholder="Search name or alias" autocomplete="off" spellcheck="false">
     <div id="findList" class="plist"></div>
     <div class="divider"><span>New player</span></div>
     <div class="form">
       <label for="nName">Full name</label><input id="nName" maxlength="40" autocomplete="off" placeholder="e.g. Rick Sanchez">
-      <label for="nCo">Company</label><input id="nCo" maxlength="80" autocomplete="off" placeholder="e.g. Event Equipment">
       <label class="tick"><input type="checkbox" id="nUseAlias"> Show an alias (gamer name) on the leaderboard instead</label>
       <div id="aliasRow" hidden><label for="nAlias">Alias</label><input id="nAlias" maxlength="24" autocomplete="off" placeholder="e.g. KnightRider"></div>
       <div class="check" id="nCheck"></div>
@@ -221,8 +220,8 @@ table.list input.ed{width:70px}
 
   <section class="view panel" id="v-players" hidden>
     <h2>Players</h2>
-    <p class="sub">Every player. Change a leaderboard name, full name or company, fix any day's points or the overall total, or hide someone from the leaderboard. Press Save on the row.</p>
-    <div class="toolbar"><input id="psearch" placeholder="Search name, alias or company"><button class="btn" id="export">Export CSV</button></div>
+    <p class="sub">Every player. Change a leaderboard name or full name, fix any day's points or the overall total, or hide someone from the leaderboard. Press Save on the row.</p>
+    <div class="toolbar"><input id="psearch" placeholder="Search name or alias"><button class="btn" id="export">Export CSV</button></div>
     <div class="tablewrap"><table class="list"><thead id="phead"></thead><tbody id="players"></tbody></table></div>
   </section>
 
@@ -313,7 +312,7 @@ function seatHTML(t,side){
   var turn=s&&s.status==="playing"&&s.turn===side[0];
   var canClear=p&&!(s&&s.status==="playing");
   return '<div class="seat '+side[0]+(turn?" turn":"")+'"><span class="chip" title="'+(side==="white"?"White":"Black")+'"></span><div class="who">'+
-    (p?'<div class="n">'+esc(p.name)+'</div><div class="c">'+(p.has_alias?esc(p.full_name)+" · ":"")+esc(p.company||"")+" · today "+(p.today||0)+", overall "+p.points+" pts</div>"
+    (p?'<div class="n">'+esc(p.name)+'</div><div class="c">'+(p.has_alias?esc(p.full_name)+" · ":"")+"today "+(p.today||0)+", overall "+p.points+" pts</div>"
       :'<div class="e">'+(side==="white"?"White":"Black")+(t.paused?": paused":": empty seat")+'</div>')+
     '</div><div class="pts">'+pts+'</div>'+(canClear?'<button class="x" data-act="clear" data-side="'+side+'" title="Remove from this seat">✕</button>':'<span></span>')+'</div>';
 }
@@ -369,7 +368,7 @@ $("grid").addEventListener("click",function(e){
 function focusFind(){var a=document.activeElement;if(a&&(a.tagName==="INPUT"||a.tagName==="TEXTAREA"||a.tagName==="SELECT"))return;$("find").focus()}
 function queued(id){return data&&data.queue?data.queue.some(function(q){return q.id===id}):false}
 
-/* returning players: search by name, alias or company */
+/* returning players: search by name or alias */
 var fT=null,fSeq=0;
 $("find").addEventListener("input",function(){clearTimeout(fT);fT=setTimeout(doFind,220)});
 function doFind(){
@@ -380,7 +379,7 @@ function doFind(){
 function personHTML(p){
   var st=queued(p.id)?'<span class="tag">In the queue</span>':p.seated_at?'<span class="tag">At table '+p.seated_at+'</span>':"";
   return '<div class="person" data-id="'+p.id+'"><div><div class="nm">'+esc(p.name)+(p.hidden?' <span class="tag">Hidden</span>':"")+st+'</div>'+
-    '<div class="co">'+(p.has_alias?esc(p.full_name)+" · ":"")+esc(p.company||"")+'</div>'+
+    (p.has_alias?'<div class="co">'+esc(p.full_name)+'</div>':'')+
     '<div class="stats">Today '+p.today+' pts · Overall '+p.points+' pts · '+p.games+' game'+(p.games===1?"":"s")+'</div></div>'+
     '<div class="pact">'+seatSelect(p.id,p.name)+'<button class="btn sm" data-queue="'+p.id+'" data-name="'+esc(p.name)+'"'+(queued(p.id)?" disabled":"")+'>Add to queue</button></div></div>';
 }
@@ -413,12 +412,13 @@ function seatPlayer(id,name,v){
 /* keep every seat list in step with the tables (skips a list the host has open) */
 function renderSeatPickers(){var n=freeSeats().length;Array.prototype.forEach.call(document.querySelectorAll("#findList .seatpick,#nSame .seatpick,#nSeat"),function(s){
   if(s===document.activeElement)return;s.innerHTML=n?seatOpts():'<option value="">No free seats</option>';if(s.id!=="nSeat")s.disabled=!n});if($("nSeat"))formState()}
+function lastPlayed(iso){var d=new Date(iso);return d.toLocaleDateString("en-AU",{timeZone:"Australia/Melbourne",weekday:"short"})+" "+d.toLocaleTimeString("en-AU",{timeZone:"Australia/Melbourne",hour:"numeric",minute:"2-digit"})}
 function since(iso){var m=Math.floor((Date.now()+offset-Date.parse(iso))/60000);return m<1?"just now":m+" min"}
 function renderQueue(){
   if(!data)return;var q=data.queue||[],box=$("queue");if(box.querySelector("select:focus"))return;
   $("qCount").textContent=q.length?"("+q.length+")":"";
   var seats=freeSeats(),opts=seatOpts();
-  box.innerHTML=q.length?q.map(function(p,i){return '<div class="qitem" data-id="'+p.id+'"><b class="qn">'+(i+1)+'</b><div class="qw"><div class="nm">'+esc(p.name)+'</div><div class="co">'+(p.has_alias?esc(p.full_name)+" · ":"")+esc(p.company||"")+' · waiting '+since(p.queued_at)+'</div></div>'+
+  box.innerHTML=q.length?q.map(function(p,i){return '<div class="qitem" data-id="'+p.id+'"><b class="qn">'+(i+1)+'</b><div class="qw"><div class="nm">'+esc(p.name)+'</div><div class="co">'+(p.has_alias?esc(p.full_name)+" · ":"")+'waiting '+since(p.queued_at)+'</div></div>'+
     '<select class="qseat" aria-label="Seat at a table"'+(seats.length?"":" disabled")+'>'+opts+'</select><button class="x" data-unq title="Take out of the queue">✕</button></div>'}).join("")
     :'<div class="none">Nobody waiting. When every table is busy, add players here and seat them as tables free up.</div>';
 }
@@ -435,9 +435,9 @@ function announceSeats(){
   lastSeats=now;
 }
 
-/* new players: full name + company, optional alias, live checks */
+/* new players: full name, optional alias, live checks (company is not collected) */
 var chk=null,cT=null,cSeq=0,sameOK=false;
-["nName","nCo","nAlias"].forEach(function(id){$(id).addEventListener("input",function(){msg("");if(id==="nName")sameOK=false;clearTimeout(cT);cT=setTimeout(check,250);formState()})});
+["nName","nAlias"].forEach(function(id){$(id).addEventListener("input",function(){msg("");if(id==="nName")sameOK=false;clearTimeout(cT);cT=setTimeout(check,250);formState()})});
 $("nUseAlias").addEventListener("change",function(){$("aliasRow").hidden=!this.checked;if(this.checked)$("nAlias").focus();else $("nAlias").value="";check()});
 function aliasVal(){return $("nUseAlias").checked?$("nAlias").value.trim():""}
 function check(){
@@ -457,7 +457,7 @@ function renderCheck(){
   if(chk.same_name&&chk.same_name.length&&!sameOK){
     same.hidden=false;
     same.innerHTML='<b>'+(chk.same_name.length>1?chk.same_name.length+" players are":"There's already a player")+' called "'+esc($("nName").value.trim())+'".</b> Is this the same person?'+
-      chk.same_name.map(function(p){return '<div class="person"><div><div class="nm">'+esc(p.name)+'</div><div class="co">'+(p.name!==p.full_name?esc(p.full_name)+' · ':'')+esc(p.company||"")+' · '+p.points+' pts overall</div></div><div class="pact">'+seatSelect(p.id,p.name)+'<button class="btn sm" data-same="'+p.id+'" data-name="'+esc(p.name)+'">Same person: add to queue</button></div></div>'}).join("")+
+      chk.same_name.map(function(p){return '<div class="person"><div><div class="nm">'+esc(p.name)+'</div><div class="co">'+(p.name!==p.full_name?'Alias '+esc(p.name)+' · ':'')+p.games+' game'+(p.games===1?'':'s')+' · '+p.points+' pts overall'+(p.last_played?' · last played '+lastPlayed(p.last_played):'')+'</div></div><div class="pact">'+seatSelect(p.id,p.name)+'<button class="btn sm" data-same="'+p.id+'" data-name="'+esc(p.name)+'">Same person: add to queue</button></div></div>'}).join("")+
       '<button class="btn sm" id="nDiff">No, a different person</button>';
   }else same.hidden=true;
   formState();
@@ -472,19 +472,19 @@ $("nSame").addEventListener("click",function(e){
 });
 $("nCheck").addEventListener("click",function(e){var b=e.target.closest("[data-use]");if(!b)return;$("nUseAlias").checked=true;$("aliasRow").hidden=false;$("nAlias").value=b.dataset.use;check()});
 function formState(){
-  var ok=$("nName").value.trim()&&$("nCo").value.trim()&&(!$("nUseAlias").checked||$("nAlias").value.trim())&&chk&&chk.board_ok&&!(chk.same_name&&chk.same_name.length&&!sameOK);
+  var ok=$("nName").value.trim()&&(!$("nUseAlias").checked||$("nAlias").value.trim())&&chk&&chk.board_ok&&!(chk.same_name&&chk.same_name.length&&!sameOK);
   $("nSave").disabled=!ok;var ns=$("nSeat");if(ns&&ns!==document.activeElement){ns.disabled=!ok||!freeSeats().length}
 }
-function clearForm(){$("nName").value="";$("nCo").value="";$("nAlias").value="";$("nUseAlias").checked=false;$("aliasRow").hidden=true;chk=null;sameOK=false;renderCheck()}
+function clearForm(){$("nName").value="";$("nAlias").value="";$("nUseAlias").checked=false;$("aliasRow").hidden=true;chk=null;sameOK=false;renderCheck()}
 $("nClear").onclick=function(){clearForm();msg("")};
 $("nSave").onclick=function(){
   if(this.disabled)return;this.disabled=true;
-  op("op_add_player",{p_name:$("nName").value,p_company:$("nCo").value,p_alias:aliasVal()}).then(function(p){clearForm();return enqueue(p)}).catch(function(e){msg(e.message,"err");formState()});
+  op("op_add_player",{p_name:$("nName").value,p_company:"",p_alias:aliasVal()}).then(function(p){clearForm();return enqueue(p)}).catch(function(e){msg(e.message,"err");formState()});
 };
 $("nSeat").addEventListener("change",function(){var v=this.value;if(!v||$("nSave").disabled)return;this.disabled=true;$("nSave").disabled=true;
-  op("op_add_player",{p_name:$("nName").value,p_company:$("nCo").value,p_alias:aliasVal()}).then(function(p){clearForm();return seatPlayer(p.id,p.name,v)}).catch(function(e){msg(e.message,"err");formState()});
+  op("op_add_player",{p_name:$("nName").value,p_company:"",p_alias:aliasVal()}).then(function(p){clearForm();return seatPlayer(p.id,p.name,v)}).catch(function(e){msg(e.message,"err");formState()});
 });
-$("nCo").addEventListener("keydown",function(e){if(e.key==="Enter")$("nSave").click()});
+$("nName").addEventListener("keydown",function(e){if(e.key==="Enter")$("nSave").click()});
 $("nAlias").addEventListener("keydown",function(e){if(e.key==="Enter")$("nSave").click()});
 
 /* ---------- results: edit scores ---------- */
@@ -505,14 +505,14 @@ function todayIsEventDay(){return data&&data.event&&evDays().indexOf(data.event.
 function loadPlayers(){op("op_players",{p_search:$("psearch").value.trim()}).then(function(l){plist=l||[];renderPlayers()},function(e){toast(e.message,true)})}
 function renderPlayers(){
   var showToday=!todayIsEventDay();
-  $("phead").innerHTML='<tr><th>Leaderboard name</th><th>Full name</th><th>Company</th>'+[0,1,2].map(function(i){return '<th class="num">'+dayLabel(i)+'</th>'}).join("")+
+  $("phead").innerHTML='<tr><th>Leaderboard name</th><th>Full name</th>'+[0,1,2].map(function(i){return '<th class="num">'+dayLabel(i)+'</th>'}).join("")+
     (showToday?'<th class="num">Today</th>':"")+'<th class="num">Overall</th><th class="num">Games</th><th>Hidden</th><th></th></tr>';
   $("players").innerHTML=plist.length?plist.map(function(p){
     var num=function(k,v){return '<td class="num"><input class="ed" type="number" data-k="'+k+'" value="'+v+'" data-was="'+v+'"></td>'};
-    return '<tr data-id="'+p.id+'"><td><input class="edt" data-k="alias" value="'+esc(p.name)+'" data-was="'+esc(p.name)+'"></td><td><input class="edt" data-k="full" value="'+esc(p.full_name)+'" data-was="'+esc(p.full_name)+'"></td><td><input class="edt" data-k="company" value="'+esc(p.company||"")+'" data-was="'+esc(p.company||"")+'"></td>'+
+    return '<tr data-id="'+p.id+'"><td><input class="edt" data-k="alias" value="'+esc(p.name)+'" data-was="'+esc(p.name)+'"></td><td><input class="edt" data-k="full" value="'+esc(p.full_name)+'" data-was="'+esc(p.full_name)+'"></td>'+
       num("d0",p.day1)+num("d1",p.day2)+num("d2",p.day3)+(showToday?num("today",p.today):"")+num("total",p.points)+
       '<td class="num">'+p.games+'</td><td><input type="checkbox" data-k="hidden"'+(p.hidden?" checked":"")+' data-was="'+(p.hidden?1:0)+'"></td>'+
-      '<td class="rowacts"><button class="btn sm" data-save>Save</button>'+(p.games?"":'<button class="btn sm danger" data-del title="Delete this player">Delete</button>')+'</td></tr>'}).join(""):'<tr><td colspan="11" style="color:var(--muted)">No players found.</td></tr>';
+      '<td class="rowacts"><button class="btn sm" data-save>Save</button>'+(p.games?"":'<button class="btn sm danger" data-del title="Delete this player">Delete</button>')+'</td></tr>'}).join(""):'<tr><td colspan="10" style="color:var(--muted)">No players found.</td></tr>';
 }
 $("psearch").addEventListener("input",function(){clearTimeout(pT);pT=setTimeout(loadPlayers,300)});
 $("players").addEventListener("click",function(e){
@@ -521,9 +521,9 @@ $("players").addEventListener("click",function(e){
   if(!e.target.closest("[data-save]"))return;
   var f=function(k){return tr.querySelector('[data-k="'+k+'"]')},changed=function(k){var el=f(k);return el&&String(el.type==="checkbox"?(el.checked?1:0):el.value.trim())!==el.dataset.was};
   var steps=Promise.resolve();
-  if(changed("alias")||changed("full")||changed("company")||changed("hidden")){
+  if(changed("alias")||changed("full")||changed("hidden")){
     var full=f("full").value.trim(),alias=f("alias").value.trim();
-    steps=steps.then(function(){return op("op_update_player",{p_player:id,p_name:full,p_company:f("company").value,p_alias:alias.toLowerCase()===full.toLowerCase()?"":alias,p_hidden:f("hidden").checked})});
+    steps=steps.then(function(){return op("op_update_player",{p_player:id,p_name:full,p_company:"",p_alias:alias.toLowerCase()===full.toLowerCase()?"":alias,p_hidden:f("hidden").checked})});
   }
   [0,1,2].forEach(function(i){if(changed("d"+i)){var d=evDays()[i],v=parseInt(f("d"+i).value,10)||0;steps=steps.then(function(){return op("op_set_day_total",{p_player:id,p_day:d,p_total:v})})}});
   if(changed("today")){var tv=parseInt(f("today").value,10)||0;steps=steps.then(function(){return op("op_set_day_total",{p_player:id,p_day:data.event.today,p_total:tv})})}
@@ -533,7 +533,7 @@ $("players").addEventListener("click",function(e){
 });
 $("export").onclick=function(){
   op("op_players",{p_search:""}).then(function(l){
-    var rows=[["Leaderboard name","Full name","Company",dayLabel(0),dayLabel(1),dayLabel(2),"Overall points","Games","Checkmate wins","Hidden"]].concat(l.map(function(p){return [p.name,p.full_name,p.company||"",p.day1,p.day2,p.day3,p.points,p.games,p.wins,p.hidden?"yes":""]}));
+    var rows=[["Leaderboard name","Full name",dayLabel(0),dayLabel(1),dayLabel(2),"Overall points","Games","Checkmate wins","Hidden"]].concat(l.map(function(p){return [p.name,p.full_name,p.day1,p.day2,p.day3,p.points,p.games,p.wins,p.hidden?"yes":""]}));
     var csv=rows.map(function(r){return r.map(function(v){v=String(v);return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v}).join(",")}).join("\n");
     var a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["﻿"+csv],{type:"text/csv"}));a.download="cisco-live-chess-players.csv";document.body.appendChild(a);a.click();a.remove();
   },function(e){toast(e.message,true)});
