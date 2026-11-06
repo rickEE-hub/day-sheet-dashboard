@@ -56,6 +56,8 @@
     --status-onlocation-soft:#E4EBFD;
     --status-returned:#6B7280;
     --status-returned-soft:#EBEDF0;
+    --status-inprogress:#0891B2;
+    --status-inprogress-soft:#D7F3F8;
     --warn:#C2410C;
     --warn-soft:#FDE7DA;
     --reminder-bg-a:#FFF7ED;
@@ -117,6 +119,8 @@
       --status-onlocation-soft:#1E2A4A;
       --status-returned:#9CA3AF;
       --status-returned-soft:#262B33;
+      --status-inprogress:#38BDF8;
+      --status-inprogress-soft:#123344;
       --warn:#FB923C;
       --warn-soft:#3A2411;
       --reminder-bg-a:#2A2013;
@@ -176,6 +180,8 @@
     --status-onlocation-soft:#1E2A4A;
     --status-returned:#9CA3AF;
     --status-returned-soft:#262B33;
+    --status-inprogress:#38BDF8;
+    --status-inprogress-soft:#123344;
     --warn:#FB923C;
     --warn-soft:#3A2411;
     --reminder-bg-a:#2A2013;
@@ -440,6 +446,7 @@
   .pill-prepped{background:var(--status-prepped-soft); color:var(--status-prepped);}
   .pill-onlocation{background:var(--status-onlocation-soft); color:var(--status-onlocation);}
   .pill-returned{background:var(--status-returned-soft); color:var(--status-returned);}
+  .pill-inprogress{background:var(--status-inprogress-soft); color:var(--status-inprogress);}
   .pill-warn{background:var(--warn-soft); color:var(--warn);}
 
   .rows{display:flex; flex-direction:column;}
@@ -634,7 +641,8 @@
     {id:3, key:'confirmed',  label:'Confirmed'},
     {id:4, key:'prepped',    label:'Prepped'},
     {id:5, key:'onlocation', label:'On location'},
-    {id:6, key:'returned',   label:'Returned'}
+    {id:6, key:'returned',   label:'Returned'},
+    {id:1001, key:'inprogress', label:'In progress'}
   ];
   var STATUS_META = {};
   STATUS_LIST.forEach(function(s){ STATUS_META[s.key] = s; });

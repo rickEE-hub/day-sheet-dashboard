@@ -56,6 +56,8 @@
     --status-onlocation-soft:#E4EBFD;
     --status-returned:#6B7280;
     --status-returned-soft:#EBEDF0;
+    --status-inprogress:#0891B2;
+    --status-inprogress-soft:#D7F3F8;
     --warn:#C2410C;
     --warn-soft:#FDE7DA;
     --shadow: 0 1px 2px rgba(20,25,35,.04), 0 8px 24px rgba(20,25,35,.06);
@@ -112,6 +114,8 @@
       --status-onlocation-soft:#1E2A4A;
       --status-returned:#9CA3AF;
       --status-returned-soft:#262B33;
+      --status-inprogress:#38BDF8;
+      --status-inprogress-soft:#123344;
       --warn:#FB923C;
       --warn-soft:#3A2411;
       --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.45);
@@ -166,6 +170,8 @@
     --status-onlocation-soft:#1E2A4A;
     --status-returned:#9CA3AF;
     --status-returned-soft:#262B33;
+    --status-inprogress:#38BDF8;
+    --status-inprogress-soft:#123344;
     --warn:#FB923C;
     --warn-soft:#3A2411;
     --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.45);
@@ -275,6 +281,7 @@
   .pill-prepped{background:var(--status-prepped-soft); color:var(--status-prepped);}
   .pill-onlocation{background:var(--status-onlocation-soft); color:var(--status-onlocation);}
   .pill-returned{background:var(--status-returned-soft); color:var(--status-returned);}
+  .pill-inprogress{background:var(--status-inprogress-soft); color:var(--status-inprogress);}
   .rows{display:flex; flex-direction:column;}
   .row{display:grid; grid-template-columns:80px 116px 1fr; gap:12px; padding:13px 18px; border-top:1px solid var(--border); align-items:start;}
   .rows .row:first-child{border-top:none;}
@@ -364,7 +371,8 @@
     confirmed:{key:'confirmed', label:'Confirmed'},
     prepped:{key:'prepped', label:'Prepped'},
     onlocation:{key:'onlocation', label:'On location'},
-    returned:{key:'returned', label:'Returned'}
+    returned:{key:'returned', label:'Returned'},
+    inprogress:{key:'inprogress', label:'In progress'}
   };
 
   var CAT_LABEL = {
