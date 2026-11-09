@@ -360,6 +360,10 @@ input[type=range]{width:100%;accent-color:var(--text)}
 /* reconnecting notice on the board */
 .conn{position:absolute;left:50%;top:12px;transform:translateX(-50%);z-index:6;background:var(--orange);color:#07182d;font-weight:600;font-size:clamp(12px,1.5vmin,40px);padding:6px 14px;border-radius:999px}
 .conn[hidden]{display:none}
+/* operator paused the game */
+.gpause{position:absolute;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;gap:5%;background:rgba(7,24,45,.6);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
+.gpause[hidden]{display:none}
+.gpause i{width:7%;height:24%;background:#fff;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.35)}
 /* one-time table setup */
 .setup{position:fixed;inset:0;z-index:95;background:var(--bg);display:flex;align-items:center;justify-content:center}
 .setup[hidden]{display:none}
@@ -419,6 +423,7 @@ input[type=range]{width:100%;accent-color:var(--text)}
       <div class="ribbon"></div>
       <div class="board" id="board" role="grid"></div>
       <div class="conn" id="conn" hidden>Reconnecting…</div>
+      <div class="gpause" id="gpause" hidden role="status" aria-label="Game paused"><i></i><i></i></div>
       <div class="modal" id="promo" hidden><div class="card"><h3>Promote to</h3><p>Choose the piece your pawn becomes.</p><div class="promo" id="promoOpts"></div></div></div>
       <div class="modal" id="over" hidden>
         <div class="card twin flip"><h3 class="ovT"></h3><p class="ovX"></p><p class="ovR"></p><p class="note ovN" style="margin:12px 0 0"></p></div>
@@ -723,7 +728,7 @@ function renderBoard(){
   boardEl.style.setProperty("--sq",(boardEl.clientWidth/8||60)+"px");
   $("frame").setAttribute("data-turn",turn);
 }
-function humanTurn(){return playing()&&!isOver()}
+function humanTurn(){return playing()&&!isOver()&&!gamePaused()}
 function canPick(s){var p=game.get(s);return p&&p.color===game.turn()&&humanTurn()}
 function isOver(){return gameOver()||timeUp||opEnded}
 function rep3(){if(fens.length<5)return false;var k=function(f){return f.split(" ").slice(0,4).join(" ")},cur=k(game.fen()),n=0;fens.forEach(function(f){if(k(f)===cur)n++});return n>=3}
@@ -873,6 +878,10 @@ var turnStart=0,note="";
 /* time per move: the running game keeps the value it started with; otherwise the operator's current choice (30/45/60 s) */
 function moveMs(){var s=TS.session;return ((s&&s.status==="playing"&&s.move_seconds)||TS.moveSec||30)*1000}
 function moveSecTxt(){return Math.round(moveMs()/1000)}
+/* operator pause: both clocks freeze and no moves can be made */
+function gamePaused(){var s=TS.session;return !!(s&&s.status==="playing"&&s.paused_at)}
+function pauseRef(){return Date.parse(TS.session.paused_at)-TS.offset}
+var pausedRef=null,pausedSid=null;
 /* ?demo in the address: a self-contained test game, no operator or server needed. Refresh = new game. */
 var DEMO=/[?&]demo(=|&|$)/.test(location.search);        /* operator-set seconds per move */
 
@@ -929,7 +938,10 @@ function applyState(t){
       caps.w=s.white_cap;caps.b=s.black_cap;
     }
   }
-  var sig=JSON.stringify([t.state,t.white&&[t.white.id,t.white.name,t.white.points],t.black&&[t.black.id,t.black.name,t.black.points],s&&[s.id,s.status,s.white_points,s.black_points,s.reason,s.result]]);
+  var pr=(s&&s.status==="playing"&&s.paused_at)?Date.parse(s.paused_at)-TS.offset:null;
+  if(pausedRef!==null&&pr===null&&s&&s.id===pausedSid&&localSid===s.id&&s.status==="playing"){turnStart+=Date.now()-pausedRef;lastBeep=-1}
+  pausedRef=pr;pausedSid=s?s.id:null;if(pr!==null){sel=null;$("promo").hidden=true}
+  var sig=JSON.stringify([t.state,t.white&&[t.white.id,t.white.name,t.white.points],t.black&&[t.black.id,t.black.name,t.black.points],s&&[s.id,s.status,s.white_points,s.black_points,s.reason,s.result,s.paused_at]]);
   if(sig!==lastSig){lastSig=sig;renderAll()}
   if(s&&s.status==="finished")showOver();else if(!s||s.status!=="finished"){if(!isOver()){$("over").hidden=true;overShownFor=null}}
 }
@@ -981,16 +993,17 @@ function commit(mv){
   if(gameOver()){renderAll();return finish()}
   renderAll();pushProgress();
 }
-function remaining(){if(!TS.session)return 0;return Math.max(0,Date.parse(TS.session.ends_at)-(Date.now()+TS.offset))}
+function remaining(){if(!TS.session)return 0;if(gamePaused())return Math.max(0,Date.parse(TS.session.ends_at)-Date.parse(TS.session.paused_at));return Math.max(0,Date.parse(TS.session.ends_at)-(Date.now()+TS.offset))}
 function startClock(){stopClock();lastBeep=-1;clockTick=setInterval(function(){
   /* demo: both clocks wait for White's first move */
   if(DEMO&&!hist.length&&TS.session){turnStart=Date.now();TS.session.ends_at=new Date(Date.now()+TS.session.minutes*60000).toISOString()}
   if(!playing()||isOver()){stopClock();renderTimers();return}
+  if(gamePaused()){renderTimers();return}
   var r=remaining();if(r<=0){stopClock();return onTimeUp()}
   var mr=moveLeft();if(mr<=0){moveTimeout();return}
   renderTimers();var s=Math.ceil(Math.min(r,mr)/1000);if(s<=10&&s!==lastBeep){lastBeep=s;beep(880,.06)}},250);renderTimers()}
 window.__cl={skip:function(ms){turnStart-=ms},turn:function(){return game.turn()},hist:function(){return hist.map(function(h){return h.san}).join(" ")}};
-function moveLeft(){return Math.max(0,moveMs()-(Date.now()-turnStart))}
+function moveLeft(){var now=gamePaused()?pauseRef():Date.now();return Math.max(0,Math.min(moveMs(),moveMs()-(now-turnStart)))}
 /* the 1-minute move clock ran out: the turn passes to the other player.
    You can't pass while in check, so then a move is played for the player instead. */
 function passTurn(){
@@ -1026,7 +1039,7 @@ function renderTimers(){
   [[$("tFar"),far()],[$("tNear"),near()]].forEach(function(x){
     var el=x[0].querySelector(".ttimer"),c=x[1],mine=t===c;
     el.classList.toggle("mine",live&&mine);el.classList.toggle("notime",st==="idle"||st==="seating");el.classList.toggle("urgent",urgent);
-    el.querySelector(".tlabel").textContent=live?(mine?"Your move":colorName(t)+"’s move")+" · "+moveSecTxt()+" sec":over?"Game over":st==="ready"?moveSecTxt()+" seconds per move":"Next game";
+    el.querySelector(".tlabel").textContent=live&&gamePaused()?"Game paused":live?(mine?"Your move":colorName(t)+"’s move")+" · "+moveSecTxt()+" sec":over?"Game over":st==="ready"?moveSecTxt()+" seconds per move":"Next game";
     el.querySelector(".tval").textContent=(st==="idle"||st==="seating"||over)?"":live&&!mine?"":fmt(live?mv:MOVE_MS);
     el.classList.toggle("wait",live&&!mine);
     var bar=el.querySelector(".tbar i");bar.style.width=(over||(live&&!mine)?0:pct)+"%";bar.style.setProperty("--bgw",(pct>0?10000/pct:100)+"%");
@@ -1081,6 +1094,7 @@ function renderStatus(){
   var r=result(),t=game.turn(),st=tState();
   var T=$("stTitle"),P=$("stText");
   if(r){T.textContent=r.t;P.textContent=r.x}
+  else if(st==="playing"&&playing()&&gamePaused()){T.textContent="Game paused";P.textContent="The operator has paused the game. Please wait."}
   else if(st==="playing"&&playing()){T.textContent=nameOf(t)+" to move";P.textContent=game.in_check()?"Check.":""}
   else if(st==="ready"){T.textContent="Get ready";P.textContent="The operator will start the game shortly."}
   else if(TS.open===false){T.textContent="Thanks for playing";P.textContent="The Cisco Live chess challenge is now closed."}
@@ -1088,6 +1102,7 @@ function renderStatus(){
   [[$("tFar"),far()],[$("tNear"),near()]].forEach(function(x){
     var h=x[0].querySelector(".tstatus h2"),p=x[0].querySelector(".tstatus p"),c=x[1],me=playerOf(c),fn=firstName(c);
     if(r){var pts=pointsFor(c);h.textContent=r.reason==="checkmate"?(r.w===c?"You win!":"Checkmate"):r.t;p.textContent=(r.reason==="checkmate"?(r.w===c?"+100 points":"0 points this game"):"+"+pts+" points")+". Thanks for playing!";return}
+    if(st==="playing"&&playing()&&gamePaused()){h.textContent="Game paused";p.textContent="Please wait. The operator will resume the game shortly.";return}
     if(st==="playing"&&playing()){
       if(t===c){h.textContent=game.in_check()?"Check":"Your move";p.textContent=note?note:game.in_check()?"Get your king to safety.":(hist.length?"":(c==="w"?"White moves first. ":"")+"You have "+moveSecTxt()+" seconds for each move.")}
       else{h.textContent="Waiting for "+(firstName(t)||colorName(t));p.textContent=note?note:game.in_check()?"You gave check.":""}
@@ -1098,7 +1113,7 @@ function renderStatus(){
     if(TS.open===false){h.textContent="Thanks for playing";p.textContent="The chess challenge is now closed.";}else{h.textContent="Next game";p.textContent="Please see the welcome desk to play.";}
   });
 }
-function renderAll(){renderBoard();renderMoves();renderPlayers();renderStatus()}
+function renderAll(){renderBoard();renderMoves();renderPlayers();renderStatus();var gp=$("gpause");if(gp)gp.hidden=!(playing()&&gamePaused()&&!isOver())}
 
 function finish(){
   stopClock();renderAll();var r=result();if(!r)return;

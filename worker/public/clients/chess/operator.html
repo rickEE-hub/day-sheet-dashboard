@@ -106,6 +106,7 @@ main{display:grid;grid-template-columns:360px minmax(0,1fr);gap:18px;padding:18p
 .live{display:flex;gap:12px;align-items:baseline;font-size:13px;color:var(--muted)}
 .live .clock{font-size:26px;font-weight:300;color:var(--text);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
 .live .clock.low{color:var(--bad)}
+.clock.pz{color:#B05E00}
 .acts{display:flex;flex-wrap:wrap;gap:6px}
 .res{font-size:13px;font-weight:500}
 /* lists */
@@ -319,15 +320,15 @@ function seatHTML(t,side){
 function cardHTML(t){
   var s=t.session,st=t.state,tvOn=t.last_seen&&(Date.now()+offset-Date.parse(t.last_seen))<10000;
   var h='<div class="tcard'+(t.paused?" paused":"")+'" data-t="'+t.table_no+'">';
-  h+='<div class="th"><b>Table '+t.table_no+'</b><span class="pill '+st+'">'+STATE[st]+'</span>'+(t.paused?'<span class="pill paused">Paused</span>':'')+'<span class="tv'+(tvOn?" on":"")+'"><i></i>'+(tvOn?"Screen online":"Screen offline")+'</span></div>';
+  h+='<div class="th"><b>Table '+t.table_no+'</b>'+(s&&s.status==="playing"&&s.paused_at?'<span class="pill paused">Game paused</span>':'<span class="pill '+st+'">'+STATE[st]+'</span>')+(t.paused?'<span class="pill paused">Paused</span>':'')+'<span class="tv'+(tvOn?" on":"")+'"><i></i>'+(tvOn?"Screen online":"Screen offline")+'</span></div>';
   h+=seatHTML(t,"white")+seatHTML(t,"black");
   if(s&&s.status==="playing"){var mv=s.moves?s.moves.split(" ").filter(Boolean).length:0;
-    h+='<div class="live"><span class="clock" data-ends="'+esc(s.ends_at)+'">'+fmt(left(s))+'</span><span>'+mv+' moves · '+(s.turn==="w"?"White":"Black")+' to move</span></div>'}
+    h+='<div class="live">'+(s.paused_at?'<span class="clock pz">'+fmt(Date.parse(s.ends_at)-Date.parse(s.paused_at))+'</span>':'<span class="clock" data-ends="'+esc(s.ends_at)+'">'+fmt(left(s))+'</span>')+'<span>'+(s.paused_at?'Clocks stopped · ':'')+mv+' moves · '+(s.turn==="w"?"White":"Black")+' to move</span></div>'}
   if(s&&s.status==="finished"){var r=s.result==="white"?(t.white?t.white.name:"White")+" won":s.result==="black"?(t.black?t.black.name:"Black")+" won":"Draw";
     h+='<div class="res">'+esc(r)+' · '+(REASON[s.reason]||"")+(s.edited?' <span class="edited">edited</span>':"")+'</div>'}
   h+='<div class="acts">';
   if(st==="ready")h+='<button class="btn go" data-act="start">Start game</button><button class="btn sm" data-act="swap">Swap colours</button><button class="btn sm danger" data-act="clearall">Clear table</button>';
-  else if(st==="playing")h+='<button class="btn sm" data-act="endkeep">End, keep points</button><button class="btn sm danger" data-act="reset">Reset (no points)</button>';
+  else if(st==="playing")h+=(s&&s.paused_at?'<button class="btn go" data-act="resumegame">Resume game</button>':'<button class="btn sm" data-act="pausegame">Pause game</button>')+'<button class="btn sm" data-act="endkeep">End, keep points</button><button class="btn sm danger" data-act="reset">Reset (no points)</button>';
   else if(st==="finished")h+='<button class="btn go" data-act="rematch">Rematch</button><button class="btn sm" data-act="clearall">Clear table</button>';
   else if(st==="seating")h+='<button class="btn sm danger" data-act="clearall">Clear table</button>';
   if(st!=="playing")h+=t.paused?'<button class="btn sm" data-act="resume">Resume table</button>':'<button class="btn sm" data-act="pause" title="A paused table is left out of the seat lists">Pause table</button>';
@@ -358,6 +359,8 @@ $("grid").addEventListener("click",function(e){
   else if(a==="pause")act(op("op_pause",{p_table:n,p_paused:true})).then(function(){toast("Table "+n+" paused")});
   else if(a==="resume")act(op("op_pause",{p_table:n,p_paused:false})).then(function(){toast("Table "+n+" back in use")});
   else if(a==="rematch")act(op("op_reset",{p_table:n})).then(function(){return act(op("op_swap",{p_table:n}))}).then(function(){toast("Table "+n+": same players, colours swapped. Press Start game.")});
+  else if(a==="pausegame")act(op("op_pause_game",{p_table:n,p_on:true})).then(function(){toast("Table "+n+" paused. Both clocks are stopped.")});
+  else if(a==="resumegame")act(op("op_pause_game",{p_table:n,p_on:false})).then(function(){toast("Table "+n+" resumed.")});
   else if(a==="endkeep")armed(b,"Tap again to end",function(){act(op("op_end",{p_table:n,p_keep:true})).then(function(){toast("Table "+n+" ended. Points kept.")})});
   else if(a==="reset")armed(b,"Tap again to reset",function(){act(op("op_reset",{p_table:n})).then(function(){toast("Table "+n+" reset. Same players, ready to start again.")})});
   e.stopPropagation();

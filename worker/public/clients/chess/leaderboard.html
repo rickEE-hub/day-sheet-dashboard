@@ -234,7 +234,7 @@ function renderLive(){
   $("liveCount").textContent=playing?playing+" of "+D.tables.length+" playing":"Tables are free: come and play!";
   $("live").innerHTML=D.tables.map(function(t){
     if(t.status!=="playing")return '<div class="lt idle"><b>Table '+t.table_no+'</b><span>'+(t.paused?"Closed":"Free")+'</span></div>';
-    return '<div class="lt"><div class="lh"><b>Table '+t.table_no+'</b><span class="clk">'+fmtClock(Date.parse(t.ends_at)-(Date.now()+offset))+'</span></div>'+
+    return '<div class="lt"><div class="lh"><b>Table '+t.table_no+'</b><span class="clk">'+(t.paused_at?"Paused":fmtClock(Date.parse(t.ends_at)-(Date.now()+offset)))+'</span></div>'+
       '<div class="ls'+(t.turn==="w"?" turn":"")+'"><em>'+esc(t.white_name)+'</em><strong>'+t.white_cap+'</strong></div>'+
       '<div class="ls'+(t.turn==="b"?" turn":"")+'"><em>'+esc(t.black_name)+'</em><strong>'+t.black_cap+'</strong></div></div>'}).join("");
 }
