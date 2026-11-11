@@ -3139,6 +3139,510 @@
      }
     ]
    }
+  ],
+  "2026-11-11": [
+   {
+    "id": "sub1488",
+    "title": "Cisco Live 2026 - Uplighting",
+    "status": "confirmed",
+    "venue": "Cisco Live 2026 - Uplighting",
+    "state": "VIC",
+    "rows": [
+     {
+      "id": "fn5175",
+      "name": "AV Reset (Setup)",
+      "category": "install",
+      "start": "07:00",
+      "end": "09:30",
+      "needed": 1,
+      "crew": [],
+      "vehicles": []
+     },
+     {
+      "id": "fn5176",
+      "name": "AV Reset (Packdown)",
+      "category": "packdown",
+      "start": "17:00",
+      "end": "19:30",
+      "needed": 1,
+      "crew": [],
+      "vehicles": []
+     }
+    ],
+    "address": "1 Convention Centre Pl, South Wharf VIC 3006",
+    "equipment": [
+     {
+      "name": "PACKAGE PRICE",
+      "qty": 1
+     },
+     {
+      "name": "LED Battery Par - IP Rated",
+      "qty": 42
+     },
+     {
+      "name": "LED Propar 12x8 RGBA ",
+      "qty": 10
+     },
+     {
+      "name": "SFX LED 1.2m Lighting Tubes",
+      "qty": 18
+     },
+     {
+      "name": "SFX LED 1.2m Lighting Tubes",
+      "qty": 6
+     },
+     {
+      "name": "iWash18 18x10w RGBWY - Pix Bar / Pixel Bar",
+      "qty": 8
+     },
+     {
+      "name": "Battery Par",
+      "qty": 32
+     },
+     {
+      "name": "LED Propar 12x8 RGBA ",
+      "qty": 10
+     }
+    ]
+   },
+   {
+    "id": "sub1703",
+    "title": "AAGE Conference - Employer League",
+    "status": "inprogress",
+    "venue": "AAGE Conference - Employer League",
+    "state": "NSW",
+    "rows": [
+     {
+      "id": "fn5781",
+      "name": "AV Setup",
+      "category": "install",
+      "start": "07:00",
+      "end": "08:00",
+      "needed": 1,
+      "crew": [
+       "Yvette Paci"
+      ],
+      "vehicles": [
+       "NSW Transit Van \u00b7 1UE4DI"
+      ]
+     }
+    ],
+    "address": "488 George Street, Sydney NSW 2000",
+    "equipment": [
+     {
+      "name": "43\" LED TV - Philips 4K Android",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     }
+    ]
+   },
+   {
+    "id": "sub1715",
+    "title": "AAGE Conference - The Careers Department",
+    "status": "inprogress",
+    "venue": "AAGE Conference - The Careers Department",
+    "state": "NSW",
+    "rows": [
+     {
+      "id": "fn5835",
+      "name": "AV Setup",
+      "category": "install",
+      "start": "07:00",
+      "end": "08:00",
+      "needed": 2,
+      "crew": [
+       "Yvette Paci"
+      ],
+      "vehicles": [
+       "NSW Transit Van \u00b7 1UE4DI"
+      ]
+     }
+    ],
+    "address": "488 George Street, Sydney NSW 2000",
+    "equipment": [
+     {
+      "name": "*Portrait Mounted",
+      "qty": 0
+     },
+     {
+      "name": "65\"  Philips 4K Ultra HD ",
+      "qty": 1
+     },
+     {
+      "name": "1.8m TV Stand - Black",
+      "qty": 1
+     }
+    ]
+   },
+   {
+    "id": "sub1733",
+    "title": "Marketing Leaders 2026 - Exhibitor Orders",
+    "status": "confirmed",
+    "venue": "Marketing Leaders 2026 - Getty Images",
+    "state": "VIC",
+    "rows": [
+     {
+      "id": "fn5885",
+      "name": "AV Setup",
+      "category": "install",
+      "start": "07:00",
+      "end": "07:00",
+      "needed": 2,
+      "crew": [
+       "Emma McLoughlin"
+      ],
+      "vehicles": [
+       "VIC Master Van \u00b7 2FG6UP"
+      ]
+     }
+    ],
+    "address": "9 Maritime Place, Docklands VIC 3008",
+    "equipment": [
+     {
+      "name": "Wall Mount System - Custom Stand",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K Android",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "65\"  Philips 4K Ultra HD ",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K Android",
+      "qty": 1
+     }
+    ]
+   },
+   {
+    "id": "sub1690",
+    "title": "Cisco Live 2026 - The Collective (CHESS)",
+    "status": "confirmed",
+    "venue": "Cisco Live 2026 - The Collective (CHESS)",
+    "state": "VIC",
+    "rows": [
+     {
+      "id": "fn5765",
+      "name": "AV Show Engineer",
+      "category": "other",
+      "start": "08:30",
+      "end": "17:00",
+      "needed": 1,
+      "crew": [],
+      "vehicles": []
+     }
+    ],
+    "address": "1 Convention Centre Pl, South Wharf VIC 3006",
+    "equipment": [
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "43\" Philips Touchscreen V2",
+      "qty": 6
+     },
+     {
+      "name": "HP ProBook 450  15.6 FHD G10 Laptop",
+      "qty": 2
+     },
+     {
+      "name": "55' Portrait Mounted",
+      "qty": 0
+     },
+     {
+      "name": "55\" LED TV 4K UHD Android - Philips",
+      "qty": 1
+     }
+    ]
+   },
+   {
+    "id": "sub1654",
+    "title": "Cisco Live 2026 - Lightning Theatres 1 + 2",
+    "status": "inprogress",
+    "venue": "Cisco Live 2026 - Lightning Theatres 1 + 2",
+    "state": "VIC",
+    "rows": [
+     {
+      "id": "fn5633",
+      "name": "AV Show Engineer",
+      "category": "other",
+      "start": "09:00",
+      "end": "16:30",
+      "needed": 1,
+      "crew": [],
+      "vehicles": []
+     }
+    ],
+    "address": "1 Convention Centre Pl, South Wharf VIC 3006",
+    "equipment": [
+     {
+      "name": "Wall Mount System - Custom Stand",
+      "qty": 2
+     },
+     {
+      "name": "98\"LED Screen 4K - CHiQ",
+      "qty": 2
+     },
+     {
+      "name": "HP ProBook 450  15.6 FHD G10 Laptop",
+      "qty": 4
+     },
+     {
+      "name": "Logitech Remote Presentation Clicker/Laser-Pointer",
+      "qty": 2
+     },
+     {
+      "name": "Roland VR-50HD Vision Switcher",
+      "qty": 2
+     },
+     {
+      "name": "Decimator MD-HX HDMI/SDI Cross",
+      "qty": 4
+     },
+     {
+      "name": "SDI Cable - 20m",
+      "qty": 4
+     },
+     {
+      "name": "6.5mm to 3.5mm PC Audio Cable - 1m",
+      "qty": 5
+     },
+     {
+      "name": "XLR Cable - 20m",
+      "qty": 2
+     },
+     {
+      "name": "DI - Behringer Ultra DI",
+      "qty": 2
+     },
+     {
+      "name": "Minature Operator Surround Package - 4m",
+      "qty": 2
+     },
+     {
+      "name": "LED Display Poster (P2) - 1.9m x 0.8m",
+      "qty": 2
+     },
+     {
+      "name": "HDMI 4K HD - USB-C  -3m",
+      "qty": 2
+     },
+     {
+      "name": "Small Desktop Countdown Timer",
+      "qty": 2
+     },
+     {
+      "name": "PerfectCue Micro Compact Presentation Clicker",
+      "qty": 2
+     }
+    ]
+   },
+   {
+    "id": "sub1680",
+    "title": "Cisco Live 2026 - ***CREWING***",
+    "status": "pending",
+    "venue": "Cisco Live 2026 - ***CREWING***",
+    "state": "VIC",
+    "rows": [
+     {
+      "id": "fn5714",
+      "name": "AV Show Engineer (Lightning Theatre #1 + #2)",
+      "category": "other",
+      "start": "09:00",
+      "end": "16:30",
+      "needed": 1,
+      "crew": [
+       "Simon Pentz"
+      ],
+      "vehicles": []
+     },
+     {
+      "id": "fn5713",
+      "name": "AV Floating Operator",
+      "category": "operator",
+      "start": "09:30",
+      "end": "17:00",
+      "needed": 2,
+      "crew": [
+       "Odin Runga Covington",
+       "Steve Smith",
+       "Mick Rocco",
+       "Steve Smith",
+       "Josh Montgomery",
+       "Ezequiel Vico",
+       "Odin Runga Covington"
+      ],
+      "vehicles": []
+     }
+    ],
+    "address": "1 Convention Centre Pl, South Wharf VIC 3006",
+    "equipment": [
+     {
+      "name": "",
+      "qty": 0
+     }
+    ]
+   },
+   {
+    "id": "sub1745",
+    "title": "SLEDB26 - Exhibitor Orders",
+    "status": "confirmed",
+    "venue": "SLEDB26 - Exhibitor Orders",
+    "state": "QLD",
+    "rows": [
+     {
+      "id": "fn5927",
+      "name": "Exhibition Installation",
+      "category": "install",
+      "start": "12:00",
+      "end": "12:00",
+      "needed": 1,
+      "crew": [
+       "Justin Kennon"
+      ],
+      "vehicles": []
+     }
+    ],
+    "address": "Cnr Merivale & Glenelg Sts, Southbank QLD 4101",
+    "equipment": [
+     {
+      "name": "Wall Mount System - Custom Stand",
+      "qty": 1
+     },
+     {
+      "name": "55\" QLED 4K TV - TCL ",
+      "qty": 1
+     },
+     {
+      "name": "55\" LED TV - DSE",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     }
+    ]
+   },
+   {
+    "id": "sub1744",
+    "title": "AATCM26 - Exhibitor Orders",
+    "status": "confirmed",
+    "venue": "AATCM26 - Exhibitor Orders",
+    "state": "VIC",
+    "rows": [
+     {
+      "id": "fn5924",
+      "name": "AV Setup",
+      "category": "install",
+      "start": "12:30",
+      "end": "12:30",
+      "needed": 1,
+      "crew": [
+       "Lorencius Stefanus"
+      ],
+      "vehicles": [
+       "VIC Staff Vehicle \u00b7 "
+      ]
+     }
+    ],
+    "address": "Brunton Avenue, Richmond VIC 3002",
+    "equipment": [
+     {
+      "name": "43\" LED TV - Philips UHD Android",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "32\" LED TV - Sony",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     }
+    ]
+   },
+   {
+    "id": "sub1732",
+    "title": "ACIPCB26 - Exhibitor Orders",
+    "status": "inprogress",
+    "venue": "ACIPCB26 - Exhibitor Orders",
+    "state": "QLD",
+    "rows": [
+     {
+      "id": "fn5879",
+      "name": "Exhibition Packdown",
+      "category": "packdown",
+      "start": "14:30",
+      "end": "14:30",
+      "needed": 1,
+      "crew": [
+       "Justin Kennon"
+      ],
+      "vehicles": []
+     }
+    ],
+    "address": "2684-2690 Gold Coast Highway, Broadbeach QLD 4218",
+    "equipment": [
+     {
+      "name": "Wall Mount System - Custom Stand",
+      "qty": 1
+     },
+     {
+      "name": "55\" QLED 4K TV - TCL ",
+      "qty": 1
+     },
+     {
+      "name": "Wall Mount System - Custom Stand",
+      "qty": 2
+     },
+     {
+      "name": "55\" LED TV 4K - Philips",
+      "qty": 2
+     },
+     {
+      "name": "43\" LED TV - Philips 4K Android",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "Wall Mount System - Custom Stand",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K Android",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K Android",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     }
+    ]
+   }
   ]
  }
 }
