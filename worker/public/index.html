@@ -954,9 +954,11 @@
     return fmt.format(d);
   }
 
-  function fmtTime(iso){
-    if(!iso) return null;
-    var d = new Date(iso);
+  function fmtTime(value){
+    if(!value) return null;
+    var bareMatch = /^(\d{1,2}):(\d{2})$/.exec(value);
+    if(bareMatch) return ('0' + bareMatch[1]).slice(-2) + ':' + bareMatch[2];
+    var d = new Date(value);
     if(isNaN(d)) return null;
     var fmt = new Intl.DateTimeFormat('en-AU', {
       timeZone:'Australia/Sydney', hour:'2-digit', minute:'2-digit', hour12:false
