@@ -4307,6 +4307,301 @@
      }
     ]
    }
+  ],
+  "2026-11-16": [
+   {
+    "id": "sub1674",
+    "title": "GROSB26 - Exhibitor Orders",
+    "status": "inprogress",
+    "venue": "Sofitel Brisbane",
+    "state": "QLD",
+    "address": "249 Turbot St, Brisbane QLD 4000",
+    "rows": [
+     {
+      "id": "fn5685",
+      "name": "AV Setup",
+      "category": "install",
+      "start": "13:00",
+      "end": "15:00",
+      "needed": 1,
+      "crew": [
+       "Justin Kennon"
+      ],
+      "vehicles": []
+     }
+    ],
+    "equipment": [
+     {
+      "name": "Shelf - TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "Shelf -  TV Stand SLIM - Black",
+      "qty": 1
+     },
+     {
+      "name": "55\" Dell LCD Integrated Touchscreen",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K Android",
+      "qty": 1
+     },
+     {
+      "name": "1.8m TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "Wall Mount System - Custom Stand",
+      "qty": 1
+     },
+     {
+      "name": "Wall Mount System - Custom Stand",
+      "qty": 1
+     },
+     {
+      "name": "55\" LED TV 4K - Philips",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K Android",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K Android",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "Adapter - Lightning to HDMI",
+      "qty": 1
+     },
+     {
+      "name": "Client connecting Ipad gen9 to touchscreen via hdmi",
+      "qty": 0
+     }
+    ]
+   },
+   {
+    "id": "sub1724",
+    "title": "Transfer VIC > NSW (AFTER CISCO)",
+    "status": "inprogress",
+    "venue": null,
+    "state": "VIC",
+    "rows": [
+     {
+      "id": "fn5852",
+      "name": "Interstate Truck Transfer",
+      "category": "other",
+      "start": "07:00",
+      "end": "17:00",
+      "needed": 1,
+      "crew": [],
+      "vehicles": []
+     }
+    ],
+    "equipment": [
+     {
+      "name": "55\" LED TV 4K  Android (Tuner) - Philips ",
+      "qty": 6
+     },
+     {
+      "name": "LED Display Poster Foldable (P1.86) - 0.64mW x 1.92mH",
+      "qty": 6
+     },
+     {
+      "name": "LED Display Poster (P2) - 0.8mW x 1.9mH",
+      "qty": 4
+     },
+     {
+      "name": "2CH Cable Tray 1m",
+      "qty": 10
+     },
+     {
+      "name": "32\" Philips 32PHT6529/79 Desk Stand",
+      "qty": 4
+     },
+     {
+      "name": "32\" LED TV - Philips",
+      "qty": 2
+     },
+     {
+      "name": "55\" LED TV 4K - Philips",
+      "qty": 15
+     },
+     {
+      "name": "Universal iPad Stand - Fits 7.9\" - 13\"",
+      "qty": 1
+     },
+     {
+      "name": "43\" Philips Touchscreen",
+      "qty": 4
+     },
+     {
+      "name": "Unilumin 2.6mm LED Panel - 500x500mm",
+      "qty": 96
+     },
+     {
+      "name": "Novastar VX1000 LED Processor Kit",
+      "qty": 5
+     },
+     {
+      "name": "Silent Conference Headphones",
+      "qty": 30
+     },
+     {
+      "name": "Silent Conference Headphones V2",
+      "qty": 20
+     },
+     {
+      "name": "12 Point Multi Charger for Silent Conference Headphones V2",
+      "qty": 1
+     },
+     {
+      "name": "20 Point Multi Charger for Silent Conference Headphones",
+      "qty": 2
+     },
+     {
+      "name": "Portable 3ch Transmitter for Silent Conference Headphones",
+      "qty": 1
+     },
+     {
+      "name": "Portable 3ch Transmitter for Silent Conference Headphones V2",
+      "qty": 2
+     },
+     {
+      "name": "Behringer Xenyx Q1204 Console USB (4 XLR)",
+      "qty": 1
+     },
+     {
+      "name": "NL4 Cable - 10m",
+      "qty": 0
+     },
+     {
+      "name": "Wireless Antenna - Sennheiser UDP  Directional ",
+      "qty": 0
+     },
+     {
+      "name": "Solidcom C1 - Master Headset",
+      "qty": 1
+     },
+     {
+      "name": "Solidcom C1 - Remote Headset",
+      "qty": 5
+     },
+     {
+      "name": "Solidcom C1 - On-Ear Foam Cushion",
+      "qty": 6
+     },
+     {
+      "name": "Solidcom C1 - Over-Ear Leather Cushion",
+      "qty": 6
+     },
+     {
+      "name": "Solidcom C1 - 8-Slot Charging Case",
+      "qty": 1
+     },
+     {
+      "name": "Solidcom C1 - Mic Windscreen",
+      "qty": 6
+     },
+     {
+      "name": "Solidcom C1 - Battery",
+      "qty": 12
+     },
+     {
+      "name": "Solidcom C1 - Power Adapter",
+      "qty": 1
+     },
+     {
+      "name": "Solidcom C1 - USB-A to USB-C Cable",
+      "qty": 1
+     },
+     {
+      "name": "HP ProBook 450 15\" G10  Laptop - Unit Only",
+      "qty": 8
+     },
+     {
+      "name": "AV OPS KIt - Carry Bag",
+      "qty": 0
+     },
+     {
+      "name": " AV OPS - Steel Base Plate +  M8 Spiggot\u2013 300mm x 200mm",
+      "qty": 0
+     },
+     {
+      "name": "AV OPS - Telescopic Backdrop Pole \u2013 1m to 1.5m Adjustable",
+      "qty": 0
+     },
+     {
+      "name": "240v to TruCon Cable - 1m",
+      "qty": 0
+     },
+     {
+      "name": "43\" LED TV - Philips - Screen Only",
+      "qty": 14
+     },
+     {
+      "name": "Y Fork - Speaker Stand Mount",
+      "qty": 8
+     },
+     {
+      "name": "Custom Alum - BOTTOM BAR 40x80mm - 2.5mts ",
+      "qty": 1
+     },
+     {
+      "name": "Cat 5e Ethernet Cable - 5m",
+      "qty": 4
+     },
+     {
+      "name": "Accsoon CineView Master 4K - Wireless SDI HDMI 4K 60FPS",
+      "qty": 1
+     },
+     {
+      "name": "Custom Alum - REAR FRAME 400mmW x 1000mmH (Modular)",
+      "qty": 8
+     },
+     {
+      "name": "LED Processor Laptop",
+      "qty": 1
+     },
+     {
+      "name": "Unilumin 2.6mm LED Panel - 500x500mm",
+      "qty": 24
+     },
+     {
+      "name": "4x LEGS @500mm off the floor",
+      "qty": 1
+     },
+     {
+      "name": "Custom Alum - BOTTOM BAR 40x80mm - 2.5mts ",
+      "qty": 1
+     },
+     {
+      "name": "86\" LED TV 4K - Philips - Smart TV",
+      "qty": 1
+     },
+     {
+      "name": "Novastar TB60 LED Processor Kit",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K Android",
+      "qty": 10
+     },
+     {
+      "name": "43\" LED TV - Philips 4K",
+      "qty": 42
+     }
+    ]
+   }
   ]
  }
 }
