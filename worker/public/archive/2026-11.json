@@ -4602,6 +4602,80 @@
      }
     ]
    }
+  ],
+  "2026-11-17": [
+   {
+    "id": "sub1517",
+    "title": "nCino APAC Summit 2026",
+    "status": "inprogress",
+    "venue": "Museum of Contemporary Art",
+    "state": "NSW",
+    "address": "140 George Street Level 4, The Rocks NSW 2000",
+    "rows": [
+     {
+      "id": "fn5280",
+      "name": "AV Setup",
+      "category": "install",
+      "start": "06:30",
+      "end": "10:00",
+      "needed": 2,
+      "crew": [
+       "Rick Sanchez",
+       "Yvette Paci"
+      ],
+      "vehicles": [
+       "NSW Transit Van \u00b7 1UE4DI"
+      ]
+     },
+     {
+      "id": "fn5353",
+      "name": "AV Floating Operator",
+      "category": "operator",
+      "start": "12:00",
+      "end": "18:30",
+      "needed": 1,
+      "crew": [
+       "Rick Sanchez"
+      ],
+      "vehicles": [
+       "NSW Transit Van \u00b7 1UE4DI"
+      ]
+     },
+     {
+      "id": "fn5281",
+      "name": "AV Packdown",
+      "category": "packdown",
+      "start": "19:00",
+      "end": "21:00",
+      "needed": 2,
+      "crew": [
+       "Mick Rocco",
+       "Rick Sanchez"
+      ],
+      "vehicles": [
+       "NSW Transit Van \u00b7 1UE4DI"
+      ]
+     }
+    ],
+    "equipment": [
+     {
+      "name": "LED Display Poster (P2) - 1.9m x 0.8m",
+      "qty": 1
+     },
+     {
+      "name": "Wall Mount System - Custom Stand",
+      "qty": 6
+     },
+     {
+      "name": "55\" LED TV 4K  Android (Tuner) - Philips ",
+      "qty": 6
+     },
+     {
+      "name": "LED Display Poster (P2) - 0.8mW x 1.9mH - Unit Only",
+      "qty": 1
+     }
+    ]
+   }
   ]
  }
 }
