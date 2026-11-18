@@ -4676,6 +4676,224 @@
      }
     ]
    }
+  ],
+  "2026-11-18": [
+   {
+    "id": "sub1564",
+    "title": "THE ARC Gold Coast November 2026 - POWER + LIGHTING",
+    "status": "inprogress",
+    "venue": "Mondrian Gold Coast",
+    "state": "QLD",
+    "rows": [
+     {
+      "id": "fn5431",
+      "name": "AV Setup",
+      "category": "install",
+      "start": "08:00",
+      "end": "15:00",
+      "needed": 2,
+      "crew": [
+       "Justin Kennon",
+       "Ray Sackett"
+      ],
+      "vehicles": []
+     },
+     {
+      "id": "fn5432",
+      "name": "AV Show Engineer",
+      "category": "other",
+      "start": "15:00",
+      "end": "20:00",
+      "needed": 1,
+      "crew": [
+       "Justin Kennon"
+      ],
+      "vehicles": []
+     },
+     {
+      "id": "fn5433",
+      "name": "AV Packdown",
+      "category": "packdown",
+      "start": "20:00",
+      "end": "23:00",
+      "needed": 2,
+      "crew": [
+       "Justin Kennon",
+       "Ray Sackett"
+      ],
+      "vehicles": []
+     }
+    ],
+    "equipment": [
+     {
+      "name": "LED Propar RGBW - 3 Pin",
+      "qty": 4
+     },
+     {
+      "name": "Powerwise 1215 3RC 3Ph Distro",
+      "qty": 1
+     },
+     {
+      "name": " PD12 (12x10A) 3Ph Distro",
+      "qty": 1
+     },
+     {
+      "name": "6-Way Wieland Cable - 20m",
+      "qty": 2
+     },
+     {
+      "name": "6-Way Wieland Header",
+      "qty": 2
+     },
+     {
+      "name": "6-Way Wieland Tail",
+      "qty": 2
+     },
+     {
+      "name": "32Amp 3Ph Cable - 10m",
+      "qty": 1
+     },
+     {
+      "name": "32Amp 3Ph Cable - 5m",
+      "qty": 1
+     },
+     {
+      "name": "Power Ext Cable - 240v 10A - Black - 5m",
+      "qty": 20
+     },
+     {
+      "name": "Powerboard - 4 Way - 240v 10A - White",
+      "qty": 20
+     },
+     {
+      "name": "Consumables",
+      "qty": 1
+     },
+     {
+      "name": "2CH Cable Tray 1m",
+      "qty": 6
+     },
+     {
+      "name": "LED Propar RGBW - 5 Pin",
+      "qty": 5
+     },
+     {
+      "name": "LED Propar RGBW - 3 Pin",
+      "qty": 12
+     },
+     {
+      "name": "LED Propar RGBW - 3 Pin",
+      "qty": 2
+     }
+    ],
+    "address": "3 First Avenue, Burleigh Heads QLD 4220"
+   },
+   {
+    "id": "sub1725",
+    "title": "Tara Anglican Carols 2026",
+    "status": "inprogress",
+    "venue": "Tara Anglican School for Girls",
+    "state": "NSW",
+    "rows": [
+     {
+      "id": "fn5853",
+      "name": "AV Setup",
+      "category": "install",
+      "start": "15:30",
+      "end": "15:30",
+      "needed": 1,
+      "crew": [
+       "Mick Rocco"
+      ],
+      "vehicles": [
+       "NSW Sprinter Van \u00b7 DL55LR"
+      ]
+     }
+    ],
+    "equipment": [
+     {
+      "name": "K&M Tripod Speaker Stand",
+      "qty": 4
+     },
+     {
+      "name": "Shure PG81",
+      "qty": 2
+     },
+     {
+      "name": "Shure SM57 Microphone",
+      "qty": 5
+     },
+     {
+      "name": "Mic Stand - K&M 21070 Tall Boom (Silver)",
+      "qty": 3
+     },
+     {
+      "name": "Mic Stand - K&M 21070 Tall Boom (Black)",
+      "qty": 5
+     },
+     {
+      "name": "Windsock",
+      "qty": 7
+     },
+     {
+      "name": "Power Ext Cable - 240v 10A - Black - 20m",
+      "qty": 30
+     },
+     {
+      "name": "XLR Cable - 20m",
+      "qty": 20
+     },
+     {
+      "name": "XLR Cable - 10m",
+      "qty": 13
+     },
+     {
+      "name": "XLR Cable - 5m",
+      "qty": 13
+     },
+     {
+      "name": "Cable Package",
+      "qty": 1
+     },
+     {
+      "name": "LED Battery Par - IP Rated",
+      "qty": 8
+     },
+     {
+      "name": "10' Lighting Stand (3m)",
+      "qty": 2
+     },
+     {
+      "name": "Lighting CLS Base Plate 600mm x 600mm",
+      "qty": 2
+     },
+     {
+      "name": "Threaded Base Plate Adaptor - for 10' Push Up",
+      "qty": 2
+     },
+     {
+      "name": "10kg Shotbag",
+      "qty": 18
+     },
+     {
+      "name": "Lighting T-Bar",
+      "qty": 2
+     },
+     {
+      "name": "2CH Cable Tray 1m",
+      "qty": 18
+     },
+     {
+      "name": "JBL EON712 Speaker",
+      "qty": 4
+     },
+     {
+      "name": "Waterproof Bag - JBL EON 7 Series Speaker",
+      "qty": 4
+     }
+    ],
+    "address": "Masons Drive, North Parramatta NSW 2151"
+   }
   ]
  }
 }
