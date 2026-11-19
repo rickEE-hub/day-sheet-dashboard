@@ -4894,6 +4894,348 @@
     ],
     "address": "Masons Drive, North Parramatta NSW 2151"
    }
+  ],
+  "2026-11-19": [
+   {
+    "id": "sub1396",
+    "title": "Caravan Camping Leisurefest (Geelong)",
+    "status": "inprogress",
+    "venue": "Geelong Racecourse",
+    "state": "VIC",
+    "address": "99 Breakwater Road, Breakwater VIC 3219",
+    "rows": [
+     {
+      "id": "fn4879",
+      "name": "AV Setup",
+      "category": "install",
+      "start": "13:00",
+      "end": "17:00",
+      "needed": 1,
+      "crew": [
+       "Emma McLoughlin",
+       "Lorencius Stefanus"
+      ],
+      "vehicles": [
+       "VIC Master Van \u00b7 2FG6UP"
+      ]
+     }
+    ],
+    "equipment": [
+     {
+      "name": "Trestle Table",
+      "qty": 1
+     },
+     {
+      "name": "Function Chair - Black",
+      "qty": 1
+     },
+     {
+      "name": "Table Cloth (Black)",
+      "qty": 1
+     },
+     {
+      "name": "*** OTHER***",
+      "qty": 0
+     },
+     {
+      "name": "GRAVITY Tripod Speaker Stand",
+      "qty": 2
+     },
+     {
+      "name": "iPad for BGM",
+      "qty": 1
+     },
+     {
+      "name": "***AUDIO***",
+      "qty": 0
+     },
+     {
+      "name": "***VISION***",
+      "qty": 0
+     },
+     {
+      "name": "***AUDIO (For Musicians)***",
+      "qty": 0
+     },
+     {
+      "name": "Shure SM58 Microphone",
+      "qty": 2
+     },
+     {
+      "name": "DI - BSS AR-133 Active DI",
+      "qty": 2
+     },
+     {
+      "name": "Musician has requested effects",
+      "qty": 0
+     },
+     {
+      "name": "Stage Skirt 8m x 0.6m",
+      "qty": 1
+     },
+     {
+      "name": "10kg Shotbag",
+      "qty": 4
+     },
+     {
+      "name": "Mic Stand - K&M 21070 Tall Boom (Black)",
+      "qty": 2
+     },
+     {
+      "name": "Sennheiser - Handheld EW100 (G8)",
+      "qty": 1
+     },
+     {
+      "name": "Sennheiser - Beltpack EW100 (G8)",
+      "qty": 1
+     },
+     {
+      "name": "Miniature Headset Microphone - 3.5mm Sennheiser",
+      "qty": 1
+     },
+     {
+      "name": "Wireless Single RX - Sennheiser EW100 (G8) ",
+      "qty": 2
+     },
+     {
+      "name": "Wireless Shure BLX Kit - Handheld Only",
+      "qty": 1
+     },
+     {
+      "name": "55\" LED TV 4K - Philips",
+      "qty": 1
+     },
+     {
+      "name": "17.5kg Black plastic moulded Concrete Weight",
+      "qty": 2
+     },
+     {
+      "name": "Logitech Remote Presentation Clicker/Laser-Pointer",
+      "qty": 1
+     },
+     {
+      "name": "Soundcraft Ui12 Digital Console (12ch)",
+      "qty": 1
+     },
+     {
+      "name": "JBL EON612 Speaker",
+      "qty": 2
+     },
+     {
+      "name": "RCF ART310A Speaker (foldback)",
+      "qty": 2
+     },
+     {
+      "name": "HP Pavillion 14 x360 Laptop (Blue)",
+      "qty": 1
+     },
+     {
+      "name": "1.8m TV Stand - Black",
+      "qty": 1
+     }
+    ]
+   },
+   {
+    "id": "sub1765",
+    "title": "MILKLAB Barista Battle - La Marzocco",
+    "status": "inprogress",
+    "venue": "La Marzocco",
+    "state": "NSW",
+    "address": "14 Underwood Avenue, Botany NSW",
+    "rows": [
+     {
+      "id": "fn5948",
+      "name": "AV Setup",
+      "category": "install",
+      "start": "14:00",
+      "end": "16:00",
+      "needed": 2,
+      "crew": [
+       "Rick Sanchez",
+       "Mick Rocco"
+      ],
+      "vehicles": [
+       "NSW Staff Vehicle \u00b7 "
+      ]
+     },
+     {
+      "id": "fn5950",
+      "name": "AV Floating Operator",
+      "category": "operator",
+      "start": "17:00",
+      "end": "20:30",
+      "needed": 1,
+      "crew": [
+       "Rick Sanchez"
+      ],
+      "vehicles": [
+       "NSW Staff Vehicle \u00b7 "
+      ]
+     }
+    ],
+    "equipment": [
+     {
+      "name": "GRAVITY Tripod Speaker Stand",
+      "qty": 2
+     },
+     {
+      "name": "iPad for BGM",
+      "qty": 1
+     },
+     {
+      "name": "JBL EON712 Speaker",
+      "qty": 2
+     },
+     {
+      "name": "Allen & Heath QU-16 Digital Mixer (16 Ch)",
+      "qty": 1
+     },
+     {
+      "name": "86\" LED TV 4K - Philips - Smart TV",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 2
+     },
+     {
+      "name": "PTZ Controller",
+      "qty": 1
+     },
+     {
+      "name": "PTZ Video Cam - Kit",
+      "qty": 1
+     },
+     {
+      "name": "Sennheiser - Handheld SKM300-845 G3 (G)",
+      "qty": 1
+     },
+     {
+      "name": "Wireless Single RX - Sennheiser EW300 (G)",
+      "qty": 1
+     },
+     {
+      "name": "Roland V-60HD Vision Switcher",
+      "qty": 1
+     },
+     {
+      "name": "10' Lighting Stand (3m)",
+      "qty": 1
+     },
+     {
+      "name": "Lighting CLS Base Plate 600mm x 600mm",
+      "qty": 1
+     },
+     {
+      "name": "17.5kg Black plastic moulded Concrete Weight",
+      "qty": 4
+     },
+     {
+      "name": "SDI Cable - 20m",
+      "qty": 1
+     },
+     {
+      "name": "Lighting T-Bar Offset",
+      "qty": 1
+     },
+     {
+      "name": "2m Pipe",
+      "qty": 1
+     },
+     {
+      "name": "JBL IRX108BT JBL 8 inch - Speaker Only ",
+      "qty": 1
+     },
+     {
+      "name": "JBL IRX108BT JBL 8 inch - Speaker Only ",
+      "qty": 1
+     },
+     {
+      "name": "Allen & Heath SQ5 16 Channel 12 Bus Kit",
+      "qty": 1
+     }
+    ]
+   },
+   {
+    "id": "sub1674",
+    "title": "GROSB26 - Exhibitor Orders",
+    "status": "inprogress",
+    "venue": "Sofitel Brisbane",
+    "state": "QLD",
+    "address": "249 Turbot St, Brisbane QLD 4000",
+    "rows": [
+     {
+      "id": "fn5686",
+      "name": "AV Packdown",
+      "category": "packdown",
+      "start": "16:00",
+      "end": "16:00",
+      "needed": 1,
+      "crew": [
+       "Justin Kennon"
+      ],
+      "vehicles": []
+     }
+    ],
+    "equipment": [
+     {
+      "name": "Shelf - TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "Shelf -  TV Stand SLIM - Black",
+      "qty": 1
+     },
+     {
+      "name": "55\" Dell LCD Integrated Touchscreen",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K Android",
+      "qty": 1
+     },
+     {
+      "name": "1.8m TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "Wall Mount System - Custom Stand",
+      "qty": 1
+     },
+     {
+      "name": "Wall Mount System - Custom Stand",
+      "qty": 1
+     },
+     {
+      "name": "55\" LED TV 4K - Philips",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K Android",
+      "qty": 1
+     },
+     {
+      "name": "43\" LED TV - Philips 4K Android",
+      "qty": 1
+     },
+     {
+      "name": "1.8m SLIM TV Stand - Black",
+      "qty": 1
+     },
+     {
+      "name": "Adapter - Lightning to HDMI",
+      "qty": 1
+     },
+     {
+      "name": "Client connecting Ipad gen9 to touchscreen via hdmi",
+      "qty": 0
+     }
+    ]
+   }
   ]
  }
 }
